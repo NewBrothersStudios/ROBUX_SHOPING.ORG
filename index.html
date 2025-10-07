@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBUX SHOP [by: ANDZX]</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',sans-serif;overflow-x:hidden;background:#0b0c1b;color:white;text-align:center;position:relative;}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+h1{font-size:3em;margin-top:20px;color:#00fff0;text-shadow:0 0 10px #00fff0;}
+.top-bar{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.7);padding:10px;font-size:1em;display:flex;justify-content:space-between;align-items:center;color:#00ffcc;z-index:10;animation:slideDown 1s ease forwards;}
+@keyframes slideDown{from{transform:translateY(-50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+#countdown{font-weight:bold;color:#00ff99;margin-left:20px;font-size:1.1em;}
+.container{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;margin-top:80px;padding-bottom:50px;}
+.card,.bonus,.special{background:rgba(255,255,255,0.08);border-radius:25px;padding:35px;width:320px;min-height:160px;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;font-size:1.25em;}
+.card:hover,.bonus:hover,.special:hover{transform:scale(1.1) rotateX(5deg) rotateY(5deg);box-shadow:0 0 30px #00ffcc,0 0 40px #00ffcc inset;}
+.btn{display:inline-block;margin-top:15px;padding:15px 30px;background:#00ffcc;color:#000;font-weight:bold;text-decoration:none;border-radius:12px;transition:all .3s;font-size:1.15em;position:relative;overflow:hidden;cursor:pointer;}
+.btn:hover{background:#00cc99;transform:scale(1.1);}
+.row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:20px 0;}
+#membership,#secret{margin-top:40px;}
+#secret{display:none;}
+.notice{color:#ffcc00;font-size:0.95em;margin-top:10px;}
+.discount{color:#00ff99;font-size:0.9em;margin-top:8px;}
+input[type=text]{padding:10px 15px;border-radius:12px;border:none;outline:none;width:230px;font-size:1.1em;}
+.key-container{display:flex;flex-direction:column;align-items:center;gap:15px;}
+.popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#22c55e;color:#000;padding:30px 50px;border-radius:25px;font-size:1.35em;box-shadow:0 0 35px #22c55e;z-index:100;display:none;animation:popupAnim 0.5s ease forwards;text-align:center;}
+@keyframes popupAnim{from{transform:translate(-50%,-60%) scale(0.5);opacity:0;}to{transform:translate(-50%,-50%) scale(1);opacity:1;}}
+
+/* Aviso inicial */
+#alertKey{position:fixed;top:20%;left:50%;transform:translate(-50%, -50%);background:#ff9900;color:#000;padding:40px 60px;border-radius:30px;font-size:1.6em;font-weight:bold;z-index:200;display:none;text-align:center;box-shadow:0 0 20px #ffcc00;}
+
+/* Loader overlay */
+#overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#00ffcc;font-size:1.5em;z-index:9999;display:none;}
+.spinner{border:10px solid #333;border-top:10px solid #00ffcc;border-radius:50%;width:80px;height:80px;animation:spin 1s linear infinite;margin-bottom:15px;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Confetti */
+.confetti-piece{position:fixed;width:8px;height:8px;background:red;z-index:9999;pointer-events:none;opacity:0.9;border-radius:2px;animation:confetti-fall 3s linear forwards;}
+@keyframes confetti-fall{0%{transform:translateY(0);}100%{transform:translateY(100vh) rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- Aviso inicial -->
+<div id="alertKey">
+😾 No compartas tu key.<br>LA KEY ES UNICA. XFAVOR NO COMPARTIRLA CON NADIE...
+</div>
+
+<canvas id="bg"></canvas>
+
+<div class="top-bar">
+    <div>🔥 ¡PRÓXIMAMENTE! [2 DAYS] </div>
+    <div id="countdown"></div>
+</div
+
+<h1> Season 1 </h1>
+
+<h1>ROBUX STORES </h1>
+
+<div class="cloud"><span>Colaboración : 😸 NewBrothersStudios 🤎</span></div>
+</div>
+   </div>
+      </div>
+
+<div class="finish-bar">
+<div>⏰️ nuestros servidores estan ocupados [error 012]</div>
+<div id="countdown"></div>
+</div>
+
+<div class="container" id="robux-list">
+  <div class="card">⏣ 40 robux = $0.75 <br><span class="discount">-0% menos precio</span><br><button class="btn" onclick="btnLoad('40 robux','$0.75')">Comprar</button></div>
+  <div class="card">⏣ 80 robux = $1.75 <br><span class="discount">-7% menos precio</span><br><button class="btn" onclick="btnLoad('80 robux','$1.75')">Comprar</button></div>
+  <div class="card">⏣ 400 robux = $6.00 <br><span class="discount">-3% menos precio</span><br><button class="btn" onclick="btnLoad('400 robux','$6.00')">Comprar</button></div>
+  <div class="card">⏣ 800 robux = $12.25 <br><span class="discount">-3% menos precio</span><br><button class="btn" onclick="btnLoad('800 robux','$12.25')">Comprar</button></div>
+  <div class="card">⏣ 1700  = $22.00 <br><span class="discount">-6% menos precio</span><br><button class="btn" onclick="btnLoad('1700 robux','$22.00')">Comprar</button></div>
+  <div class="card">⏣ 4500 robux = $53.00 <br><span class="discount">-3% menos precio</span><br><button class="btn" onclick="btnLoad('4500 robux','$53.00')">Comprar</button></div>
+  <div class="card">⏣ 10,000 robux = $105.00 <br><span class="discount">-5% menos precio</span><br><button class="btn" onclick="btnLoad('10000 robux','$105.00')">Comprar</button></div>
+  <div class="card">⏣ 22,500 robux = $214.99 <br><span class="discount">-6% menos precio</span><br><button class="btn" onclick="btnLoad('22500 robux','$214.99')">Comprar</button></div>
+</div>
+
+<div class="key-container">
+<label for="keyInput" style="font-size:1.3em;">🔑 ¿YA TIENES TU LLAVE? 🤔 </label><br>
+<input type="text" id="keyInput" placeholder="Ingresa tu key">
+<button class="btn" onclick="checkKey()">Ingresar</button>
+</div>
+
+<div id="membresias">
+  <h2>Membresía con tu key!</h2>
+  <p style="font-size: 12px; font-style: italic; color: gray; margin-top:5px;">Una vez compras una membresía se te dará una key por el tiempo que hayas comprado.</p>
+  <div class="row">
+    <div class="bonus">Membresía +25% en robux = $3.99 (5 días)<br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('Membresía +25%','$3.99')">Suscribirse</button><p class="notice">💬💚 duración = 5 días.</p></div>
+    <div class="bonus">Membresía +25% en robux = $5.99 (8 días)<br><span class="discount">-3% menos precio</span><br><button class="btn" onclick="btnLoad('Membresía +25%','$5.99')">Suscribirse</button><p class="notice">💬💚 duración = 8 días.</p></div>
+    <div class="bonus">Membresía +25% en robux = $9.99 (15 días)<br><span class="discount">-6% menos precio</span><br><button class="btn" onclick="btnLoad('Membresía +25%','$9.99')">Suscribirse</button><p class="notice">💬💚 duración = 15 días.</p></div>
+    <div class="bonus">Membresía +25% en robux = $11.99 (23 días)<br><span class="discount">-3% menos precio</span><br><button class="btn" onclick="btnLoad('Membresía +25%','$11.99')">Suscribirse</button><p class="notice">💬💚 duración = 23 días.</p></div>
+    <div class="bonus">Membresía +25% en robux + Gratis ⏣ 160 Robux = $15.99 (32 días)<br><span class="discount">-16% menos precio</span><br><button class="btn" onclick="btnLoad('Membresía +25% AHORRO','$15.99')">Suscribirse</button><p class="notice">💬💚 duración = 28 días.</p></div>
+  </div>
+</div>
+
+<div id="secret">
+<h2>Paquetes con el mismo precio pero más robux! con Membresía</h2>
+<div class="card">⏣ 500 robux = $6.00 <br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('500 robux','$6.00')">Comprar</button></div>
+<div class="card">⏣ 1,000 robux = $12.25 <br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('1,000 robux','$12.25')">Comprar</button></div>
+<div class="card">⏣ 2,000 robux = $22.00 <br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('2,000 robux','$22.00')">Comprar</button></div>
+<div class="card">⏣ 5,250 robux = $53.00<br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('5,250 robux','$53.00')">Comprar</button></div>
+<div class="card">⏣ 11,000 robux = $105.00 <br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('11,000 robux','$105.00')">Comprar</button></div>
+<div class="card">⏣ 24,000 robux = $214.99 <br><span class="discount">-4% menos precio</span><br><button class="btn" onclick="btnLoad('24,000 robux','$214.99')">Comprar</button></div>
+<p class="notice">😻 Gracias por comprar tu Membresía <3</p>
+</div>
+
+<div class="popup" id="popup">✅ ¡Key aceptada! 😺 DISFRUTA DE TU MEMBRESÍA.💚</div>
+
+<div id="overlay"><div class="spinner"></div>Cargando...</div>
+
+<p style="margin-top:40px;">By reserved : New Brothers Studios LLC & GLITCH.COM</p>
+
+<script>
+// Aviso inicial
+window.addEventListener("load", ()=>{
+  document.getElementById("alertKey").style.display="block";
+  setTimeout(()=>{document.getElementById("alertKey").style.display="none";},8000);
+});
+
+// Loader + WhatsApp
+function btnLoad(item, price){
+  const overlay=document.getElementById("overlay");
+  overlay.style.display="flex";
+  setTimeout(()=>{
+    overlay.style.display="none";
+    window.open(`https://wa.me/50373826693?text=${encodeURIComponent(`Quiero comprar ${item} por ${price}`)}`,'_blank');
+  },8000);
+}
+
+// Keys
+let validKeys=["ANDZXKEY","KATHZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","ABKEY","123KEY","1500KEY","3000KEY","4000KEY","PHONEKEY","BROSKEY","CODEKEY","ROBLOXKEY","AB123KEY","AV340KEY"];
+function checkKey(){
+  let key=document.getElementById("keyInput").value.trim().toUpperCase();
+  if(validKeys.includes(key)){
+    document.getElementById("secret").style.display="block";
+    document.getElementById("membresias").style.display="none";
+    document.getElementById("popup").style.display="block";
+    spawnConfetti();
+    setTimeout(()=>{document.getElementById("popup").style.display="none";},4000);
+  } else { alert("⛔️✖️⛔️ Key inválida, intenta de nuevo [error 202]"); }
+}
+
+// Confetti
+function spawnConfetti(){
+  for(let i=0;i<400;i++){
+    const c=document.createElement("div");
+    c.className="confetti-piece";
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>{c.remove();},3000);
+  }
+}
+</script>
+</body>
+</html>
