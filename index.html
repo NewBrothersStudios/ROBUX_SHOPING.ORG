@@ -1,243 +1,318 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBUX SHOP [by: ANDZXX V4.7]</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ROBUX STORE V5 — Azul Oscuro & Verde Musgo</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(-45deg,#1a1a1a,#2a2a2a,#1a1a1a,#101010);
-  background-size:400% 400%;
-  animation:bgMove 8s ease infinite;
-  color:white;text-align:center;overflow-x:hidden;position:relative;
-}
-@keyframes bgMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-h1{
-  font-size:2.8em;margin-top:25px;
-  color:#ffb347;text-shadow:0 0 25px #ffb347;
-  animation:floatTitle 3s ease-in-out infinite;
-}
-@keyframes floatTitle{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
-}
-
-.top-bar{
-  position:fixed;top:0;left:0;width:100%;
-  background:rgba(60,60,60,0.85);
-  padding:10px;font-size:1em;
-  display:flex;justify-content:space-between;align-items:center;
-  color:#ffb347;z-index:10;
-  animation:slideDown 1s ease forwards;
-}
-@keyframes slideDown{
-  from{transform:translateY(-50px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
-}
-
-.container{
-  display:flex;flex-wrap:wrap;justify-content:center;
-  gap:30px;margin-top:90px;padding-bottom:60px;
-}
-.card,.bonus{
-  background:rgba(255,255,255,0.07);
-  border-radius:25px;padding:35px;width:320px;
-  transition:transform .4s,box-shadow .4s;
-  font-size:1.25em;backdrop-filter:blur(5px);
-  color:#e0e0e0;
-}
-.card:hover,.bonus:hover{
-  transform:scale(1.08) rotateX(3deg) rotateY(3deg);
-  box-shadow:0 0 35px #ffb347,0 0 45px #ffb347 inset;
-}
-
-.btn{
-  display:inline-block;margin-top:15px;padding:14px 28px;
-  background:#ffb347;color:#000;font-weight:bold;
-  border-radius:12px;transition:all .25s;font-size:1.1em;cursor:pointer;
-  box-shadow:0 0 15px #ffb347a8;
-  animation:pulse 2s infinite;
-}
-.btn:active{transform:scale(0.95);}
-@keyframes pulse{
-  0%{box-shadow:0 0 10px #ffb347,0 0 25px #ffb347;}
-  50%{box-shadow:0 0 25px #ffaa33,0 0 40px #ffb347;}
-  100%{box-shadow:0 0 10px #ffb347,0 0 25px #ffb347;}
-}
-
-.notice{color:#ffd966;font-size:0.95em;margin-top:10px;}
-.discount{color:#b6ff9b;font-size:0.9em;margin-top:8px;}
-input[type=text]{
-  padding:10px 15px;border-radius:12px;border:none;outline:none;
-  width:230px;font-size:1.1em;
-}
-.key-container{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:25px;}
-
-.popup{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  background:#22c55e;color:#000;padding:30px 50px;border-radius:25px;
-  font-size:1.35em;box-shadow:0 0 35px #22c55e;z-index:100;
-  display:none;text-align:center;animation:popupAnim .5s ease forwards;
-}
-@keyframes popupAnim{
-  from{transform:translate(-50%,-60%) scale(.5);opacity:0;}
-  to{transform:translate(-50%,-50%) scale(1);opacity:1;}
-}
-
-#alertKey{
-  position:fixed;top:20%;left:50%;transform:translate(-50%,-50%);
-  background:#ffd966;color:#000;padding:40px 60px;border-radius:30px;
-  font-size:1.5em;font-weight:bold;z-index:200;display:none;text-align:center;
-  box-shadow:0 0 20px #ffd966;
-}
-
-#overlay{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.85);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#ffb347;font-size:1.5em;z-index:9999;display:none;
-}
-.spinner{
-  border:10px solid #333;border-top:10px solid #ffb347;border-radius:50%;
-  width:80px;height:80px;animation:spin 1s linear infinite;margin-bottom:15px;
-}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-
-/* Fondo de desbloqueo */
-.unlock-effect{
-  animation:unlockFlash 1.5s ease-out;
-}
-@keyframes unlockFlash{
-  0%{background:radial-gradient(circle,#ffb34744 0%,transparent 80%);}
-  50%{background:radial-gradient(circle,#ffb34799 0%,transparent 90%);}
-  100%{background:radial-gradient(circle,#1a1a1a 0%,#2a2a2a 100%);}
-}
-
-/* Confeti */
-.confetti-piece{
-  position:fixed;width:8px;height:8px;background:red;z-index:9999;
-  pointer-events:none;opacity:.9;border-radius:2px;
-  animation:confetti-fall 3s linear forwards;
-}
-@keyframes confetti-fall{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(100vh) rotate(360deg);}
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Poppins",sans-serif;
+    background:#001122;
+    color:#dff7ef;
+    overflow-x:hidden;
+    text-align:center;
+    padding-top:74px;
+  }
+  .top-bar{
+    position:fixed;top:0;left:0;width:100%;
+    background:rgba(0,30,40,0.96);
+    padding:12px 18px;display:flex;justify-content:space-between;align-items:center;
+    color:#bfeed2;z-index:120;border-bottom:2px solid #355e36;backdrop-filter:blur(6px)
+  }
+  header{margin-top:6px}
+  h1{font-size:2.1rem;color:#9aff8f;margin-top:6px;letter-spacing:0.6px}
+  h2{color:#aee7cf;margin-top:6px;font-weight:500}
+  .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:24px;max-width:1100px;margin:6px auto}
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    width:230px;border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;
+    box-shadow:0 6px 20px rgba(0,0,0,0.6), inset 0 0 8px rgba(85,122,70,0.06);
+    transition:transform .18s, box-shadow .18s;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.7)}
+  .robux-title{font-size:1.02rem;color:#eafaf0;margin-bottom:6px}
+  .price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
+  .price{font-weight:700;color:#cfeee0}
+  .price-bar{width:86%;height:8px;border-radius:6px;background:#9aff8f44;margin-top:8px;box-shadow:0 0 12px #9aff8f33 inset}
+  .btn{margin-top:10px;padding:9px 14px;border-radius:999px;border:none;cursor:pointer;background:#557a46;color:#e8f9ef;font-weight:700;box-shadow:0 6px 18px rgba(85,122,70,0.18)}
+  .btn:hover{transform:scale(1.03)}
+  .small{font-size:.86rem;color:#bfeed2;margin-top:8px}
+  .memberships{max-width:1000px;margin:18px auto;padding:14px}
+  #overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.78);display:none;align-items:center;justify-content:center;z-index:220}
+  .modal{background:#0d1720;border-radius:12px;padding:18px 20px;width:92%;max-width:560px;color:#e7f9ee;box-shadow:0 20px 50px rgba(0,0,0,0.7);border:2px solid #355e36}
+  .modal h3{color:#9aff8f;margin-bottom:10px}
+  .instruction{background:#071014;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #557a46;color:#dff7ef}
+  .modal .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+  .ghost{background:transparent;border:1px solid #355e36;color:#9aff8f;padding:8px 12px;border-radius:10px;cursor:pointer}
+  .copyBtn{background:#9aff8f;color:#072018;padding:8px 12px;border-radius:10px;border:none;cursor:pointer}
+  #overlayLoad{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:210}
+  .spinner{width:64px;height:64px;border-radius:50%;border:8px solid rgba(85,122,70,0.12);border-top-color:#9aff8f;animation:spin 1s linear infinite;margin-bottom:10px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  footer{margin:26px 0 60px;color:#9bd9b0;font-size:.9rem}
+  @media (max-width:720px){.container{gap:12px;padding:14px}.card{width:46%}}
 </style>
 </head>
 <body>
 
-<div id="alertKey">⚠️ No compartas tu key.<br>Actualización 4.7: IVA +5% y Robux ⏣</div>
-
-<div class="top-bar">
-  <div>🔥 Servidores AWS activos (25 usuarios)</div>
-  <div id="countdown"></div>
-</div>
-
-<h1>ROBUX STORE ⏣</h1>
-<h2 style="color:#ffb347;">by: ANDZXX — V4.7 (IVA +5%)</h2>
-<p style="color:#ccc;margin-top:5px;">Todos los precios incluyen IVA +5% o descuento -5% según corresponda 🇸🇻</p>
-
-<!-- Robux normales -->
-<div class="container" id="robux-list">
-  <div class="card">⏣ 40 robux = $0.79<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 40 robux','$0.79')">Comprar</button></div>
-  <div class="card">⏣ 80 robux = $1.85<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 80 robux','$1.85')">Comprar</button></div>
-  <div class="card">⏣ 400 robux = $6.35<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 400 robux','$6.35')">Comprar</button></div>
-  <div class="card">⏣ 800 robux = $12.70<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 800 robux','$12.70')">Comprar</button></div>
-  <div class="card">⏣ 1700 robux = $23.50<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 1700 robux','$23.50')">Comprar</button></div>
-  <div class="card">⏣ 4500 robux = $56.70<br><span class="discount">IVA +5%</span><br><button class="btn" onclick="btnLoad('⏣ 4500 robux','$56.70')">Comprar</button></div>
-</div>
-
-<!-- Key -->
-<div class="key-container">
-  <label for="keyInput" style="font-size:1.3em;">🔐 ¿Ya tienes tu llave?</label><br>
-  <input type="text" id="keyInput" placeholder="Ingresa tu key">
-  <button class="btn" onclick="checkKey()">Enviar key</button>
-</div>
-
-<!-- Membresías -->
-<div id="membresias">
-  <h2>Membresías con Key — IVA -5%</h2>
-  <p style="font-size:12px;font-style:italic;color:gray;margin-top:5px;">Optimizado para tu comodidad.</p>
-  <div class="row">
-    <div class="bonus">Membresía +25% robux = $3.98 (4 días)<br><button class="btn" onclick="btnLoad('Membresía +25%','$3.98')">Suscribirse</button></div>
-    <div class="bonus">Membresía +25% robux = $5.03 (8 días)<br><button class="btn" onclick="btnLoad('Membresía +25%','$5.03')">Suscribirse</button></div>
-    <div class="bonus">Membresía +25% robux = $9.08 (15 días)<br><button class="btn" onclick="btnLoad('Membresía +25%','$9.08')">Suscribirse</button></div>
+  <div class="top-bar">
+    <div>🌐 Colaboración con <b>CakesBrows</b></div>
+    <div id="serverCount">Servidores activos: 25</div>
   </div>
-</div>
 
-<!-- Paquetes secretos (sin IVA) -->
-<div id="secret" style="display:none;">
-  <h2>🎉 Paquetes secretos (sin IVA)</h2>
-  <div class="container">
-    <div class="card">⏣ 500 robux = $6.05<br><span class="notice">Sin IVA</span><br><button class="btn" onclick="btnLoad('⏣ 500 robux','$6.05')">Comprar</button></div>
-    <div class="card">⏣ 1000 robux = $12.10<br><span class="notice">Sin IVA</span><br><button class="btn" onclick="btnLoad('⏣ 1000 robux','$12.10')">Comprar</button></div>
-    <div class="card">⏣ 2000 robux = $22.00<br><span class="notice">Sin IVA</span><br><button class="btn" onclick="btnLoad('⏣ 2000 robux','$22.00')">Comprar</button></div>
-    <div class="card">⏣ 5600 robux = $56.00<br><span class="notice">Sin IVA</span><br><button class="btn" onclick="btnLoad('⏣ 5600 robux','$56.00')">Comprar</button></div>
+  <header>
+    <h1>ROBUX STORE V5</h1>
+    <h2>Azul Oscuro & Verde Musgo — Verde & Celeste Reimaginado</h2>
+    <p class="small">Sigue las instrucciones de pago que aparecen al comprar.</p>
+  </header>
+
+  <!-- Paquetes -->
+  <main class="container" id="paquetes">
+    <div class="card">
+      <div class="robux-title">⏣ 40 robux</div>
+      <div class="price-row">
+        <div class="price">$0.75</div>
+        <div class="price-bar" aria-hidden="true"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('40 robux',0.75)">Comprar</button>
+      <div class="small">-5% descuento</div>
+    </div>
+
+    <div class="card">
+      <div class="robux-title">⏣ 80 robux</div>
+      <div class="price-row">
+        <div class="price">$1.75</div>
+        <div class="price-bar"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('80 robux',1.75)">Comprar</button>
+      <div class="small">-5% descuento</div>
+    </div>
+
+    <div class="card">
+      <div class="robux-title">⏣ 400 robux</div>
+      <div class="price-row">
+        <div class="price">$6.00</div>
+        <div class="price-bar"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('400 robux',6.00)">Comprar</button>
+      <div class="small">-5% descuento</div>
+    </div>
+
+    <div class="card">
+      <div class="robux-title">⏣ 800 robux</div>
+      <div class="price-row">
+        <div class="price">$11.99</div>
+        <div class="price-bar"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('800 robux',11.99)">Comprar</button>
+      <div class="small">-5% descuento</div>
+    </div>
+
+    <div class="card">
+      <div class="robux-title">⏣ 1000 robux</div>
+      <div class="price-row">
+        <div class="price">$14.99</div>
+        <div class="price-bar"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('1000 robux',14.99)">Comprar</button>
+      <div class="small">Paquete estándar</div>
+    </div>
+
+    <div class="card">
+      <div class="robux-title">⏣ Paquete Secreto</div>
+      <div class="price-row">
+        <div class="price">$20.00</div>
+        <div class="price-bar"></div>
+      </div>
+      <button class="btn" onclick="iniciarCompra('Paquete Secreto',20.00)">Comprar</button>
+      <div class="small">Accesible con Key</div>
+    </div>
+  </main>
+
+  <!-- Membresías -->
+  <section class="memberships">
+    <h3 style="color:#cfeee0;margin-bottom:10px">🧿 Membresías Especiales</h3>
+    <div class="container" style="gap:12px;">
+      <div class="card">
+        <div class="robux-title">Membresía 4 días — +25% robux</div>
+        <div class="price-row">
+          <div class="price">$3.99</div>
+          <div class="price-bar"></div>
+        </div>
+        <button class="btn" onclick="iniciarCompra('Membresía 4 días +25%',3.99)">Comprar</button>
+        <div class="small">Mismo flujo que paquetes</div>
+      </div>
+
+      <div class="card">
+        <div class="robux-title">Membresía 8 días — +25% robux</div>
+        <div class="price-row">
+          <div class="price">$4.99</div>
+          <div class="price-bar"></div>
+        </div>
+        <button class="btn" onclick="iniciarCompra('Membresía 8 días +25%',4.99)">Comprar</button>
+        <div class="small">Mismo flujo que paquetes</div>
+      </div>
+
+      <div class="card">
+        <div class="robux-title">Membresía 15 días — +25% robux</div>
+        <div class="price-row">
+          <div class="price">$9.99</div>
+          <div class="price-bar"></div>
+        </div>
+        <button class="btn" onclick="iniciarCompra('Membresía 15 días +25%',9.99)">Comprar</button>
+        <div class="small">Mismo flujo que paquetes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key / Encuesta (mantengo lo existente) -->
+  <section style="max-width:900px;margin:8px auto;padding:12px">
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <div style="text-align:left;min-width:260px">
+        <h4>🔐 Ingresa tu key secreta</h4>
+        <input id="keyInput" type="text" placeholder="Tu key aquí" style="padding:10px;border-radius:12px;border:none;width:100%;max-width:260px">
+        <div style="margin-top:10px">
+          <button class="btn" onclick="checkKey()">Validar</button>
+        </div>
+      </div>
+      <div style="min-width:260px;text-align:left">
+        <h4>🗳️ Encuesta</h4>
+        <p class="small">¿Qué paquete agregarías próximamente?</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ghost" onclick="vote('100 robux')">100 robux</button>
+          <button class="ghost" onclick="vote('250 robux')">250 robux</button>
+          <button class="ghost" onclick="vote('600 robux')">600 robux</button>
+        </div>
+        <p id="voteResult" class="small" style="margin-top:8px"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overlay carga -->
+  <div id="overlayLoad" style="display:none;align-items:center;justify-content:center;flex-direction:column;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:210">
+    <div class="spinner"></div>
+    <div style="color:#cfeee0;margin-top:10px">Cargando…</div>
   </div>
-  <p class="notice">Gracias por tu compra 💚</p>
-</div>
 
-<div class="popup" id="popup">✅ ¡Key aceptada! Paquetes secretos desbloqueados.</div>
+  <!-- Modal instrucciones PayPal -->
+  <div id="overlayPay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3>💳 MÉTODO DE PAGO</h3>
 
-<div id="overlay"><div class="spinner"></div>Procesando compra...</div>
+      <div class="instruction" id="instLine1">
+        ➡️ Entra a PayPal y agrega este correo: <strong style="color:#9aff8f">nohemymelgar027@gmail.com</strong>
+      </div>
 
-<p style="margin-top:40px;">© 2025 New Brothers Studios LLC — AWS powered by Amazon</p>
+      <div class="instruction" id="instLine2">
+        💵 Cantidad a depositar: <strong id="instAmount" style="color:#9aff8f">—</strong><br>
+        <small style="color:#bfeed2">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
+      </div>
+
+      <div class="instruction" id="instLine3">
+        📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
+      </div>
+
+      <div id="instExtra" style="margin-top:6px;color:#bfeed2">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
+
+      <div class="actions" style="margin-top:12px">
+        <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
+        <button class="ghost" onclick="abrirPayPal()">🔵 Abrir PayPal</button>
+        <button class="ghost" onclick="pagarEfectivo()">💚 Pagar en Efectivo (WhatsApp)</button>
+        <button class="ghost" onclick="cerrarPayModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 New Brothers Studios LLC — Azul Oscuro & Verde Musgo</footer>
 
 <script>
-window.addEventListener("load", ()=>{
-  const alert=document.getElementById("alertKey");
-  alert.style.display="block";
-  setTimeout(()=>{alert.style.display="none";},6000);
-});
+  const SELLER_PAYPAL = 'nohemymelgar027@gmail.com';
+  const WHATSAPP_PHONE = '50373826693'; // sin signos
+  let compra = { item: '', amount: 0 };
 
-function btnLoad(item, price){
-  const overlay=document.getElementById("overlay");
-  overlay.style.display="flex";
-  if(navigator.vibrate) navigator.vibrate(60);
-  setTimeout(()=>{
-    overlay.style.display="none";
-    window.open(`https://wa.me/50373826693?text=${encodeURIComponent(`Quiero comprar ${item} por ${price}`)}`,'_blank');
-  },6000);
-}
-
-const validKeys=["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
-function checkKey(){
-  const key=document.getElementById("keyInput").value.trim().toUpperCase();
-  if(validKeys.includes(key)){
-    document.body.classList.add("unlock-effect");
-    document.getElementById("secret").style.display="block";
-    document.getElementById("membresias").style.display="none";
-    document.getElementById("popup").style.display="block";
-    spawnConfetti();
-    if(navigator.vibrate) navigator.vibrate([100,50,100]);
+  // iniciar compra
+  function iniciarCompra(item, priceNumber){
+    compra.item = item;
+    compra.amount = Number(priceNumber) || 0;
+    // mostrar overlay carga breve
+    document.getElementById('overlayLoad').style.display = 'flex';
+    if(navigator.vibrate) navigator.vibrate(40);
     setTimeout(()=>{
-      document.getElementById("popup").style.display="none";
-      document.body.classList.remove("unlock-effect");
-    },2000);
-  } else {
-    alert("Key no válida ❌");
+      document.getElementById('overlayLoad').style.display = 'none';
+      // actualizar modal monto
+      const formatted = '$' + compra.amount.toFixed(2);
+      document.getElementById('instAmount').innerText = formatted;
+      // mostrar modal instrucciones
+      document.getElementById('overlayPay').style.display = 'flex';
+      document.getElementById('overlayPay').setAttribute('aria-hidden','false');
+      // scroll to modal for mobile
+      window.scrollTo({top:0,behavior:'smooth'});
+    },700);
   }
-}
 
-function spawnConfetti(){
-  for(let i=0;i<150;i++){
-    const c=document.createElement("div");
-    c.className="confetti-piece";
-    c.style.left=Math.random()*window.innerWidth+"px";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-    setTimeout(()=>{c.remove();},3000);
+  function cerrarPayModal(){
+    document.getElementById('overlayPay').style.display = 'none';
+    document.getElementById('overlayPay').setAttribute('aria-hidden','true');
   }
-}
+
+  // Copiar instrucciones al portapapeles
+  function copiarInstrucciones(){
+    const formatted = '$' + (compra.amount||0).toFixed(2);
+    const texto = `Entra a PayPal y deposita EXACTAMENTE ${formatted} a ${SELLER_PAYPAL}. Si pones más o menos, tu pago no será válido. En la descripción deja tu correo Gmail para confirmar (ej: TuEmail@gmail.com). Producto: ${compra.item}.`;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(()=> {
+        alert('Instrucciones copiadas al portapapeles.');
+      }).catch(()=> { prompt('Copia manualmente:', texto); });
+    } else {
+      prompt('Copia manualmente:', texto);
+    }
+  }
+
+  // Abrir PayPal (sitio oficial)
+  function abrirPayPal(){
+    // Abrimos la página oficial para que el usuario inicie sesión y haga el depósito manualmente
+    window.open('https://www.paypal.com/', '_blank');
+  }
+
+  // Pagar en efectivo -> abre WhatsApp con mensaje preescrito
+  function pagarEfectivo(){
+    const formatted = '$' + (compra.amount||0).toFixed(2);
+    const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por ${formatted}. ¿Cómo procedemos?`);
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${text}`, '_blank');
+  }
+
+  // Key simple
+  const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
+  function checkKey(){
+    const k = (document.getElementById('keyInput')||{}).value || '';
+    if(validKeys.includes(String(k).trim().toUpperCase())){
+      alert('✅ Key aceptada — paquetes secretos desbloqueados.');
+      // show secret section if it exists (kept for compatibility)
+      const secret = document.getElementById('secret');
+      if(secret) secret.style.display = 'block';
+    } else {
+      alert('❌ Key incorrecta');
+    }
+  }
+
+  // Confeti simple
+  function spawnConfetti(){
+    for(let i=0;i<50;i++){
+      const d = document.createElement('div');
+      d.style.position='fixed'; d.style.left=(Math.random()*100)+'%'; d.style.top='-10px';
+      d.style.width='8px'; d.style.height='8px'; d.style.background=`hsl(${Math.random()*360},80%,60%)`;
+      d.style.borderRadius='2px'; d.style.zIndex='999';
+      d.style.transition='transform 3s linear, top 3s linear';
+      document.body.appendChild(d);
+      setTimeout(()=>{ d.style.top = (window.innerHeight+40)+'px'; d.style.transform = 'rotate(360deg)'; },20);
+      setTimeout(()=>d.remove(),3400);
+    }
+  }
+
+  // Encuesta
+  function vote(choice){
+    document.getElementById('voteResult').innerText = "✅ Gracias por votar por " + choice + "!";
+  }
 </script>
 </body>
 </html>
