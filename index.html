@@ -3,66 +3,164 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ROBUX STORE V5 — Azul Oscuro & Verde Musgo</title>
+<title>TEMA: ROBUX ṣp</title>
 <style>
+  /* Reset & base */
   *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
   body{
-    font-family:"Poppins",sans-serif;
-    background:#001122;
-    color:#dff7ef;
+    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,#2a1400 0%, #100700 100%);
+    color:#fff8e5;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding-top:88px;
     overflow-x:hidden;
     text-align:center;
-    padding-top:74px;
   }
+
+  /* Top bar */
   .top-bar{
     position:fixed;top:0;left:0;width:100%;
-    background:rgba(0,30,40,0.96);
-    padding:12px 18px;display:flex;justify-content:space-between;align-items:center;
-    color:#bfeed2;z-index:120;border-bottom:2px solid #355e36;backdrop-filter:blur(6px)
+    background:linear-gradient(90deg, rgba(255,160,0,0.98), rgba(255,110,0,0.95));
+    padding:16px 18px;display:flex;justify-content:space-between;align-items:center;
+    color:#fff;z-index:140;border-bottom:3px solid rgba(255,140,0,0.14);
+    box-shadow:0 6px 24px rgba(0,0,0,0.45);
+    transform:translateY(-8px);
+    animation:barDrop .6s cubic-bezier(.2,.9,.3,1) forwards;
   }
-  header{margin-top:6px}
-  h1{font-size:2.1rem;color:#9aff8f;margin-top:6px;letter-spacing:0.6px}
-  h2{color:#aee7cf;margin-top:6px;font-weight:500}
-  .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:24px;max-width:1100px;margin:6px auto}
+  @keyframes barDrop{to{transform:translateY(0)}}
+
+  /* Header text */
+  header{margin-top:6px;padding:8px 12px}
+  h1{
+    font-size:2.0rem;
+    color:#fff1c7;
+    letter-spacing:0.6px;
+    text-shadow:0 6px 18px rgba(255,150,0,0.12),0 0 22px rgba(255,200,50,0.06);
+    animation:glowText 2.4s ease-in-out infinite alternate;
+  }
+  @keyframes glowText{
+    from{text-shadow:0 6px 18px rgba(255,140,0,0.12),0 0 14px rgba(255,180,50,0.04)}
+    to{text-shadow:0 12px 30px rgba(255,180,0,0.18),0 0 36px rgba(255,220,90,0.08)}
+  }
+  h2{color:#ffe9b3;font-weight:500;margin-top:6px;font-size:1rem}
+
+  /* Layout container */
+  .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
+  /* CARD - mobile first, big touch targets */
   .card{
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    width:230px;border-radius:14px;padding:14px;display:flex;flex-direction:column;align-items:center;
-    box-shadow:0 6px 20px rgba(0,0,0,0.6), inset 0 0 8px rgba(85,122,70,0.06);
-    transition:transform .18s, box-shadow .18s;
+    width:94%;
+    max-width:420px;
+    border-radius:18px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(255,140,0,0.03);
+    transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+    will-change:transform;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(255,170,0,0.08);
+    transform:translateY(10px);
+    animation:cardIn .6s ease forwards;
   }
-  .card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.7)}
-  .robux-title{font-size:1.02rem;color:#eafaf0;margin-bottom:6px}
+  @keyframes cardIn{to{transform:translateY(0)}}
+  .card::before{
+    content:"";
+    position:absolute;left:-40%;top:-40%;width:120%;height:120%;
+    background:radial-gradient(circle at 10% 10%, rgba(255,215,120,0.08), transparent 10%),
+               radial-gradient(circle at 90% 90%, rgba(255,120,50,0.06), transparent 10%);
+    transform:scale(1.05);
+    pointer-events:none;
+  }
+  .card:hover{transform:translateY(-10px) scale(1.02); box-shadow:0 22px 50px rgba(255,150,0,0.16)}
+  .robux-title{font-size:1.35rem;color:#fff; margin-bottom:8px; font-weight:700; text-shadow:0 4px 18px rgba(255,170,0,0.06)}
   .price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
-  .price{font-weight:700;color:#cfeee0}
-  .price-bar{width:86%;height:8px;border-radius:6px;background:#9aff8f44;margin-top:8px;box-shadow:0 0 12px #9aff8f33 inset}
-  .btn{margin-top:10px;padding:9px 14px;border-radius:999px;border:none;cursor:pointer;background:#557a46;color:#e8f9ef;font-weight:700;box-shadow:0 6px 18px rgba(85,122,70,0.18)}
-  .btn:hover{transform:scale(1.03)}
-  .small{font-size:.86rem;color:#bfeed2;margin-top:8px}
+  .price{font-weight:800;color:#fff;font-size:1.15rem}
+  .price-bar{
+    width:92%;height:12px;border-radius:10px;
+    background:linear-gradient(90deg,#ffd54f,#ff8a00);
+    margin-top:10px;
+    box-shadow:0 6px 30px rgba(255,140,0,0.12) inset;
+    position:relative;
+    overflow:hidden;
+  }
+  .price-bar::after{
+    content:"";position:absolute;left:-30%;top:0;width:50%;height:100%;
+    background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    transform:skewX(-18deg);
+    animation:barShine 2.2s linear infinite;
+  }
+  @keyframes barShine{to{left:120%}}
+
+  /* Buttons - big */
+  .btn{
+    margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;
+    background:linear-gradient(90deg,#ffcf5e,#ff7d00);color:#2b1100;font-weight:800;
+    box-shadow:0 10px 30px rgba(255,140,0,0.22), 0 2px 6px rgba(0,0,0,0.18);
+    transition:transform .18s, box-shadow .18s;
+    letter-spacing:0.4px;
+  }
+  .btn:active{transform:translateY(2px) scale(.995)}
+  .btn.hoverPulse{animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+  .small{font-size:.98rem;color:#ffe9b3;margin-top:10px}
+
+  /* MEMBERSHIPS */
   .memberships{max-width:1000px;margin:18px auto;padding:14px}
-  #overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.78);display:none;align-items:center;justify-content:center;z-index:220}
-  .modal{background:#0d1720;border-radius:12px;padding:18px 20px;width:92%;max-width:560px;color:#e7f9ee;box-shadow:0 20px 50px rgba(0,0,0,0.7);border:2px solid #355e36}
-  .modal h3{color:#9aff8f;margin-bottom:10px}
-  .instruction{background:#071014;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #557a46;color:#dff7ef}
-  .modal .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-  .ghost{background:transparent;border:1px solid #355e36;color:#9aff8f;padding:8px 12px;border-radius:10px;cursor:pointer}
-  .copyBtn{background:#9aff8f;color:#072018;padding:8px 12px;border-radius:10px;border:none;cursor:pointer}
-  #overlayLoad{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:210}
-  .spinner{width:64px;height:64px;border-radius:50%;border:8px solid rgba(85,122,70,0.12);border-top-color:#9aff8f;animation:spin 1s linear infinite;margin-bottom:10px}
+
+  /* KEY & Survey area */
+  .key-survey{max-width:920px;margin:10px auto;padding:12px 16px;background:linear-gradient(180deg, rgba(255,140,0,0.02), rgba(0,0,0,0.02));border-radius:14px;border:1px solid rgba(255,140,0,0.06)}
+  .key-survey h4{color:#ffe7b0;margin-bottom:6px}
+  .key-survey input[type="text"]{padding:14px;border-radius:12px;border:none;width:100%;max-width:320px;font-size:1rem;margin-top:6px}
+  .ghost{background:transparent;border:2px solid rgba(255,190,90,0.14);color:#ffdca8;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700}
+  .voteResult{margin-top:8px;color:#fff3d6;font-size:.98rem}
+
+  /* Overlays & Modals */
+  #overlayLoad,#overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7));z-index:260}
+  .modal{background:linear-gradient(180deg,#3b1800,#2a1200);border-radius:16px;padding:18px; width:94%;max-width:560px;color:#fff8e5;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(255,170,0,0.18);transform:translateY(18px);animation:modalIn .48s cubic-bezier(.2,.9,.3,1) forwards}
+  @keyframes modalIn{to{transform:translateY(0)}}
+  .modal h3{color:#ffd76a;margin-bottom:10px}
+  .instruction{background:#2b0f00;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #ff8a00;color:#ffeccf}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+
+  .copyBtn{background:linear-gradient(90deg,#ffd54f,#ff8a00);color:#2b1100;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .copyBtn:active{transform:translateY(2px)}
+  .modal .ghost{background:transparent;border:2px solid #ffb86b;color:#ffecae;padding:10px 12px;border-radius:10px}
+
+  /* Spinner */
+  .spinner{width:76px;height:76px;border-radius:50%;border:10px solid rgba(255,210,120,0.12);border-top-color:#ffd54f;animation:spin 1s linear infinite;margin-bottom:10px}
   @keyframes spin{to{transform:rotate(360deg)}}
-  footer{margin:26px 0 60px;color:#9bd9b0;font-size:.9rem}
-  @media (max-width:720px){.container{gap:12px;padding:14px}.card{width:46%}}
+
+  /* Confetti pieces */
+  .confetti{position:fixed;z-index:9999;pointer-events:none}
+
+  /* Footer */
+  footer{margin:28px 0 80px;color:#ffebb7;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
+
+  /* Responsive rules */
+  @media(min-width:800px){
+    .container{padding:28px}
+    .card{width:260px}
+    .card:nth-child(odd){animation-duration:.64s}
+    .card:nth-child(even){animation-duration:.7s}
+  }
 </style>
 </head>
 <body>
 
-  <div class="top-bar">
-    <div>🌐 Colaboración con <b>CakesBrows</b></div>
-    <div id="serverCount">Servidores activos: 25</div>
+  <div class="top-bar" role="banner">
+    <div>🔥 TEMA: <strong>ROBUX ṣp</strong></div>
+    <div id="serverCount" aria-live="polite">Servidores activos: 25</div>
   </div>
 
   <header>
-    <h1>ROBUX STORE V5</h1>
-    <h2>Azul Oscuro & Verde Musgo — Verde & Celeste Reimaginado</h2>
+    <h1>ROBUX ṣp</h1>
+    <h2>Amarillo & Naranja — Móvil (Animado)</h2>
     <p class="small">Sigue las instrucciones de pago que aparecen al comprar.</p>
   </header>
 
@@ -94,7 +192,7 @@
         <div class="price">$6.00</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('400 robux',6.00)">Comprar</button>
+      <button class="btn hoverPulse" onclick="iniciarCompra('400 robux',6.00)">Comprar</button>
       <div class="small">-5% descuento</div>
     </div>
 
@@ -130,8 +228,8 @@
   </main>
 
   <!-- Membresías -->
-  <section class="memberships">
-    <h3 style="color:#cfeee0;margin-bottom:10px">🧿 Membresías Especiales</h3>
+  <section class="memberships" aria-labelledby="membersTitle">
+    <h3 id="membersTitle" style="color:#ffdca8;margin-bottom:10px">🧿 Membresías Especiales</h3>
     <div class="container" style="gap:12px;">
       <div class="card">
         <div class="robux-title">Membresía 4 días — +25% robux</div>
@@ -165,12 +263,12 @@
     </div>
   </section>
 
-  <!-- Key / Encuesta (mantengo lo existente) -->
-  <section style="max-width:900px;margin:8px auto;padding:12px">
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+  <!-- Key / Encuesta -->
+  <section style="max-width:940px;margin:12px auto;padding:12px">
+    <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
       <div style="text-align:left;min-width:260px">
         <h4>🔐 Ingresa tu key secreta</h4>
-        <input id="keyInput" type="text" placeholder="Tu key aquí" style="padding:10px;border-radius:12px;border:none;width:100%;max-width:260px">
+        <input id="keyInput" type="text" placeholder="Tu key aquí" aria-label="Key secreta">
         <div style="margin-top:10px">
           <button class="btn" onclick="checkKey()">Validar</button>
         </div>
@@ -183,15 +281,17 @@
           <button class="ghost" onclick="vote('250 robux')">250 robux</button>
           <button class="ghost" onclick="vote('600 robux')">600 robux</button>
         </div>
-        <p id="voteResult" class="small" style="margin-top:8px"></p>
+        <p id="voteResult" class="voteResult"></p>
       </div>
     </div>
   </section>
 
   <!-- Overlay carga -->
-  <div id="overlayLoad" style="display:none;align-items:center;justify-content:center;flex-direction:column;position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:210">
-    <div class="spinner"></div>
-    <div style="color:#cfeee0;margin-top:10px">Cargando…</div>
+  <div id="overlayLoad" aria-hidden="true">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="spinner" role="status" aria-label="Cargando"></div>
+      <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
+    </div>
   </div>
 
   <!-- Modal instrucciones PayPal -->
@@ -200,19 +300,19 @@
       <h3>💳 MÉTODO DE PAGO</h3>
 
       <div class="instruction" id="instLine1">
-        ➡️ Entra a PayPal y agrega este correo: <strong style="color:#9aff8f">nohemymelgar027@gmail.com</strong>
+        ➡️ Entra a PayPal y agrega este correo: <strong style="color:#ffd76a">nohemymelgar027@gmail.com</strong>
       </div>
 
       <div class="instruction" id="instLine2">
-        💵 Cantidad a depositar: <strong id="instAmount" style="color:#9aff8f">—</strong><br>
-        <small style="color:#bfeed2">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
+        💵 Cantidad a depositar: <strong id="instAmount" style="color:#ffd76a">—</strong><br>
+        <small style="color:#ffdca8">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
       </div>
 
       <div class="instruction" id="instLine3">
         📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
       </div>
 
-      <div id="instExtra" style="margin-top:6px;color:#bfeed2">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
+      <div id="instExtra" style="margin-top:6px;color:#ffdca8">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
 
       <div class="actions" style="margin-top:12px">
         <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
@@ -223,14 +323,15 @@
     </div>
   </div>
 
-  <footer>© 2025 New Brothers Studios LLC — Azul Oscuro & Verde Musgo</footer>
+  <footer>© 2025 New Brothers Studios LLC — ROBUX ṣp</footer>
 
 <script>
+  /* --- Datos de contacto (mantener los que tenías) --- */
   const SELLER_PAYPAL = 'nohemymelgar027@gmail.com';
   const WHATSAPP_PHONE = '50373826693'; // sin signos
   let compra = { item: '', amount: 0 };
 
-  // iniciar compra
+  /* --- iniciar compra: animación de carga, luego modal --- */
   function iniciarCompra(item, priceNumber){
     compra.item = item;
     compra.amount = Number(priceNumber) || 0;
@@ -240,48 +341,58 @@
     setTimeout(()=>{
       document.getElementById('overlayLoad').style.display = 'none';
       // actualizar modal monto
-      const formatted = '$' + compra.amount.toFixed(2);
+      const formatted = '$' + (compra.amount||0).toFixed(2);
       document.getElementById('instAmount').innerText = formatted;
-      // mostrar modal instrucciones
-      document.getElementById('overlayPay').style.display = 'flex';
-      document.getElementById('overlayPay').setAttribute('aria-hidden','false');
-      // scroll to modal for mobile
+      // mostrar modal instrucciones con efecto
+      const overlay = document.getElementById('overlayPay');
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden','false');
+      // pequeño rebote en modal
+      const modal = overlay.querySelector('.modal');
+      modal.style.transform = 'translateY(-8px) scale(0.98)';
+      modal.style.opacity = '0';
+      setTimeout(()=>{ modal.style.transition = 'transform .36s cubic-bezier(.2,.9,.3,1), opacity .36s'; modal.style.transform = 'translateY(0) scale(1)'; modal.style.opacity='1'; },20);
+      // scroll to top for mobile
       window.scrollTo({top:0,behavior:'smooth'});
     },700);
   }
 
   function cerrarPayModal(){
-    document.getElementById('overlayPay').style.display = 'none';
-    document.getElementById('overlayPay').setAttribute('aria-hidden','true');
+    const overlay = document.getElementById('overlayPay');
+    const modal = overlay.querySelector('.modal');
+    modal.style.transition = 'transform .22s ease, opacity .22s';
+    modal.style.transform = 'translateY(12px) scale(.98)';
+    modal.style.opacity = '0';
+    setTimeout(()=>{ overlay.style.display = 'none'; overlay.setAttribute('aria-hidden','true'); modal.style.transform=''; modal.style.opacity=''; },220);
   }
 
-  // Copiar instrucciones al portapapeles
+  /* Copiar instrucciones al portapapeles */
   function copiarInstrucciones(){
     const formatted = '$' + (compra.amount||0).toFixed(2);
     const texto = `Entra a PayPal y deposita EXACTAMENTE ${formatted} a ${SELLER_PAYPAL}. Si pones más o menos, tu pago no será válido. En la descripción deja tu correo Gmail para confirmar (ej: TuEmail@gmail.com). Producto: ${compra.item}.`;
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(texto).then(()=> {
         alert('Instrucciones copiadas al portapapeles.');
+        spawnConfetti();
       }).catch(()=> { prompt('Copia manualmente:', texto); });
     } else {
       prompt('Copia manualmente:', texto);
     }
   }
 
-  // Abrir PayPal (sitio oficial)
+  /* Abrir PayPal (sitio oficial) */
   function abrirPayPal(){
-    // Abrimos la página oficial para que el usuario inicie sesión y haga el depósito manualmente
     window.open('https://www.paypal.com/', '_blank');
   }
 
-  // Pagar en efectivo -> abre WhatsApp con mensaje preescrito
+  /* Pagar en efectivo -> abre WhatsApp con mensaje preescrito */
   function pagarEfectivo(){
     const formatted = '$' + (compra.amount||0).toFixed(2);
     const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por ${formatted}. ¿Cómo procedemos?`);
     window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${text}`, '_blank');
   }
 
-  // Key simple
+  /* Key simple (mantén las keys que ya tenías) */
   const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
   function checkKey(){
     const k = (document.getElementById('keyInput')||{}).value || '';
@@ -290,29 +401,48 @@
       // show secret section if it exists (kept for compatibility)
       const secret = document.getElementById('secret');
       if(secret) secret.style.display = 'block';
+      spawnConfetti();
     } else {
       alert('❌ Key incorrecta');
+      // pequeño shake
+      const input = document.getElementById('keyInput');
+      input.style.transition='transform .08s'; input.style.transform='translateX(-6px)';
+      setTimeout(()=>{ input.style.transform='translateX(6px)'; },80);
+      setTimeout(()=>{ input.style.transform='translateX(0)'; },160);
     }
   }
 
-  // Confeti simple
+  /* Confetti (simple) */
   function spawnConfetti(){
-    for(let i=0;i<50;i++){
+    const count = 36;
+    for(let i=0;i<count;i++){
       const d = document.createElement('div');
-      d.style.position='fixed'; d.style.left=(Math.random()*100)+'%'; d.style.top='-10px';
-      d.style.width='8px'; d.style.height='8px'; d.style.background=`hsl(${Math.random()*360},80%,60%)`;
-      d.style.borderRadius='2px'; d.style.zIndex='999';
-      d.style.transition='transform 3s linear, top 3s linear';
+      d.className = 'confetti';
+      const size = Math.floor(Math.random()*10)+8;
+      d.style.left = (20 + Math.random()*60) + '%';
+      d.style.top = '-10px';
+      d.style.width = size + 'px';
+      d.style.height = Math.floor(size*0.6) + 'px';
+      d.style.background = `hsl(${Math.random()*40 + 20},90%,55%)`;
+      d.style.opacity = Math.random()*0.9 + 0.2;
+      d.style.borderRadius = '2px';
+      d.style.transform = `rotate(${Math.random()*360}deg)`;
+      d.style.zIndex = 9999;
+      d.style.transition = `transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear`;
       document.body.appendChild(d);
-      setTimeout(()=>{ d.style.top = (window.innerHeight+40)+'px'; d.style.transform = 'rotate(360deg)'; },20);
-      setTimeout(()=>d.remove(),3400);
+      setTimeout(()=>{ d.style.top = (window.innerHeight + 40) + 'px'; d.style.left = (Math.random()*100) + '%'; d.style.transform = `rotate(${Math.random()*720}deg)` },20);
+      setTimeout(()=>{ d.remove(); },3000);
     }
   }
 
-  // Encuesta
+  /* Encuesta */
   function vote(choice){
     document.getElementById('voteResult').innerText = "✅ Gracias por votar por " + choice + "!";
+    // pulse effect
+    const el = document.getElementById('voteResult');
+    el.style.transform='scale(1.02)'; setTimeout(()=>el.style.transform='scale(1)',220);
   }
+
 </script>
 </body>
 </html>
