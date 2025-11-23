@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name=google-site-verification content=7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- ✔ Google Site Verification (correctamente colocado) -->
+<meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
+
 <title>TEMA: Bobux </title>
 <style>
   /* Reset & base */
@@ -47,7 +52,8 @@
 
   /* Layout container */
   .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
-  /* CARD - mobile first, big touch targets */
+
+  /* CARD */
   .card{
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     width:94%;
@@ -76,6 +82,7 @@
     pointer-events:none;
   }
   .card:hover{transform:translateY(-10px) scale(1.02); box-shadow:0 22px 50px rgba(255,150,0,0.16)}
+
   .robux-title{font-size:1.35rem;color:#fff; margin-bottom:8px; font-weight:700; text-shadow:0 4px 18px rgba(255,170,0,0.06)}
   .price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
   .price{font-weight:800;color:#fff;font-size:1.15rem}
@@ -95,7 +102,6 @@
   }
   @keyframes barShine{to{left:120%}}
 
-  /* Buttons - big */
   .btn{
     margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;
     background:linear-gradient(90deg,#ffcf5e,#ff7d00);color:#2b1100;font-weight:800;
@@ -112,14 +118,14 @@
   /* MEMBERSHIPS */
   .memberships{max-width:1000px;margin:18px auto;padding:14px}
 
-  /* KEY & Survey area */
+  /* KEY & Survey */
   .key-survey{max-width:920px;margin:10px auto;padding:12px 16px;background:linear-gradient(180deg, rgba(255,140,0,0.02), rgba(0,0,0,0.02));border-radius:14px;border:1px solid rgba(255,140,0,0.06)}
   .key-survey h4{color:#ffe7b0;margin-bottom:6px}
   .key-survey input[type="text"]{padding:14px;border-radius:12px;border:none;width:100%;max-width:320px;font-size:1rem;margin-top:6px}
   .ghost{background:transparent;border:2px solid rgba(255,190,90,0.14);color:#ffdca8;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700}
   .voteResult{margin-top:8px;color:#fff3d6;font-size:.98rem}
 
-  /* Overlays & Modals */
+  /* Overlays */
   #overlayLoad,#overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7));z-index:260}
   .modal{background:linear-gradient(180deg,#3b1800,#2a1200);border-radius:16px;padding:18px; width:94%;max-width:560px;color:#fff8e5;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(255,170,0,0.18);transform:translateY(18px);animation:modalIn .48s cubic-bezier(.2,.9,.3,1) forwards}
   @keyframes modalIn{to{transform:translateY(0)}}
@@ -131,17 +137,13 @@
   .copyBtn:active{transform:translateY(2px)}
   .modal .ghost{background:transparent;border:2px solid #ffb86b;color:#ffecae;padding:10px 12px;border-radius:10px}
 
-  /* Spinner */
   .spinner{width:76px;height:76px;border-radius:50%;border:10px solid rgba(255,210,120,0.12);border-top-color:#ffd54f;animation:spin 1s linear infinite;margin-bottom:10px}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* Confetti pieces */
   .confetti{position:fixed;z-index:9999;pointer-events:none}
 
-  /* Footer */
   footer{margin:28px 0 80px;color:#ffebb7;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
 
-  /* Responsive rules */
   @media(min-width:800px){
     .container{padding:28px}
     .card{width:260px}
