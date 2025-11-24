@@ -7,6 +7,73 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 
+<!-- CHATBOT FLOTANTE -->
+<style>
+#chatBtn{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:#ffb84d;color:#2b1100;
+  padding:16px;border-radius:50%;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.4);font-size:22px;font-weight:700;
+}
+#chatBox{
+  position:fixed;bottom:90px;right:22px;width:280px;
+  background:#2b1100;border-radius:14px;border:2px solid #ffae40;
+  padding:12px;color:#ffeccc;display:none;z-index:9999;
+  box-shadow:0 16px 40px rgba(0,0,0,.6);
+}
+#chatMessages{
+  max-height:240px;overflow-y:auto;padding:6px;font-size:.92rem;
+}
+.chatMsg{margin-bottom:8px;background:#3b1500;padding:6px 8px;border-radius:8px}
+</style>
+
+<div id="chatBtn">💬</div>
+
+<div id="chatBox">
+  <div style="font-weight:700;margin-bottom:6px">Soporte</div>
+  <div id="chatMessages"></div>
+  <input id="chatInput" type="text" placeholder="Escribe..." 
+         style="width:100%;padding:8px;border-radius:8px;border:none;margin-top:6px">
+</div>
+
+<script>
+document.getElementById("chatBtn").onclick = ()=>{
+  const box = document.getElementById("chatBox");
+  box.style.display = box.style.display=="none" ? "block" : "none";
+};
+
+document.getElementById("chatInput").addEventListener("keypress", e=>{
+  if(e.key==="Enter"){
+    let msg = e.target.value.trim();
+    if(!msg) return;
+    addMsg("Tú: "+msg);
+
+    setTimeout(()=>{
+      let r = botReply(msg.toLowerCase());
+      addMsg("Bot: "+r);
+    },400);
+
+    e.target.value="";
+  }
+});
+
+function addMsg(t){
+  let m = document.createElement("div");
+  m.className="chatMsg";
+  m.innerText=t;
+  chatMessages.appendChild(m);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function botReply(t){
+  if(t.includes("hola")) return "¡Hola! ¿En qué puedo ayudarte hoy?";
+  if(t.includes("precio") || t.includes("cuesta")) return "Los precios están arriba en las tarjetas 🔥";
+  if(t.includes("key")) return "Las keys válidas son las que aparecen en la sección de Key.";
+  if(t.includes("pago")) return "Puedes pagar por PayPal o en efectivo por WhatsApp.";
+  return "No entendí muy bien, intenta preguntarlo de otra forma 🙏";
+}
+</script>
+
 <title>TEMA: Bobux </title>
 <style>
   /* Reset & base */
