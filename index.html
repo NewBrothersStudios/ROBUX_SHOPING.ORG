@@ -68,9 +68,11 @@ function addMsg(t){
 function botReply(t){
   if(t.includes("hola")) return "¡Hola! ¿En qué puedo ayudarte hoy?";
   if(t.includes("precio") || t.includes("cuesta")) return "Los precios están arriba en las tarjetas 🔥";
+if(t.includes("ayudame")) return
+"lamentablemente todavía estoy siendo configurado no puedo ayudarte.";
   if(t.includes("key")) return "Las keys válidas son las que aparecen en la sección de Key.";
   if(t.includes("pago")) return "Puedes pagar por PayPal o en efectivo por WhatsApp.";
-  return "No entendí muy bien, intenta preguntarlo de otra forma 🙏";
+  return "Todavia no me han inicializado completamente x favor espera los correspondiente 🙏";
 }
 </script>
 
@@ -223,12 +225,12 @@ function botReply(t){
 
   <div class="top-bar" role="banner">
     <div>🔥<strong>Bobux </strong></div>
-    <div id="serverCount" aria-live="polite">Servidores activos: 25</div>
+    <div id="serverCount" aria-live="polite">Tu actividad se está observando en tiempo real, atravez de nuestros moderadores.</div>
   </div>
 
   <header>
     <h1>Bobux</h1>
-    <h2>V2.19.20 solución de errores y animaciones </h2>
+    <h2>Versión 2.8 solución de errores y animaciones </h2>
     <p class="small">Sigue las instrucciones de pago que aparecen al comprar.</p>
   </header>
 
@@ -395,7 +397,7 @@ function botReply(t){
 
 <script>
   /* --- Datos de contacto (mantener los que tenías) --- */
-  const SELLER_PAYPAL = 'nohemymelgar027@gmail.com';
+  const SELLER_PAYPAL = 'gato41959@gmail.com';
   const WHATSAPP_PHONE = '50373826693'; // sin signos
   let compra = { item: '', amount: 0 };
 
