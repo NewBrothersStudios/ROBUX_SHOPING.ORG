@@ -73,7 +73,102 @@ if(t.includes("ayudame")) return
   if(t.includes("key")) return "Las keys válidas son las que aparecen en la sección de Key.";
   if(t.includes("pago")) return "Puedes pagar por PayPal o en efectivo por WhatsApp.";
   return "Todavia no me han inicializado completamente x favor espera los correspondiente 🙏";
-}
+
+const botResponses = [
+  {
+    trigger: "hola",
+    response: "¡Hola! 👋 ¿En qué te ayudo hoy?"
+  },
+  {
+    trigger: "precio",
+    response: "Los precios varían según el paquete. ¿Cuál estás buscando?"
+  },
+  {
+    trigger: "bobux",
+    response: "Vendemos Bobux totalmente legales y confiables 😎"
+  },
+  {
+    trigger: "comprar",
+    response: "Para comprar, solo dime qué paquete quieres y te paso los pasos 👌"
+  },
+  {
+    trigger: "ayuda",
+    response: "Claro que sí, ¿qué necesitas? 💬"
+},
+{ 
+botResponses.push(
+  {
+    trigger: "pagar",
+    response: "Aceptamos pagos por PayPal, saldo y más métodos disponibles 💲"
+  },
+  {
+    trigger: "paypal",
+    response: "Con PayPal el proceso es rápido y seguro 🔐"
+  },
+  {
+    trigger: "tiempo",
+    response: "La entrega tarda entre 1 y 10 minutos ⏱️"
+  },
+  {
+    trigger: "tarda",
+    response: "Tranquilo, normal es de 1–10 min, depende del tráfico 🌀"
+  }
+);
+botResponses.push(
+  {
+    trigger: "legal",
+    response: "Sí, todo es legal y seguro. No hay riesgo para tu cuenta."
+  },
+  {
+    trigger: "soporte",
+    response: "Estoy aquí 24/7, cualquier cosa me escribes 📞"
+  },
+  {
+    trigger: "admin",
+    response: "El admin siempre revisa los pedidos antes de entregar ✔️"
+  },
+  {
+    trigger: "estafa",
+    response: "Jamás. Aquí todo se entrega como se promete 💯"
+  }
+);
+
+botResponses.push(
+  {
+    trigger: "pedido",
+    response: "Tu pedido está en proceso, solo espera un momento 🙌"
+  },
+  {
+    trigger: "listo",
+    response: "Tu pedido ya fue entregado. Gracias por comprar 💚"
+  },
+  {
+    trigger: "cancelar",
+    response: "Si quieres cancelar, dime tu ID de pedido y lo reviso."
+  },
+  {
+    trigger: "estado",
+    response: "Puedo revisar tu estado, solo dime tu número de pedido 🧾"
+  }
+);
+botResponses.push(
+  {
+    trigger: "seguro",
+    response: "Sí, 100% seguro. Miles de clientes felices 😎"
+  },
+  {
+    trigger: "cuánto tarda",
+    response: "Normalmente entre 1 y 10 minutos ⏳"
+  },
+  {
+    trigger: "cuánto vale",
+    response: "Dime qué cantidad de Bobux quieres y te digo el precio 💸"
+  },
+  {
+    trigger: "horario",
+    response: "Estamos disponibles todo el día, todos los días 🕒"
+  }
+);
 </script>
 
 <title>TEMA: Bobux </title>
