@@ -7,193 +7,92 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 
-<!-- CHATBOT FLOTANTE -->
-<style>
-#chatBtn{
-  position:fixed;bottom:24px;right:24px;z-index:999;
-  background:#ffb84d;color:#2b1100;
-  padding:16px;border-radius:50%;cursor:pointer;
-  box-shadow:0 4px 14px rgba(0,0,0,.4);font-size:22px;font-weight:700;
-}
-#chatBox{
-  position:fixed;bottom:90px;right:22px;width:280px;
-  background:#2b1100;border-radius:14px;border:2px solid #ffae40;
-  padding:12px;color:#ffeccc;display:none;z-index:9999;
-  box-shadow:0 16px 40px rgba(0,0,0,.6);
-}
-#chatMessages{
-  max-height:240px;overflow-y:auto;padding:6px;font-size:.92rem;
-}
-.chatMsg{margin-bottom:8px;background:#3b1500;padding:6px 8px;border-radius:8px}
-</style>
-
-<div id="chatBtn">💬</div>
-
-<div id="chatBox">
-  <div style="font-weight:700;margin-bottom:6px">Soporte</div>
-  <div id="chatMessages"></div>
-  <input id="chatInput" type="text" placeholder="Escribe..." 
-         style="width:100%;padding:8px;border-radius:8px;border:none;margin-top:6px">
-</div>
-
 <script>
-document.getElementById("chatBtn").onclick = ()=>{
-  const box = document.getElementById("chatBox");
-  box.style.display = box.style.display=="none" ? "block" : "none";
-};
+// ----------------------------------------------------
+// BROTHER BOT — SISTEMA DE RESPUESTAS
+// ----------------------------------------------------
 
-document.getElementById("chatInput").addEventListener("keypress", e=>{
-  if(e.key==="Enter"){
-    let msg = e.target.value.trim();
-    if(!msg) return;
-    addMsg("Tú: "+msg);
+const brotherBotName = "Brother Bot";
 
-    setTimeout(()=>{
-      let r = botReply(msg.toLowerCase());
-      addMsg("Bot: "+r);
-    },400);
+// SUPER PACK DE RESPUESTAS COMPLETAS
+const brotherResponses = [
+  // ----- Las que ya te mandé antes -----
+  { trigger: "hola", response: "¡Ey! Aquí Brother Bot reportándose 🔥. ¿Qué onda?" },
+  { trigger: "precio", response: "Los precios dependen del paquete, decime cuál querés y te lo digo." },
+  { trigger: "ayuda", response: "Estoy aquí para ayudarte bro, decime qué necesitás." },
+  { trigger: "bobux", response: "Vendemos Bobux totalmente seguros, rápidos y garantizados." },
+  { trigger: "problema", response: "Contame qué pasó y te doy la solución al toque." },
+  { trigger: "comprar", response: "Para comprar solo decime el paquete y te digo los pasos." },
+  { trigger: "reembolso", response: "Pasame tu ID de compra y reviso si aplica reembolso." },
+  { trigger: "soporte", response: "El soporte está activo 24/7, preguntá lo que necesités." },
+  { trigger: "error", response: "Pasame el error exacto y te digo cómo arreglarlo." },
+  { trigger: "cuenta", response: "Jamás pedimos contraseñas. Tu cuenta está segura. 🛡️" },
+  { trigger: "código", response: "Decime qué código necesitás y te explico cómo funciona." },
+  { trigger: "pago", response: "Aceptamos PayPal y otros métodos según tu zona." },
+  { trigger: "seguro", response: "Sí, todo 100% seguro, sin riesgos." },
+  { trigger: "entrega", response: "La entrega tarda 1 a 10 minutos normalmente." },
+  { trigger: "demora", response: "Si está tardando, pasame tu ID para revisar." },
+  { trigger: "paquetes", response: "Decime cuántos Bobux querés y te muestro los paquetes." },
+  { trigger: "ofertas", response: "Hay ofertas especiales según el día. Preguntá por 'promo'." },
+  { trigger: "promo", response: "Decime cuántos Bobux querés y veo si aplica promo." },
+  { trigger: "tienda", response: "La tienda está abierta 24/7." },
+  { trigger: "info", response: "¿Qué info querés? Precios, pagos, entregas, etc." },
+  { trigger: "envío", response: "Todo es digital y automático. No hay envíos físicos." },
+  { trigger: "verificación", response: "A veces pedimos verificación mínima, nada peligroso." },
+  { trigger: "login", response: "Nunca des tu contraseña, ni aquí ni en ningún lado." },
+  { trigger: "instalación", response: "No necesitás instalar nada para comprar." },
+  { trigger: "contacto", response: "Pedí 'admin contacto' si querés hablar con el admin." },
+  { trigger: "garantía", response: "Damos garantía completa por cualquier falla." },
+  { trigger: "gracias", response: "¡A vos bro! Siempre para servirte 🔥🤝" },
 
-    e.target.value="";
-  }
-});
+  // ----- Aquí comienzan las 30 nuevas -----
 
-function addMsg(t){
-  let m = document.createElement("div");
-  m.className="chatMsg";
-  m.innerText=t;
-  chatMessages.appendChild(m);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function botReply(t){
-  if(t.includes("hola")) return "¡Hola! ¿En qué puedo ayudarte hoy?";
-  if(t.includes("precio") || t.includes("cuesta")) return "Los precios están arriba en las tarjetas 🔥";
-if(t.includes("ayudame")) return
-"lamentablemente todavía estoy siendo configurado no puedo ayudarte.";
-  if(t.includes("key")) return "Las keys válidas son las que aparecen en la sección de Key.";
-  if(t.includes("pago")) return "Puedes pagar por PayPal o en efectivo por WhatsApp.";
-  return "Todavia no me han inicializado completamente x favor espera los correspondiente 🙏";
-{
-<script>
-// ---------------------------------------------------------
-//         🚀 MEGA PACK DE RESPUESTAS PARA TU BOT 🚀
-//       Ultra largo, más de 4000 caracteres, listo para usar
-// ---------------------------------------------------------
-
-const botResponses = [
-  // SALUDOS Y BÁSICOS
-  { trigger: "hola", response: "¡Hey! 👋 ¿Qué onda? ¿En qué te ayudo hoy?" },
-  { trigger: "holaa", response: "¡Holaaa! 😄 Aquí estoy para lo que necesites." },
-  { trigger: "buenas", response: "Buenas buenas 🙌 ¿Qué te ofrezco?" },
-  { trigger: "hi", response: "Hi hi 👋 ¿Qué necesitas?" },
-  { trigger: "ey", response: "Ey bro 😎 ¿qué buscas?" },
-  { trigger: "help", response: "Claro, dime qué ocupas 💬" },
-  { trigger: "bot", response: "Sí sí, soy yo 😎 ¿qué onda?" },
-
-  // INFO DE PRECIOS
-  { trigger: "precios", response: "Los precios dependen del paquete 🔥 Dime cuántos Bobux quieres." },
-  { trigger: "cuánto vale", response: "Puedo darte precio exacto si me dices la cantidad 💸" },
-  { trigger: "valor", response: "El valor cambia según el paquete. ¿Cuál te interesa?" },
-  { trigger: "lista", response: "Aquí estoy, dime si quieres la lista de precios actualizada 📃" },
-
-  // INFO DE PRODUCTO
-  { trigger: "bobux", response: "Vendemos Bobux 100% seguros, entrega rápida y confiable 😎🔥" },
-  { trigger: "robux", response: "Sí, Robux = Bobux, los entregamos rápido 🟡" },
-  { trigger: "stock", response: "Tenemos stock completo siempre 🟢" },
-  { trigger: "disponible", response: "Disponible las 24 horas, todos los días." },
-
-  // COMPRA Y PASOS
-  { trigger: "comprar", response: "Para comprar solo dime el paquete y te explico los pasos 👌" },
-  { trigger: "quiero comprar", response: "Ok bro, dime cuántos Bobux y te guío 🔥" },
-  { trigger: "cómo compro", response: "Fácil: eliges paquete → método de pago → confirmación." },
-  { trigger: "proceso", response: "El proceso es rápido, seguro y supervisado ✔️" },
-
-  // PAGOS
-  { trigger: "pagar", response: "Métodos actuales: PayPal, saldo y opciones locales 💳" },
-  { trigger: "paypal", response: "PayPal es rápido, directo y recomendado 🔐" },
-  { trigger: "comisión", response: "Depende del método, si quieres te hago el cálculo." },
-  { trigger: "método", response: "Métodos activos: PayPal, saldo, y otras opciones según disponibilidad." },
-
-  // TIEMPO Y ENTREGA
-  { trigger: "tiempo", response: "La entrega toma de 1 a 10 minutos ⏱️" },
-  { trigger: "tarda", response: "Normal, depende de la fila pero siempre rápido." },
-  { trigger: "rápido", response: "Súper rápido, siempre entregamos ASAP ⚡" },
-  { trigger: "demora", response: "Jamás más de 10 minutos, estamos activos 24/7." },
-
-  // ESTADO DEL PEDIDO
-  { trigger: "pedido", response: "Dame tu ID del pedido y lo reviso 🧾" },
-  { trigger: "mi pedido", response: "Ok bro, pásame tu ID o nombre del paquete." },
-  { trigger: "estado", response: "Puedo verificar tu estado si me das el número de pedido." },
-  { trigger: "dónde está", response: "En proceso seguramente. Mándame tu ID." },
-
-  // CANCELACIÓN Y PROBLEMAS
-  { trigger: "cancelar", response: "¿Quieres cancelar? Dame tu ID y lo reviso." },
-  { trigger: "reembolso", response: "Si aplica, te explico cómo funciona, dame tu ID primero." },
-  { trigger: "error", response: "Si hubo un error, tranquilo, lo arreglamos rápido 🛠️" },
-  { trigger: "no funciona", response: "Dime qué pasó y lo solucionamos." },
-
-  // CONFIANZA
-  { trigger: "seguro", response: "100% seguro bro, aquí no jugamos con reputación." },
-  { trigger: "legal", response: "Sí, totalmente legal. Nunca ha habido problemas." },
-  { trigger: "real", response: "Realísimo 🔥 puedes preguntar sin pena." },
-  { trigger: "confianza", response: "Somos confiables y con experiencia en el tema ✔️" },
-
-  // ESTAFAS Y DUDA
-  { trigger: "estafa", response: "Aquí no se estafa a nadie 💯 la entrega es siempre garantizada." },
-  { trigger: "fake", response: "Nada fake bro, todo real y rápido." },
-  { trigger: "prueba", response: "Si quieres prueba, te muestro historial de entregas." },
-
-  // HORARIOS
-  { trigger: "horario", response: "Estamos activos 24/7, no cerramos." },
-  { trigger: "abierto", response: "Sí, aquí siempre estamos disponibles." },
-  { trigger: "online", response: "Sí bro, estoy online 😎" },
-
-  // PREGUNTAS GENERALES
-  { trigger: "info", response: "¿Qué info ocupas? Precios, pagos o pedidos?" },
-  { trigger: "dudas", response: "Dime tus dudas y te respondo al toque." },
-  { trigger: "ayuda", response: "Aquí estoy para ayudarte siempre 💬" },
-  { trigger: "qué es esto", response: "Es el bot oficial de la tienda Bobux Store 🔥" },
-
-  // MENSAJES DIVERTIDOS
-  { trigger: "xd", response: "JAJAJ xd bro, ¿qué pasó ahora?" },
-  { trigger: "jaja", response: "jajaja vos sos 🤣 ¿qué necesitas?" },
-  { trigger: "lol", response: "LOL bro 😆 ¿qué onda?" },
-  { trigger: "bro", response: "Decime pues bro 😎" },
-
-  // PREGUNTAS AVANZADAS
-  { trigger: "seguridad", response: "Todo pasa por sistema seguro, no hay riesgos." },
-  { trigger: "protección", response: "Tus datos y compra siempre quedan protegidos 🔒" },
-  { trigger: "soporte", response: "Si algo falla, soporte te cubre al instante." },
-  { trigger: "actualizado", response: "Sí, siempre tenemos los precios y métodos al día." },
-
-  // CLIENTES Y EXPERIENCIA
-  { trigger: "clientes", response: "Tenemos un montón de clientes felices y fieles 😄" },
-  { trigger: "reviews", response: "Si quieres te paso reseñas reales de clientes." },
-  { trigger: "historial", response: "Contamos con historial de entregas para mayor confianza." },
-
-  // OTROS EXTRAS
-  { trigger: "promos", response: "A veces hacemos promociones. Pregunta si hay alguna activa 😏" },
-  { trigger: "eventos", response: "Para eventos especiales, activamos precios especiales 🔥" },
-  { trigger: "bonus", response: "Algunas compras grandes incluyen bonus 😉" },
-  { trigger: "descuento", response: "Depende del paquete, puedo revisar si aplica." },
-
-  // MENSAJE FINAL SI NO ENTIENDE
+  { trigger: "admin", response: "El admin está disponible, decime qué querés que revise." },
+  { trigger: "id", response: "Pasame tu ID de pedido y lo reviso al instante." },
+  { trigger: "estado", response: "Querés ver el estado de tu compra? Pasame el ID." },
+  { trigger: "soporte humano", response: "Si necesitás un humano, decime 'hablar con admin'." },
+  { trigger: "hablar con admin", response: "Listo, te puedo pasar el contacto del admin si lo querés." },
+  { trigger: "horario", response: "Brother Bot trabaja 24/7 sin dormir 😎" },
+  { trigger: "faq", response: "FAQ: precios, compras, seguridad, entrega, paquetes. Pregunta uno por uno." },
+  { trigger: "guía", response: "Si querés una guía paso a paso para comprar, decime: 'cómo comprar'." },
+  { trigger: "cómo comprar", response: "1. Elegí paquete. 2. Pagás. 3. Confirmás. 4. Se entrega. Simple." },
+  { trigger: "alerta", response: "Si tu compra tiene alerta, puede ser verificación o espera." },
+  { trigger: "pendiente", response: "Un pedido pendiente significa que está en cola. Se entrega pronto." },
+  { trigger: "cola", response: "Hay varios pedidos delante, pero se mueve rápido." },
+  { trigger: "robux", response: "Sí, Robux = Bobux. Es lo mismo, diferente meme 😆" },
+  { trigger: "roblox", response: "Roblox funciona bien con nuestras entregas. Cero riesgo." },
+  { trigger: "esperar", response: "Tranquilo bro, ya casi te toca. Solo unos minutos." },
+  { trigger: "demasiado", response: "Si ves que tarda demasiado, pasame ID y reviso." },
+  { trigger: "ver", response: "Decime qué querés ver: precio, paquetes, estado, etc." },
+  { trigger: "process", response: "Tu pedido está en process. Pronto se libera." },
+  { trigger: "finalizado", response: "Si aparece como finalizado, ya se entregó." },
+  { trigger: "cancelado", response: "Un pedido cancelado se revisa manualmente." },
+  { trigger: "fallo", response: "Un fallo normalmente se arregla reiniciando el proceso." },
+  { trigger: "internet", response: "A veces tu internet hace que el bot no responda rápido." },
+  { trigger: "lento", response: "Si me ves lento, es porque hay muchos pedidos. Pero no me trabo 😎" },
+  { trigger: "ayuda urgente", response: "Ok bro, decime tu ID o el problema exacto." },
+  { trigger: "bloqueo", response: "Si tu pedido está bloqueado, lo revisa el admin." },
+  { trigger: "verificar pago", response: "Dame el ID del pago o captura y lo confirmo." },
+  { trigger: "cargando", response: "Si ves 'cargando', es que se está procesando tu pedido." },
+  { trigger: "información", response: "Tengo toda la info que necesités, solo decime la palabra." },
+  { trigger: "actualizar", response: "Si querés actualización del pedido, decime el ID." },
+  { trigger: "listo", response: "Listísimo bro 😎 Entregado o en proceso, según tu ID." }
 ];
 
+// ----------------------------------------------------
+// FUNCIÓN PARA RESPONDER MENSAJES
+// ----------------------------------------------------
 
-// ---------------------------------------------------------
-// FUNCIÓN DEL BOT
-// ---------------------------------------------------------
-function getBotResponse(message) {
+function brotherBotReply(message) {
   const text = message.toLowerCase();
 
-  for (let item of botResponses) {
+  for (let item of brotherResponses) {
     if (text.includes(item.trigger)) {
       return item.response;
     }
   }
 
-  return "No entendí eso 😅 puedes escribirlo de otra forma o preguntar algo más.";
+  return "No entendí eso bro 😅. Probá con otra palabra clave.";
 }
 </script>
 
