@@ -7,160 +7,193 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
-/* ---------------- CHAT FLOTANTE ---------------- */
-#chatBubble {
+<!-- BOT BROTHER FLOTANTE -->
+<style>
+#botBrotherBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #1e88e5;
+  bottom: 25px;
+  right: 25px;
+  background: #007bff;
   color: white;
-  padding: 15px 18px;
   border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
   cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
   z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-#chatWindow {
+#botBrotherWindow {
   position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  height: 380px;
+  bottom: 100px;
+  right: 25px;
+  width: 320px;
+  height: 420px;
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 9999;
 }
 
-#chatMessages {
+#botHeader {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#botMessages {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
   font-size: 14px;
 }
 
-#chatInput {
+#botInputArea {
   display: flex;
   border-top: 1px solid #ccc;
 }
 
-#chatInput input {
+#botInput {
   flex: 1;
   padding: 10px;
   border: none;
   outline: none;
+  font-size: 14px;
 }
 
-#chatInput button {
-  padding: 10px;
-  background: #1e88e5;
+#botSend {
+  width: 70px;
+  background: #007bff;
   color: white;
   border: none;
   cursor: pointer;
 }
 </style>
 
-<div id="chatBubble">💬</div>
+<div id="botBrotherBtn">🤖</div>
 
-<div id="chatWindow">
-  <div id="chatMessages"></div>
-  <div id="chatInput">
-    <input type="text" id="userMsg" placeholder="Escribe aquí...">
-    <button onclick="sendChat()">Enviar</button>
+<div id="botBrotherWindow">
+  <div id="botHeader">Bot Brother</div>
+  <div id="botMessages"></div>
+  <div id="botInputArea">
+    <input id="botInput" type="text" placeholder="Escribe algo...">
+    <button id="botSend">Enviar</button>
   </div>
 </div>
 
 <script>
-// ---------------- ABRIR/CERRAR CHAT ----------------
-document.getElementById("chatBubble").onclick = function () {
-  const box = document.getElementById("chatWindow");
-  box.style.display = (box.style.display === "flex") ? "none" : "flex";
+// --- ABRIR / CERRAR EL BOT ---
+document.getElementById("botBrotherBtn").onclick = ()=>{
+  let win = document.getElementById("botBrotherWindow");
+  win.style.display = win.style.display === "flex" ? "none" : "flex";
 };
 
-// ---------------- BOT RESPUESTAS ----------------
-const brotherResponses = [
-  { trigger: "hola", response: "¡Ey bro! Aquí Brother Bot 🔥 ¿qué onda?" },
-  { trigger: "precio", response: "Decime el paquete y te digo el precio exacto 😎" },
-  { trigger: "ayuda", response: "Decime qué necesitás y te guío al toque." },
-  { trigger: "bobux", response: "Tenemos Bobux seguros, rápidos y garantizados 💸🔥" },
-  { trigger: "problema", response: "Contame qué pasó y te lo arreglo." },
-
-  // Tus 30 nuevas + 20 anteriores ya están aquí
-  { trigger: "comprar", response: "Decime el paquete y te explico cómo comprar." },
-  { trigger: "reembolso", response: "Pasame tu ID y reviso si aplica reembolso." },
-  { trigger: "soporte", response: "Estoy activo 24/7 bro 😎" },
-  { trigger: "error", response: "Pasame el error exacto." },
-  { trigger: "cuenta", response: "Tu cuenta siempre está segura bro 🛡️" },
-  { trigger: "código", response: "¿Qué código necesitás?" },
-  { trigger: "pago", response: "Aceptamos PayPal y otros." },
-  { trigger: "seguro", response: "100% seguro como siempre 💯" },
-  { trigger: "entrega", response: "La entrega tarda 1 a 10 minutos." },
-  { trigger: "demora", response: "Pasame tu ID y lo reviso." },
-  { trigger: "paquetes", response: "Decime cuántos Robux querés." },
-  { trigger: "promo", response: "Puede haber promo, decime cantidad." },
-  { trigger: "admin", response: "¿Querés hablar con el admin?" },
-  { trigger: "id", response: "Pasame tu ID para revisión." },
-  { trigger: "estado", response: "Decime tu ID y te digo el estado." },
-  { trigger: "cómo comprar", response: "1. Elegís paquete 2. Pagás 3. Confirmación 4. Entrega" },
-  { trigger: "alerta", response: "Tu pedido podría estar en verificación." },
-  { trigger: "cola", response: "Hay pedidos delante, pero avanza rápido." },
-  { trigger: "roblox", response: "Funciona sin riesgo alguno." },
-  { trigger: "ver", response: "¿Qué querés ver bro?" },
-  { trigger: "finalizado", response: "Eso significa que ya llegó." },
-  { trigger: "cancelado", response: "Un admin debe revisarlo." },
-  { trigger: "falla", response: "Normalmente se arregla repitiendo el proceso." },
-  { trigger: "lento", response: "Hay muchos pedidos, pero no me trabo 😎" },
-  { trigger: "bloqueo", response: "Puede ser verificación del admin." },
-  { trigger: "verificar pago", response: "Pasame captura o ID." },
-  { trigger: "actualizar", response: "Dame tu ID y te doy update." },
-  { trigger: "listo", response: "🎉 Todo listo bro." }
-];
-
-// ---------- SISTEMA DEL BOT ----------
-const btn = document.getElementById("brotherBotBtn");
-const box = document.getElementById("brotherBotBox");
-const msgBox = document.getElementById("brotherMessages");
-const input = document.getElementById("brotherInput");
-const send = document.getElementById("brotherSend");
-
-btn.onclick = () => {
-  box.style.display = box.style.display === "none" ? "flex" : "none";
+// --- PALABRAS CLAVE Y RESPUESTAS ---
+const respuestas = {
+  "precio": "El precio depende del producto Bobux que elijas.",
+  "compra": "Puedes comprar Bobux directamente desde la tienda.",
+  "bobux": "Bobux es la moneda virtual para tus compras.",
+  "gratis": "Actualmente no hay métodos gratis oficiales.",
+  "descuento": "Los descuentos se publican cuando están disponibles.",
+  "ayuda": "Estoy aquí para ayudarte con tu compra.",
+  "pago": "Los pagos se procesan automáticamente.",
+  "metodo": "Aceptamos distintos métodos de pago.",
+  "envio": "Los envíos digitales son instantáneos.",
+  "tarde": "Si tarda, es por tráfico del servidor.",
+  "saldo": "Tu saldo se muestra en tu cuenta.",
+  "fallo": "Si hubo un fallo, intenta recargar la página.",
+  "error": "Puede ser un error temporal del sistema.",
+  "codigo": "Los códigos aparecen en tu email o cuenta.",
+  "verificacion": "A veces se requiere verificación extra.",
+  "cuenta": "Tu cuenta guarda tu historial de compras.",
+  "usuario": "Tu nombre de usuario es esencial para procesar Bobux.",
+  "roblox": "Roblox es donde puedes usar los Bobux.",
+  "soporte": "Puedes escribir aquí si necesitas soporte.",
+  "horario": "Soporte está disponible 24/7.",
+  "ticket": "Puedes abrir un ticket desde aquí.",
+  "demora": "La demora regular es de 1 a 3 minutos.",
+  "rapido": "Los envíos suelen ser rápidos.",
+  "instantaneo": "Muchas compras son instantáneas.",
+  "confirmacion": "Tu confirmación llegará pronto.",
+  "store": "Bienvenido a la Bobux Store oficial.",
+  "regalo": "Puedes comprar Bobux como regalo.",
+  "amigo": "Puedes enviar Bobux a amigos si lo permite tu pedido.",
+  "historial": "Tu historial se guarda automáticamente.",
+  "transaccion": "Las transacciones pueden tardar un poco.",
+  "seguro": "Tu compra es completamente segura.",
+  "soporte tecnico": "Soporte técnico disponible aquí.",
+  "problema": "Dime qué problema tienes.",
+  "espera": "Solo espera un poco, procesando.",
+  "gracias": "¡Gracias por comprar en nuestra store!",
+  "tiempo": "El tiempo promedio es de segundos.",
+  "informacion": "Toda la información está en esta tienda.",
+  "tutorial": "Pronto añadiremos tutoriales.",
+  "clave": "Tu clave se genera automáticamente.",
+  "recarga": "La recarga de Bobux es instantánea.",
+  "fallo compra": "Revisa tu método de pago.",
+  "demora compra": "Puede tardar por saturación.",
+  "login": "Inicia sesión para ver tus pedidos.",
+  "registro": "Puedes registrarte en segundos.",
+  "premium": "Opciones premium estarán próximamente.",
+  "basico": "Este es el paquete básico.",
+  "mega": "Este es el paquete Mega Bobux.",
+  "vip": "El paquete VIP tiene beneficios extra.",
+  "soporte rapido": "Responderé lo más rápido posible.",
+  "problema pago": "Revisa tu banco o método de pago.",
+  "pendiente": "Tu compra está pendiente de confirmación.",
+  "autorizacion": "Espera autorización del sistema.",
+  "validacion": "Validando tu compra...",
+  "consulta": "Estoy aquí para resolver tus consultas.",
+  "pregunta": "Hazme cualquier pregunta.",
+  "alerta": "No compartas datos personales.",
+  "info": "¿Qué info necesitas?",
+  "detalle": "Aquí tienes los detalles disponibles.",
+  "compra fallida": "Intenta de nuevo en un minuto.",
+  "listo": "¡Listo! Procesando la solicitud."
 };
 
-function sendMessage() {
-  const text = input.value.trim();
-  if (!text) return;
+// --- ENVIAR MENSAJE ---
+document.getElementById("botSend").onclick = enviarMensaje;
+document.getElementById("botInput").addEventListener("keypress", e=>{
+  if(e.key === "Enter") enviarMensaje();
+});
 
-  msgBox.innerHTML += `<div><b>Tú:</b> ${text}</div>`;
-  input.value = "";
+function enviarMensaje(){
+  let msg = document.getElementById("botInput").value.trim();
+  if(msg === "") return;
 
-  // Animación de cargando 3 segundos
-  msgBox.innerHTML += `<div id="loadingMsg">Brother Bot está escribiendo...</div>`;
-  msgBox.scrollTop = msgBox.scrollHeight;
+  agregarMensaje("👤 Tú: " + msg);
 
-  setTimeout(() => {
-    document.getElementById("loadingMsg").remove();
+  // Buscar respuesta por palabra clave
+  let respuesta = "No entendí eso, intenta con otra palabra clave.";
 
-    // Buscar palabra clave
-    let response = "No encontré coincidencia exacta, intenta escribirlo de otra forma 👀";
-
-    for (const key in brotherData) {
-      if (text.toLowerCase().includes(key.toLowerCase())) {
-        response = brotherData[key];
-        break;
-      }
+  for(let clave in respuestas){
+    if(msg.toLowerCase().includes(clave)){
+      respuesta = respuestas[clave];
+      break;
     }
+  }
 
-    msgBox.innerHTML += `<div><b>Brother Bot:</b> ${response}</div>`;
-    msgBox.scrollTop = msgBox.scrollHeight;
+  setTimeout(()=>agregarMensaje("🤖 Bot Brother: " + respuesta), 400);
 
-  }, 3000);
+  document.getElementById("botInput").value = "";
 }
+
+function agregarMensaje(texto){
+  const box = document.getElementById("botMessages");
+  box.innerHTML += `<div style="margin-bottom:8px;">${texto}</div>`;
+  box.scrollTop = box.scrollHeight;
+}
+</script>
 
 send.onclick = sendMessage;
 input.onkeydown = (e) => { if (e.key === "Enter") sendMessage(); };
