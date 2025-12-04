@@ -73,7 +73,7 @@
   margin: 0 auto;
 }
 
-/* ===== FLECHA USANDO "↑" ===== */
+/* ===== FLECHA USANDO "↓" ===== */
 #pointer {
   font-size: 45px;
   font-weight: bold;
@@ -149,7 +149,7 @@
 <!-- ===== PANTALLA DE RULETA ===== -->
 <div id="wheelContainer">
 
-  <!-- NUEVA FLECHA "↑" -->
+  <!-- NUEVA FLECHA "↓" -->
   <div id="pointer">↑</div>
 
   <div id="wheelBox">
@@ -240,8 +240,8 @@ function spinWheel() {
   if (!extraSpin) saveSpinTime();
 }
 
-/* ===== COOLDOWN 12 HORAS ===== */
-const COOLDOWN = 12 * 60 * 60 * 1000;
+/* ===== COOLDOWN 7 HORAS ===== */
+const COOLDOWN = 7 * 60 * 60 * 1000;
 
 function saveSpinTime() {
   localStorage.setItem("lastSpin", Date.now());
