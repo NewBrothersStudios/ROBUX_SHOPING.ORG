@@ -8,333 +8,584 @@
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
 
-/* MENSAJE FLOTANTE */
-.msg-float {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: black;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(255,255,255,.2);
-  font-size: 16px;
-  z-index: 9999;
-  animation: pop 1s ease;
-}
-@keyframes pop {
-  0% { opacity: 0; transform: translate(-50%, -20px); }
-  100% { opacity: 1; transform: translate(-50%, 0); }
-}
+  /* BIG MESSAGE */
+  .msg-float{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:9999;
+    background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+    color:#fff;
+    padding:18px 28px;
+    border-radius:14px;
+    font-weight:700;
+    font-size:22px; /* MÁS GRANDE */
+    letter-spacing:0.6px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.04);
+  }
 
-/* BURBUJA */
-.bubble-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 65px;
-  height: 65px;
-  background: #2b55ff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 0 20px #2b55ff;
-  z-index: 999;
-  animation: spinBubble 2s linear infinite;
-}
-@keyframes spinBubble {
-  from { transform: rotate(0); }
-  to { transform: rotate(360deg); }
-}
+  /* Bubble */
+  .bubble{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:9998;
+    background: linear-gradient(135deg,#6b8bff,#3d5bff);
+    box-shadow: 0 8px 30px rgba(61,91,255,0.18), 0 1px 0 rgba(255,255,255,0.03) inset;
+    transform-origin:center;
+    animation: bubbleSpin 3s linear infinite;
+    font-size:34px;
+    color:#fff;
+  }
+  @keyframes bubbleSpin{
+    0%{ transform: rotate(0) translateZ(0) }
+    100%{ transform: rotate(360deg) translateZ(0) }
+  }
 
-/* PANTALLA RULETA */
-.ruleta-screen {
-  position: fixed;
-  inset: 0;
-  background: black;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-  z-index: 9998;
-}
+  /* Ruleta screen overlay */
+  .overlay{
+    position:fixed;
+    inset:0;
+    z-index:9997;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    background: linear-gradient(180deg, rgba(1,6,14,0.78), rgba(1,6,14,0.9));
+    backdrop-filter: blur(6px);
+  }
 
-/* RULETA 2D */
-.wheel-box {
-  position: relative;
-  width: 300px;
-  height: 300px;
-}
+  .card{
+    width: 920px;
+    max-width: calc(100% - 48px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:18px;
+    padding:28px;
+    display:flex;
+    gap:28px;
+    align-items:flex-start;
+    box-shadow: 0 20px 60px rgba(3,6,18,0.7);
+    border: 1px solid rgba(255,255,255,0.03);
+  }
 
-.arrow {
-  width: 0;
-  height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 30px solid red;
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
+  /* Left: wheel column */
+  .left{
+    width:520px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+  }
 
-.wheel2d {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 4px solid white;
-  overflow: hidden;
-  transition: transform 5s ease-out;
-  position: relative;
-}
+  .wheel-wrap{
+    position:relative;
+    width:420px;
+    height:420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
 
-/* Slice base */
-.slice {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  left: 50%;
-  top: 50%;
-  transform-origin: 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-}
+  /* pointer (flecha) - fixed on top center */
+  .pointer{
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+    width:0;height:0;
+    border-left:22px solid transparent;
+    border-right:22px solid transparent;
+    border-bottom:34px solid #f03b3b; /* rojo */
+    filter: drop-shadow(0 6px 10px rgba(240,59,59,0.25));
+    transition: transform .18s ease;
+  }
 
-/* Slice colores y posiciones */
-.s1 {
-  background: #ff3d3d;
-  transform: rotate(0deg) skewY(-45deg);
-}
-.s2 {
-  background: #2222ff;
-  transform: rotate(90deg) skewY(-45deg);
-}
-.s3 {
-  background: #00cc66;
-  transform: rotate(180deg) skewY(-45deg);
-}
-.s4 {
-  background: #ffaa00;
-  transform: rotate(270deg) skewY(-45deg);
-}
+  /* wheel 2D */
+  .wheel{
+    --size:360px;
+    width:var(--size);
+    height:var(--size);
+    border-radius:50%;
+    position:relative;
+    transform-origin:center;
+    transition: transform 5s cubic-bezier(.15,.7,.2,1);
+    box-shadow: inset 0 10px 30px rgba(255,255,255,0.02), 0 18px 60px rgba(2,6,20,0.6);
+    border: 10px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  }
 
-.slice span {
-  transform: skewY(45deg) rotate(-45deg);
-  width: 90px;
-  text-align: center;
-}
+  /* center knob */
+  .center{
+    position:absolute;
+    width:96px;height:96px;border-radius:50%;
+    left:50%;top:50%;transform:translate(-50%,-50%);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+                linear-gradient(180deg,#0d1728,#071027);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(3,6,18,0.6), inset 0 2px 8px rgba(255,255,255,0.02);
+    border: 3px solid rgba(255,255,255,0.03);
+    font-weight:800;
+    color:#fff;
+    font-size:14px;
+  }
 
-/* BOTON GIRAR */
-.spin-btn {
-  background: #ff3030;
-  padding: 15px 30px;
-  border-radius: 12px;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-}
+  /* each slice (full filled look) - 4 slices (90deg each) */
+  .slice{
+    position:absolute;
+    width:50%;
+    height:50%;
+    left:50%;
+    top:50%;
+    transform-origin:0 0;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding-left:28px;
+    color:#fff;
+    font-weight:700;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+    user-select:none;
+  }
 
-/* BOTONES TIENDA */
-.btm-row {
-  display: flex;
-  gap: 25px;
-}
-.shop-btn {
-  background: #1a1a1a;
-  padding: 12px 15px;
-  border-radius: 12px;
-  border: 1px solid #444;
-  font-size: 15px;
-  text-align: center;
-  width: 130px;
-}
-.shop-btn small {
-  display: block;
-  margin-top: 4px;
-  color: #00f7dd;
-}
+  .slice span{
+    transform: skewY(45deg) rotate(-45deg);
+    display:block;
+    width:110px;
+    text-align:center;
+    font-size:18px;
+  }
 
+  /* colors with gradient fills and gloss */
+  .s1{ background: conic-gradient(from 0deg, rgba(255,107,107,1), rgba(255,61,61,1)); transform: rotate(0deg) skewY(-45deg) }
+  .s2{ background: conic-gradient(from 90deg, rgba(107,139,255,1), rgba(61,91,255,1)); transform: rotate(90deg) skewY(-45deg) }
+  .s3{ background: conic-gradient(from 180deg, rgba(65,240,132,1), rgba(0,200,107,1)); transform: rotate(180deg) skewY(-45deg) }
+  .s4{ background: conic-gradient(from 270deg, rgba(255,208,91,1), rgba(255,154,0,1)); transform: rotate(270deg) skewY(-45deg) }
+
+  /* subtle highlight overlay */
+  .wheel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    pointer-events:none;
+    background: radial-gradient(300px 120px at 20% 18%, rgba(255,255,255,0.06), transparent 8%),
+                linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+    mix-blend-mode: overlay;
+  }
+
+  /* right column: controls & info */
+  .right{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .title{
+    font-size:22px;font-weight:800;
+    letter-spacing:0.6px;
+    display:flex;align-items:center;gap:10px;
+  }
+
+  .desc{
+    color:rgba(255,255,255,0.75);font-size:14px;
+    margin-bottom:4px;
+  }
+
+  .spin-area{ display:flex; gap:12px; align-items:center; margin-top:6px; }
+
+  .btn-spin{
+    padding:16px 30px;border-radius:12px;background: linear-gradient(180deg,#ff6b6b,#ff3d3d);
+    box-shadow:0 12px 30px rgba(255,61,61,0.16);
+    color:#09101a;font-weight:800;font-size:18px;border:none;cursor:pointer;
+  }
+
+  .timer{
+    font-weight:700;color:#fff;padding:8px 12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+  }
+
+  .packs{
+    display:flex;gap:12px;margin-top:12px;
+  }
+
+  .pack-btn{
+    padding:12px 14px;border-radius:12px;background:linear-gradient(180deg,#0f1724,#071027);
+    border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:#fff;width:220px;text-align:left;
+    font-weight:700;
+  }
+  .pack-price{ display:block;color:#00f7dd;font-weight:800;margin-top:6px;font-size:14px }
+
+  /* result toast */
+  .toast{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    bottom:40px;
+    padding:16px 22px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+    border:1px solid rgba(255,255,255,0.04);
+    display:none;
+    z-index:3000;
+    min-width:300px;text-align:center;font-weight:800;font-size:18px;
+    box-shadow:0 10px 50px rgba(0,0,0,0.6);
+  }
+
+  /* special styles for different outcomes */
+  .toast.lost{ color:#ff8fb3; text-shadow: 0 6px 20px rgba(255,140,179,0.06); animation: popIn 700ms cubic-bezier(.2,.9,.3,1) }
+  .toast.bonus{ color:#69f0b0; text-shadow: 0 6px 30px rgba(105,240,176,0.06); animation: popIn 700ms cubic-bezier(.2,.9,.3,1) }
+  .toast.again{ color:#ffd66b; text-shadow: 0 6px 30px rgba(255,214,107,0.06); animation: popIn 700ms cubic-bezier(.2,.9,.3,1) }
+
+  @keyframes popIn {
+    from { transform:translateX(-50%) translateY(0) scale(.88); opacity:0 }
+    to { transform:translateX(-50%) translateY(-8px) scale(1); opacity:1 }
+  }
+
+  /* responsive small screens */
+  @media (max-width:920px){
+    .card{ flex-direction:column; align-items:center; padding:18px }
+    .left{ width:100% }
+    .right{ width:100% }
+    .wheel-wrap{ width:320px;height:320px }
+    .wheel{ --size:320px }
+    .pack-btn{ width:48% }
+    .packs{ flex-wrap:wrap; gap:10px; justify-content:center }
+  }
 </style>
 </head>
-
 <body>
 
-<!-- MENSAJE FLOTANTE -->
-<div class="msg-float" id="msgFloat">
-  New lucky wheel 🍀!!
-</div>
+<!-- big message -->
+<div class="msg-float" id="msgFloat">NEW LUCKY WHEEL 🍀!!</div>
 
-<script>
-setTimeout(()=>document.getElementById("msgFloat").style.display="none",3500);
-</script>
+<!-- small rotating bubble -->
+<div class="bubble" id="bubbleBtn">🎡</div>
 
-<!-- BURBUJA -->
-<div class="bubble-btn" id="bubbleBtn">🎡</div>
+<!-- overlay with card -->
+<div class="overlay" id="overlay">
+  <div class="card">
+    <div class="left">
+      <div class="wheel-wrap">
+        <div class="pointer" id="pointer" title="Indicator"></div>
+        <div class="wheel" id="wheel">
+          <!-- 4 slices -->
+          <div class="slice s1" style=""><span>500 🆓 BOBUX!</span></div>
+          <div class="slice s2" style=""><span>PERDISTE...</span></div>
+          <div class="slice s3" style=""><span>PROMO +25%</span></div>
+          <div class="slice s4" style=""><span>GIRA DE NUEVO</span></div>
 
-<!-- PANTALLA RULETA -->
-<div class="ruleta-screen" id="ruletaScreen">
+          <div class="center">RULETA</div>
+        </div>
+      </div>
+      <div style="width:100%;display:flex;justify-content:center">
+        <div style="color:rgba(255,255,255,0.8);font-size:13px;margin-top:6px">La flecha roja indica lo que ganarás</div>
+      </div>
+    </div>
 
-  <div class="wheel-box">
-    <div class="arrow"></div>
+    <div class="right">
+      <div class="title">Ruleta de la Suerte</div>
+      <div class="desc">Gira la rueda y gana premios. Solo 1 giro cada 12 horas. Guarda el tiempo aunque salgas.</div>
 
-    <div id="wheel" class="wheel2d">
-      <div class="slice s1"><span>500 🆓 BOBUX!</span></div>
-      <div class="slice s2"><span>PERDISTE...</span></div>
-      <div class="slice s3"><span>BONO +25%</span></div>
-      <div class="slice s4"><span>GIRA DE NUEVO</span></div>
+      <div class="spin-area">
+        <button class="btn-spin" id="spinBtn">Cargando...</button>
+        <div class="timer" id="timerBox">--:--:--</div>
+      </div>
+
+      <div class="packs">
+        <button class="pack-btn" id="pack5">+5 giros <span class="pack-price">$1.99</span></button>
+        <button class="pack-btn" id="pack10">10 giros + 2 🆓 <span class="pack-price">$2.99</span></button>
+      </div>
+
+      <div style="margin-top:12px;color:rgba(255,255,255,0.65);font-size:13px">
+        NOTA: El premio <strong>500 🆓 BOBUX!</strong> está deshabilitado (0%).
+      </div>
     </div>
   </div>
 
-  <button id="spinBtn" class="spin-btn">Cargando...</button>
-
-  <div class="btm-row">
-    <div class="shop-btn">
-      +5 GIROS
-      <small>$1.99</small>
-    </div>
-    <div class="shop-btn">
-      10 GIROS +2 🆓
-      <small>$2.99</small>
-    </div>
-  </div>
-
+  <div class="toast" id="toast"></div>
 </div>
 
 <script>
-/* ------------ PROBABILIDADES ------------ */
-const premios = [
-  { name: "500 🆓 BOBUX!", prob: 0 },
-  { name: "PERDISTE...", prob: 70 },
-  { name: "Promo de bono +25%", prob: 15 },
-  { name: "Gira de nuevo", prob: 15 }
+/* ================= CONFIG ================= */
+const PHONE = "50373826693"; // tu número
+const HOURS12 = 12 * 60 * 60 * 1000;
+const LS_ATT = "ruleta_attempts_v1";
+const LS_UNLOCK = "ruleta_unlock_v1";
+
+/* premios (probabilidades invisibles) */
+const slices = [
+  { name:"500 🆓 BOBUX!", prob:0 },       // nunca tocará
+  { name:"PERDISTE...", prob:70 },
+  { name:"Promo de bono +25%", prob:15 },
+  { name:"Gira de nuevo", prob:15 }
 ];
 
-/* ------------ VARIABLES LOCALSTORAGE ------------ */
-let intentos = parseInt(localStorage.getItem("intentos")) || 1;
-let nextSpin = localStorage.getItem("nextSpinTime");
-let spinBtn = document.getElementById("spinBtn");
-let wheel = document.getElementById("wheel");
+/* elementos */
+const overlay = document.getElementById("overlay");
+const bubbleBtn = document.getElementById("bubbleBtn");
+const spinBtn = document.getElementById("spinBtn");
+const timerBox = document.getElementById("timerBox");
+const wheel = document.getElementById("wheel");
+const toast = document.getElementById("toast");
+const pointer = document.getElementById("pointer");
+const pack5 = document.getElementById("pack5");
+const pack10 = document.getElementById("pack10");
+const msgFloat = document.getElementById("msgFloat");
 
-/* ------------ BOTÓN BURBUJA ------------ */
-document.getElementById("bubbleBtn").onclick = () => {
-  document.getElementById("ruletaScreen").style.display = "flex";
-  actualizarBoton();
-};
+/* estado */
+let attempts = parseInt(localStorage.getItem(LS_ATT)) || 1;
+let unlockAt = parseInt(localStorage.getItem(LS_UNLOCK)) || 0;
+let spinning = false;
+let currentRotation = 0; // keep track so rotation accumulative
 
-/* ------------ ACTUALIZAR BOTON ------------ */
-function actualizarBoton() {
-  if (intentos > 0) {
-    spinBtn.innerText = `GIRAR (${intentos})`;
+/* mostrar overlay al tocar bubble */
+bubbleBtn.addEventListener("click", ()=>{
+  overlay.style.display = "flex";
+  actualizarUI();
+});
+
+/* packs -> abrir WhatsApp con mensaje preescrito */
+pack5.addEventListener("click", ()=>{
+  const text = encodeURIComponent("Hola, quiero comprar +5 giros por $1.99");
+  window.open(`https://wa.me/${PHONE}?text=${text}`,'_blank');
+});
+pack10.addEventListener("click", ()=>{
+  const text = encodeURIComponent("Hola, quiero comprar 10 giros +2 por $2.99");
+  window.open(`https://wa.me/${PHONE}?text=${text}`,'_blank');
+});
+
+/* util: save attempts */
+function saveAttempts(){ localStorage.setItem(LS_ATT, String(attempts)); }
+
+/* actualizar boton / timer */
+function actualizarUI(){
+  // if we have attempts -> show
+  if(attempts>0){
+    spinBtn.innerText = `GIRAR (${attempts})`;
     spinBtn.disabled = false;
+    timerBox.innerText = "Listo";
   } else {
     spinBtn.disabled = true;
-    iniciarCuentaRegresiva();
+    // show remaining time
+    const now = Date.now();
+    if(unlockAt && unlockAt > now){
+      startCountdown();
+    } else {
+      // safety: if unlockAt missing, grant 1 attempt
+      attempts = 1;
+      saveAttempts();
+      spinBtn.innerText = `GIRAR (${attempts})`;
+      spinBtn.disabled = false;
+      timerBox.innerText = "Listo";
+    }
   }
 }
 
-/* ------------ ELEGIR PREMIO ------------ */
-function elegirPremio() {
-  let total = premios.reduce((a,b)=>a+b.prob,0);
-  let r = Math.random()*total;
-  let acum=0;
-
-  for (let p of premios) {
-    acum+=p.prob;
-    if (r<=acum) return p.name;
+/* pick prize according to probs (works with prob sum any) */
+function pickPrize(){
+  const total = slices.reduce((s,p)=>s+p.prob,0);
+  const r = Math.random()*total;
+  let acc = 0;
+  for(let p of slices){
+    acc += p.prob;
+    if(r <= acc) return p;
   }
+  return slices[1]; // fallback
 }
 
-/* ------------ GIRAR RULETA ------------ */
-function girarRuleta() {
-  if (intentos<=0) return;
-
-  intentos--;
-  localStorage.setItem("intentos", intentos);
-  actualizarBoton();
-
-  let premio = elegirPremio();
-  let index = premios.findIndex(p=>p.name===premio);
-
-  let vueltas = 360*5;
-  let grados = vueltas + (index*90);
-
-  wheel.style.transform = `rotate(${grados}deg)`;
-
-  setTimeout(()=>resultado(premio),5200);
+/* compute target rotation so pointer (top) indicates prize:
+   slices arranged starting at 0deg slice0 [0..90), slice1 [90..180), ... 
+   We need to rotate wheel so that chosen slice's center aligns with pointer at top (angle 0).
+   Center angle of slice i = i*90 + 45 (degrees). To bring that to top, rotate wheel by (360 - centerAngle) + manyTurns
+*/
+function computeRotationForIndex(i){
+  const centerAngle = i*90 + 45;
+  // add random offset within slice ±18deg for natural feel
+  const offset = (Math.random()*36)-18; 
+  const manyTurns = 360 * (4 + Math.floor(Math.random()*4)); // 4-7 full turns
+  const target = manyTurns + (360 - centerAngle) + offset;
+  return target;
 }
 
-/* ------------ RESULTADOS ------------ */
-function resultado(premio) {
+/* spin function */
+async function spin(){
+  if(spinning) return;
+  if(attempts <= 0) return;
+  spinning = true;
+  spinBtn.disabled = true;
+  spinBtn.innerText = "Girando...";
 
-  if (premio==="Gira de nuevo") {
-    intentos++;
-    localStorage.setItem("intentos", intentos);
-    actualizarBoton();
-    alert("¡Giro extra!");
+  // visual micro-zoom
+  wheel.style.transition = "transform 300ms ease";
+  wheel.style.transform = `rotate(${currentRotation}deg) scale(1.06)`;
+  await new Promise(r=>setTimeout(r,300));
+
+  // pick prize but ensure 500 never selected (prob 0 already)
+  const prize = pickPrize(); // object
+  const index = slices.findIndex(s=>s.name===prize.name);
+
+  // compute rotation and apply long transition
+  const target = computeRotationForIndex(index);
+  // update rotation state
+  currentRotation = currentRotation + target;
+  wheel.style.transition = "transform 5000ms cubic-bezier(.17,.67,.14,1)";
+  wheel.style.transform = `rotate(${currentRotation}deg) scale(1)`;
+
+  // pointer subtle bounce
+  pointer.style.transform = "translateY(-6px)";
+
+  // allow the spin to finish
+  await new Promise(r=>setTimeout(r,5200));
+  pointer.style.transform = "translateY(0)";
+
+  // handle result
+  handleResult(prize);
+
+  // if attempts now zero -> set unlock
+  if(attempts <= 0){
+    unlockAt = Date.now() + HOURS12;
+    localStorage.setItem(LS_UNLOCK, String(unlockAt));
+    startCountdown();
+  }
+
+  // save attempts
+  saveAttempts();
+  spinning = false;
+  actualizarUI();
+}
+
+/* handle result show toast with animation and special actions */
+function handleResult(prize){
+  // show styled toast
+  if(prize.name === "Gira de nuevo"){
+    // give one attempt back
+    attempts += 1;
+    saveAttempts();
+    showToast("¡Gira de nuevo! +1 intento", "again");
+    // small sparkle effect and highlight center
+    flashCenter("#ffd66b");
+    setTimeout(()=>{ actualizarUI(); }, 200);
     return;
   }
 
-  if (premio==="Promo de bono +25%") {
-    let msg = encodeURIComponent("¡Me gané un bono de +25% en la ruleta!");
-    window.location.href=`https://wa.me/50373826693?text=${msg}`;
+  if(prize.name === "Promo de bono +25%"){
+    showToast("¡Ganaste PROMO +25%!", "bonus");
+    flashCenter("#69f0b0");
+    // open WhatsApp after short delay so user sees toast
+    setTimeout(()=>{
+      const text = encodeURIComponent("¡Me gané un bono de +25% en la ruleta!");
+      window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
+    }, 900);
     return;
   }
 
-  if (premio==="PERDISTE...") {
-    alert("Perdiste 😢");
+  if(prize.name === "PERDISTE..."){
+    showToast("Perdiste... intenta luego", "lost");
+    flashCenter("#ff8fb3");
+    return;
   }
 
-  if (intentos<=0) bloquear12h();
+  // should not reach "500 🆓 BOBUX!" because prob=0, but safe:
+  if(prize.name.includes("500")){
+    showToast("¡500 BOBUX! (INACTIVO)", "lost");
+    flashCenter("#ff8fb3");
+  }
 }
 
-/* ------------ BLOQUEAR 12 HORAS ------------ */
-function bloquear12h() {
-  let t = Date.now() + (12*60*60*1000);
-  localStorage.setItem("nextSpinTime", t);
-  iniciarCuentaRegresiva();
+/* UI helpers */
+let toastTimer = null;
+function showToast(text, type){
+  toast.className = "toast " + (type || "");
+  toast.innerText = text;
+  toast.style.display = "block";
+  if(toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{
+    toast.style.display = "none";
+  }, 2500);
 }
 
-/* ------------ CONTADOR ------------ */
-function iniciarCuentaRegresiva() {
-  let interval = setInterval(()=>{
+/* center flash animation */
+function flashCenter(color){
+  const c = document.querySelector('.center');
+  const old = c.style.boxShadow;
+  c.style.boxShadow = `0 0 40px ${color}, 0 8px 30px rgba(0,0,0,0.6)`;
+  setTimeout(()=> c.style.boxShadow = old, 900);
+}
 
-    let t = localStorage.getItem("nextSpinTime");
-    if (!t) return;
-
-    let diff = t - Date.now();
-
-    if (diff<=0) {
-      clearInterval(interval);
-      intentos = 1;
-      localStorage.setItem("intentos",1);
-      localStorage.removeItem("nextSpinTime");
-      actualizarBoton();
+/* countdown */
+let countdownInterval = null;
+function startCountdown(){
+  if(countdownInterval) clearInterval(countdownInterval);
+  countdownInterval = setInterval(()=>{
+    const now = Date.now();
+    const t = parseInt(localStorage.getItem(LS_UNLOCK)) || unlockAt || 0;
+    if(!t || t <= now){
+      clearInterval(countdownInterval);
+      localStorage.removeItem(LS_UNLOCK);
+      unlockAt = 0;
+      attempts = 1;
+      saveAttempts();
+      actualizarUI();
       return;
     }
-
-    let h = Math.floor(diff/3600000);
-    let m = Math.floor((diff%3600000)/60000);
-    let s = Math.floor((diff%60000)/1000);
-
-    spinBtn.innerText = `${h}h ${m}m ${s}s`;
-
-  },1000);
+    const diff = t - now;
+    const hh = Math.floor(diff/3600000);
+    const mm = Math.floor((diff%3600000)/60000);
+    const ss = Math.floor((diff%60000)/1000);
+    timerBox.innerText = `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+    spinBtn.innerText = `${pad(hh)}h ${pad(mm)}m`;
+    spinBtn.disabled = true;
+  }, 1000);
 }
 
-/* CLICK GIRO */
-spinBtn.onclick = girarRuleta;
+/* pad */
+function pad(n){ return n.toString().padStart(2,'0'); }
 
+/* init */
+function init(){
+  // restore unlockAt from storage if any
+  const storedUnlock = parseInt(localStorage.getItem(LS_UNLOCK));
+  if(storedUnlock) unlockAt = storedUnlock;
+
+  // init UI
+  actualizarUI();
+
+  // if countdown needed
+  if(unlockAt && unlockAt > Date.now()){
+    startCountdown();
+  }
+
+  // attach spin handler
+  spinBtn.addEventListener("click", ()=>{
+    // check attempts and lock
+    if(attempts <= 0) return;
+    // consume attempt and spin
+    attempts = Math.max(0, attempts); // safety
+    spin();
+  });
+
+  // accessibility: close overlay when clicked outside card (optional)
+  overlay.addEventListener("click",(e)=>{
+    if(e.target === overlay){
+      overlay.style.display = "none";
+    }
+  });
+}
+
+/* show big message a little longer (3.5s) then keep small */
+setTimeout(()=>{ msgFloat.style.opacity = 0; msgFloat.style.transition = "opacity .8s"; }, 3500);
+setTimeout(()=>{ try{ msgFloat.remove() }catch(e){} }, 4500);
+
+init();
 </script>
 
 <title>TEMA: Bobux </title>
