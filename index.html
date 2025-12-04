@@ -411,20 +411,24 @@ window.open(
             <li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
         </ul>
 
-        <!-- NUEVO BOTÓN -->
-        <button class="vip-subscribe">SUSCRÍBETE<br>$2.99 × semana</button>
+        <!-- BOTÓN SUSCRIBIR -->
+        <button class="vip-subscribe" onclick="subscribeVIP()">
+            SUSCRÍBETE<br>$2.99 × semana
+        </button>
 
+        <!-- BOTÓN CERRAR -->
         <button class="vip-close" onclick="closeVIP()">Cerrar</button>
     </div>
 </div>
 
 <style>
-/* ======= POSICIÓN ESQUINA ======= */
+/* ======= POSICIÓN ESQUINA BAJADO 70px ======= */
 .vip-container {
     position: absolute;
-    top: 5px;
+    top: 70px; /* ← bajado */
     right: 10px;
     text-align: center;
+    z-index: 999;
 }
 
 /* ======= VIP NEW ======= */
@@ -477,15 +481,26 @@ window.open(
     z-index: 9999;
 }
 
-/* ======= CONTENIDO CON ANIMACIÓN ======= */
+/* ======= CONTENIDO MODAL ======= */
 .vip-content {
-    background: white;
+    background: #0e355e; /* azulito oscuro pálido */
     padding: 20px;
     border-radius: 12px;
     width: 85%;
     max-width: 320px;
     text-align: center;
     animation: slideFade 0.55s ease;
+    color: #9aff9a; /* texto verde claro */
+}
+
+.vip-content h2,
+.vip-content p,
+.vip-content li {
+    color: #9aff9a;
+}
+
+.vip-content ul {
+    text-align: left;
 }
 
 /* Animación de entrada bonita */
@@ -529,15 +544,18 @@ window.open(
 
 <script>
 function openVIP() {
-    const modal = document.getElementById("vipModal");
-    modal.style.display = "flex";
+    document.getElementById("vipModal").style.display = "flex";
 }
 
 function closeVIP() {
     document.getElementById("vipModal").style.display = "none";
 }
-</script>
 
+function subscribeVIP() {
+    const mensaje = encodeURIComponent("Hola, quiero comprar el VIP semanal de $2.99.");
+    window.location.href = "https://wa.me/50373826693?text=" + mensaje;
+}
+</script>
 <title> Robux tienda </title>
 <style>
 <body style="background-color: #F0F9E8; color: #81C784;
