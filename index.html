@@ -390,8 +390,8 @@ window.open(
 }
 
 </script>
-
-<!-- ====== TARJETA VIP ====== -->
+ 
+<!-- ====== CÍRCULO VIP PEQUEÑO ESQUINA ====== -->
 <div class="vip-container">
     <small class="vip-new">NEW: VIP</small>
     <div class="vip-circle" onclick="openVIP()">
@@ -399,9 +399,9 @@ window.open(
     </div>
 </div>
 
-<!-- ====== MODAL VIP (Pantalla completa) ====== -->
+<!-- ====== MODAL VIP ====== -->
 <div id="vipModal" class="vip-modal">
-    <div class="vip-content">
+    <div class="vip-content animate-modal">
         <h2>ÚNETE A V.I.P</h2>
         <p><strong>LAS características VIP son las siguientes:</strong></p>
         <ul>
@@ -410,51 +410,59 @@ window.open(
             <li>Acceso completo a nuestro código page de Github.</li>
             <li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
         </ul>
+
+        <!-- NUEVO BOTÓN -->
+        <button class="vip-subscribe">SUSCRÍBETE<br>$2.99 × semana</button>
+
         <button class="vip-close" onclick="closeVIP()">Cerrar</button>
     </div>
 </div>
 
 <style>
-/* ========= VIP CIRCLE STYLE ========= */
+/* ======= POSICIÓN ESQUINA ======= */
 .vip-container {
+    position: absolute;
+    top: 5px;
+    right: 10px;
     text-align: center;
-    margin-top: 20px;
 }
 
+/* ======= VIP NEW ======= */
 .vip-new {
-    font-size: 12px;
+    font-size: 10px;
     color: #007bff;
     font-weight: bold;
 }
 
+/* ======= CÍRCULO VIP CHIQUITO ======= */
 .vip-circle {
-    width: 120px;
-    height: 120px;
+    width: 55px;
+    height: 55px;
     background: gold;
     border-radius: 50%;
-    margin: 10px auto;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    animation: zoomOut 0.9s ease forwards;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    animation: vipPulse 1.6s infinite ease-in-out;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
 
 .vip-text {
-    font-size: 35px;
+    font-size: 20px;
     font-weight: bold;
-    color: #000;
-    transform: skewX(-12deg);
+    color: black;
+    transform: skewX(-10deg);
 }
 
-/* Animación zoom-out */
-@keyframes zoomOut {
-    0% { transform: scale(0.2); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+/* Animación latido + zoom suave */
+@keyframes vipPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.13); }
+    100% { transform: scale(1); }
 }
 
-/* ========= VIP MODAL ========= */
+/* ======= MODAL FULL SCREEN ======= */
 .vip-modal {
     position: fixed;
     top: 0;
@@ -469,29 +477,60 @@ window.open(
     z-index: 9999;
 }
 
+/* ======= CONTENIDO CON ANIMACIÓN ======= */
 .vip-content {
     background: white;
     padding: 20px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 350px;
+    border-radius: 12px;
+    width: 85%;
+    max-width: 320px;
     text-align: center;
+    animation: slideFade 0.55s ease;
 }
 
+/* Animación de entrada bonita */
+@keyframes slideFade {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ======= BOTÓN SUSCRIBIR ======= */
+.vip-subscribe {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+/* ======= BOTÓN CERRAR ======= */
 .vip-close {
     margin-top: 15px;
     background: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 10px;
     cursor: pointer;
+    width: 100%;
 }
 </style>
 
 <script>
 function openVIP() {
-    document.getElementById("vipModal").style.display = "flex";
+    const modal = document.getElementById("vipModal");
+    modal.style.display = "flex";
 }
 
 function closeVIP() {
