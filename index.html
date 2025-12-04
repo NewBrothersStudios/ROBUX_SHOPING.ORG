@@ -164,13 +164,13 @@
       <div id="result"></div>
 
       <div class="purchaseArea">
-          <div class="buyBox" onclick="buySpins(5,'1.99')">
+          <div class="buyBox" onclick="buySpins(5,'$2.99')">
               <span>+5 giros + ×2🍀</span>
                <span>↓</span>
               <span>$2.99</span>
           </div>
 
-          <div class="buyBox" onclick="buySpins(10,'2.99')">
+          <div class="buyBox" onclick="buySpins(10,'$4.99')">
               <span>+10 giros + ×6🍀</span>
               <span>↓</span>
               <span>$4.99</span>
@@ -189,7 +189,7 @@ document.getElementById("floatingBubble").onclick = () => {
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const sections = ["500 🆓 BOBUX!", "PERDISTE...", "BONO +25%", "GIRA DE NUEVO"];
+const sections = ["500 🆓 BOBUX!", "PERDISTE...", "BONO +25%", "BONO +30%"];
 const colors = ["#fff4c2","#fff","gold","#f1e6a8"];
 
 function drawWheel() {
@@ -244,8 +244,8 @@ function spinWheel() {
   if (!extraSpin) saveSpinTime();
 }
 
-/* ===== COOLDOWN 6 HORAS ===== */
-const COOLDOWN = 6 * 60 * 60 * 1000;
+/* ===== COOLDOWN 4 HORAS ===== */
+const COOLDOWN = 4 * 60 * 60 * 1000;
 
 function saveSpinTime() {
   localStorage.setItem("lastSpin", Date.now());
@@ -293,9 +293,9 @@ function handlePrize(prize) {
     return;
   }
 
-  if (prize === "GIRA DE NUEVO") {
-    r.innerText = "¡TIENES OTRO GIRO!";
-    extraSpin = true;
+  if (prize === "BONO DE +30%") {
+    r.innerText = "¡BONO +30%!";
+   window.open("https://wa.me/50373826693?text=Me%30gané%30un%20bono30%2B30%30%30en%30la%30ruleta","_blank");
     return;
   }
 }
