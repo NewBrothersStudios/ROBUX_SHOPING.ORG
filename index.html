@@ -7,8 +7,8 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
-  
-/* ====== BURBUJA FLOTANTE (IGUAL QUE ANTES) ======= */
+ 
+/* ====== BURBUJA FLOTANTE ======= */
 #floatingBubble {
   position: fixed;
   right: 20px;
@@ -49,18 +49,19 @@
 
 /* Caja de ruleta */
 #wheelBox {
-  background: white;
+  background: #cfe9ff; /* azulito claro */
   padding: 20px;
   border-radius: 20px;
   text-align: center;
   width: 90%;
   max-width: 400px;
   animation: popIn 0.4s ease;
+  position: relative;
 }
 
 @keyframes popIn {
   0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1); }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* ===== RULETA ===== */
@@ -73,13 +74,16 @@
   margin: 0 auto;
 }
 
-/* ===== FLECHA USANDO "↓" ===== */
+/* ===== FLECHA A LA DERECHA ===== */
 #pointer {
-  font-size: 45px;
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 55px;
   font-weight: bold;
   color: red;
   text-shadow: 0 0 5px black;
-  margin-bottom: 10px;
 }
 
 /* ===== Botón girar ===== */
@@ -149,8 +153,8 @@
 <!-- ===== PANTALLA DE RULETA ===== -->
 <div id="wheelContainer">
 
-  <!-- NUEVA FLECHA "↓" -->
-  <div id="pointer">↑</div>
+  <!-- NUEVA FLECHA A LA DERECHA -->
+  <div id="pointer">←</div>
 
   <div id="wheelBox">
       <canvas id="wheel" width="300" height="300"></canvas>
@@ -200,7 +204,7 @@ function drawWheel() {
     ctx.save();
     ctx.translate(150,150);
     ctx.rotate(startAngle + arc/2);
-    ctx.fillStyle="black"; /* ← TEXTO NEGRO */
+    ctx.fillStyle="black";
     ctx.font="bold 18px Arial";
     ctx.fillText(sections[i],30,5);
     ctx.restore();
@@ -240,8 +244,8 @@ function spinWheel() {
   if (!extraSpin) saveSpinTime();
 }
 
-/* ===== COOLDOWN 7 HORAS ===== */
-const COOLDOWN = 7 * 60 * 60 * 1000;
+/* ===== COOLDOWN 6 HORAS ===== */
+const COOLDOWN = 6 * 60 * 60 * 1000;
 
 function saveSpinTime() {
   localStorage.setItem("lastSpin", Date.now());
@@ -300,7 +304,7 @@ function handlePrize(prize) {
 function buySpins(q,price) {
   window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${q}%20giros%20por%20${price}`, "_blank");
 }
-</script>   
+</script>
 
 <title>TEMA: Bobux </title>
 <style>
