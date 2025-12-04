@@ -24,25 +24,21 @@
   cursor: pointer;
   animation: bubbleFloat 3s infinite ease-in-out;
   z-index: 99999;
-}@keyframes bubbleFloat {
-0% { transform: translateY(0); }
-50% { transform: translateY(-10px); }
-100% { transform: translateY(0); }
 }
-
-/* ====== CONTENEDOR DE RULETA ======= */
+@keyframes bubbleFloat {0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); }}/* ====== CONTENEDOR DE RULETA ======= /
 #wheelContainer {
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(0,0,0,0.75);
+background: #f8d6d6; / rojo crema pálido */
 display: none;
 justify-content: center;
 align-items: center;
 flex-direction: column;
 z-index: 100000;
+overflow-y: auto;
 }
 
 /* Caja de ruleta /
@@ -57,10 +53,7 @@ animation: popIn 0.4s ease;
 position: relative;
 }
 
-@keyframes popIn {
-0% { transform: scale(0.6); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
-}
+@keyframes popIn {0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; }}
 
 /* ===== RULETA ===== */
 #wheel {
@@ -109,23 +102,29 @@ font-weight: bold;
 .purchaseArea {
 margin-top: 25px;
 display: grid;
-grid-template-columns: repeat(2,1fr);
-gap: 10px;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+max-height: 400px;
+overflow-y: auto;
 }
 
 .buyBox {
 background: #1E90FF;
 border: 2px solid gold;
 border-radius: 12px;
-padding: 10px;
+padding: 20px;
 text-align: center;
 cursor: pointer;
 color: #FFD700;
 font-weight: bold;
-transition: transform 0.3s;
+transition: transform 0.7s;
+animation: zoomLoop 2s infinite alternate;
 }
-.buyBox:hover {
-transform: translateY(-5px);
+
+@keyframes zoomLoop {
+0% { transform: scale(1); }
+50% { transform: scale(1.08); }
+100% { transform: scale(1); }
 }
 
 /* Mensajes */
@@ -138,7 +137,7 @@ color: white;
 </style>
 
 </head>
-<body><!-- ===== BURBUJA ===== --><div id="floatingBubble">🎡</div><!-- ===== PANTALLA DE RULETA ===== --><div id="wheelContainer">
+<body><div id="floatingBubble">🎡</div><div id="wheelContainer">
   <div id="pointer">→</div>
   <div id="wheelBox">
       <canvas id="wheel" width="300" height="300"></canvas>
@@ -146,27 +145,14 @@ color: white;
       <div id="cooldown"></div>
       <div id="result"></div>
       <div class="purchaseArea">
-          <div class="buyBox" onclick="buySpins('10 Spins +suerte ×6🍀','$6.99')">
-              10 Spins +suerte ×6🍀<br>↓<br>$6.99
-          </div>
-          <div class="buyBox" onclick="buySpins('5 Spins +suerte ×4🍀','$2.99')">
-              5 Spins +suerte ×4🍀<br>↓<br>$2.99
-          </div>
-          <div class="buyBox" onclick="buySpins('Suerte ×12🍀','$7.99')">
-              Suerte ×12🍀<br>↓<br>$7.99
-          </div>
-          <div class="buyBox" onclick="buySpins('Premio asegurado ⭐','$5.99')">
-              Premio asegurado ⭐<br>↓<br>$5.99
-          </div>
-          <div class="buyBox" onclick="buySpins('Suerte ×7🍀','$4.99')">
-              Suerte ×7🍀<br>↓<br>$4.99
-          </div>
-          <div class="buyBox" onclick="buySpins('Suerte ×2🍀','$0.49')">
-              Suerte ×2🍀<br>↓<br>$0.49
-          </div>
-          <div class="buyBox" onclick="buySpins('Suerte ×1.5🍀','$0.25')">
-              Suerte ×1.5🍀<br>↓<br>$0.25
-          </div>
+          <div class="buyBox" onclick="buySpins('10 Spins +suerte ×6🍀','$6.99')">10 Spins +suerte ×6🍀<br>↓<br>$6.99</div>
+          <div class="buyBox" onclick="buySpins('5 Spins +suerte ×4🍀','$2.99')">5 Spins +suerte ×4🍀<br>↓<br>$2.99</div>
+          <div class="buyBox" onclick="buySpins('Suerte ×12🍀','$7.99')">Suerte ×12🍀<br>↓<br>$7.99</div>
+          <div class="buyBox" onclick="buySpins('Premio asegurado ⭐','$5.99')">Premio asegurado ⭐<br>↓<br>$5.99</div>
+          <div class="buyBox" onclick="buySpins('Suerte ×7🍀','$4.99')">Suerte ×7🍀<br>↓<br>$4.99</div>
+          <div class="buyBox" onclick="buySpins('Suerte ×2🍀','$0.49')">Suerte ×2🍀<br>↓<br>$0.49</div>
+          <div class="buyBox" onclick="buySpins('Suerte ×1.5🍀','$0.25')">Suerte ×1.5🍀<br>↓<br>$0.25</div>
+          <div class="buyBox">300 ROBUX GRATIS!<br>↓<br>—</div>
       </div>
   </div>
 </div><script>
@@ -178,7 +164,7 @@ document.getElementById("floatingBubble").onclick = () => {
 /* ===== DIBUJAR RULETA ===== */
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
-const sections = ["300 ROBUX GRATIS!", "PERDISTE...", "BONO +25%", "BONO +30%"];
+const sections = ["PERDISTE...", "BONO +25%", "BONO +30%", "300 ROBUX GRATIS!"];
 const colors = ["#fff4c2","#fff","gold","#f1e6a8"];
 
 function drawWheel() {
@@ -211,13 +197,15 @@ function spinWheel() {
   if (!canSpin()) return;
 
   spinning = true;
-  let randomAngle = Math.random()*360 + 720;
+  let randomIndex = Math.floor(Math.random()*3); // solo permite 0,1,2 (no sale ROBUX)
+  let anglePerSection = 360/sections.length;
+  let randomAngle = randomIndex*anglePerSection + Math.random()*anglePerSection + 720;
   canvas.style.transform = `rotate(${randomAngle}deg)`;
 
   setTimeout(() => {
     spinning = false;
     let finalAngle = randomAngle % 360;
-    let index = Math.floor((360-finalAngle)/90) % 4;
+    let index = Math.floor((360-finalAngle)/anglePerSection) % sections.length;
     handlePrize(sections[index]);
   },4000);
 
@@ -226,17 +214,12 @@ function spinWheel() {
 
 /* ===== COOLDOWN 2 HORAS ===== */
 const COOLDOWN = 2 * 60 * 60 * 1000;
-
-function saveSpinTime() {
-  localStorage.setItem("lastSpin", Date.now());
-}
-
+function saveSpinTime() { localStorage.setItem("lastSpin", Date.now()); }
 function canSpin() {
   let last = localStorage.getItem("lastSpin");
   if (!last) return true;
   return (Date.now() - last) >= COOLDOWN;
 }
-
 setInterval(() => {
   let spinBtn = document.getElementById("spinBtn");
   if (canSpin()) {
@@ -265,7 +248,6 @@ function buySpins(item, price) {
   window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${item}%20por%20${price}`,"_blank");
 }
 </script>
-
 
 <title> Robux tienda </title>
 <style>
