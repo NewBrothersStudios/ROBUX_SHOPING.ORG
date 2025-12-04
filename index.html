@@ -7,7 +7,7 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
- 
+
 /* ====== BURBUJA FLOTANTE ======= */
 #floatingBubble {
   position: fixed;
@@ -24,166 +24,152 @@
   cursor: pointer;
   animation: bubbleFloat 3s infinite ease-in-out;
   z-index: 99999;
-}
-
-@keyframes bubbleFloat {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+}@keyframes bubbleFloat {
+0% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
+100% { transform: translateY(0); }
 }
 
 /* ====== CONTENEDOR DE RULETA ======= */
 #wheelContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.75);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 100000;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.75);
+display: none;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+z-index: 100000;
 }
 
-/* Caja de ruleta */
+/* Caja de ruleta /
 #wheelBox {
-  background: #FFCDD2; /* rojo pastel */
-  padding: 20px;
-  border-radius: 20px;
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-  animation: popIn 0.4s ease;
-  position: relative;
+background: #9b2c2c; / rojo oscuro pálido */
+padding: 20px;
+border-radius: 20px;
+text-align: center;
+width: 90%;
+max-width: 400px;
+animation: popIn 0.4s ease;
+position: relative;
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+0% { transform: scale(0.6); opacity: 0; }
+100% { transform: scale(1); opacity: 1; }
 }
 
 /* ===== RULETA ===== */
 #wheel {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 10px solid gold;
-  box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
-  margin: 0 auto;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+border: 10px solid gold;
+box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
+margin: 0 auto;
+transition: transform 4s ease-out;
 }
 
 /* ===== FLECHA A LA DERECHA ===== */
 #pointer {
-  position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 55px;
-  font-weight: bold;
-  color: red;
-  text-shadow: 0 0 5px black;
+position: absolute;
+right: -40px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 55px;
+font-weight: bold;
+color: red;
+text-shadow: 0 0 5px black;
 }
 
 /* ===== Botón girar ===== */
 #spinBtn {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 20px;
-  background: gold;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
+margin-top: 20px;
+padding: 12px 25px;
+font-size: 20px;
+background: gold;
+border: none;
+border-radius: 10px;
+font-weight: bold;
+cursor: pointer;
 }
 
 /* ====== CONTADOR ===== */
 #cooldown {
-  font-size: 18px;
-  margin-top: 10px;
-  color: black;
-  font-weight: bold;
+font-size: 18px;
+margin-top: 10px;
+color: black;
+font-weight: bold;
 }
 
 /* ===== BOTONES DE COMPRA ===== */
 .purchaseArea {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
+margin-top: 25px;
+display: grid;
+grid-template-columns: repeat(2,1fr);
+gap: 10px;
 }
 
 .buyBox {
-  width: 48%;
-  background: #F57C00;
-  border: 2px solid gold;
-  border-radius: 12px;
-  padding: 10px;
-  text-align: center;
-  animation: zoomLoop 4s infinite ease-in-out;
-  cursor: pointer;
+background: #1E90FF;
+border: 2px solid gold;
+border-radius: 12px;
+padding: 10px;
+text-align: center;
+cursor: pointer;
+color: #FFD700;
+font-weight: bold;
+transition: transform 0.3s;
 }
-
-@keyframes zoomLoop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.07); }
-  100% { transform: scale(1); }
-}
-
-.buyBox span {
-  display: block;
-  font-weight: bold;
-  color: black;
+.buyBox:hover {
+transform: translateY(-5px);
 }
 
 /* Mensajes */
 #result {
-  font-size: 22px;
-  margin-top: 15px;
-  font-weight: bold;
+font-size: 22px;
+margin-top: 15px;
+font-weight: bold;
+color: white;
 }
-
 </style>
+
 </head>
-<body>
-
-<!-- ===== BURBUJA ===== -->
-<div id="floatingBubble">🎡</div>
-
-<!-- ===== PANTALLA DE RULETA ===== -->
-<div id="wheelContainer">
-
-  <!-- NUEVA FLECHA A LA DERECHA -->
+<body><!-- ===== BURBUJA ===== --><div id="floatingBubble">🎡</div><!-- ===== PANTALLA DE RULETA ===== --><div id="wheelContainer">
   <div id="pointer">→</div>
-
   <div id="wheelBox">
       <canvas id="wheel" width="300" height="300"></canvas>
-
-      <button id="spinBtn">GIRAR ×1 suerte 🍀</button>
+      <button id="spinBtn">GIRAR ×1 suerte</button>
       <div id="cooldown"></div>
       <div id="result"></div>
-
       <div class="purchaseArea">
-          <div class="buyBox" onclick="buySpins(Premio asegurado!,'$5.99')">
-              <span>premio asegurado + ×12🍀</span>
-               <span>↓</span>
-              <span>$5.99</span>
-          </div> 
-          <div class="buyBox" onclick="buySpins(10 Spins,'$9.99')">
-              <span>10 Spins + ×12🍀</span>
-               <span>↓</span>
-              <span>$9.99</span>
+          <div class="buyBox" onclick="buySpins('10 Spins +suerte ×6🍀','$6.99')">
+              10 Spins +suerte ×6🍀<br>↓<br>$6.99
           </div>
-         <div class="buyBox" onclick="buySpins(suerte ×12 🍀!,'$8.99')">
-              <span>suerte ×12🍀</span>
-               <span>↓</span>
-              <span>$8.99</span>
+          <div class="buyBox" onclick="buySpins('5 Spins +suerte ×4🍀','$2.99')">
+              5 Spins +suerte ×4🍀<br>↓<br>$2.99
+          </div>
+          <div class="buyBox" onclick="buySpins('Suerte ×12🍀','$7.99')">
+              Suerte ×12🍀<br>↓<br>$7.99
+          </div>
+          <div class="buyBox" onclick="buySpins('Premio asegurado ⭐','$5.99')">
+              Premio asegurado ⭐<br>↓<br>$5.99
+          </div>
+          <div class="buyBox" onclick="buySpins('Suerte ×7🍀','$4.99')">
+              Suerte ×7🍀<br>↓<br>$4.99
+          </div>
+          <div class="buyBox" onclick="buySpins('Suerte ×2🍀','$0.49')">
+              Suerte ×2🍀<br>↓<br>$0.49
+          </div>
+          <div class="buyBox" onclick="buySpins('Suerte ×1.5🍀','$0.25')">
+              Suerte ×1.5🍀<br>↓<br>$0.25
           </div>
       </div>
   </div>
-</div>
-
-<script>
+</div><script>
 /* ===== ABRIR RULETA ===== */
 document.getElementById("floatingBubble").onclick = () => {
   document.getElementById("wheelContainer").style.display = "flex";
@@ -192,7 +178,6 @@ document.getElementById("floatingBubble").onclick = () => {
 /* ===== DIBUJAR RULETA ===== */
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
-
 const sections = ["300 ROBUX GRATIS!", "PERDISTE...", "BONO +25%", "BONO +30%"];
 const colors = ["#fff4c2","#fff","gold","#f1e6a8"];
 
@@ -219,36 +204,27 @@ drawWheel();
 
 /* ===== LÓGICA SPIN ===== */
 let spinning = false;
-let extraSpin = false;
-
 document.getElementById("spinBtn").onclick = spinWheel;
 
 function spinWheel() {
   if (spinning) return;
-
-  if (!extraSpin && !canSpin()) return;
+  if (!canSpin()) return;
 
   spinning = true;
   let randomAngle = Math.random()*360 + 720;
-
-  canvas.style.transition = "transform 4s ease-out";
   canvas.style.transform = `rotate(${randomAngle}deg)`;
 
   setTimeout(() => {
     spinning = false;
-
     let finalAngle = randomAngle % 360;
     let index = Math.floor((360-finalAngle)/90) % 4;
-
-    let prize = sections[index];
-
-    handlePrize(prize);
+    handlePrize(sections[index]);
   },4000);
 
-  if (!extraSpin) saveSpinTime();
+  saveSpinTime();
 }
 
-/* ===== COOLDOWN 2 horas ===== */
+/* ===== COOLDOWN 2 HORAS ===== */
 const COOLDOWN = 2 * 60 * 60 * 1000;
 
 function saveSpinTime() {
@@ -258,14 +234,14 @@ function saveSpinTime() {
 function canSpin() {
   let last = localStorage.getItem("lastSpin");
   if (!last) return true;
-  let diff = Date.now() - last;
-  return diff >= COOLDOWN;
+  return (Date.now() - last) >= COOLDOWN;
 }
 
 setInterval(() => {
+  let spinBtn = document.getElementById("spinBtn");
   if (canSpin()) {
     document.getElementById("cooldown").innerText = "";
-    document.getElementById("spinBtn").disabled = false;
+    spinBtn.disabled = false;
   } else {
     let last = localStorage.getItem("lastSpin");
     let diff = COOLDOWN - (Date.now() - last);
@@ -273,42 +249,23 @@ setInterval(() => {
     let m = Math.floor((diff%3600000)/60000);
     let s = Math.floor((diff%60000)/1000);
     document.getElementById("cooldown").innerText = `${h}h ${m}m ${s}s`;
-    document.getElementById("spinBtn").disabled = true;
+    spinBtn.disabled = true;
   }
 },1000);
 
 /* ===== MANEJO DE PREMIOS ===== */
 function handlePrize(prize) {
-  let r = document.getElementById("result");
-
-  if (prize === "500 ROBUX! GRATIS") {
-    r.innerText = "CASI!...";
-    return;
-  }
-
-  if (prize === "PERDISTE...") {
-    r.innerText = "PERDISTE 🙃";
-    return;
-  }
-
-  if (prize === "BONO +25%") {
-    r.innerText = "¡GANASTE UN BONO!";
-    window.open("https://wa.me/50373826693?text=Me%20gané%20un%20bono%20%2B25%25%20en%20la%20ruleta","_blank");
-    return;
-  }
-
-  if (prize === "BONO DE +30%") {
-    r.innerText = "¡BONO +30%!";
-   window.open("https://wa.me/50373826693?text=Me%30gané%30un%20bono30%2B30%30%30en%30la%30ruleta","_blank");
-    return;
-  }
+  const r = document.getElementById("result");
+  if(prize === "PERDISTE...") r.innerText = "PERDISTE 🙃";
+  else r.innerText = `¡GANASTE ${prize}!`;
 }
 
 /* ===== COMPRAS ===== */
-function buySpins(q,price) {
-  window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${q}%20giros%20por%20${price}`, "_blank");
+function buySpins(item, price) {
+  window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${item}%20por%20${price}`,"_blank");
 }
 </script>
+
 
 <title> Robux tienda </title>
 <style>
