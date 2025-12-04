@@ -171,8 +171,7 @@
           </div>
 
           <div class="buyBox" onclick="buySpins(10,'$5.99')">
-              <span>+10 giros + ×6🍀
-                <span> Robux garantizados</span>
+              <span>+10 giros + ×6🍀 
 </span>
               <span>↓</span>
               <span>$5.99</span>
@@ -246,8 +245,8 @@ function spinWheel() {
   if (!extraSpin) saveSpinTime();
 }
 
-/* ===== COOLDOWN 30 MINUTOS ===== */
-const COOLDOWN = 30 minutos * 60 * 60 * 1000;
+/* ===== COOLDOWN 2 horas ===== */
+const COOLDOWN = 2 * 60 * 60 * 1000;
 
 function saveSpinTime() {
   localStorage.setItem("lastSpin", Date.now());
@@ -308,7 +307,7 @@ function buySpins(q,price) {
 }
 </script>
 
-<title>TEMA: Bobux </title>
+<title> Robux tienda </title>
 <style>
   /* Reset & base */
   *{box-sizing:border-box;margin:0;padding:0}
@@ -456,12 +455,12 @@ function buySpins(q,price) {
 <body>
 
   <div class="top-bar" role="banner">
-    <div>🔥<strong>Bobux </strong></div>
-    <div id="serverCount" aria-live="polite">Tu actividad se está observando en tiempo real.</div>
+    <div>🔥<strong>Robux tienda </strong></div>
+    <div id="serverCount" aria-live="polite">estamos trabajando en nuestra traducción a ingles.</div>
   </div>
 
   <header>
-    <h1>Bobux</h1>
+    <h1>Robux tienda</h1>
     <h2>Versión 10.0.9 nueva ruleta  </h2>
     <p class="small">Sigue las instrucciones de pago que aparecen al comprar.</p>
   </header>
@@ -471,20 +470,20 @@ function buySpins(q,price) {
     <div class="card">
       <div class="robux-title">⏣ 40 robux</div>
       <div class="price-row">
-        <div class="price">$0.65</div>
+        <div class="price">$0.75</div>
         <div class="price-bar" aria-hidden="true"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('40 robux',0.65)">Comprar</button>
+      <button class="btn" onclick="iniciarCompra('40 robux',$0.75)">Comprar</button>
       <div class="small">-5% descuento</div>
     </div>
 
     <div class="card">
       <div class="robux-title">⏣ 80 robux</div>
       <div class="price-row">
-        <div class="price">$1.25</div>
+        <div class="price">$1.75</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('80 robux',1.25)">Comprar</button>
+      <button class="btn" onclick="iniciarCompra('80 robux',$1.75)">Comprar</button>
       <div class="small">-5% descuento</div>
     </div>
 
@@ -494,17 +493,17 @@ function buySpins(q,price) {
         <div class="price">$6.25</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn hoverPulse" onclick="iniciarCompra('400 robux',6.25)">Comprar</button>
+      <button class="btn hoverPulse" onclick="iniciarCompra('400 robux',$6.25)">Comprar</button>
       <div class="small">-5% descuento</div>
     </div>
 
     <div class="card">
       <div class="robux-title">⏣ 800 robux</div>
       <div class="price-row">
-        <div class="price">$10.99</div>
+        <div class="price">$11.99</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('800 robux',19.99)">Comprar</button>
+      <button class="btn" onclick="iniciarCompra('800 robux',$11.99)">Comprar</button>
       <div class="small">-5% descuento</div>
     </div>
 
@@ -514,18 +513,18 @@ function buySpins(q,price) {
         <div class="price">$14.99</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('1000 robux',14.99)">No disponible.</button>
+      <button class="btn" onclick="iniciarCompra('1000 robux',14.99)">disponible.</button>
       <div class="small">Paquete PREMIUM</div>
     </div>
 
     <div class="card">
-      <div class="robux-title">⏣ Paquete Secreto</div>
+      <div class="robux-title">⏣ 2,000 robux</div>
       <div class="price-row">
-        <div class="price">$20.00</div>
+        <div class="price">$23.99</div>
         <div class="price-bar"></div>
       </div>
-      <button class="btn" onclick="iniciarCompra('Paquete Secreto',20.00)">No disponible.</button>
-      <div class="small">Accesible con Key</div>
+      <button class="btn" onclick="iniciarCompra('Paquete Secreto',$23.99)">No disponible.</button>
+      <div class="small">DISPONIBLE SIN KEY!!</div>
     </div>
   </main>
 
