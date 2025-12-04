@@ -25,31 +25,31 @@
   animation: bubbleFloat 3s infinite ease-in-out;
   z-index: 99999;
 }
-@keyframes bubbleFloat {0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); }}/* ====== CONTENEDOR DE RULETA ======= /
+@keyframes bubbleFloat {0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); }}/* ====== OVERLAY RULETA ====== /
 #wheelContainer {
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: #f8d6d6; / rojo crema pálido */
+background: rgba(248,214,214,0.95); / rojo crema pálido semi-opaco */
 display: none;
 justify-content: center;
 align-items: center;
-flex-direction: column;
-z-index: 100000;
+z-index: 9999;
 overflow-y: auto;
+padding: 20px;
 }
 
-/* Caja de ruleta /
+/* Caja de ruleta */
 #wheelBox {
-background: #9b2c2c; / rojo oscuro pálido */
+background: #9b2c2c;
 padding: 20px;
 border-radius: 20px;
 text-align: center;
 width: 90%;
-max-width: 400px;
-animation: popIn 0.4s ease;
+max-width: 450px;
+animation: popIn 0.5s ease;
 position: relative;
 }
 
@@ -62,8 +62,8 @@ height: 300px;
 border-radius: 50%;
 border: 10px solid gold;
 box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
-margin: 0 auto;
-transition: transform 4s ease-out;
+margin: 0 auto 15px auto;
+transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 /* ===== FLECHA A LA DERECHA ===== */
@@ -80,15 +80,17 @@ text-shadow: 0 0 5px black;
 
 /* ===== Botón girar ===== */
 #spinBtn {
-margin-top: 20px;
-padding: 12px 25px;
+margin-top: 15px;
+padding: 14px 25px;
 font-size: 20px;
 background: gold;
 border: none;
 border-radius: 10px;
 font-weight: bold;
 cursor: pointer;
+transition: transform 0.3s;
 }
+#spinBtn:hover { transform: scale(1.05); }
 
 /* ====== CONTADOR ===== */
 #cooldown {
@@ -103,28 +105,28 @@ font-weight: bold;
 margin-top: 25px;
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 12px;
+gap: 15px;
 max-height: 400px;
 overflow-y: auto;
+padding-right: 5px;
 }
 
 .buyBox {
 background: #1E90FF;
 border: 2px solid gold;
-border-radius: 12px;
-padding: 20px;
+border-radius: 15px;
+padding: 25px;
 text-align: center;
 cursor: pointer;
 color: #FFD700;
 font-weight: bold;
-transition: transform 0.7s;
+transition: transform 0.7s, box-shadow 0.5s;
 animation: zoomLoop 2s infinite alternate;
 }
-
 @keyframes zoomLoop {
-0% { transform: scale(1); }
-50% { transform: scale(1.08); }
-100% { transform: scale(1); }
+0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,0,0.5); }
+50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(255,255,0,0.8); }
+100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,0,0.5); }
 }
 
 /* Mensajes */
@@ -197,7 +199,8 @@ function spinWheel() {
   if (!canSpin()) return;
 
   spinning = true;
-  let randomIndex = Math.floor(Math.random()*3); // solo permite 0,1,2 (no sale ROBUX)
+  // solo permite salir los 3 primeros premios, nunca ROBUX
+  let randomIndex = Math.floor(Math.random()*3); 
   let anglePerSection = 360/sections.length;
   let randomAngle = randomIndex*anglePerSection + Math.random()*anglePerSection + 720;
   canvas.style.transform = `rotate(${randomAngle}deg)`;
