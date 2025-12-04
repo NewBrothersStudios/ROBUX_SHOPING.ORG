@@ -170,10 +170,12 @@
               <span>$2.99</span>
           </div>
 
-          <div class="buyBox" onclick="buySpins(10,'$4.99')">
-              <span>+10 giros + ×6🍀</span>
+          <div class="buyBox" onclick="buySpins(10,'$5.99')">
+              <span>+10 giros + ×6🍀
+                <span> Robux garantizados</span>
+</span>
               <span>↓</span>
-              <span>$4.99</span>
+              <span>$5.99</span>
           </div>
       </div>
   </div>
@@ -189,7 +191,7 @@ document.getElementById("floatingBubble").onclick = () => {
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const sections = ["500 🆓 BOBUX!", "PERDISTE...", "BONO +25%", "BONO +30%"];
+const sections = ["300 ROBUX GRATIS!", "PERDISTE...", "BONO +25%", "BONO +30%"];
 const colors = ["#fff4c2","#fff","gold","#f1e6a8"];
 
 function drawWheel() {
@@ -244,8 +246,8 @@ function spinWheel() {
   if (!extraSpin) saveSpinTime();
 }
 
-/* ===== COOLDOWN 4 HORAS ===== */
-const COOLDOWN = 4 * 60 * 60 * 1000;
+/* ===== COOLDOWN 30 MINUTOS ===== */
+const COOLDOWN = 30 minutos * 60 * 60 * 1000;
 
 function saveSpinTime() {
   localStorage.setItem("lastSpin", Date.now());
@@ -277,8 +279,8 @@ setInterval(() => {
 function handlePrize(prize) {
   let r = document.getElementById("result");
 
-  if (prize === "500 🆓 BOBUX!") {
-    r.innerText = "PERDISTE...";
+  if (prize === "500 ROBUX! GRATIS") {
+    r.innerText = "CASI!...";
     return;
   }
 
@@ -460,7 +462,7 @@ function buySpins(q,price) {
 
   <header>
     <h1>Bobux</h1>
-    <h2>Versión 10.0.0 nueva ruleta  </h2>
+    <h2>Versión 10.0.9 nueva ruleta  </h2>
     <p class="small">Sigue las instrucciones de pago que aparecen al comprar.</p>
   </header>
 
