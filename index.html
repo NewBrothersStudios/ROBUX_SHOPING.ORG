@@ -8,289 +8,192 @@
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
 
-  /* BIG MESSAGE */
-  .msg-float {
-    position: fixed;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: linear-gradient(180deg, rgba(20,12,6,0.95), rgba(8,6,3,0.9));
-    color: #fff;
-    padding: 18px 30px;
-    border-radius: 14px;
-    font-weight: 900;
-    font-size: 26px; /* MÁS GRANDE */
-    letter-spacing: 0.6px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 40px rgba(255,184,77,0.06);
-    border: 1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(4px);
-  }
+/* BIG MESSAGE (visible al entrar) */
+.msg-float {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: linear-gradient(180deg, rgba(20,12,6,0.95), rgba(8,6,3,0.9));
+  color: #fff;
+  padding: 18px 30px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: 0.6px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 40px rgba(255,184,77,0.06);
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(4px);
+}
 
-  /* Bubble */
-  .bubble {
-    position: fixed;
-    right: 22px;
-    bottom: 22px;
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    z-index:9998;
-    background: linear-gradient(135deg,#ffdd88,#ffb84d);
-    box-shadow: 0 12px 34px var(--accent-shadow), inset 0 -6px 18px rgba(0,0,0,0.12);
-    transform-origin:center;
-    animation: bubbleSpin 3s linear infinite;
-    font-size:36px;
-    color:#2b1b00;
-    border:1px solid rgba(255,255,255,0.06);
-  }
-  @keyframes bubbleSpin{
-    0%{ transform: rotate(0) scale(1); }
-    50%{ transform: rotate(180deg) scale(1.02); }
-    100%{ transform: rotate(360deg) scale(1); }
-  }
+/* The same floating bubble you had before (id="bubble") */
+#bubble {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:9998;
+  background: linear-gradient(135deg,#ffdd88,#ffb84d);
+  box-shadow: 0 12px 34px rgba(255,184,77,0.18), inset 0 -6px 18px rgba(0,0,0,0.12);
+  transform-origin:center;
+  animation: bubbleSpin 3s linear infinite;
+  font-size:36px;
+  color:#2b1b00;
+  border:1px solid rgba(255,255,255,0.06);
+}
+@keyframes bubbleSpin{
+  0%{ transform: rotate(0) scale(1); }
+  50%{ transform: rotate(180deg) scale(1.02); }
+  100%{ transform: rotate(360deg) scale(1); }
+}
 
-  /* Overlay / card */
-  .overlay {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9997;
-    background: linear-gradient(180deg, rgba(2,1,0,0.7), rgba(2,1,0,0.86));
-    backdrop-filter: blur(4px);
-    padding: 28px;
-  }
-  .card {
-    width: 960px;
-    max-width: calc(100% - 48px);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius: 16px;
-    padding: 22px;
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-    border: 1px solid rgba(255,255,255,0.03);
-  }
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9997;
+  background: linear-gradient(180deg, rgba(2,1,0,0.7), rgba(2,1,0,0.86));
+  backdrop-filter: blur(4px);
+  padding: 28px;
+}
+.card {
+  width: 920px;
+  max-width: calc(100% - 48px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 20px;
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.03);
+}
 
-  /* left wheel column */
-  .left {
-    width: 520px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-  }
+/* Left wheel */
+.left { width:480px; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.wheel-wrap { position:relative; width:420px; height:420px; display:flex; align-items:center; justify-content:center; }
+#pointer {
+  position:absolute; top:6px; left:50%; transform:translateX(-50%); z-index:50;
+  width:0;height:0; border-left:26px solid transparent; border-right:26px solid transparent;
+  border-bottom:40px solid #b62d00;
+  filter: drop-shadow(0 10px 20px rgba(182,45,0,0.18));
+  transition: transform .16s ease;
+}
 
-  .wheel-wrap {
-    position:relative;
-    width:440px;
-    height:440px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+/* Wheel using conic-gradient for 4 slices (full filled look) */
+.wheel {
+  --size:360px;
+  width:var(--size);
+  height:var(--size);
+  border-radius:50%;
+  position:relative;
+  transform-origin:center;
+  transition: transform 5s cubic-bezier(.17,.67,.14,1);
+  box-shadow: inset 0 12px 30px rgba(255,255,255,0.03), 0 18px 60px rgba(10,6,3,0.7);
+  border: 10px solid rgba(255,215,130,0.06);
+  overflow:hidden;
+  background:
+    conic-gradient(
+      /* mimic circular game wheel with premium-gold shades: 4 sectors */
+      #ffdca2 0deg 90deg,
+      #ffdb99 90deg 180deg,
+      #ffcc66 180deg 270deg,
+      #ffb84d 270deg 360deg
+    );
+}
+.wheel::before{
+  content:"";
+  position:absolute; inset:0; border-radius:50%;
+  background: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.04), transparent 6%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%);
+  mix-blend-mode: overlay;
+}
+.rim-dot { position:absolute; width:12px;height:12px;border-radius:50%; background: #fff4d6; box-shadow:0 8px 20px rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.06); }
 
-  /* pointer */
-  .pointer {
-    position:absolute;
-    top:10px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:50;
-    width:0;height:0;
-    border-left:26px solid transparent;
-    border-right:26px solid transparent;
-    border-bottom:40px solid #b62d00;
-    filter: drop-shadow(0 10px 20px rgba(182,45,0,0.18));
-    transition: transform .16s ease;
-  }
+/* center knob */
+.center { position:absolute; width:100px;height:100px;border-radius:50%; left:50%;top:50%;transform:translate(-50%,-50%);
+  background: linear-gradient(180deg,#2b1604,#140a03); display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 28px rgba(0,0,0,0.6); border:3px solid rgba(255,255,255,0.03); color:var(--gold1); font-weight:900;
+}
 
-  /* wheel base */
-  .wheel {
-    --size:380px;
-    width:var(--size);
-    height:var(--size);
-    border-radius:50%;
-    position:relative;
-    transform-origin:center;
-    transition: transform 5s cubic-bezier(.17,.67,.14,1);
-    box-shadow: inset 0 16px 40px rgba(255,255,255,0.03), 0 24px 80px rgba(18,10,4,0.7);
-    border: 12px solid rgba(255,215,130,0.08);
-    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.03), transparent 10%);
-    overflow:hidden;
-  }
+/* Right column */
+.right { flex:1; display:flex; flex-direction:column; gap:12px; }
+.title { font-size:20px; font-weight:900; color:var(--gold1); }
+.desc { color:var(--muted); font-size:14px; }
 
-  /* center knob */
-  .center {
-    position:absolute;
-    width:110px;height:110px;border-radius:50%;
-    left:50%;top:50%;transform:translate(-50%,-50%);
-    background: linear-gradient(180deg,#2a1605,#140a03);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 12px 30px rgba(0,0,0,0.6), inset 0 4px 14px rgba(255,240,180,0.03);
-    border: 3px solid rgba(255,255,255,0.03);
-    font-weight:900;
-    color:var(--gold1);
-    font-size:15px;
-    text-shadow:0 2px 8px rgba(0,0,0,0.6);
-  }
+/* Spin area */
+.spin-area { display:flex; gap:12px; align-items:center; margin-top:6px; }
+.btn-spin {
+  padding:14px 30px; border-radius:12px; background: linear-gradient(180deg,#ffdf9a,#ffb84d);
+  box-shadow:0 14px 36px rgba(255,184,77,0.14); color:#2a1604; font-weight:900; font-size:16px; border:none; cursor:pointer;
+}
+.btn-spin:disabled { opacity:0.6; cursor:not-allowed; }
 
-  /* slices - full filled */
-  .slice {
-    position:absolute;
-    width:50%;
-    height:50%;
-    left:50%;
-    top:50%;
-    transform-origin:0 0;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding-left:26px;
-    color:#2b1700;
-    font-weight:900;
-    text-shadow:0 2px 10px rgba(0,0,0,0.5);
-    user-select:none;
-  }
-  .slice span {
-    transform: skewY(45deg) rotate(-45deg);
-    display:block;
-    width:140px;
-    text-align:center;
-    font-size:18px;
-  }
+/* timer */
+.timer { font-weight:800; color:var(--gold1); padding:8px 10px; border-radius:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.03); }
 
-  /* gold gradients and fills - 4 slices (0,90,180,270) */
-  .s1{ background: conic-gradient(from 0deg, #ffdb99 0deg, #ffcc66 90deg); transform: rotate(0deg) skewY(-45deg); }
-  .s2{ background: conic-gradient(from 90deg, #ffdca2 90deg, #ffb84d 180deg); transform: rotate(90deg) skewY(-45deg); }
-  .s3{ background: conic-gradient(from 180deg, #ffdb99 180deg, #ffb84d 270deg); transform: rotate(180deg) skewY(-45deg); }
-  .s4{ background: conic-gradient(from 270deg, #ffdca2 270deg, #ffb84d 360deg); transform: rotate(270deg) skewY(-45deg); }
+/* packs */
+.packs { display:flex; gap:10px; margin-top:10px; }
+.pack-btn { padding:12px 14px; border-radius:12px; background: linear-gradient(180deg,#1a1106,#0f0a06); color:var(--gold1); font-weight:900; cursor:pointer; width:210px; text-align:left; border:1px solid rgba(255,255,255,0.02); }
+.pack-small { display:block; margin-top:6px; color:#fff9e6; font-size:13px; }
 
-  .wheel::after {
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    pointer-events:none;
-    background:
-      radial-gradient(360px 140px at 22% 18%, rgba(255,255,255,0.06), transparent 8%),
-      linear-gradient(180deg, rgba(255,255,255,0.02), transparent 30%);
-    mix-blend-mode: overlay;
-  }
+/* toast */
+.toast { position:absolute; left:50%; transform:translateX(-50%) translateY(20px); bottom:32px; padding:14px 20px; border-radius:12px; background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35)); display:none; z-index:3000; min-width:320px; text-align:center; font-weight:900; font-size:16px; box-shadow:0 16px 60px rgba(0,0,0,0.6); }
+.toast.lost { color:#ffb3c6; animation: pop .6s; }
+.toast.bonus { color:#eaffd6; animation: pop .6s; }
+.toast.again { color:#fff0c2; animation: pop .6s; }
+@keyframes pop { from{ transform:translateX(-50%) translateY(0) scale(.95); opacity:0 } to{ transform:translateX(-50%) translateY(-8px) scale(1); opacity:1 } }
 
-  /* gold rim dots */
-  .rim-dot {
-    position:absolute;
-    width:10px;height:10px;border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #fff, #ffd36a);
-    box-shadow:0 6px 16px rgba(0,0,0,0.5);
-    border:1px solid rgba(255,255,255,0.04);
-  }
+.note { font-size:13px; color:var(--muted); margin-top:10px; }
 
-  /* right column (controls/info) */
-  .right {
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
-  .title {
-    font-size:22px;font-weight:900;color:var(--gold1);
-  }
-  .desc { color:var(--muted); font-size:14px; }
-
-  .spin-area { display:flex; gap:14px; align-items:center; margin-top:10px; }
-  .btn-spin {
-    padding:16px 34px;border-radius:12px;background: linear-gradient(180deg,#ffdf9a,#ffb84d);
-    box-shadow:0 14px 36px rgba(255,184,77,0.14);
-    color:#2a1604;font-weight:900;font-size:18px;border:none;cursor:pointer;
-  }
-  .btn-spin:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
-
-  .timer { font-weight:800; color:var(--gold1); background:var(--glass); padding:10px 12px; border-radius:10px; font-size:15px; border:1px solid rgba(255,255,255,0.03); }
-
-  .packs { display:flex; gap:10px; margin-top:12px; }
-  .pack-btn {
-    padding:12px 14px;border-radius:12px;background: linear-gradient(180deg,#1a1106,#0f0a06);
-    border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--gold1);
-    font-weight:800;width:210px;text-align:left;
-  }
-  .pack-small { color:#ffd; display:block; margin-top:6px; font-size:13px; font-weight:900; color:#fff9e6;}
-
-  /* toast */
-  .toast {
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%) translateY(20px);
-    bottom:32px;
-    padding:16px 22px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
-    border:1px solid rgba(255,255,255,0.03);
-    display:none;
-    z-index:3000;
-    min-width:320px;text-align:center;font-weight:900;font-size:18px;
-    box-shadow:0 18px 60px rgba(0,0,0,0.6);
-  }
-  .toast.lost { color:#ffb3c6; text-shadow:0 6px 20px rgba(255,179,198,0.04); animation: pop .6s; }
-  .toast.bonus { color:#eaffd6; text-shadow:0 6px 20px rgba(233,255,214,0.04); animation: pop .6s; }
-  .toast.again { color:#fff0c2; text-shadow:0 6px 20px rgba(255,240,194,0.04); animation: pop .6s; }
-
-  @keyframes pop { from{ transform:translateX(-50%) translateY(0) scale(.9); opacity:0 } to{ transform:translateX(-50%) translateY(-8px) scale(1); opacity:1 } }
-
-  /* responsive */
-  @media (max-width:980px){
-    .card{ flex-direction:column; align-items:center; padding:18px; width:100% }
-    .left{ width:100% }
-    .wheel-wrap{ width:360px;height:360px }
-    .wheel{ --size:320px }
-    .pack-btn{ width:48% }
-    .packs{ flex-wrap:wrap; gap:10px; justify-content:center }
-  }
+@media (max-width:920px){
+  .card{ flex-direction:column; align-items:center; padding:16px; width:100%; }
+  .left{ width:100% } .wheel-wrap{ width:340px; height:340px } .wheel{ --size:300px }
+  .pack-btn{ width:48% } .packs{ flex-wrap:wrap; gap:10px; justify-content:center }
+}
 </style>
 </head>
 <body>
 
-<!-- BIG MESSAGE -->
+<!-- big message -->
 <div class="msg-float" id="msgFloat">NEW LUCKY WHEEL 🍀!!</div>
 
-<!-- Bubble -->
-<div class="bubble" id="bubbleBtn" title="Abrir ruleta">🎡</div>
+<!-- same floating bubble you had -->
+<div id="bubble" title="Abrir ruleta">🎡</div>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay">
+<!-- overlay -->
+<div class="overlay" id="overlay" aria-hidden="true">
   <div class="card" role="dialog" aria-modal="true">
 
     <div class="left">
       <div class="wheel-wrap">
-        <div class="pointer" id="pointer" aria-hidden="true"></div>
+        <div id="pointer" aria-hidden="true"></div>
 
-        <div class="wheel" id="wheel" aria-hidden="true">
-          <div class="slice s1"><span>500 🆓 BOBUX!</span></div>
-          <div class="slice s2"><span>PERDISTE...</span></div>
-          <div class="slice s3"><span>PROMO +25%</span></div>
-          <div class="slice s4"><span>GIRA DE NUEVO</span></div>
+        <div id="wheel" class="wheel" aria-hidden="true">
+          <!-- decorative rim dots -->
+          <div class="rim-dot" style="top:10px; left:50%; transform:translateX(-50%)"></div>
+          <div class="rim-dot" style="top:50%; left:10px; transform:translateY(-50%)"></div>
+          <div class="rim-dot" style="bottom:10px; left:50%; transform:translateX(-50%)"></div>
+          <div class="rim-dot" style="top:50%; right:10px; transform:translateY(-50%)"></div>
 
           <div class="center">RULETA</div>
-
-          <!-- decorative rim dots -->
-          <div class="rim-dot" style="top:6px; left:50%; transform:translateX(-50%)"></div>
-          <div class="rim-dot" style="top:50%; left:6px; transform:translateY(-50%)"></div>
-          <div class="rim-dot" style="bottom:6px; left:50%; transform:translateX(-50%)"></div>
-          <div class="rim-dot" style="top:50%; right:6px; transform:translateY(-50%)"></div>
         </div>
       </div>
-      <div style="color:var(--muted); font-size:13px; margin-top:6px">La flecha roja indica el premio que recibes.</div>
+      <div style="color:var(--muted); font-size:13px; margin-top:6px">La flecha roja indica el premio que recibirás.</div>
     </div>
 
     <div class="right">
       <div class="title">Ruleta de la Suerte — Premium Gold</div>
-      <div class="desc">Un giro cada 12 horas. El sistema guarda tu tiempo aunque cierres la página. ¡Suerte!</div>
+      <div class="desc">Un giro cada 12 horas. El tiempo se guarda aunque cierres la página o vuelvas más tarde.</div>
 
       <div class="spin-area">
         <button class="btn-spin" id="spinBtn" aria-live="polite">Cargando...</button>
@@ -302,9 +205,7 @@
         <button class="pack-btn" id="pack10">10 giros +2 🆓 <span class="pack-small">$2.99</span></button>
       </div>
 
-      <div style="margin-top:14px;color:var(--muted);font-size:13px">
-        Nota: "500 🆓 BOBUX!" está mostrado pero <strong>desactivado (0%)</strong>.
-      </div>
+      <div class="note" style="display:none">Gana bonos, gira de nuevo o pierde. (500 BOBUX está desactivado en la lógica.)</div>
     </div>
 
     <div class="toast" id="toast"></div>
@@ -313,22 +214,22 @@
 </div>
 
 <script>
-/* ================== CONFIG ================== */
-const PHONE = "50373826693"; // tu WhatsApp (sin +)
+/* ================= CONFIG ================= */
+const PHONE = "50373826693"; // WhatsApp (sin +)
 const COOLDOWN = 12 * 60 * 60 * 1000; // 12 horas
-const LS_ATT = "rb_attempts_v2";   // intentos en localStorage
-const LS_UNLOCK = "rb_unlock_v2";  // desbloqueo timestamp
+const LS_ATT = "rb_attempts_final_v1";
+const LS_UNLOCK = "rb_unlock_final_v1";
 
-/* premios (probabilidades invisibles) */
+/* premiación - probabilidades invisibles */
 const slices = [
-  { name: "500 🆓 BOBUX!", prob: 0 },      // nunca saldrá
+  { name: "500 🆓 BOBUX!", prob: 0 }, // visually present but 0% logically
   { name: "PERDISTE...", prob: 70 },
   { name: "Promo de bono +25%", prob: 15 },
   { name: "Gira de nuevo", prob: 15 }
 ];
 
-/* elementos DOM */
-const bubbleBtn = document.getElementById("bubbleBtn");
+/* DOM */
+const bubble = document.getElementById("bubble");
 const overlay = document.getElementById("overlay");
 const spinBtn = document.getElementById("spinBtn");
 const timerBox = document.getElementById("timerBox");
@@ -339,38 +240,36 @@ const pack5 = document.getElementById("pack5");
 const pack10 = document.getElementById("pack10");
 const msgFloat = document.getElementById("msgFloat");
 
-/* estado */
-let attempts = parseInt(localStorage.getItem(LS_ATT)) || 1;
+/* STATE */
+let attempts = parseInt(localStorage.getItem(LS_ATT));
+if(Number.isNaN(attempts)) attempts = 1;
 let unlockAt = parseInt(localStorage.getItem(LS_UNLOCK)) || 0;
 let spinning = false;
-let currentRotation = 0; // accumulated rotation (degrees)
+let currentRotation = 0;
 
 /* --- helpers --- */
 function saveAttempts(){ localStorage.setItem(LS_ATT, String(attempts)); }
 function saveUnlock(ts){ localStorage.setItem(LS_UNLOCK, String(ts)); unlockAt = ts; }
 
-/* --- UI: open/close overlay --- */
-bubbleBtn.addEventListener("click", ()=>{
+/* --- open overlay (bubble click) --- */
+bubble.addEventListener("click", ()=>{
   overlay.style.display = "flex";
-  inicializarUI();
+  overlay.setAttribute("aria-hidden","false");
+  initUI();
 });
+overlay.addEventListener("click",(e)=>{ if(e.target===overlay){ overlay.style.display="none"; overlay.setAttribute("aria-hidden","true"); } });
 
-/* close clicking outside card */
-overlay.addEventListener("click", (e)=>{
-  if(e.target === overlay) overlay.style.display = "none";
-});
-
-/* packs -> open WhatsApp with prewritten messages */
-pack5.addEventListener("click", ()=>{
+/* packs -> whatsapp */
+pack5.addEventListener("click", ()=> {
   const text = encodeURIComponent("Hola, quiero comprar +5 giros por $1.99");
   window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
 });
-pack10.addEventListener("click", ()=>{
+pack10.addEventListener("click", ()=> {
   const text = encodeURIComponent("Hola, quiero comprar 10 giros +2 por $2.99");
   window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
 });
 
-/* --- probabilities pick --- */
+/* --- pick prize (invisible probabilities) --- */
 function pickPrize(){
   const total = slices.reduce((s,p)=>s+p.prob,0);
   const r = Math.random()*total;
@@ -379,22 +278,20 @@ function pickPrize(){
     acc += p.prob;
     if(r <= acc) return p;
   }
-  return slices[1]; // fallback
+  // fallback
+  return slices[1];
 }
 
-/* compute rotation to align chosen slice center to pointer at top.
-   Each slice is 90deg wide. Center angle of slice i = i*90 + 45.
-   To bring that to top, rotate wheel by (360 - centerAngle) + manyTurns.
-   We also include a small offset for natural feel.
-*/
+/* compute rotation so pointer indicates chosen slice center */
 function computeRotationForIndex(i){
+  // centerAngle for slice i (0..3): i*90 + 45
   const centerAngle = i*90 + 45;
-  const offset = (Math.random()*28) - 14; // +/-14deg natural offset
-  const many = 360 * (4 + Math.floor(Math.random()*4)); // 4-7 full turns
+  const offset = (Math.random()*18)-9; // +/-9deg for natural feel
+  const many = 360 * (4 + Math.floor(Math.random()*4)); // 4..7 turns
   return many + (360 - centerAngle) + offset;
 }
 
-/* --- spin logic --- */
+/* spin */
 async function spin(){
   if(spinning) return;
   if(attempts <= 0) return;
@@ -402,79 +299,75 @@ async function spin(){
   spinBtn.disabled = true;
   spinBtn.innerText = "Girando...";
 
-  // micro zoom
+  // tiny zoom
   wheel.style.transition = "transform 260ms ease";
-  wheel.style.transform = `rotate(${currentRotation}deg) scale(1.06)`;
+  wheel.style.transform = `rotate(${currentRotation}deg) scale(1.05)`;
   await new Promise(r=>setTimeout(r,260));
 
-  // pick prize (probabilities ensure 500 never chosen)
+  // pick prize object (500 has 0 prob)
   const prizeObj = pickPrize();
   const index = slices.findIndex(s => s.name === prizeObj.name);
 
-  // compute rotation and apply long transition
+  // compute rotation, apply
   const target = computeRotationForIndex(index);
-  currentRotation = currentRotation + target;
-  wheel.style.transition = "transform 5s cubic-bezier(.17,.67,.14,1)";
+  currentRotation += target;
+  wheel.style.transition = "transform 5000ms cubic-bezier(.17,.67,.14,1)";
   wheel.style.transform = `rotate(${currentRotation}deg) scale(1)`;
 
   // pointer bounce
   pointer.style.transform = "translateY(-8px)";
 
-  // wait spin duration
+  // wait spin end
   await new Promise(r=>setTimeout(r,5200));
   pointer.style.transform = "translateY(0)";
 
-  // handle prize
-  handleResult(prizeObj);
+  // handle prize effects
+  handlePrize(prizeObj);
 
-  // when attempts reach zero -> set unlock timer
+  // if attempts exhausted, set unlock
   if(attempts <= 0){
     const ts = Date.now() + COOLDOWN;
     saveUnlock(ts);
     startCountdown();
   }
-
   saveAttempts();
   spinning = false;
-  inicializarUI();
+  initUI();
 }
 
-/* --- handle result (toasts, actions) --- */
-function handleResult(prize){
-  if(prize.name === "Gira de nuevo"){
+/* handle prize */
+function handlePrize(pr){
+  if(pr.name === "Gira de nuevo"){
+    // give one extra attempt
     attempts += 1;
     saveAttempts();
     showToast("¡Gira de nuevo! +1 intento", "again");
-    flashCenter("#ffd66b");
+    flashCenter("#fff0c2");
     return;
   }
-
-  if(prize.name === "Promo de bono +25%"){
+  if(pr.name === "Promo de bono +25%"){
     showToast("¡Ganaste PROMO +25%!", "bonus");
     flashCenter("#b9ffcf");
-    // open WhatsApp after a short delay so user sees toast
-    setTimeout(()=>{
+    // open WhatsApp after short delay
+    setTimeout(()=> {
       const text = encodeURIComponent("¡Me gané un bono de +25% en la ruleta!");
       window.open(`https://wa.me/${PHONE}?text=${text}`, "_blank");
     }, 900);
     return;
   }
-
-  if(prize.name === "PERDISTE..."){
+  if(pr.name === "PERDISTE..."){
     showToast("Perdiste... ¡intenta luego!", "lost");
     flashCenter("#ffb3c6");
     return;
   }
-
-  // safety fallback
-  showToast(prize.name, "lost");
+  showToast(pr.name, "lost");
 }
 
-/* --- toast UI --- */
+/* toast */
 let toastTimer = null;
-function showToast(text, type){
+function showToast(txt, type){
   toast.className = "toast " + (type||"");
-  toast.innerText = text;
+  toast.innerText = txt;
   toast.style.display = "block";
   if(toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>{ toast.style.display = "none"; }, 2600);
@@ -488,11 +381,11 @@ function flashCenter(color){
   setTimeout(()=> c.style.boxShadow = prev, 900);
 }
 
-/* --- countdown handling --- */
+/* countdown */
 let countdownInterval = null;
 function startCountdown(){
   if(countdownInterval) clearInterval(countdownInterval);
-  countdownInterval = setInterval(()=>{
+  countdownInterval = setInterval(()=> {
     const now = Date.now();
     const stored = parseInt(localStorage.getItem(LS_UNLOCK)) || unlockAt || 0;
     if(!stored || stored <= now){
@@ -501,42 +394,40 @@ function startCountdown(){
       unlockAt = 0;
       attempts = 1;
       saveAttempts();
-      inicializarUI();
+      initUI();
       return;
     }
     const diff = stored - now;
-    const hh = Math.floor(diff / 3600000);
-    const mm = Math.floor((diff % 3600000) / 60000);
-    const ss = Math.floor((diff % 60000) / 1000);
+    const hh = Math.floor(diff/3600000);
+    const mm = Math.floor((diff%3600000)/60000);
+    const ss = Math.floor((diff%60000)/1000);
     timerBox.innerText = `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
     spinBtn.innerText = `${pad(hh)}h ${pad(mm)}m`;
     spinBtn.disabled = true;
-  }, 1000);
+  },1000);
 }
-
-/* pad helper */
 function pad(n){ return String(n).padStart(2,'0'); }
 
-/* --- initialize UI on overlay open or page load --- */
-function inicializarUI(){
-  // load attempts & unlock
-  attempts = parseInt(localStorage.getItem(LS_ATT)) || attempts || 1;
+/* initialize UI */
+function initUI(){
+  attempts = parseInt(localStorage.getItem(LS_ATT));
+  if(Number.isNaN(attempts)) attempts = 1;
   const storedUnlock = parseInt(localStorage.getItem(LS_UNLOCK));
   if(storedUnlock) unlockAt = storedUnlock;
 
-  // if unlock present and in future -> start countdown
+  // if unlock in future, start countdown
   if(unlockAt && unlockAt > Date.now()){
+    attempts = 0;
+    saveAttempts();
     startCountdown();
+    return;
   } else {
-    // if no unlock or passed -> ensure at least 1 attempt
-    if(attempts <= 0){
-      attempts = 1;
-      saveAttempts();
-    }
-    // clear timer display
-    timerBox.innerText = "Listo";
+    // no unlock or expired
+    if(attempts <= 0) attempts = 1;
+    saveAttempts();
     spinBtn.disabled = false;
     spinBtn.innerText = `GIRAR (${attempts})`;
+    timerBox.innerText = "Listo";
   }
 }
 
@@ -544,37 +435,35 @@ function inicializarUI(){
 spinBtn.addEventListener("click", ()=>{
   if(spinning) return;
   if(attempts <= 0) return;
-  // consume attempt
+  // consume one attempt now (Gira de nuevo can add back)
   attempts = Math.max(0, attempts - 1);
   saveAttempts();
   spin();
 });
 
-/* remove big msg after a few seconds */
+/* boot: keep countdown running in background if stored */
+(function boot(){
+  const stored = parseInt(localStorage.getItem(LS_UNLOCK));
+  if(stored && stored > Date.now()){
+    unlockAt = stored;
+    attempts = 0;
+    saveAttempts();
+    startCountdown();
+  } else {
+    attempts = parseInt(localStorage.getItem(LS_ATT));
+    if(Number.isNaN(attempts)) { attempts = 1; saveAttempts(); }
+  }
+})();
+
+/* hide big message after show */
 setTimeout(()=> {
   msgFloat.style.transition = "opacity .8s, transform .8s";
   msgFloat.style.opacity = "0";
   msgFloat.style.transform = "translateY(-8px)";
 }, 3500);
 setTimeout(()=>{ try{ msgFloat.remove(); }catch(e){} }, 4500);
-
-/* on page load ensure UI consistent even if user doesn't open overlay */
-(function boot(){
-  // if unlock stored and still future, keep timer running in background (so when user opens overlay it's updated)
-  const storedUnlock = parseInt(localStorage.getItem(LS_UNLOCK));
-  if(storedUnlock && storedUnlock > Date.now()){
-    unlockAt = storedUnlock;
-    startCountdown();
-  }
-  // also ensure attempts exist
-  attempts = parseInt(localStorage.getItem(LS_ATT)) || attempts || 1;
-  saveAttempts();
-})();
-
-/* utilities: show toast on load for debug (disabled) */
-/* End of script */
 </script>
-
+  
 <title>TEMA: Bobux </title>
 <style>
   /* Reset & base */
