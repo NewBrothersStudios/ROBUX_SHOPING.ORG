@@ -7,196 +7,334 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
-<!-- BOT BROTHER FLOTANTE -->
-<style>
-#botBrotherBtn {
+
+/* MENSAJE FLOTANTE */
+.msg-float {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #007bff;
-  color: white;
-  border-radius: 50%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255,255,255,.2);
+  font-size: 16px;
+  z-index: 9999;
+  animation: pop 1s ease;
+}
+@keyframes pop {
+  0% { opacity: 0; transform: translate(-50%, -20px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* BURBUJA */
+.bubble-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   width: 65px;
   height: 65px;
+  background: #2b55ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #2b55ff;
+  z-index: 999;
+  animation: spinBubble 2s linear infinite;
+}
+@keyframes spinBubble {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+/* PANTALLA RULETA */
+.ruleta-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  z-index: 9998;
+}
+
+/* RULETA 2D */
+.wheel-box {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 30px solid red;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.wheel2d {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid white;
+  overflow: hidden;
+  transition: transform 5s ease-out;
+  position: relative;
+}
+
+/* Slice base */
+.slice {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-#botBrotherWindow {
-  position: fixed;
-  bottom: 100px;
-  right: 25px;
-  width: 320px;
-  height: 420px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-#botHeader {
-  background: #007bff;
   color: white;
-  padding: 12px;
+  font-size: 15px;
   font-weight: bold;
-  font-size: 18px;
 }
 
-#botMessages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  font-size: 14px;
+/* Slice colores y posiciones */
+.s1 {
+  background: #ff3d3d;
+  transform: rotate(0deg) skewY(-45deg);
+}
+.s2 {
+  background: #2222ff;
+  transform: rotate(90deg) skewY(-45deg);
+}
+.s3 {
+  background: #00cc66;
+  transform: rotate(180deg) skewY(-45deg);
+}
+.s4 {
+  background: #ffaa00;
+  transform: rotate(270deg) skewY(-45deg);
 }
 
-#botInputArea {
-  display: flex;
-  border-top: 1px solid #ccc;
+.slice span {
+  transform: skewY(45deg) rotate(-45deg);
+  width: 90px;
+  text-align: center;
 }
 
-#botInput {
-  flex: 1;
-  padding: 10px;
+/* BOTON GIRAR */
+.spin-btn {
+  background: #ff3030;
+  padding: 15px 30px;
+  border-radius: 12px;
   border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-#botSend {
-  width: 70px;
-  background: #007bff;
   color: white;
-  border: none;
+  font-size: 18px;
   cursor: pointer;
 }
+
+/* BOTONES TIENDA */
+.btm-row {
+  display: flex;
+  gap: 25px;
+}
+.shop-btn {
+  background: #1a1a1a;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  font-size: 15px;
+  text-align: center;
+  width: 130px;
+}
+.shop-btn small {
+  display: block;
+  margin-top: 4px;
+  color: #00f7dd;
+}
+
 </style>
+</head>
 
-<div id="botBrotherBtn">🤖</div>
+<body>
 
-<div id="botBrotherWindow">
-  <div id="botHeader">Bot Brother</div>
-  <div id="botMessages"></div>
-  <div id="botInputArea">
-    <input id="botInput" type="text" placeholder="Escribe algo...">
-    <button id="botSend">Enviar</button>
-  </div>
+<!-- MENSAJE FLOTANTE -->
+<div class="msg-float" id="msgFloat">
+  New lucky wheel 🍀!!
 </div>
 
 <script>
-// --- ABRIR / CERRAR EL BOT ---
-document.getElementById("botBrotherBtn").onclick = ()=>{
-  let win = document.getElementById("botBrotherWindow");
-  win.style.display = win.style.display === "flex" ? "none" : "flex";
-};
-
-// --- PALABRAS CLAVE Y RESPUESTAS ---
-const respuestas = {
-  "precio": "El precio depende del producto Bobux que elijas.",
-  "compra": "Puedes comprar Bobux directamente desde la tienda.",
-  "bobux": "Bobux es la moneda virtual para tus compras.",
-  "gratis": "Actualmente no hay métodos gratis oficiales.",
-  "descuento": "Los descuentos se publican cuando están disponibles.",
-  "ayuda": "Estoy aquí para ayudarte con tu compra.",
-  "pago": "Los pagos se procesan automáticamente.",
-  "metodo": "Aceptamos distintos métodos de pago.",
-  "envio": "Los envíos digitales son instantáneos.",
-  "tarde": "Si tarda, es por tráfico del servidor.",
-  "saldo": "Tu saldo se muestra en tu cuenta.",
-  "fallo": "Si hubo un fallo, intenta recargar la página.",
-  "error": "Puede ser un error temporal del sistema.",
-  "codigo": "Los códigos aparecen en tu email o cuenta.",
-  "verificacion": "A veces se requiere verificación extra.",
-  "cuenta": "Tu cuenta guarda tu historial de compras.",
-  "usuario": "Tu nombre de usuario es esencial para procesar Bobux.",
-  "roblox": "Roblox es donde puedes usar los Bobux.",
-  "soporte": "Puedes escribir aquí si necesitas soporte.",
-  "horario": "Soporte está disponible 24/7.",
-  "ticket": "Puedes abrir un ticket desde aquí.",
-  "demora": "La demora regular es de 1 a 3 minutos.",
-  "rapido": "Los envíos suelen ser rápidos.",
-  "instantaneo": "Muchas compras son instantáneas.",
-  "confirmacion": "Tu confirmación llegará pronto.",
-  "store": "Bienvenido a la Bobux Store oficial.",
-  "regalo": "Puedes comprar Bobux como regalo.",
-  "amigo": "Puedes enviar Bobux a amigos si lo permite tu pedido.",
-  "historial": "Tu historial se guarda automáticamente.",
-  "transaccion": "Las transacciones pueden tardar un poco.",
-  "seguro": "Tu compra es completamente segura.",
-  "soporte tecnico": "Soporte técnico disponible aquí.",
-  "problema": "Dime qué problema tienes.",
-  "espera": "Solo espera un poco, procesando.",
-  "gracias": "¡Gracias por comprar en nuestra store!",
-  "tiempo": "El tiempo promedio es de segundos.",
-  "informacion": "Toda la información está en esta tienda.",
-  "tutorial": "Pronto añadiremos tutoriales.",
-  "clave": "Tu clave se genera automáticamente.",
-  "recarga": "La recarga de Bobux es instantánea.",
-  "fallo compra": "Revisa tu método de pago.",
-  "demora compra": "Puede tardar por saturación.",
-  "login": "Inicia sesión para ver tus pedidos.",
-  "registro": "Puedes registrarte en segundos.",
-  "premium": "Opciones premium estarán próximamente.",
-  "basico": "Este es el paquete básico.",
-  "mega": "Este es el paquete Mega Bobux.",
-  "vip": "El paquete VIP tiene beneficios extra.",
-  "soporte rapido": "Responderé lo más rápido posible.",
-  "problema pago": "Revisa tu banco o método de pago.",
-  "pendiente": "Tu compra está pendiente de confirmación.",
-  "autorizacion": "Espera autorización del sistema.",
-  "validacion": "Validando tu compra...",
-  "consulta": "Estoy aquí para resolver tus consultas.",
-  "pregunta": "Hazme cualquier pregunta.",
-  "alerta": "No compartas datos personales.",
-  "info": "¿Qué info necesitas?",
-  "detalle": "Aquí tienes los detalles disponibles.",
-  "compra fallida": "Intenta de nuevo en un minuto.",
-  "listo": "¡Listo! Procesando la solicitud."
-};
-
-// --- ENVIAR MENSAJE ---
-document.getElementById("botSend").onclick = enviarMensaje;
-document.getElementById("botInput").addEventListener("keypress", e=>{
-  if(e.key === "Enter") enviarMensaje();
-});
-
-function enviarMensaje(){
-  let msg = document.getElementById("botInput").value.trim();
-  if(msg === "") return;
-
-  agregarMensaje("👤 Tú: " + msg);
-
-  // Buscar respuesta por palabra clave
-  let respuesta = "No entendí eso, intenta con otra palabra clave.";
-
-  for(let clave in respuestas){
-    if(msg.toLowerCase().includes(clave)){
-      respuesta = respuestas[clave];
-      break;
-    }
-  }
-
-  setTimeout(()=>agregarMensaje("🤖 Bot Brother: " + respuesta), 400);
-
-  document.getElementById("botInput").value = "";
-}
-
-function agregarMensaje(texto){
-  const box = document.getElementById("botMessages");
-  box.innerHTML += `<div style="margin-bottom:8px;">${texto}</div>`;
-  box.scrollTop = box.scrollHeight;
-}
+setTimeout(()=>document.getElementById("msgFloat").style.display="none",3500);
 </script>
 
-send.onclick = sendMessage;
-input.onkeydown = (e) => { if (e.key === "Enter") sendMessage(); };
+<!-- BURBUJA -->
+<div class="bubble-btn" id="bubbleBtn">🎡</div>
+
+<!-- PANTALLA RULETA -->
+<div class="ruleta-screen" id="ruletaScreen">
+
+  <div class="wheel-box">
+    <div class="arrow"></div>
+
+    <div id="wheel" class="wheel2d">
+      <div class="slice s1"><span>500 🆓 BOBUX!</span></div>
+      <div class="slice s2"><span>PERDISTE...</span></div>
+      <div class="slice s3"><span>BONO +25%</span></div>
+      <div class="slice s4"><span>GIRA DE NUEVO</span></div>
+    </div>
+  </div>
+
+  <button id="spinBtn" class="spin-btn">Cargando...</button>
+
+  <div class="btm-row">
+    <div class="shop-btn">
+      +5 GIROS
+      <small>$1.99</small>
+    </div>
+    <div class="shop-btn">
+      10 GIROS +2 🆓
+      <small>$2.99</small>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ------------ PROBABILIDADES ------------ */
+const premios = [
+  { name: "500 🆓 BOBUX!", prob: 0 },
+  { name: "PERDISTE...", prob: 70 },
+  { name: "Promo de bono +25%", prob: 15 },
+  { name: "Gira de nuevo", prob: 15 }
+];
+
+/* ------------ VARIABLES LOCALSTORAGE ------------ */
+let intentos = parseInt(localStorage.getItem("intentos")) || 1;
+let nextSpin = localStorage.getItem("nextSpinTime");
+let spinBtn = document.getElementById("spinBtn");
+let wheel = document.getElementById("wheel");
+
+/* ------------ BOTÓN BURBUJA ------------ */
+document.getElementById("bubbleBtn").onclick = () => {
+  document.getElementById("ruletaScreen").style.display = "flex";
+  actualizarBoton();
+};
+
+/* ------------ ACTUALIZAR BOTON ------------ */
+function actualizarBoton() {
+  if (intentos > 0) {
+    spinBtn.innerText = `GIRAR (${intentos})`;
+    spinBtn.disabled = false;
+  } else {
+    spinBtn.disabled = true;
+    iniciarCuentaRegresiva();
+  }
+}
+
+/* ------------ ELEGIR PREMIO ------------ */
+function elegirPremio() {
+  let total = premios.reduce((a,b)=>a+b.prob,0);
+  let r = Math.random()*total;
+  let acum=0;
+
+  for (let p of premios) {
+    acum+=p.prob;
+    if (r<=acum) return p.name;
+  }
+}
+
+/* ------------ GIRAR RULETA ------------ */
+function girarRuleta() {
+  if (intentos<=0) return;
+
+  intentos--;
+  localStorage.setItem("intentos", intentos);
+  actualizarBoton();
+
+  let premio = elegirPremio();
+  let index = premios.findIndex(p=>p.name===premio);
+
+  let vueltas = 360*5;
+  let grados = vueltas + (index*90);
+
+  wheel.style.transform = `rotate(${grados}deg)`;
+
+  setTimeout(()=>resultado(premio),5200);
+}
+
+/* ------------ RESULTADOS ------------ */
+function resultado(premio) {
+
+  if (premio==="Gira de nuevo") {
+    intentos++;
+    localStorage.setItem("intentos", intentos);
+    actualizarBoton();
+    alert("¡Giro extra!");
+    return;
+  }
+
+  if (premio==="Promo de bono +25%") {
+    let msg = encodeURIComponent("¡Me gané un bono de +25% en la ruleta!");
+    window.location.href=`https://wa.me/50373826693?text=${msg}`;
+    return;
+  }
+
+  if (premio==="PERDISTE...") {
+    alert("Perdiste 😢");
+  }
+
+  if (intentos<=0) bloquear12h();
+}
+
+/* ------------ BLOQUEAR 12 HORAS ------------ */
+function bloquear12h() {
+  let t = Date.now() + (12*60*60*1000);
+  localStorage.setItem("nextSpinTime", t);
+  iniciarCuentaRegresiva();
+}
+
+/* ------------ CONTADOR ------------ */
+function iniciarCuentaRegresiva() {
+  let interval = setInterval(()=>{
+
+    let t = localStorage.getItem("nextSpinTime");
+    if (!t) return;
+
+    let diff = t - Date.now();
+
+    if (diff<=0) {
+      clearInterval(interval);
+      intentos = 1;
+      localStorage.setItem("intentos",1);
+      localStorage.removeItem("nextSpinTime");
+      actualizarBoton();
+      return;
+    }
+
+    let h = Math.floor(diff/3600000);
+    let m = Math.floor((diff%3600000)/60000);
+    let s = Math.floor((diff%60000)/1000);
+
+    spinBtn.innerText = `${h}h ${m}m ${s}s`;
+
+  },1000);
+}
+
+/* CLICK GIRO */
+spinBtn.onclick = girarRuleta;
+
 </script>
 
 <title>TEMA: Bobux </title>
