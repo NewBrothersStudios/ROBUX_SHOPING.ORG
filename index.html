@@ -7,14 +7,15 @@
 <!-- ✔ Google Site Verification (correctamente colocado) -->
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
- 
+
+
 /* ===== BURBUJA FLOTANTE ===== */
 #floatingBubble {
 position: fixed;
 right: 20px;
 bottom: 20px;
-width: 65px;
-height: 65px;
+width: 70px;
+height: 70px;
 border-radius: 50%;
 background: gold;
 box-shadow: 0 0 18px rgba(255,215,0,0.8);
@@ -24,7 +25,10 @@ align-items: center;
 cursor: pointer;
 animation: bubbleFloat 3s infinite ease-in-out;
 z-index: 99999;
+font-size: 30px;
 }
+
+/* Animación burbuja */
 @keyframes bubbleFloat {
 0% { transform: translateY(0); }
 50% { transform: translateY(-10px); }
@@ -38,23 +42,45 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(120,0,0,0.75); /* rojo oscuro pálido */
+background: rgba(120,0,0,0.88); /* rojo pálido oscuro */
 display: none;
-flex-direction: column;
+justify-content: center;
 align-items: center;
-padding-top: 20px;
+flex-direction: column;
 z-index: 100000;
+padding: 20px;
 }
 
-/* ===== CAJA DE RULETA ===== */
+/* Botón salir */
+#closeWheel {
+position: absolute;
+top: 15px;
+right: 15px;
+background: black;
+color: white;
+padding: 10px 15px;
+border-radius: 10px;
+font-size: 16px;
+cursor: pointer;
+z-index: 200000;
+}
+
+/* Caja central */
 #wheelBox {
-background: #FFB3B3; /* rojito pastel */
+background: #ffb3b3;
 padding: 20px;
 border-radius: 20px;
 text-align: center;
 width: 90%;
-max-width: 380px;
+max-width: 430px;
+animation: popIn 0.4s ease;
 position: relative;
+}
+
+/* Animación entrada */
+@keyframes popIn {
+0% { transform: scale(0.6); opacity: 0; }
+100% { transform: scale(1); opacity: 1; }
 }
 
 /* ===== RULETA ===== */
@@ -64,22 +90,25 @@ height: 300px;
 border-radius: 50%;
 border: 10px solid gold;
 box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
+margin: 0 auto;
+display: block;
 }
 
-/* ===== FLECHA ===== */
+/* Flecha derecha */
 #pointer {
 position: absolute;
-right: -35px;
+right: -40px;
 top: 50%;
 transform: translateY(-50%);
 font-size: 55px;
 font-weight: bold;
 color: red;
+text-shadow: 0 0 6px black;
 }
 
-/* ====== BOTÓN GIRAR ===== */
+/* Botón girar */
 #spinBtn {
-margin-top: 15px;
+margin-top: 20px;
 padding: 12px 25px;
 font-size: 20px;
 background: gold;
@@ -89,48 +118,53 @@ font-weight: bold;
 cursor: pointer;
 }
 
-/* ===== CONTADOR ===== */
+/* Contador */
 #cooldown {
 font-size: 18px;
 margin-top: 10px;
 color: black;
-}
-
-/* ===== RESULTADO ===== */
-#result {
-margin-top: 10px;
-font-size: 22px;
 font-weight: bold;
 }
 
-/* ====== CAJAS SCROLLEABLES ====== */
+/* ===== CASILLAS ===== */
 #scrollArea {
-margin-top: 15px;
-height: 240px;
+margin-top: 20px;
+height: 230px;
 overflow-y: scroll;
 padding-right: 10px;
 }
 
-/* ====== CAJAS DE COMPRA ===== */
 .buyBox {
-background: blue;
-border: 2px solid gold;
+background: #0057ff;
+border: 2px solid yellow;
 border-radius: 12px;
-padding: 12px;
-margin-bottom: 12px;
+padding: 10px;
 text-align: center;
 color: yellow;
-font-weight: bold;
+margin-bottom: 15px;
 animation: zoomLoop 4s infinite ease-in-out;
 cursor: pointer;
 }
+
+/* Zoom animación */
 @keyframes zoomLoop {
 0% { transform: scale(1); }
 50% { transform: scale(1.07); }
 100% { transform: scale(1); }
 }
+
+/* Texto */
 .buyBox span {
 display: block;
+font-weight: bold;
+}
+
+/* Resultado */
+#result {
+font-size: 22px;
+margin-top: 12px;
+font-weight: bold;
+color: black;
 }
 
 </style>
@@ -140,162 +174,223 @@ display: block;
 <!-- ===== BURBUJA ===== -->
 <div id="floatingBubble">🎡</div>
 
-<!-- ===== CONTENIDO RULETA ===== -->
+<!-- ===== RUETA COMPLETA ===== -->
 <div id="wheelContainer">
 
+<div id="closeWheel">Salir de la ruleta</div>
+
+<div id="pointer">→</div>
+
 <div id="wheelBox">
-    <div id="pointer">→</div>
 
-    <canvas id="wheel" width="300" height="300"></canvas>
+<canvas id="wheel" width="300" height="300"></canvas>
 
-    <button id="spinBtn">GIRAR ×1 suerte 🍀</button>
+<button id="spinBtn">GIRAR ×1 suerte 🍀</button>
 
-    <div id="cooldown"></div>
-    <div id="result"></div>
+<div id="cooldown"></div>
+<div id="result"></div>
 
-    <!-- === CASILLAS SCROLL SOLO ABAJO === -->
-    <div id="scrollArea">
+<!-- CASILLAS CON SCROLL -->
+<div id="scrollArea">
 
-        <div class="buyBox"><span>10 Spins + suerte ×6🍀</span><span>↓</span><span>$6.99</span></div>
-        <div class="buyBox"><span>5 Spins + suerte ×4🍀</span><span>↓</span><span>$2.99</span></div>
-        <div class="buyBox"><span>Suerte ×12🍀</span><span>↓</span><span>$7.99</span></div>
-        <div class="buyBox"><span>Premio asegurado ⭐</span><span>↓</span><span>$5.99</span></div>
-        <div class="buyBox"><span>Suerte ×7🍀</span><span>↓</span><span>$4.99</span></div>
-        <div class="buyBox"><span>Suerte ×2🍀</span><span>↓</span><span>$0.49</span></div>
-        <div class="buyBox"><span>Suerte ×1.5🍀</span><span>↓</span><span>$0.25</span></div>
+<div class="buyBox" onclick="buy('10 Spins + suerte ×6 🍀', '6.99')">
+<span>10 Spins + suerte ×6🍀</span>
+<span>↓</span>
+<span>$6.99</span>
+</div>
 
-    </div>
+<div class="buyBox" onclick="buy('5 Spins + suerte ×4 🍀','2.99')">
+<span>5 Spins + suerte ×4🍀</span>
+<span>↓</span>
+<span>$2.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Suerte ×12 🍀','7.99')">
+<span>Suerte ×12🍀</span>
+<span>↓</span>
+<span>$7.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Premio asegurado ⭐','5.99')">
+<span>Premio asegurado ⭐</span>
+<span>↓</span>
+<span>$5.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Suerte ×7 🍀','4.99')">
+<span>Suerte ×7🍀</span>
+<span>↓</span>
+<span>$4.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Suerte ×2 🍀','0.49')">
+<span>Suerte ×2🍀</span>
+<span>↓</span>
+<span>$0.49</span>
+</div>
+
+<div class="buyBox" onclick="buy('Suerte ×1.5 🍀','0.25')">
+<span>Suerte ×1.5🍀</span>
+<span>↓</span>
+<span>$0.25</span>
+</div>
 
 </div>
 
+</div>
 </div>
 
 <script>
 
-/* ABRIR RULETA */
+/* ABRIR */
 document.getElementById("floatingBubble").onclick = () => {
-    document.getElementById("wheelContainer").style.display = "flex";
+document.getElementById("wheelContainer").style.display = "flex";
 };
 
-/* RULETA SECCIONES */
+/* SALIR */
+document.getElementById("closeWheel").onclick = () => {
+document.getElementById("wheelContainer").style.display = "none";
+};
+
+/* RULETA */
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
 const sections = [
- "300 ROBUX GRATIS!",
- "PERDISTE...",
- "BONO +25%",
- "BONO +30%"
+"300 ROBUX (NO SALE)",
+"PERDISTE",
+"BONO +25%",
+"BONO +30%"
 ];
 
-const colors = ["#fff4c2","#fff","gold","#f1e6a8"];
+const colors = ["#fff4c2","#fff","#f7e35b","#f1d67a"];
 
 /* DIBUJAR RULETA */
 function drawWheel() {
 let start = 0;
-const arc = Math.PI * 2 / sections.length;
+let arc = Math.PI * 2 / sections.length;
 
 for (let i = 0; i < sections.length; i++) {
-    ctx.beginPath();
-    ctx.fillStyle = colors[i];
-    ctx.moveTo(150,150);
-    ctx.arc(150,150,150,start,start+arc);
-    ctx.fill();
+ctx.beginPath();
+ctx.fillStyle = colors[i];
+ctx.moveTo(150,150);
+ctx.arc(150,150,150,start,start+arc);
+ctx.fill();
 
-    ctx.save();
-    ctx.translate(150,150);
-    ctx.rotate(start + arc/2);
-    ctx.fillStyle = "black";
-    ctx.font = "bold 18px Arial";
-    ctx.fillText(sections[i], 20, 5);
-    ctx.restore();
+ctx.save();
+ctx.translate(150,150);
+ctx.rotate(start + arc/2);
+ctx.fillStyle = "black";
+ctx.font = "bold 17px Arial";
+ctx.fillText(sections[i], 20, 5);
+ctx.restore();
 
-    start += arc;
+start += arc;
 }
 }
+
 drawWheel();
 
-/* LOGICA SPIN */
+/* SPIN */
 let spinning = false;
 
-document.getElementById("spinBtn").onclick = () => {
+document.getElementById("spinBtn").onclick = spin;
+
+function spin() {
 if (spinning) return;
 if (!canSpin()) return;
 
 spinning = true;
 
-let angle = Math.random()*360 + 720;
+/* ANGULO PERO IMPOSIBLE QUE CAIGA EN 300 ROBUX */
+let safeAngles = [1, 2, 3]; // evita el primer sector
+let pick = safeAngles[Math.floor(Math.random()*safeAngles.length)];
+
+let angle = pick * 90 + 720;
 
 canvas.style.transition = "transform 4s ease-out";
 canvas.style.transform = `rotate(${angle}deg)`;
 
-setTimeout(() => {
-    spinning = false;
+setTimeout(()=>{
+spinning = false;
 
-    let final = angle % 360;
-    let index = Math.floor((360-final)/90) % 4;
-    let prize = sections[index];
+let index = pick % 4;
+let prize = sections[index];
 
-    handlePrize(prize);
+handlePrize(prize);
+saveSpin();
 
-    saveSpin();
-}, 4000);
-};
+},4000);
+}
 
-/* COOLDOWN 2 HORAS */
-const COOLDOWN = 2 * 60 * 60 * 1000;
+/* TIEMPO 2 HORAS */
+const CD = 2 * 60 * 60 * 1000;
 
-function saveSpin() {
+function saveSpin(){
 localStorage.setItem("lastSpin", Date.now());
 }
-function canSpin() {
+
+function canSpin(){
 let last = localStorage.getItem("lastSpin");
 if (!last) return true;
-return (Date.now() - last) >= COOLDOWN;
+return Date.now() - last >= CD;
 }
 
-setInterval(() => {
+setInterval(()=>{
+let btn = document.getElementById("spinBtn");
+let cd = document.getElementById("cooldown");
+
 if (canSpin()) {
-    spinBtn.disabled = false;
-    cooldown.innerText = "";
+btn.disabled = false;
+cd.innerText = "";
 } else {
-    let last = localStorage.getItem("lastSpin");
-    let diff = COOLDOWN - (Date.now() - last);
-    let h = Math.floor(diff/3600000);
-    let m = Math.floor((diff%3600000)/60000);
-    let s = Math.floor((diff%60000)/1000);
-    cooldown.innerText = `${h}h ${m}m ${s}s`;
-    spinBtn.disabled = true;
-}
-}, 1000);
-
-/* PREMIOS */
-function handlePrize(prize) {
-
-if (prize.includes("300 ROBUX")) {
-    result.innerText = "CASI!";
-    return;
+btn.disabled = true;
+let diff = CD - (Date.now() - localStorage.getItem("lastSpin"));
+let h = Math.floor(diff/3600000);
+let m = Math.floor((diff%3600000)/60000);
+let s = Math.floor((diff%60000)/1000);
+cd.innerText = `${h}h ${m}m ${s}s`;
 }
 
-if (prize === "PERDISTE...") {
-    result.innerText = "PERDISTE 🙃";
-    return;
+},1000);
+
+/* RESULTADOS */
+function handlePrize(prize){
+let r = document.getElementById("result");
+
+if (prize.includes("300")) {
+r.innerText = "Casi!";
+return;
 }
 
-if (prize === "BONO +25%") {
-    result.innerText = "BONO +25% GANADO!";
-    return;
+if (prize === "PERDISTE"){
+r.innerText = "PERDISTE 🙃";
+return;
 }
 
-if (prize === "BONO +30%") {
-    result.innerText = "BONO +30%!";
-    return;
+if (prize === "BONO +25%"){
+r.innerText = "BONO +25% GANADO";
+window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%", "_blank");
+return;
 }
 
+if (prize === "BONO +30%"){
+r.innerText = "BONO +30% GANADO";
+window.open("https://wa.me/50373826693?text=Gané%20BONO%2030%", "_blank");
+return;
+}
+
+}
+
+/* CASILLAS → WhatsApp */
+function buy(name, price){
+window.open(
+`https://wa.me/50373826693?text=Quiero%20comprar%20${name}%20por%20$${price}`,
+"_blank"
+);
 }
 
 </script>
-
 
 <title> Robux tienda </title>
 <style>
