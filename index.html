@@ -728,14 +728,25 @@ function subscribeVIP() {
     </div>
 
     <div class="card">
-      <div class="robux-title">⏣ 80 robux</div>
-      <div class="price-row">
-        <div class="price">$1.75</div>
-        <div class="price-bar"></div>
-      </div>
-      <button class="btn" onclick="iniciarCompra('80 robux',$1.75)">Comprar</button>
-      <div class="small">-3% descuento</div>
-    </div>
+  <div class="robux-title">⏣ 80 robux</div>
+  <div class="price-row">
+    <div class="price">$1.75</div>
+    <div class="price-bar"></div>
+  </div>
+
+  <button class="btn" onclick="comprarPaquete('80 robux - $1.75')">Comprar</button>
+
+  <div class="small">-3% descuento</div>
+</div>
+
+<script>
+  function comprarPaquete(nombrePaquete) {
+    const numero = "50373826693"; // tu número de WhatsApp
+    const mensaje = encodeURIComponent("Hola, quiero comprar el paquete: " + nombrePaquete);
+    const url = "https://wa.me/" + numero + "?text=" + mensaje;
+    window.location.href = url;
+  }
+</script>
 
     <div class="card">
       <div class="robux-title">⏣ 400 robux</div>
