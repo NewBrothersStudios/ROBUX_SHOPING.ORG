@@ -558,6 +558,114 @@ function subscribeVIP() {
 }
 </script>
 
+<!-- Burbuja de Usuario --><style>
+  /* Burbuja flotante */
+  #userBubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  /* Panel de usuario */
+  #userPanel {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+    background-color: #ffffffdd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 9999;
+  }
+
+  #userPanel input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  #userPanel button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #userPanel button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+</style><div id="userBubble">👤</div><div id="userPanel">
+  <label>Nombre:</label>
+  <input type="text" id="userName" placeholder="Escribe tu nombre" /><button id="saveNameBtn">Guardar Nombre</button>
+
+<button disabled>Ayuda y permisos (NO DISPONIBLE)</button>
+
+<button id="vipBtn">Convertirse en VIP</button>
+
+<button id="luckBtn">Obtener Suerte y Giros 🍀</button>
+
+</div><script>
+  const userBubble = document.getElementById('userBubble');
+  const userPanel = document.getElementById('userPanel');
+  const userNameInput = document.getElementById('userName');
+  const saveNameBtn = document.getElementById('saveNameBtn');
+  const vipBtn = document.getElementById('vipBtn');
+  const luckBtn = document.getElementById('luckBtn');
+
+  // Mostrar/ocultar panel al presionar la burbuja
+  userBubble.addEventListener('click', () => {
+    userPanel.style.display = userPanel.style.display === 'none' ? 'block' : 'none';
+  });
+
+  // Guardar nombre en localStorage
+  saveNameBtn.addEventListener('click', () => {
+    const name = userNameInput.value.trim();
+    if(name) {
+      localStorage.setItem('userName', name);
+      alert(`Nombre guardado: ${name}`);
+    }
+  });
+
+  // Cargar nombre guardado si existe
+  window.addEventListener('load', () => {
+    const savedName = localStorage.getItem('userName');
+    if(savedName) {
+      userNameInput.value = savedName;
+    }
+  });
+
+  // Botón VIP
+  vipBtn.addEventListener('click', () => {
+    alert('Se abriría el círculo VIP aquí.');
+    // Aquí puedes poner la función que abra el VIP
+  });
+
+  // Botón Suerte y Giros
+  luckBtn.addEventListener('click', () => {
+    alert('Se dirigiría al sector de Giros y Suerte 🍀');
+    // Aquí puedes poner la función que abra los giros
+  });
+</script>
+
 
 <title> tienda </title>
 <style>
