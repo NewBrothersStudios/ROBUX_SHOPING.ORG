@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Robux × Steal a brainrot</title>
-<meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 
+<!-- ✔ Google Site Verification (correctamente colocado) -->
+<meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
+
+
 /* ===== BURBUJA FLOTANTE ===== */
 #floatingBubble {
 position: fixed;
@@ -25,20 +27,22 @@ animation: bubbleFloat 3s infinite ease-in-out;
 z-index: 99999;
 font-size: 30px;
 }
+
+/* Animación burbuja */
 @keyframes bubbleFloat {
 0% { transform: translateY(0); }
 50% { transform: translateY(-10px); }
 100% { transform: translateY(0); }
 }
 
-/* ===== CONTENEDOR RUETA ===== */
+/* ===== CONTENEDOR COMPLETO ===== */
 #wheelContainer {
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(120,0,0,0.88);
+background: rgba(120,0,0,0.88); /* rojo pálido oscuro */
 display: none;
 justify-content: center;
 align-items: center;
@@ -79,7 +83,7 @@ position: relative;
 100% { transform: scale(1); opacity: 1; }
 }
 
-/* RULETA */
+/* ===== RULETA ===== */
 #wheel {
 width: 300px;
 height: 300px;
@@ -89,6 +93,8 @@ box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
 margin: 0 auto;
 display: block;
 }
+
+/* Flecha derecha */
 #pointer {
 position: absolute;
 right: -40px;
@@ -99,6 +105,8 @@ font-weight: bold;
 color: red;
 text-shadow: 0 0 6px black;
 }
+
+/* Botón girar */
 #spinBtn {
 margin-top: 20px;
 padding: 12px 25px;
@@ -109,8 +117,23 @@ border-radius: 10px;
 font-weight: bold;
 cursor: pointer;
 }
-#cooldown { font-size: 18px; margin-top: 10px; color: black; font-weight: bold; }
-#scrollArea { margin-top: 20px; height: 230px; overflow-y: auto; padding-right: 10px; }
+
+/* Contador */
+#cooldown {
+font-size: 18px;
+margin-top: 10px;
+color: black;
+font-weight: bold;
+}
+
+/* ===== CASILLAS ===== */
+#scrollArea {
+margin-top: 20px;
+height: 230px;
+overflow-y: scroll;
+padding-right: 10px;
+}
+
 .buyBox {
 background: #0057ff;
 border: 2px solid yellow;
@@ -122,171 +145,423 @@ margin-bottom: 15px;
 animation: zoomLoop 4s infinite ease-in-out;
 cursor: pointer;
 }
+
+/* Zoom animación */
 @keyframes zoomLoop {
 0% { transform: scale(1); }
 50% { transform: scale(1.07); }
 100% { transform: scale(1); }
 }
-.buyBox span { display: block; font-weight: bold; }
-#result { font-size: 22px; margin-top: 12px; font-weight: bold; color: black; }
 
-/* VIP */
-.vip-container { position: fixed; top: 70px; right: 10px; text-align: center; z-index: 99999; }
-.vip-new { font-size: 10px; color: #007bff; font-weight: bold; }
-.vip-circle {
-width: 55px;
-height: 55px;
-background: gold;
-border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-animation: vipPulse 1.6s infinite ease-in-out;
-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+/* Texto */
+.buyBox span {
+display: block;
+font-weight: bold;
 }
-.vip-text { font-size: 20px; font-weight: bold; color: black; transform: skewX(-10deg); }
-@keyframes vipPulse { 0% { transform: scale(1); } 50% { transform: scale(1.13); } 100% { transform: scale(1); } }
-.vip-modal {
-position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75);
-display: none; justify-content: center; align-items: center; padding:20px; z-index: 999999;
+
+/* Resultado */
+#result {
+font-size: 22px;
+margin-top: 12px;
+font-weight: bold;
+color: black;
 }
-.vip-content {
-background: #0e355e; padding: 20px; border-radius: 12px; width: 85%; max-width: 320px;
-text-align: center; animation: slideFade 0.55s ease; color: #9aff9a;
-}
-.vip-content h2, .vip-content p, .vip-content li { color: #9aff9a; }
-.vip-content ul { text-align: left; }
-@keyframes slideFade { 0% { opacity:0; transform:translateY(40px) scale(0.9);} 100%{opacity:1; transform:translateY(0) scale(1);} }
-.vip-subscribe, .vip-close { width: 100%; border: none; border-radius:10px; padding:12px; cursor:pointer; margin-top:10px; font-weight:bold; }
-.vip-subscribe { background:#28a745; color:white; font-size:15px; }
-.vip-close { background:#007bff; color:white; }
+
 </style>
 </head>
 <body>
 
+<!-- ===== BURBUJA ===== -->
 <div id="floatingBubble">🎡</div>
 
+<!-- ===== RUETA COMPLETA ===== -->
 <div id="wheelContainer">
+
 <div id="closeWheel">Salir de la ruleta</div>
+
 <div id="pointer">→</div>
+
 <div id="wheelBox">
+
 <canvas id="wheel" width="300" height="300"></canvas>
+
 <button id="spinBtn">GIRAR ×1 suerte 🍀</button>
+
 <div id="cooldown"></div>
 <div id="result"></div>
+
+<!-- CASILLAS CON SCROLL -->
 <div id="scrollArea">
-<div class="buyBox" onclick="buy('10 Spins + suerte ×6 🍀', '6.99')"><span>10 Spins + suerte ×6🍀</span><span>↓</span><span>$6.99</span></div>
-<div class="buyBox" onclick="buy('5 Spins + suerte ×4 🍀','2.99')"><span>5 Spins + suerte ×4🍀</span><span>↓</span><span>$2.99</span></div>
-<div class="buyBox" onclick="buy('Suerte ×12 🍀','7.99')"><span>Suerte ×12🍀</span><span>↓</span><span>$7.99</span></div>
-<div class="buyBox" onclick="buy('Premio asegurado ⭐','5.99')"><span>Premio asegurado ⭐</span><span>↓</span><span>$5.99</span></div>
-<div class="buyBox" onclick="buy('Suerte ×7 🍀','4.99')"><span>Suerte ×7🍀</span><span>↓</span><span>$4.99</span></div>
-<div class="buyBox" onclick="buy('Suerte ×2 🍀','0.49')"><span>Suerte ×2🍀</span><span>↓</span><span>$0.49</span></div>
-<div class="buyBox" onclick="buy('Suerte ×1.5 🍀','0.25')"><span>Suerte ×1.5🍀</span><span>↓</span><span>$0.25</span></div>
-</div>
-</div>
+
+<div class="buyBox" onclick="buy('10 Spins + ×6 luck 🍀', '6.99')">
+<span>10 Giros + ×6 luck 🍀</span>
+<span>↓</span>
+<span>$6.99</span>
 </div>
 
-<!-- VIP -->
-<div class="vip-container">
-<small class="vip-new">¡¡NEW!!</small>
-<div class="vip-circle" onclick="openVIP()"><span class="vip-text">VIP</span></div>
+<div class="buyBox" onclick="buy('premio asegurado ','5.99')">
+<span> ASEGURAR PREMIO</span>
+<span>↓</span>
+<span>$5.99</span>
 </div>
 
-<div id="vipModal" class="vip-modal">
-<div class="vip-content">
-<h2>ÚNETE a VIP</h2>
-<p><strong>LAS características VIP son las siguientes:</strong></p>
-<ul>
-<li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
-<li><b>10 giros</b> para la ruleta de la suerte 🍀.</li>
-<li><b>120 robux</b> semanales</li>
-<li>Acceso completo a nuestro código page de Github.</li>
-<li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
-</ul>
-<button class="vip-subscribe" onclick="subscribeVIP()">SUSCRÍBETE<br>$7.99 × semana</button>
-<button class="vip-close" onclick="closeVIP()">Cerrar</button>
+<div class="buyBox" onclick="buy('5 Giros + ×4 luck 🍀','2.99')">
+<span>5 Giros + ×4 luck 🍀</span>
+<span>↓</span>
+<span>$2.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Luck ×12 🍀','7.99')">
+<span>luck ×12 🍀</span>
+<span>↓</span>
+<span>$7.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('Luck ×3 🍀','1.50')">
+<span> pack Luck ×3 🍀 + 3 Giros </span>
+<span>↓</span>
+<span>$1.50</span>
+</div>
+
+<div class="buyBox" onclick="buy('Luck ×2 🍀 ','$0.99')">
+<span> Luck ×2 🍀</span>
+<span>↓</span>
+<span>$0.99</span>
+</div>
+
+<div class="buyBox" onclick="buy('luck ×1.5 🍀','0.49')">
+<span>Luck ×1.5 🍀</span>
+<span>↓</span>
+<span>$0.49</span>
+</div>
+
+</div>
+
 </div>
 </div>
 
 <script>
-/* ABRIR / CERRAR RULETA */
-document.getElementById("floatingBubble").onclick = () => { document.getElementById("wheelContainer").style.display = "flex"; };
-document.getElementById("closeWheel").onclick = () => { document.getElementById("wheelContainer").style.display = "none"; };
+
+/* ABRIR */
+document.getElementById("floatingBubble").onclick = () => {
+document.getElementById("wheelContainer").style.display = "flex";
+};
+
+/* SALIR */
+document.getElementById("closeWheel").onclick = () => {
+document.getElementById("wheelContainer").style.display = "none";
+};
 
 /* RULETA */
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
-const sections = ["350 ROBUX GRATIS","PERDISTE","BONO +25%","TE FALTA MUCHO COMPRA EL VIP"];
+
+const sections = [
+"500 ROBUX (Free)",
+"PERDISTE",
+"BONO +25%",
+"Descuento V.I.P"
+];
+
 const colors = ["#fff4c2","#fff","#f7e35b","#f1d67a"];
-function drawWheel(){
-let start=0; let arc=Math.PI*2/sections.length;
-for(let i=0;i<sections.length;i++){
+
+/* DIBUJAR RULETA */
+function drawWheel() {
+let start = 0;
+let arc = Math.PI * 2 / sections.length;
+
+for (let i = 0; i < sections.length; i++) {
 ctx.beginPath();
-ctx.fillStyle=colors[i];
+ctx.fillStyle = colors[i];
 ctx.moveTo(150,150);
 ctx.arc(150,150,150,start,start+arc);
 ctx.fill();
+
 ctx.save();
 ctx.translate(150,150);
-ctx.rotate(start+arc/2);
-ctx.fillStyle="black";
-ctx.font="bold 17px Arial";
-ctx.fillText(sections[i],20,5);
+ctx.rotate(start + arc/2);
+ctx.fillStyle = "black";
+ctx.font = "bold 17px Arial";
+ctx.fillText(sections[i], 20, 5);
 ctx.restore();
-start+=arc;
-}}
+
+start += arc;
+}
+}
+
 drawWheel();
 
 /* SPIN */
-let spinning=false;
+let spinning = false;
+
 document.getElementById("spinBtn").onclick = spin;
-const CD = 2*60*60*1000;
-function canSpin(){ let last=localStorage.getItem("lastSpin"); if(!last) return true; return Date.now()-last>=CD; }
-function saveSpin(){ localStorage.setItem("lastSpin",Date.now()); }
-function spin(){
-if(spinning||!canSpin()) return;
-spinning=true;
-let safeAngles=[1,2,3];
-let pick=safeAngles[Math.floor(Math.random()*safeAngles.length)];
-let angle = pick*90 + 720;
-canvas.style.transition="transform 4s ease-out";
-canvas.style.transform=`rotate(${angle}deg)`;
+
+function spin() {
+if (spinning) return;
+if (!canSpin()) return;
+
+spinning = true;
+
+/* ANGULO PERO IMPOSIBLE QUE CAIGA EN 500 ROBUX */
+let safeAngles = [1, 2, 3]; // evita el primer sector
+let pick = safeAngles[Math.floor(Math.random()*safeAngles.length)];
+
+let angle = pick * 90 + 720;
+
+canvas.style.transition = "transform 4s ease-out";
+canvas.style.transform = `rotate(${angle}deg)`;
+
 setTimeout(()=>{
-spinning=false;
-let index=pick%4;
-let prize=sections[index];
+spinning = false;
+
+let index = pick % 4;
+let prize = sections[index];
+
 handlePrize(prize);
 saveSpin();
+
 },4000);
 }
-setInterval(()=>{
-let btn=document.getElementById("spinBtn");
-let cd=document.getElementById("cooldown");
-if(canSpin()){ btn.disabled=false; cd.innerText=""; } else {
-btn.disabled=true;
-let diff=CD-(Date.now()-localStorage.getItem("lastSpin"));
-let h=Math.floor(diff/3600000);
-let m=Math.floor((diff%3600000)/60000);
-let s=Math.floor((diff%60000)/1000);
-cd.innerText=`${h}h ${m}m ${s}s`;
-}
-},1000);
-function handlePrize(prize){
-let r=document.getElementById("result");
-if(prize.includes("300")){ r.innerText="Casi!"; return; }
-if(prize==="PERDISTE"){ r.innerText="PERDISTE 🙃"; return; }
-if(prize==="BONO +25%"){ r.innerText="BONO +25% GANADO"; window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%","_blank"); return; }
-if(prize==="BONO +30%"){ r.innerText="HAS PERDIDO CASI, CONPRA EL VIP"; window.open("https://wa.me/50373826693?text=PERDI%20Quiero%20comprar%20VIP%2030%","_blank"); return; }
-}
-function buy(name,price){ window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${name}%20por%20$${price}`,"_blank"); }
 
-/* VIP */
-function openVIP(){ document.getElementById("vipModal").style.display="flex"; }
-function closeVIP(){ document.getElementById("vipModal").style.display="none"; }
-function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el VIP semanal de $7.99."); window.location.href="https://wa.me/50373826693?text="+msg; }
+/* TIEMPO 3 HORAS */
+const CD = 3 * 60 * 60 * 1000;
+
+function saveSpin(){
+localStorage.setItem("lastSpin", Date.now());
+}
+
+function canSpin(){
+let last = localStorage.getItem("lastSpin");
+if (!last) return true;
+return Date.now() - last >= CD;
+}
+
+setInterval(()=>{
+let btn = document.getElementById("spinBtn");
+let cd = document.getElementById("cooldown");
+
+if (canSpin()) {
+btn.disabled = false;
+cd.innerText = "";
+} else {
+btn.disabled = true;
+let diff = CD - (Date.now() - localStorage.getItem("lastSpin"));
+let h = Math.floor(diff/3600000);
+let m = Math.floor((diff%3600000)/60000);
+let s = Math.floor((diff%60000)/1000);
+cd.innerText = `${h}h ${m}m ${s}s`;
+}
+
+},1000);
+
+/* RESULTADOS */
+function handlePrize(prize){
+let r = document.getElementById("result");
+
+if (prize.includes("500")) {
+r.innerText = "Casi!";
+return;
+}
+
+if (prize === "PERDISTE"){
+r.innerText = "PERDISTE 🙃";
+return;
+}
+
+if (prize === "BONO +25%"){
+r.innerText = "BONO +25% GANADO";
+window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%", "_blank");
+return;
+}
+
+if (prize === "Descuento V.I.P"){
+r.innerText = "RECIBISTE DESCUENTO V.I.P";
+window.open("https://wa.me/50373826693?text=Gané Descuento V.I.P Por $7.99", "_blank");
+return;
+}
+
+}
+
+/* CASILLAS → WhatsApp */
+function buy(name, price){
+window.open(
+`https://wa.me/50373826693?text=Quiero%20comprar%20${name}%20por%20$${price}`,
+"_blank"
+);
+}
+
+</script>
+ 
+<!-- ====== CÍRCULO VIP PEQUEÑO ESQUINA ====== -->
+<div class="vip-container">
+    <small class="vip-new">NEW!</small>
+    <div class="vip-circle" onclick="openVIP()">
+        <span class="vip-text">V.I.P</span>
+    </div>
+</div>
+
+<!-- ====== MODAL VIP ====== -->
+<div id="vipModal" class="vip-modal">
+    <div class="vip-content animate-modal">
+        <h2>V.I.P</h2>
+        <p><strong>LAS características VIP son las siguientes:</strong></p>
+        <ul>
+            <li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
+            <li><b>10 giros</b> para la ruleta de la suerte 🍀.</li>
+            <li>Acceso completo a nuestro código page de Github.</li>
+            <li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
+          <li><b>120 robux ⏣ </b>semanales.</li>
+<li><b>Alfombra</b> × Steal a Brainrot.</li>
+ </ul>
+
+        <!-- BOTÓN SUSCRIBIR -->
+        <button class="vip-subscribe" onclick="subscribeVIP()">
+            SUSCRIBIRSE.<br>$8.99 × semana
+        </button>
+
+        <!-- BOTÓN CERRAR -->
+        <button class="vip-close" onclick="closeVIP()">Cerrar</button>
+    </div>
+</div>
+
+<style>
+/* ======= POSICIÓN ESQUINA BAJADO 70px ======= */
+.vip-container {
+    position: absolute;
+    top: 70px; /* ← bajado */
+    right: 10px;
+    text-align: center;
+    z-index: 999;
+}
+
+/* ======= VIP NEW ======= */
+.vip-new {
+    font-size: 10px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ======= CÍRCULO VIP CHIQUITO ======= */
+.vip-circle {
+    width: 55px;
+    height: 55px;
+    background: gold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation: vipPulse 1.6s infinite ease-in-out;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.vip-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    transform: skewX(-10deg);
+}
+
+/* Animación latido + zoom suave */
+@keyframes vipPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.13); }
+    100% { transform: scale(1); }
+}
+
+/* ======= MODAL FULL SCREEN ======= */
+.vip-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+/* ======= CONTENIDO MODAL ======= */
+.vip-content {
+    background: #0e355e; /* azulito oscuro pálido */
+    padding: 20px;
+    border-radius: 12px;
+    width: 85%;
+    max-width: 320px;
+    text-align: center;
+    animation: slideFade 0.55s ease;
+    color: #9aff9a; /* texto verde claro */
+}
+
+.vip-content h2,
+.vip-content p,
+.vip-content li {
+    color: #9aff9a;
+}
+
+.vip-content ul {
+    text-align: left;
+}
+
+/* Animación de entrada bonita */
+@keyframes slideFade {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ======= BOTÓN SUSCRIBIR ======= */
+.vip-subscribe {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+/* ======= BOTÓN CERRAR ======= */
+.vip-close {
+    margin-top: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+</style>
+
+<script>
+function openVIP() {
+    document.getElementById("vipModal").style.display = "flex";
+}
+
+function closeVIP() {
+    document.getElementById("vipModal").style.display = "none";
+}
+
+function subscribeVIP() {
+    const mensaje = encodeURIComponent("Hola, quiero comprar el VIP semanal de $8.99.");
+    window.location.href = "https://wa.me/50373826693?text=" + mensaje;
+}
 </script>
 
+
+<title> ROBUX </title>
 <style>
   /* Reset & base */
   *{box-sizing:border-box;margin:0;padding:0}
@@ -353,8 +628,7 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
   }
   @keyframes cardIn{to{transform:translateY(0)}}
   .card::before{
-    content:"";
-    position:absolute;left:-40%;top:-40%;width:120%;height:120%;
+    content:"";position:absolute;left:-40%;top:-40%;width:120%;height:120%;
     background:radial-gradient(circle at 10% 10%, rgba(255,215,120,0.08), transparent 10%),
                radial-gradient(circle at 90% 90%, rgba(255,120,50,0.06), transparent 10%);
     transform:scale(1.05);
@@ -432,15 +706,15 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
 </style>
 </head>
 <body>
-  <div class="top-bar" role="banner">
-    <div>🔥<strong> Robux × Steal a Brainrot </strong></div>
-    <div id="serverCount" aria-live="polite"privacidad y política .</div>
+<div class="top-bar" role="banner">
+    <div>🔥<strong>Robux × Steal a Brainrot</strong></div>
+    <div id="serverCount" aria-live="polite">Estamos trabajando en nuestras traducciones a ingles</div>
   </div>
 <body style="background-color: #F0F9E8; color: #81C784;"
   <header>
-    <h1>Robux × Steal B</h1>
-    <h2>Versión 10.01.10 </h2>
-    <p class="small">Sin VIP.</p>
+    <h1>TIENDA DE ROBUX ⏣</h1>
+    <h2>Versión 10.0.10</h2>
+    <p class="small">SIN V.I.P</p>
   </header>
 
   <!-- Paquetes -->
@@ -455,145 +729,195 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
   <div class="small">-9% descuento</div>
 </div>
 
-<!-- Paquetes Robux --><div class="card">
+    <div class="card">
   <div class="robux-title">⏣ 80 robux</div>
   <div class="price-row">
     <div class="price">$1.75</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('80 robux', 1.75)">Comprar</button>
+
+  <button class="btn" onclick="comprarPaquete('80 robux - $1.75')">Comprar</button>
+
   <div class="small">-3% descuento</div>
-</div><div class="card">
+</div>
+
+<script>
+  function comprarPaquete(nombrePaquete) {
+    const numero = "50373826693"; // tu número de WhatsApp
+    const mensaje = encodeURIComponent("Hola, quiero comprar el paquete: " + nombrePaquete);
+    const url = "https://wa.me/" + numero + "?text=" + mensaje;
+    window.location.href = url;
+  }
+</script>
+
+    <div class="card">
   <div class="robux-title">⏣ 400 robux</div>
   <div class="price-row">
     <div class="price">$6.25</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('400 robux', 6.25)">Comprar</button>
+  <button class="btn hoverPulse" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar</button>
   <div class="small">-5% descuento</div>
-</div><div class="card">
+</div>
+
+    <div class="card">
   <div class="robux-title">⏣ 800 robux</div>
   <div class="price-row">
-    <div class="price">$11.99</div>
+    <div class="price">$12.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('800 robux', 11.99)">Comprar</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20800%20robux%20por%20$12.99','_blank')">Comprar</button>
   <div class="small">-5% descuento</div>
-</div><div class="card">
-  <div class="robux-title">⏣ 1000 robux + Alfombra STB</div>
+</div>
+
+    <div class="card">
+  <div class="robux-title">⏣ 1000 robux</div>
   <div class="price-row">
-    <div class="price">$18.99</div>
+    <div class="price">$14.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('1000 robux + Alfombra STB', 18.99)">Comprar</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%201000%20robux%20por%20$14.99','_blank')">Comprar</button>
   <div class="small">Paquete PREMIUM</div>
-</div><div class="card">
-  <div class="robux-title">⏣ 2,000 robux + láser Gun STB</div>
+</div>
+
+   <div class="card">
+  <div class="robux-title">⏣ 2,000 robux</div>
   <div class="price-row">
-    <div class="price">$34.99</div>
+    <div class="price">$24.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('2,000 robux + láser Gun STB', 34.99)">Comprar</button>
-  <div class="small">DISPONIBLE SIN KEY!!</div>
-</div><!-- Membresías --><div class="card">
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%202000%20robux%20por%20$24.99','_blank')">Comprar</button>
+  <div class="small">DISPONIBLE CON V.I.P!</div>
+</div>
+  </main>
+
+  <!-- Membresías -->
+  <section class="memberships" aria-labelledby="membersTitle">
+    <h3 id="membersTitle" style="color:#ffdca8;margin-bottom:10px">MEBRESIAS ESPECIALES</h3>
+    <div class="container" style="gap:12px;">
+
+      <div class="card">
   <div class="robux-title">Membresía 4 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$1.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('Membresía 4 días', 1.99)">Suscribirse</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%204%20días%20+25%25','_blank')">Suscribirse</button>
   <div class="small">extra robux en paquetes</div>
-</div><div class="card">
+</div>
+
+      <div class="card">
   <div class="robux-title">Membresía 8 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$2.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('Membresía 8 días', 2.99)">Suscribirse</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%208%20días%20+25%25','_blank')">Suscribirse</button>
   <div class="small">extra robux en paquetes</div>
-</div><div class="card">
+</div>
+
+      <div class="card">
   <div class="robux-title">Membresía 15 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$4.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="comprarPaquete('Membresía 15 días', 4.99)">Suscribirse</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%2015%20días%20+25%25','_blank')">Suscribirse</button>
   <div class="small">Extra robux en paquetes!</div>
-</div><!-- Key / Encuesta --><section style="max-width:940px;margin:12px auto;padding:12px">
-  <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <div style="text-align:left;min-width:260px">
-      <h4>🔐 Ingresa tu key secreta</h4>
-      <input id="keyInput" type="text" placeholder="Tu key aquí" aria-label="Key secreta">
-      <div style="margin-top:10px">
-        <button class="btn" onclick="checkKey()">Validar</button>
       </div>
     </div>
-    <div style="min-width:260px;text-align:left">
-      <h4>🗳️ Encuesta</h4>
-      <p class="small">¿Quieres que traigamos más paquetes?</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="ghost" onclick="vote('100 robux')">100 robux</button>
-        <button class="ghost" onclick="vote('250 robux')">250 robux</button>
-        <button class="ghost" onclick="vote('600 robux')">600 robux</button>
+  </section>
+
+  <!-- Key / Encuesta -->
+  <section style="max-width:940px;margin:12px auto;padding:12px">
+    <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <div style="text-align:left;min-width:260px">
+        <h4>🔐 IXXXX</h4>
+        <input id="keyInput" type="text" placeholder="Opcion disponible" aria-label="Key secreta">
+        <div style="margin-top:10px">
+          <button class="btn" onclick="checkKey()">Verificar 🔐</button>
+        </div>
       </div>
-      <p id="voteResult" class="voteResult"></p>
+      <div style="min-width:260px;text-align:left">
+        <h4>🗳️ Encuesta</h4>
+        <p class="small">¿Quieres que traigamos más paquetes?</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ghost" onclick="vote('100 robux')">100 robux</button>
+          <button class="ghost" onclick="vote('250 robux')">250 robux</button>
+          <button class="ghost" onclick="vote('600 robux')">600 robux</button>
+        </div>
+        <p id="voteResult" class="voteResult"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overlay carga -->
+  <div id="overlayLoad" aria-hidden="true">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="spinner" role="status" aria-label="Cargando"></div>
+      <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
     </div>
   </div>
-</section><!-- Overlay carga --><div id="overlayLoad" aria-hidden="true">
-  <div style="display:flex;flex-direction:column;align-items:center">
-    <div class="spinner" role="status" aria-label="Cargando"></div>
-    <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
+
+  <!-- Modal instrucciones PayPal -->
+  <div id="overlayPay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3>💳 MÉTODO DE PAGO</h3>
+
+      <div class="instruction" id="instLine1">
+        ➡️ Entra a PayPal y agrega este correo: <strong style="color:#ffd76a">gato41959@gmail.com</strong>
+      </div>
+
+      <div class="instruction" id="instLine2">
+        💵 Cantidad a depositar: <strong id="instAmount" style="color:#ffd76a">—</strong><br>
+        <small style="color:#ffdca8">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
+      </div>
+
+      <div class="instruction" id="instLine3">
+        📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
+      </div>
+
+      <div id="instExtra" style="margin-top:6px;color:#ffdca8">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
+
+      <div class="actions" style="margin-top:12px">
+        <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
+        <button class="ghost" onclick="abrirPayPal()">🔵 Abrir PayPal</button>
+        <button class="ghost" onclick="pagarEfectivo()">💚 Pagar en Efectivo (WhatsApp)</button>
+        <button class="ghost" onclick="cerrarPayModal()">Cerrar</button>
+      </div>
+    </div>
   </div>
-</div><!-- Modal instrucciones PayPal --><div id="overlayPay" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true">
-    <h3>💳 MÉTODO DE PAGO</h3>
-    <div class="instruction" id="instLine1">
-      ➡️ Entra a PayPal y agrega este correo: <strong style="color:#ffd76a">gato41959@gmail.com</strong>
-    </div>
-    <div class="instruction" id="instLine2">
-      💵 Cantidad a depositar: <strong id="instAmount" style="color:#ffd76a">—</strong><br>
-      <small style="color:#ffdca8">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
-    </div>
-    <div class="instruction" id="instLine3">
-      📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
-    </div>
-    <div id="instExtra" style="margin-top:6px;color:#ffdca8">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
-    <div class="actions" style="margin-top:12px">
-      <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
-      <button class="ghost" onclick="abrirPayPal()">🔵 Abrir PayPal</button>
-      <button class="ghost" onclick="pagarEfectivo()">💚 Pagar en Efectivo (WhatsApp)</button>
-      <button class="ghost" onclick="cerrarPayModal()">Cerrar</button>
-    </div>
-  </div>
-</div><footer>© 2025 New Brothers Studios LLC — NOHEMXS</footer><script>
+
+  <footer>© 2025 New Brothers Studios LLC — NOHEMXS</footer>
+
+<script>
+  /* --- Datos de contacto (mantener los que tenías) --- */
   const SELLER_PAYPAL = 'gato41959@gmail.com';
-  const WHATSAPP_PHONE = '50373826693'; 
-  let compra = { item:'', amount:0 };
+  const WHATSAPP_PHONE = '50373826693'; // sin signos
+  let compra = { item: '', amount: 0 };
 
-  function comprarPaquete(item, precio){
-    const mensaje = encodeURIComponent(`Hola, quiero comprar ${item} por $${precio}`);
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${mensaje}`, '_blank');
-  }
-
+  /* --- iniciar compra: animación de carga, luego modal --- */
   function iniciarCompra(item, priceNumber){
     compra.item = item;
     compra.amount = Number(priceNumber) || 0;
+    // mostrar overlay carga breve
     document.getElementById('overlayLoad').style.display = 'flex';
     if(navigator.vibrate) navigator.vibrate(40);
     setTimeout(()=>{
       document.getElementById('overlayLoad').style.display = 'none';
-      document.getElementById('instAmount').innerText = '$' + compra.amount.toFixed(2);
+      // actualizar modal monto
+      const formatted = '$' + (compra.amount||0).toFixed(2);
+      document.getElementById('instAmount').innerText = formatted;
+      // mostrar modal instrucciones con efecto
       const overlay = document.getElementById('overlayPay');
-      overlay.style.display='flex';
+      overlay.style.display = 'flex';
       overlay.setAttribute('aria-hidden','false');
+      // pequeño rebote en modal
       const modal = overlay.querySelector('.modal');
-      modal.style.transform='translateY(-8px) scale(0.98)';
-      modal.style.opacity='0';
-      setTimeout(()=>{ 
-        modal.style.transition='transform .36s cubic-bezier(.2,.9,.3,1), opacity .36s';
-        modal.style.transform='translateY(0) scale(1)'; 
-        modal.style.opacity='1'; 
-      },20);
+      modal.style.transform = 'translateY(-8px) scale(0.98)';
+      modal.style.opacity = '0';
+      setTimeout(()=>{ modal.style.transition = 'transform .36s cubic-bezier(.2,.9,.3,1), opacity .36s'; modal.style.transform = 'translateY(0) scale(1)'; modal.style.opacity='1'; },20);
+      // scroll to top for mobile
       window.scrollTo({top:0,behavior:'smooth'});
     },700);
   }
@@ -601,37 +925,49 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
   function cerrarPayModal(){
     const overlay = document.getElementById('overlayPay');
     const modal = overlay.querySelector('.modal');
-    modal.style.transition='transform .22s ease, opacity .22s';
-    modal.style.transform='translateY(12px) scale(.98)';
-    modal.style.opacity='0';
-    setTimeout(()=>{ overlay.style.display='none'; overlay.setAttribute('aria-hidden','true'); modal.style.transform=''; modal.style.opacity=''; },220);
+    modal.style.transition = 'transform .22s ease, opacity .22s';
+    modal.style.transform = 'translateY(12px) scale(.98)';
+    modal.style.opacity = '0';
+    setTimeout(()=>{ overlay.style.display = 'none'; overlay.setAttribute('aria-hidden','true'); modal.style.transform=''; modal.style.opacity=''; },220);
   }
 
+  /* Copiar instrucciones al portapapeles */
   function copiarInstrucciones(){
-    const texto = `Entra a PayPal y deposita EXACTAMENTE $${compra.amount.toFixed(2)} a ${SELLER_PAYPAL}. Producto: ${compra.item}. Deja tu Gmail en la descripción.`;
+    const formatted = '$' + (compra.amount||0).toFixed(2);
+    const texto = `Entra a PayPal y deposita EXACTAMENTE ${formatted} a ${SELLER_PAYPAL}. Si pones más o menos, tu pago no será válido. En la descripción deja tu correo Gmail para confirmar (ej: TuEmail@gmail.com). Producto: ${compra.item}.`;
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(texto).then(()=> alert('Instrucciones copiadas al portapapeles.'));
+      navigator.clipboard.writeText(texto).then(()=> {
+        alert('Instrucciones copiadas al portapapeles.');
+        spawnConfetti();
+      }).catch(()=> { prompt('Copia manualmente:', texto); });
     } else {
       prompt('Copia manualmente:', texto);
     }
   }
 
-  function abrirPayPal(){ window.open('https://www.paypal.com/', '_blank'); }
-
-  function pagarEfectivo(){
-    const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por $${compra.amount.toFixed(2)}. ¿Cómo procedemos?`);
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${text}`, '_blank');
+  /* Abrir PayPal (sitio oficial) */
+  function abrirPayPal(){
+    window.open('https://www.paypal.com/', '_blank');
   }
 
+  /* Pagar en efectivo -> abre WhatsApp con mensaje preescrito */
+  function pagarEfectivo(){
+    const formatted = '$' + (compra.amount||0).toFixed(2);
+    const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por ${formatted}. ¿Cómo procedemos?`);
+    
+  /* Key simple (mantén las keys que ya tenías) */
   const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
   function checkKey(){
     const k = (document.getElementById('keyInput')||{}).value || '';
-    if(validKeys.includes(k.trim().toUpperCase())){
+    if(validKeys.includes(String(k).trim().toUpperCase())){
       alert('✅ Key aceptada — paquetes secretos desbloqueados.');
+      // show secret section if it exists (kept for compatibility)
       const secret = document.getElementById('secret');
-      if(secret) secret.style.display='block';
+      if(secret) secret.style.display = 'block';
+      spawnConfetti();
     } else {
       alert('❌ Key incorrecta');
+      // pequeño shake
       const input = document.getElementById('keyInput');
       input.style.transition='transform .08s'; input.style.transform='translateX(-6px)';
       setTimeout(()=>{ input.style.transform='translateX(6px)'; },80);
@@ -639,37 +975,37 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
     }
   }
 
-  function vote(choice){
-    const el = document.getElementById('voteResult');
-    el.innerText = "✅ Gracias por votar por " + choice + "!";
-    el.style.transform='scale(1.02)'; 
-    setTimeout(()=>el.style.transform='scale(1)',220);
-  }
-
+  /* Confetti (simple) */
   function spawnConfetti(){
-    for(let i=0;i<36;i++){
-      const d=document.createElement('div');
-      d.className='confetti';
-      const size=Math.floor(Math.random()*10)+8;
-      d.style.left=(20+Math.random()*60)+'%';
-      d.style.top='-10px';
-      d.style.width=size+'px';
-      d.style.height=Math.floor(size*0.6)+'px';
-      d.style.background=`hsl(${Math.random()*40+20},90%,55%)`;
-      d.style.opacity=Math.random()*0.9+0.2;
-      d.style.borderRadius='2px';
-      d.style.transform=`rotate(${Math.random()*360}deg)`;
-      d.style.zIndex=9999;
-      d.style.transition='transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear';
+    const count = 36;
+    for(let i=0;i<count;i++){
+      const d = document.createElement('div');
+      d.className = 'confetti';
+      const size = Math.floor(Math.random()*10)+8;
+      d.style.left = (20 + Math.random()*60) + '%';
+      d.style.top = '-10px';
+      d.style.width = size + 'px';
+      d.style.height = Math.floor(size*0.6) + 'px';
+      d.style.background = `hsl(${Math.random()*40 + 20},90%,55%)`;
+      d.style.opacity = Math.random()*0.9 + 0.2;
+      d.style.borderRadius = '2px';
+      d.style.transform = `rotate(${Math.random()*360}deg)`;
+      d.style.zIndex = 9999;
+      d.style.transition = `transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear`;
       document.body.appendChild(d);
-      setTimeout(()=>{ 
-        d.style.top=window.innerHeight+40+'px';
-        d.style.left=Math.random()*100+'%';
-        d.style.transform=`rotate(${Math.random()*720}deg)` 
-      },20);
+      setTimeout(()=>{ d.style.top = (window.innerHeight + 40) + 'px'; d.style.left = (Math.random()*100) + '%'; d.style.transform = `rotate(${Math.random()*720}deg)` },20);
       setTimeout(()=>{ d.remove(); },3000);
     }
   }
+
+  /* Encuesta */
+  function vote(choice){
+    document.getElementById('voteResult').innerText = "✅ Gracias por votar por " + choice + "!";
+    // pulse effect
+    const el = document.getElementById('voteResult');
+    el.style.transform='scale(1.02)'; setTimeout(()=>el.style.transform='scale(1)',220);
+  }
+
 </script>
 </body>
 </html>
