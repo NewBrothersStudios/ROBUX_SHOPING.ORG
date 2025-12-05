@@ -557,6 +557,163 @@ function subscribeVIP() {
 }
 </script>
 
+
+  <!-- NUEVA SECCIÓN: Usuario -->
+  <section id="usuario-burbuja">
+    <section id="usuario-burbuja">
+  <div class="burbuja-usuario">
+    <div class="perfil-container">
+      <div class="perfil-circle">
+        <span class="icono">👤</span>
+        <label class="subir-foto">
+          <input type="file" id="fotoPerfil" accept="image/*" style="display:none;">
+          <span class="plus-circle">+</span>
+        </label>
+      </div>
+    </div>
+  </div>  <div class="info-usuario" id="infoUsuario">
+    <label>Nombre:</label>
+    <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre">
+    <button id="guardarNombre">Guardar</button><hr>
+<div>Ayuda y permisos (NO DISPONIBLE)</div>
+<button id="btnVIP">Convertirse en VIP</button>
+<button id="btnSuerte">Obtener Suerte y Giros 🍀</button>
+
+  </div>
+</section><style>
+#usuario-burbuja {
+  position: fixed;
+  left: 10px; /* izquierda */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  font-family: sans-serif;
+}
+
+.burbuja-usuario .perfil-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.perfil-circle {
+  width: 60px;
+  height: 60px;
+  background: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.perfil-circle:hover {
+  background: #a8e6a1; /* verde al seleccionar */
+  transform: scale(1.1);
+}
+
+.icono {
+  font-size: 30px;
+}
+
+.plus-circle {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: #4CAF50;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.info-usuario {
+  display: none;
+  background: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 180px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.info-usuario input {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+.info-usuario button {
+  width: 100%;
+  padding: 5px;
+  margin: 3px 0;
+  border-radius: 5px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.info-usuario button:hover {
+  background: #45a049;
+}
+</style><script>
+// Mostrar u ocultar info al presionar la burbuja
+document.querySelector('.perfil-circle').addEventListener('click', () => {
+  const info = document.getElementById('infoUsuario');
+  info.style.display = info.style.display === 'block' ? 'none' : 'block';
+});
+
+// Guardar nombre en localStorage
+document.getElementById('guardarNombre').addEventListener('click', () => {
+  const nombre = document.getElementById('nombreUsuario').value;
+  if(nombre) localStorage.setItem('nombreUsuario', nombre);
+  alert('Nombre guardado!');
+});
+
+// Subir foto de perfil
+document.querySelector('.plus-circle').addEventListener('click', () => {
+  document.getElementById('fotoPerfil').click();
+});
+
+document.getElementById('fotoPerfil').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(event){
+      document.querySelector('.perfil-circle').style.backgroundImage = `url(${event.target.result})`;
+      document.querySelector('.perfil-circle').style.backgroundSize = 'cover';
+      document.querySelector('.perfil-circle').style.backgroundPosition = 'center';
+    }
+    reader.readAsDataURL(file);
+  }
+});
+
+// Botones
+document.getElementById('btnVIP').addEventListener('click', () => {
+  alert('Abrir sección VIP');
+});
+
+document.getElementById('btnSuerte').addEventListener('click', () => {
+  alert('Ir a sección de Suerte y Giros 🍀');
+});
+</script>
+  </section>
+</body>
+
   
 <title> tienda </title>
 <style>
