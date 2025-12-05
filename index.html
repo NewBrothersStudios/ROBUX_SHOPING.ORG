@@ -561,31 +561,34 @@ function subscribeVIP() {
 
   <!-- NUEVA SECCIÓN: Usuario -->
   <section id="usuario-burbuja">
-    <!-- SECCIÓN DE USUARIO -->  <section id="usuario-burbuja">
+    <section id="usuario-burbuja">
   <style>
-    /* Contenedor de burbuja */
-    #usuario-burbuja {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 9999;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-    }/* Círculo principal */
+    /* Fuente solo para este apartado */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');#usuario-burbuja {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  font-family: 'Press Start 2P', cursive; /* fuente exclusiva */
+  pointer-events: none; /* evita bloquear scroll */
+}
+
 .user-circle {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background-color: #a0e6a0; /* verde claro */
+  background-color: #a0e6a0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #1f3a8a; /* azul oscuro pálido */
+  color: #1f3a8a;
   font-size: 30px;
   cursor: pointer;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  pointer-events: auto; /* permite click en círculo */
 }
 
 .user-circle:hover {
@@ -593,7 +596,6 @@ function subscribeVIP() {
   box-shadow: 0 0 25px rgba(0,0,0,0.5);
 }
 
-/* + botón para subir foto */
 .add-photo {
   position: absolute;
   bottom: -5px;
@@ -613,17 +615,14 @@ function subscribeVIP() {
   transition: transform 0.3s;
 }
 
-.add-photo:hover {
-  transform: scale(1.3);
-}
+.add-photo:hover { transform: scale(1.3); }
 
-/* Panel de información */
 .user-info {
   position: fixed;
   bottom: 100px;
   left: 20px;
   width: 220px;
-  background-color: #d6f5d6; /* verde más claro */
+  background-color: #d6f5d6;
   color: #1f3a8a;
   border-radius: 12px;
   padding: 12px;
@@ -631,6 +630,7 @@ function subscribeVIP() {
   display: none;
   animation: slideIn 0.5s ease forwards;
   font-weight: bold;
+  pointer-events: auto; /* permite interacción */
 }
 
 @keyframes slideIn {
@@ -644,7 +644,6 @@ function subscribeVIP() {
   margin-bottom: 8px;
   border-radius: 6px;
   border: 1px solid #1f3a8a;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .user-info button {
@@ -656,14 +655,12 @@ function subscribeVIP() {
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .vip-btn { background-color: #ffd700; color: #1f3a8a; }
 .suerte-btn { background-color: #4caf50; color: #fff; }
 
-.vip-btn:hover { transform: scale(1.05); }
-.suerte-btn:hover { transform: scale(1.05); }
+.vip-btn:hover, .suerte-btn:hover { transform: scale(1.05); }
 
   </style>  <div class="user-circle" id="userCircle">
     <span id="userIcon">👤</span>
@@ -681,36 +678,32 @@ function subscribeVIP() {
     const userIcon = document.getElementById('userIcon');
     const userNameInput = document.getElementById('userName');
 
-    // Mostrar/Ocultar panel info
     userCircle.addEventListener('click', () => {
       userInfo.style.display = userInfo.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Subir foto
-    addPhotoBtn.addEventListener('click', () => {
-      fileInput.click();
-    });
+    addPhotoBtn.addEventListener('click', () => fileInput.click());
 
     fileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if (file) {
+      if(file){
         const reader = new FileReader();
         reader.onload = function(ev) {
           userCircle.style.backgroundImage = `url('${ev.target.result}')`;
           userCircle.style.backgroundSize = 'cover';
+          userCircle.style.backgroundPosition = 'center';
           userIcon.style.display = 'none';
-        };
+        }
         reader.readAsDataURL(file);
       }
     });
 
-    // Guardar nombre en localStorage
     userNameInput.value = localStorage.getItem('userName') || '';
     userNameInput.addEventListener('input', () => {
       localStorage.setItem('userName', userNameInput.value);
     });
   </script>
-  </section>
+</section>
 </body>
 
   
