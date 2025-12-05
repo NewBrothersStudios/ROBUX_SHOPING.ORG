@@ -563,16 +563,13 @@ function subscribeVIP() {
   <section id="usuario-burbuja">
     <section id="usuario-burbuja">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');#usuario-burbuja {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
-  font-family: 'Press Start 2P', cursive;
-  pointer-events: none; /* evita bloquear scroll */
-}
-
-.user-circle {
+    #usuario-burbuja {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+      pointer-events: none; /* no bloquea scroll */
+    }.user-circle {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -583,16 +580,9 @@ function subscribeVIP() {
   color: #1f3a8a;
   font-size: 30px;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  pointer-events: auto; /* permite click solo en círculo */
-}
-
-.user-circle:hover {
-  transform: scale(1.2) rotate(10deg);
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  pointer-events: auto; /* solo círculo interactúa */
 }
 
 .add-photo {
@@ -611,11 +601,8 @@ function subscribeVIP() {
   font-weight: bold;
   border: 2px solid #fff;
   cursor: pointer;
-  transition: transform 0.3s;
-  pointer-events: auto; /* permite click solo en + */
+  pointer-events: auto;
 }
-
-.add-photo:hover { transform: scale(1.3); }
 
 .user-info {
   position: fixed;
@@ -626,16 +613,8 @@ function subscribeVIP() {
   color: #1f3a8a;
   border-radius: 12px;
   padding: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   display: none;
-  animation: slideIn 0.5s ease forwards;
-  font-weight: bold;
-  pointer-events: auto; /* solo panel interactúa */
-}
-
-@keyframes slideIn {
-  from {opacity: 0; transform: translateX(-50px);}
-  to {opacity: 1; transform: translateX(0);}
+  pointer-events: auto;
 }
 
 .user-info input {
@@ -654,13 +633,10 @@ function subscribeVIP() {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: all 0.3s;
 }
 
 .vip-btn { background-color: #ffd700; color: #1f3a8a; }
 .suerte-btn { background-color: #4caf50; color: #fff; }
-
-.vip-btn:hover, .suerte-btn:hover { transform: scale(1.05); }
 
   </style>  <div class="user-circle" id="userCircle">
     <span id="userIcon">👤</span>
@@ -683,7 +659,7 @@ function subscribeVIP() {
     });
 
     addPhotoBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // evita cerrar el panel al hacer click
+      e.stopPropagation();
       fileInput.click();
     });
 
