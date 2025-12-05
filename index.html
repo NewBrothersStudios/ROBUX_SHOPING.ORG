@@ -8,134 +8,193 @@
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
 <style>
 
-
-<!-- BURBUJA USUARIO -->
-<div id="userBubble">
-  <div id="userCircle">
-    👤
-    <div id="addPhoto">+</div>
-    <input type="file" id="photoInput" accept="image/*" style="display:none;">
-  </div>
-</div>
-
-<!-- APARTADO DE INFORMACIÓN -->
-<div id="userInfo">
-  <h3>Información de Usuario</h3>
-  <label>Nombre:</label>
-  <input type="text" id="userName" placeholder="Escribe tu nombre">
-  <button id="saveName">Guardar</button>
-  <hr>
-  <button disabled>Ayuda y permisos (NO DISPONIBLE)</button>
-  <button id="beVIP">Convertirse en VIP</button>
-  <button id="goLuck">Obtener Suerte y Giros 🍀</button>
-</div>
-
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burbuja Usuario</title>
 <style>
-/* BURBUJA FIJADA EN IZQUIERDA ABAJO */
-#userBubble {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  cursor: pointer;
-  z-index: 999;
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    overflow-x: hidden;
+  }/* Burbuja izquierda */
+.user-bubble {
+position: fixed;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+width: 60px;
+height: 60px;
+background: #ddd;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+z-index: 1000;
 }
 
-#userCircle {
-  width: 60px;
-  height: 60px;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  position: relative;
+.user-bubble:hover {
+transform: translateY(-50%) scale(1.1);
+box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
 
-#addPhoto {
-  position: absolute;
-  bottom: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 20px;
-  font-size: 14px;
-  cursor: pointer;
+.user-bubble.active {
+background: #a8d5a2; /* verde al seleccionar */
+animation: pulse 1s infinite alternate;
 }
 
-/* APARTADO DE INFORMACIÓN */
-#userInfo {
-  position: fixed;
-  left: 90px;
-  bottom: 20px;
-  width: 220px;
-  padding: 15px;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  display: none;
-  z-index: 998;
+@keyframes pulse {
+from { box-shadow: 0 0 0 #a8d5a2; }
+to { box-shadow: 0 0 20px #a8d5a2; }
 }
-#userInfo input {
-  width: 100%;
-  margin-bottom: 10px;
+
+.user-bubble span {
+font-size: 24px;
 }
-#userInfo button {
-  width: 100%;
-  margin-bottom: 5px;
+
+.plus-circle {
+position: absolute;
+bottom: -5px;
+right: -5px;
+width: 20px;
+height: 20px;
+background: #4CAF50;
+border-radius: 50%;
+color: white;
+font-size: 14px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 2px solid white;
+}
+
+/* Panel lateral */
+.user-panel {
+position: fixed;
+left: 70px;
+top: 50%;
+transform: translateY(-50%);
+width: 250px;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 0 20px rgba(0,0,0,0.2);
+padding: 15px;
+display: none;
+flex-direction: column;
+gap: 10px;
+z-index: 900;
+transition: transform 0.3s, opacity 0.3s;
+}
+
+.user-panel.active {
+display: flex;
+}
+
+.user-panel input[type="text"] {
+width: 100%;
+padding: 6px;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+.user-panel button {
+padding: 8px;
+background: #4CAF50;
+border: none;
+color: white;
+border-radius: 5px;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+.user-panel button:hover {
+transform: scale(1.05);
+}
+
+.profile-pic {
+width: 60px;
+height: 60px;
+border-radius: 50%;
+object-fit: cover;
+margin-bottom: 10px;
 }
 </style>
 
-<script>
-const userBubble = document.getElementById('userBubble');
-const userInfo = document.getElementById('userInfo');
-const addPhoto = document.getElementById('addPhoto');
-const photoInput = document.getElementById('photoInput');
-const userNameInput = document.getElementById('userName');
-const saveNameBtn = document.getElementById('saveName');
+</head>
+<body><!-- Burbuja de usuario --><div class="user-bubble" id="userBubble">
+  <span>👤</span>
+  <div class="plus-circle" id="uploadBtn">+</div>
+</div><!-- Panel de información --><div class="user-panel" id="userPanel">
+  <img src="" alt="Foto de perfil" class="profile-pic" id="profilePic" style="display:none;">
+  <label>Nombre:</label>
+  <input type="text" id="userName" placeholder="Ingresa tu nombre">
+  <button id="saveNameBtn">Guardar nombre</button>
+  <button disabled>Ayuda y permisos (NO DISPONIBLE)</button>
+  <button id="vipBtn">Convertirse en VIP</button>
+  <button id="luckBtn">Obtener Suerte y Giros 🍀</button>
+</div><input type="file" id="fileInput" accept="image/*" style="display:none;"><script>
+  const userBubble = document.getElementById('userBubble');
+  const userPanel = document.getElementById('userPanel');
+  const uploadBtn = document.getElementById('uploadBtn');
+  const fileInput = document.getElementById('fileInput');
+  const profilePic = document.getElementById('profilePic');
+  const userName = document.getElementById('userName');
+  const saveNameBtn = document.getElementById('saveNameBtn');
 
-// Mostrar/ocultar info
-userBubble.addEventListener('click', () => {
-  userInfo.style.display = userInfo.style.display === 'none' ? 'block' : 'none';
-});
+  // Activar burbuja y panel
+  userBubble.addEventListener('click', () => {
+    userBubble.classList.toggle('active');
+    userPanel.classList.toggle('active');
 
-// Subir foto
-addPhoto.addEventListener('click', (e) => {
-  e.stopPropagation();
-  photoInput.click();
-});
+    // Haptics si está disponible
+    if (navigator.vibrate) navigator.vibrate(50);
+  });
 
-photoInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if(file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      userCircle.innerHTML = `<img src="${reader.result}" style="width:100%;height:100%;border-radius:50%;">`;
-      userCircle.appendChild(addPhoto); // mantener + para cambiar foto
-    };
-    reader.readAsDataURL(file);
-  }
-});
+  // Subir foto
+  uploadBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // evitar que active panel
+    fileInput.click();
+  });
 
-// Guardar nombre en localStorage
-saveNameBtn.addEventListener('click', () => {
-  const name = userNameInput.value;
-  if(name) {
-    localStorage.setItem('userName', name);
-    alert('Nombre guardado: ' + name);
-  }
-});
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        profilePic.src = e.target.result;
+        profilePic.style.display = 'block';
+        localStorage.setItem('profilePic', e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
-// Cargar nombre al iniciar
-window.addEventListener('load', () => {
-  const savedName = localStorage.getItem('userName');
-  if(savedName) userNameInput.value = savedName;
-});
+  // Guardar nombre
+  saveNameBtn.addEventListener('click', () => {
+    const name = userName.value.trim();
+    if(name) {
+      localStorage.setItem('userName', name);
+      alert('Nombre guardado!');
+    }
+  });
+
+  // Cargar datos desde localStorage
+  window.addEventListener('load', () => {
+    const savedName = localStorage.getItem('userName');
+    const savedPic = localStorage.getItem('profilePic');
+    if(savedName) userName.value = savedName;
+    if(savedPic) {
+      profilePic.src = savedPic;
+      profilePic.style.display = 'block';
+    }
+  });
 </script>
+</body>
+</html>
 
 
 
