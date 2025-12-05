@@ -940,10 +940,7 @@ function subscribeVIP() {
   function pagarEfectivo(){
     const formatted = '$' + (compra.amount||0).toFixed(2);
     const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por ${formatted}. ¿Cómo procedemos?`);
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${text}`, '_blank');
-  }
-<a href="https://wa.me/50373826693?text=Hola%2C%20quiero%20comprar%20este%20paquete.%20Por%20favor%20más%20información." 
-</a>
+    
   /* Key simple (mantén las keys que ya tenías) */
   const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
   function checkKey(){
