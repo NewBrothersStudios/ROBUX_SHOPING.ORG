@@ -455,195 +455,145 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
   <div class="small">-9% descuento</div>
 </div>
 
-    <div class="card">
+<!-- Paquetes Robux --><div class="card">
   <div class="robux-title">⏣ 80 robux</div>
   <div class="price-row">
     <div class="price">$1.75</div>
     <div class="price-bar"></div>
   </div>
-
-  <button class="btn" onclick="comprarPaquete('80 robux - $1.75')">Comprar</button>
-
+  <button class="btn" onclick="comprarPaquete('80 robux', 1.75)">Comprar</button>
   <div class="small">-3% descuento</div>
-</div>
-
-<script>
-  function comprarPaquete(nombrePaquete) {
-    const numero = "50373826693"; // tu número de WhatsApp
-    const mensaje = encodeURIComponent("Hola, quiero comprar el paquete: " + nombrePaquete);
-    const url = "https://wa.me/" + numero + "?text=" + mensaje;
-    window.location.href = url;
-  }
-</script>
-
-    <div class="card">
+</div><div class="card">
   <div class="robux-title">⏣ 400 robux</div>
   <div class="price-row">
     <div class="price">$6.25</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn hoverPulse" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar</button>
+  <button class="btn" onclick="comprarPaquete('400 robux', 6.25)">Comprar</button>
   <div class="small">-5% descuento</div>
-</div>
-
-    <div class="card">
+</div><div class="card">
   <div class="robux-title">⏣ 800 robux</div>
   <div class="price-row">
     <div class="price">$11.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20800%20robux%20por%20$11.99','_blank')">Comprar</button>
+  <button class="btn" onclick="comprarPaquete('800 robux', 11.99)">Comprar</button>
   <div class="small">-5% descuento</div>
-</div>
-
-    <div class="card">
+</div><div class="card">
   <div class="robux-title">⏣ 1000 robux + Alfombra STB</div>
   <div class="price-row">
     <div class="price">$18.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%201000%20robux%20por%20$18.99','_blank')">Comprar</button>
+  <button class="btn" onclick="comprarPaquete('1000 robux + Alfombra STB', 18.99)">Comprar</button>
   <div class="small">Paquete PREMIUM</div>
-</div>
-
-   <div class="card">
+</div><div class="card">
   <div class="robux-title">⏣ 2,000 robux + láser Gun STB</div>
   <div class="price-row">
     <div class="price">$34.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%202000%20robux%20por%20$34.99','_blank')">Comprar</button>
+  <button class="btn" onclick="comprarPaquete('2,000 robux + láser Gun STB', 34.99)">Comprar</button>
   <div class="small">DISPONIBLE SIN KEY!!</div>
-</div>
-  </main>
-
-  <!-- Membresías -->
-  <section class="memberships" aria-labelledby="membersTitle">
-    <h3 id="membersTitle" style="color:#ffdca8;margin-bottom:10px">MEBRESIAS ESPECIALES</h3>
-    <div class="container" style="gap:12px;">
-
-      <div class="card">
+</div><!-- Membresías --><div class="card">
   <div class="robux-title">Membresía 4 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$1.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%204%20días%20+25%25','_blank')">Suscribirse</button>
+  <button class="btn" onclick="comprarPaquete('Membresía 4 días', 1.99)">Suscribirse</button>
   <div class="small">extra robux en paquetes</div>
-</div>
-
-      <div class="card">
+</div><div class="card">
   <div class="robux-title">Membresía 8 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$2.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%208%20días%20+25%25','_blank')">Suscribirse</button>
+  <button class="btn" onclick="comprarPaquete('Membresía 8 días', 2.99)">Suscribirse</button>
   <div class="small">extra robux en paquetes</div>
-</div>
-
-      <div class="card">
+</div><div class="card">
   <div class="robux-title">Membresía 15 días — +25% robux</div>
   <div class="price-row">
     <div class="price">$4.99</div>
     <div class="price-bar"></div>
   </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%2015%20días%20+25%25','_blank')">Suscribirse</button>
+  <button class="btn" onclick="comprarPaquete('Membresía 15 días', 4.99)">Suscribirse</button>
   <div class="small">Extra robux en paquetes!</div>
+</div><!-- Key / Encuesta --><section style="max-width:940px;margin:12px auto;padding:12px">
+  <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <div style="text-align:left;min-width:260px">
+      <h4>🔐 Ingresa tu key secreta</h4>
+      <input id="keyInput" type="text" placeholder="Tu key aquí" aria-label="Key secreta">
+      <div style="margin-top:10px">
+        <button class="btn" onclick="checkKey()">Validar</button>
       </div>
     </div>
-  </section>
-
-  <!-- Key / Encuesta -->
-  <section style="max-width:940px;margin:12px auto;padding:12px">
-    <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <div style="text-align:left;min-width:260px">
-        <h4>🔐 Ingresa tu key secreta</h4>
-        <input id="keyInput" type="text" placeholder="Tu key aquí" aria-label="Key secreta">
-        <div style="margin-top:10px">
-          <button class="btn" onclick="checkKey()">Validar</button>
-        </div>
+    <div style="min-width:260px;text-align:left">
+      <h4>🗳️ Encuesta</h4>
+      <p class="small">¿Quieres que traigamos más paquetes?</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="ghost" onclick="vote('100 robux')">100 robux</button>
+        <button class="ghost" onclick="vote('250 robux')">250 robux</button>
+        <button class="ghost" onclick="vote('600 robux')">600 robux</button>
       </div>
-      <div style="min-width:260px;text-align:left">
-        <h4>🗳️ Encuesta</h4>
-        <p class="small">¿Quieres que traigamos más paquetes?</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="ghost" onclick="vote('100 robux')">100 robux</button>
-          <button class="ghost" onclick="vote('250 robux')">250 robux</button>
-          <button class="ghost" onclick="vote('600 robux')">600 robux</button>
-        </div>
-        <p id="voteResult" class="voteResult"></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Overlay carga -->
-  <div id="overlayLoad" aria-hidden="true">
-    <div style="display:flex;flex-direction:column;align-items:center">
-      <div class="spinner" role="status" aria-label="Cargando"></div>
-      <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
+      <p id="voteResult" class="voteResult"></p>
     </div>
   </div>
-
-  <!-- Modal instrucciones PayPal -->
-  <div id="overlayPay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <h3>💳 MÉTODO DE PAGO</h3>
-
-      <div class="instruction" id="instLine1">
-        ➡️ Entra a PayPal y agrega este correo: <strong style="color:#ffd76a">gato41959@gmail.com</strong>
-      </div>
-
-      <div class="instruction" id="instLine2">
-        💵 Cantidad a depositar: <strong id="instAmount" style="color:#ffd76a">—</strong><br>
-        <small style="color:#ffdca8">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
-      </div>
-
-      <div class="instruction" id="instLine3">
-        📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
-      </div>
-
-      <div id="instExtra" style="margin-top:6px;color:#ffdca8">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
-
-      <div class="actions" style="margin-top:12px">
-        <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
-        <button class="ghost" onclick="abrirPayPal()">🔵 Abrir PayPal</button>
-        <button class="ghost" onclick="pagarEfectivo()">💚 Pagar en Efectivo (WhatsApp)</button>
-        <button class="ghost" onclick="cerrarPayModal()">Cerrar</button>
-      </div>
+</section><!-- Overlay carga --><div id="overlayLoad" aria-hidden="true">
+  <div style="display:flex;flex-direction:column;align-items:center">
+    <div class="spinner" role="status" aria-label="Cargando"></div>
+    <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
+  </div>
+</div><!-- Modal instrucciones PayPal --><div id="overlayPay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h3>💳 MÉTODO DE PAGO</h3>
+    <div class="instruction" id="instLine1">
+      ➡️ Entra a PayPal y agrega este correo: <strong style="color:#ffd76a">gato41959@gmail.com</strong>
+    </div>
+    <div class="instruction" id="instLine2">
+      💵 Cantidad a depositar: <strong id="instAmount" style="color:#ffd76a">—</strong><br>
+      <small style="color:#ffdca8">(Si pones más o menos que la cantidad indicada, tu pago no será válido)</small>
+    </div>
+    <div class="instruction" id="instLine3">
+      📩 Recibirás un mensaje a tu correo. Por favor deja tu Gmail en la descripción del depósito.
+    </div>
+    <div id="instExtra" style="margin-top:6px;color:#ffdca8">Puedes copiar estas instrucciones y luego entrar a PayPal para hacer el depósito manualmente.</div>
+    <div class="actions" style="margin-top:12px">
+      <button class="copyBtn" onclick="copiarInstrucciones()">Copiar instrucciones</button>
+      <button class="ghost" onclick="abrirPayPal()">🔵 Abrir PayPal</button>
+      <button class="ghost" onclick="pagarEfectivo()">💚 Pagar en Efectivo (WhatsApp)</button>
+      <button class="ghost" onclick="cerrarPayModal()">Cerrar</button>
     </div>
   </div>
-
-  <footer>© 2025 New Brothers Studios LLC — NOHEMXS</footer>
-
-<script>
-  /* --- Datos de contacto (mantener los que tenías) --- */
+</div><footer>© 2025 New Brothers Studios LLC — NOHEMXS</footer><script>
   const SELLER_PAYPAL = 'gato41959@gmail.com';
-  const WHATSAPP_PHONE = '50373826693'; // sin signos
-  let compra = { item: '', amount: 0 };
+  const WHATSAPP_PHONE = '50373826693'; 
+  let compra = { item:'', amount:0 };
 
-  /* --- iniciar compra: animación de carga, luego modal --- */
+  function comprarPaquete(item, precio){
+    const mensaje = encodeURIComponent(`Hola, quiero comprar ${item} por $${precio}`);
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${mensaje}`, '_blank');
+  }
+
   function iniciarCompra(item, priceNumber){
     compra.item = item;
     compra.amount = Number(priceNumber) || 0;
-    // mostrar overlay carga breve
     document.getElementById('overlayLoad').style.display = 'flex';
     if(navigator.vibrate) navigator.vibrate(40);
     setTimeout(()=>{
       document.getElementById('overlayLoad').style.display = 'none';
-      // actualizar modal monto
-      const formatted = '$' + (compra.amount||0).toFixed(2);
-      document.getElementById('instAmount').innerText = formatted;
-      // mostrar modal instrucciones con efecto
+      document.getElementById('instAmount').innerText = '$' + compra.amount.toFixed(2);
       const overlay = document.getElementById('overlayPay');
-      overlay.style.display = 'flex';
+      overlay.style.display='flex';
       overlay.setAttribute('aria-hidden','false');
-      // pequeño rebote en modal
       const modal = overlay.querySelector('.modal');
-      modal.style.transform = 'translateY(-8px) scale(0.98)';
-      modal.style.opacity = '0';
-      setTimeout(()=>{ modal.style.transition = 'transform .36s cubic-bezier(.2,.9,.3,1), opacity .36s'; modal.style.transform = 'translateY(0) scale(1)'; modal.style.opacity='1'; },20);
-      // scroll to top for mobile
+      modal.style.transform='translateY(-8px) scale(0.98)';
+      modal.style.opacity='0';
+      setTimeout(()=>{ 
+        modal.style.transition='transform .36s cubic-bezier(.2,.9,.3,1), opacity .36s';
+        modal.style.transform='translateY(0) scale(1)'; 
+        modal.style.opacity='1'; 
+      },20);
       window.scrollTo({top:0,behavior:'smooth'});
     },700);
   }
@@ -651,49 +601,37 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
   function cerrarPayModal(){
     const overlay = document.getElementById('overlayPay');
     const modal = overlay.querySelector('.modal');
-    modal.style.transition = 'transform .22s ease, opacity .22s';
-    modal.style.transform = 'translateY(12px) scale(.98)';
-    modal.style.opacity = '0';
-    setTimeout(()=>{ overlay.style.display = 'none'; overlay.setAttribute('aria-hidden','true'); modal.style.transform=''; modal.style.opacity=''; },220);
+    modal.style.transition='transform .22s ease, opacity .22s';
+    modal.style.transform='translateY(12px) scale(.98)';
+    modal.style.opacity='0';
+    setTimeout(()=>{ overlay.style.display='none'; overlay.setAttribute('aria-hidden','true'); modal.style.transform=''; modal.style.opacity=''; },220);
   }
 
-  /* Copiar instrucciones al portapapeles */
   function copiarInstrucciones(){
-    const formatted = '$' + (compra.amount||0).toFixed(2);
-    const texto = `Entra a PayPal y deposita EXACTAMENTE ${formatted} a ${SELLER_PAYPAL}. Si pones más o menos, tu pago no será válido. En la descripción deja tu correo Gmail para confirmar (ej: TuEmail@gmail.com). Producto: ${compra.item}.`;
+    const texto = `Entra a PayPal y deposita EXACTAMENTE $${compra.amount.toFixed(2)} a ${SELLER_PAYPAL}. Producto: ${compra.item}. Deja tu Gmail en la descripción.`;
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(texto).then(()=> {
-        alert('Instrucciones copiadas al portapapeles.');
-        spawnConfetti();
-      }).catch(()=> { prompt('Copia manualmente:', texto); });
+      navigator.clipboard.writeText(texto).then(()=> alert('Instrucciones copiadas al portapapeles.'));
     } else {
       prompt('Copia manualmente:', texto);
     }
   }
 
-  /* Abrir PayPal (sitio oficial) */
-  function abrirPayPal(){
-    window.open('https://www.paypal.com/', '_blank');
+  function abrirPayPal(){ window.open('https://www.paypal.com/', '_blank'); }
+
+  function pagarEfectivo(){
+    const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por $${compra.amount.toFixed(2)}. ¿Cómo procedemos?`);
+    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${text}`, '_blank');
   }
 
-  /* Pagar en efectivo -> abre WhatsApp con mensaje preescrito */
-  function pagarEfectivo(){
-    const formatted = '$' + (compra.amount||0).toFixed(2);
-    const text = encodeURIComponent(`Hola, quiero comprar ${compra.item} por ${formatted}. ¿Cómo procedemos?`);
-    
-  /* Key simple (mantén las keys que ya tenías) */
   const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
   function checkKey(){
     const k = (document.getElementById('keyInput')||{}).value || '';
-    if(validKeys.includes(String(k).trim().toUpperCase())){
+    if(validKeys.includes(k.trim().toUpperCase())){
       alert('✅ Key aceptada — paquetes secretos desbloqueados.');
-      // show secret section if it exists (kept for compatibility)
       const secret = document.getElementById('secret');
-      if(secret) secret.style.display = 'block';
-      spawnConfetti();
+      if(secret) secret.style.display='block';
     } else {
       alert('❌ Key incorrecta');
-      // pequeño shake
       const input = document.getElementById('keyInput');
       input.style.transition='transform .08s'; input.style.transform='translateX(-6px)';
       setTimeout(()=>{ input.style.transform='translateX(6px)'; },80);
@@ -701,37 +639,37 @@ function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el V
     }
   }
 
-  /* Confetti (simple) */
+  function vote(choice){
+    const el = document.getElementById('voteResult');
+    el.innerText = "✅ Gracias por votar por " + choice + "!";
+    el.style.transform='scale(1.02)'; 
+    setTimeout(()=>el.style.transform='scale(1)',220);
+  }
+
   function spawnConfetti(){
-    const count = 36;
-    for(let i=0;i<count;i++){
-      const d = document.createElement('div');
-      d.className = 'confetti';
-      const size = Math.floor(Math.random()*10)+8;
-      d.style.left = (20 + Math.random()*60) + '%';
-      d.style.top = '-10px';
-      d.style.width = size + 'px';
-      d.style.height = Math.floor(size*0.6) + 'px';
-      d.style.background = `hsl(${Math.random()*40 + 20},90%,55%)`;
-      d.style.opacity = Math.random()*0.9 + 0.2;
-      d.style.borderRadius = '2px';
-      d.style.transform = `rotate(${Math.random()*360}deg)`;
-      d.style.zIndex = 9999;
-      d.style.transition = `transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear`;
+    for(let i=0;i<36;i++){
+      const d=document.createElement('div');
+      d.className='confetti';
+      const size=Math.floor(Math.random()*10)+8;
+      d.style.left=(20+Math.random()*60)+'%';
+      d.style.top='-10px';
+      d.style.width=size+'px';
+      d.style.height=Math.floor(size*0.6)+'px';
+      d.style.background=`hsl(${Math.random()*40+20},90%,55%)`;
+      d.style.opacity=Math.random()*0.9+0.2;
+      d.style.borderRadius='2px';
+      d.style.transform=`rotate(${Math.random()*360}deg)`;
+      d.style.zIndex=9999;
+      d.style.transition='transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear';
       document.body.appendChild(d);
-      setTimeout(()=>{ d.style.top = (window.innerHeight + 40) + 'px'; d.style.left = (Math.random()*100) + '%'; d.style.transform = `rotate(${Math.random()*720}deg)` },20);
+      setTimeout(()=>{ 
+        d.style.top=window.innerHeight+40+'px';
+        d.style.left=Math.random()*100+'%';
+        d.style.transform=`rotate(${Math.random()*720}deg)` 
+      },20);
       setTimeout(()=>{ d.remove(); },3000);
     }
   }
-
-  /* Encuesta */
-  function vote(choice){
-    document.getElementById('voteResult').innerText = "✅ Gracias por votar por " + choice + "!";
-    // pulse effect
-    const el = document.getElementById('voteResult');
-    el.style.transform='scale(1.02)'; setTimeout(()=>el.style.transform='scale(1)',220);
-  }
-
 </script>
 </body>
 </html>
