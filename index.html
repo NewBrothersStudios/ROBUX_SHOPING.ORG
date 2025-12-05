@@ -561,157 +561,155 @@ function subscribeVIP() {
 
   <!-- NUEVA SECCIÓN: Usuario -->
   <section id="usuario-burbuja">
-    <section id="usuario-burbuja">
-  <div class="burbuja-usuario">
-    <div class="perfil-container">
-      <div class="perfil-circle">
-        <span class="icono">👤</span>
-        <label class="subir-foto">
-          <input type="file" id="fotoPerfil" accept="image/*" style="display:none;">
-          <span class="plus-circle">+</span>
-        </label>
-      </div>
-    </div>
-  </div>  <div class="info-usuario" id="infoUsuario">
-    <label>Nombre:</label>
-    <input type="text" id="nombreUsuario" placeholder="Ingresa tu nombre">
-    <button id="guardarNombre">Guardar</button><hr>
-<div>Ayuda y permisos (NO DISPONIBLE)</div>
-<button id="btnVIP">Convertirse en VIP</button>
-<button id="btnSuerte">Obtener Suerte y Giros 🍀</button>
-
-  </div>
-</section><style>
-#usuario-burbuja {
-  position: fixed;
-  left: 10px; /* izquierda */
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 9999;
-  font-family: sans-serif;
-}
-
-.burbuja-usuario .perfil-container {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-
-.perfil-circle {
-  width: 60px;
-  height: 60px;
-  background: #ccc;
+    <!-- SECCIÓN DE USUARIO -->  <section id="usuario-burbuja">
+  <style>
+    /* Contenedor de burbuja */
+    #usuario-burbuja {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 9999;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }/* Círculo principal */
+.user-circle {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
+  background-color: #a0e6a0; /* verde claro */
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #1f3a8a; /* azul oscuro pálido */
+  font-size: 30px;
   cursor: pointer;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
   position: relative;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
-.perfil-circle:hover {
-  background: #a8e6a1; /* verde al seleccionar */
-  transform: scale(1.1);
+.user-circle:hover {
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
 }
 
-.icono {
-  font-size: 30px;
-}
-
-.plus-circle {
+/* + botón para subir foto */
+.add-photo {
   position: absolute;
   bottom: -5px;
   right: -5px;
-  background: #4CAF50;
-  color: #fff;
+  background-color: #ffeb3b;
+  color: #1f3a8a;
+  border-radius: 50%;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
-  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #fff;
   cursor: pointer;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
 }
 
-.info-usuario {
+.add-photo:hover {
+  transform: scale(1.3);
+}
+
+/* Panel de información */
+.user-info {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  width: 220px;
+  background-color: #d6f5d6; /* verde más claro */
+  color: #1f3a8a;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   display: none;
-  background: rgba(255,255,255,0.95);
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 10px;
-  width: 180px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
+  animation: slideIn 0.5s ease forwards;
+  font-weight: bold;
 }
 
-.info-usuario input {
-  width: 100%;
-  padding: 5px;
-  margin: 5px 0;
-  border-radius: 5px;
-  border: 1px solid #aaa;
+@keyframes slideIn {
+  from {opacity: 0; transform: translateX(-50px);}
+  to {opacity: 1; transform: translateX(0);}
 }
 
-.info-usuario button {
+.user-info input {
   width: 100%;
   padding: 5px;
-  margin: 3px 0;
-  border-radius: 5px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #1f3a8a;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.user-info button {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 5px;
   border: none;
-  background: #4CAF50;
-  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  font-weight: bold;
+  transition: all 0.3s;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
-.info-usuario button:hover {
-  background: #45a049;
-}
-</style><script>
-// Mostrar u ocultar info al presionar la burbuja
-document.querySelector('.perfil-circle').addEventListener('click', () => {
-  const info = document.getElementById('infoUsuario');
-  info.style.display = info.style.display === 'block' ? 'none' : 'block';
-});
+.vip-btn { background-color: #ffd700; color: #1f3a8a; }
+.suerte-btn { background-color: #4caf50; color: #fff; }
 
-// Guardar nombre en localStorage
-document.getElementById('guardarNombre').addEventListener('click', () => {
-  const nombre = document.getElementById('nombreUsuario').value;
-  if(nombre) localStorage.setItem('nombreUsuario', nombre);
-  alert('Nombre guardado!');
-});
+.vip-btn:hover { transform: scale(1.05); }
+.suerte-btn:hover { transform: scale(1.05); }
 
-// Subir foto de perfil
-document.querySelector('.plus-circle').addEventListener('click', () => {
-  document.getElementById('fotoPerfil').click();
-});
+  </style>  <div class="user-circle" id="userCircle">
+    <span id="userIcon">👤</span>
+    <div class="add-photo" id="addPhotoBtn">+</div>
+  </div>  <div class="user-info" id="userInfo">
+    <input type="text" id="userName" placeholder="Nombre">
+    <div>Ayuda y permisos: NO DISPONIBLE</div>
+    <button class="vip-btn" id="vipBtn">Convertirse en VIP</button>
+    <button class="suerte-btn" id="suerteBtn">OBTENER SUERTE Y GIROS 🍀</button>
+  </div>  <input type="file" id="fileInput" accept="image/*" style="display:none;">  <script>
+    const userCircle = document.getElementById('userCircle');
+    const userInfo = document.getElementById('userInfo');
+    const addPhotoBtn = document.getElementById('addPhotoBtn');
+    const fileInput = document.getElementById('fileInput');
+    const userIcon = document.getElementById('userIcon');
+    const userNameInput = document.getElementById('userName');
 
-document.getElementById('fotoPerfil').addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if(file){
-    const reader = new FileReader();
-    reader.onload = function(event){
-      document.querySelector('.perfil-circle').style.backgroundImage = `url(${event.target.result})`;
-      document.querySelector('.perfil-circle').style.backgroundSize = 'cover';
-      document.querySelector('.perfil-circle').style.backgroundPosition = 'center';
-    }
-    reader.readAsDataURL(file);
-  }
-});
+    // Mostrar/Ocultar panel info
+    userCircle.addEventListener('click', () => {
+      userInfo.style.display = userInfo.style.display === 'block' ? 'none' : 'block';
+    });
 
-// Botones
-document.getElementById('btnVIP').addEventListener('click', () => {
-  alert('Abrir sección VIP');
-});
+    // Subir foto
+    addPhotoBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
 
-document.getElementById('btnSuerte').addEventListener('click', () => {
-  alert('Ir a sección de Suerte y Giros 🍀');
-});
-</script>
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          userCircle.style.backgroundImage = `url('${ev.target.result}')`;
+          userCircle.style.backgroundSize = 'cover';
+          userIcon.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Guardar nombre en localStorage
+    userNameInput.value = localStorage.getItem('userName') || '';
+    userNameInput.addEventListener('input', () => {
+      localStorage.setItem('userName', userNameInput.value);
+    });
+  </script>
   </section>
 </body>
 
