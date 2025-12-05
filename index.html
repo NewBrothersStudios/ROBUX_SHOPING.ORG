@@ -3,12 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-
-<!-- ✔ Google Site Verification (correctamente colocado) -->
+<title>Robux × Steal a brainrot</title>
 <meta name="google-site-verification" content="7IGGioxLL0FSkhq5319O2gWT4PCtA4Q1c3MR2zk1Xtc" />
-<style>
 
+<style>
 /* ===== BURBUJA FLOTANTE ===== */
 #floatingBubble {
 position: fixed;
@@ -27,22 +25,20 @@ animation: bubbleFloat 3s infinite ease-in-out;
 z-index: 99999;
 font-size: 30px;
 }
-
-/* Animación burbuja */
 @keyframes bubbleFloat {
 0% { transform: translateY(0); }
 50% { transform: translateY(-10px); }
 100% { transform: translateY(0); }
 }
 
-/* ===== CONTENEDOR COMPLETO ===== */
+/* ===== CONTENEDOR RUETA ===== */
 #wheelContainer {
 position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(120,0,0,0.88); /* rojo pálido oscuro */
+background: rgba(120,0,0,0.88);
 display: none;
 justify-content: center;
 align-items: center;
@@ -83,7 +79,7 @@ position: relative;
 100% { transform: scale(1); opacity: 1; }
 }
 
-/* ===== RULETA ===== */
+/* RULETA */
 #wheel {
 width: 300px;
 height: 300px;
@@ -93,8 +89,6 @@ box-shadow: 0 0 15px gold, inset 0 0 20px rgba(255,215,0,0.7);
 margin: 0 auto;
 display: block;
 }
-
-/* Flecha derecha */
 #pointer {
 position: absolute;
 right: -40px;
@@ -105,8 +99,6 @@ font-weight: bold;
 color: red;
 text-shadow: 0 0 6px black;
 }
-
-/* Botón girar */
 #spinBtn {
 margin-top: 20px;
 padding: 12px 25px;
@@ -117,23 +109,8 @@ border-radius: 10px;
 font-weight: bold;
 cursor: pointer;
 }
-
-/* Contador */
-#cooldown {
-font-size: 18px;
-margin-top: 10px;
-color: black;
-font-weight: bold;
-}
-
-/* ===== CASILLAS ===== */
-#scrollArea {
-margin-top: 20px;
-height: 230px;
-overflow-y: scroll;
-padding-right: 10px;
-}
-
+#cooldown { font-size: 18px; margin-top: 10px; color: black; font-weight: bold; }
+#scrollArea { margin-top: 20px; height: 230px; overflow-y: auto; padding-right: 10px; }
 .buyBox {
 background: #0057ff;
 border: 2px solid yellow;
@@ -145,430 +122,171 @@ margin-bottom: 15px;
 animation: zoomLoop 4s infinite ease-in-out;
 cursor: pointer;
 }
-
-/* Zoom animación */
 @keyframes zoomLoop {
 0% { transform: scale(1); }
 50% { transform: scale(1.07); }
 100% { transform: scale(1); }
 }
+.buyBox span { display: block; font-weight: bold; }
+#result { font-size: 22px; margin-top: 12px; font-weight: bold; color: black; }
 
-/* Texto */
-.buyBox span {
-display: block;
-font-weight: bold;
+/* VIP */
+.vip-container { position: fixed; top: 70px; right: 10px; text-align: center; z-index: 99999; }
+.vip-new { font-size: 10px; color: #007bff; font-weight: bold; }
+.vip-circle {
+width: 55px;
+height: 55px;
+background: gold;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+animation: vipPulse 1.6s infinite ease-in-out;
+box-shadow: 0 0 8px rgba(0,0,0,0.2);
 }
-
-/* Resultado */
-#result {
-font-size: 22px;
-margin-top: 12px;
-font-weight: bold;
-color: black;
+.vip-text { font-size: 20px; font-weight: bold; color: black; transform: skewX(-10deg); }
+@keyframes vipPulse { 0% { transform: scale(1); } 50% { transform: scale(1.13); } 100% { transform: scale(1); } }
+.vip-modal {
+position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75);
+display: none; justify-content: center; align-items: center; padding:20px; z-index: 999999;
 }
-
+.vip-content {
+background: #0e355e; padding: 20px; border-radius: 12px; width: 85%; max-width: 320px;
+text-align: center; animation: slideFade 0.55s ease; color: #9aff9a;
+}
+.vip-content h2, .vip-content p, .vip-content li { color: #9aff9a; }
+.vip-content ul { text-align: left; }
+@keyframes slideFade { 0% { opacity:0; transform:translateY(40px) scale(0.9);} 100%{opacity:1; transform:translateY(0) scale(1);} }
+.vip-subscribe, .vip-close { width: 100%; border: none; border-radius:10px; padding:12px; cursor:pointer; margin-top:10px; font-weight:bold; }
+.vip-subscribe { background:#28a745; color:white; font-size:15px; }
+.vip-close { background:#007bff; color:white; }
 </style>
 </head>
 <body>
 
-<!-- ===== BURBUJA ===== -->
 <div id="floatingBubble">🎡</div>
 
-<!-- ===== RUETA COMPLETA ===== -->
 <div id="wheelContainer">
-
 <div id="closeWheel">Salir de la ruleta</div>
-
 <div id="pointer">→</div>
-
 <div id="wheelBox">
-
 <canvas id="wheel" width="300" height="300"></canvas>
-
 <button id="spinBtn">GIRAR ×1 suerte 🍀</button>
-
 <div id="cooldown"></div>
 <div id="result"></div>
-
-<!-- CASILLAS CON SCROLL -->
 <div id="scrollArea">
-
-<div class="buyBox" onclick="buy('10 Spins + suerte ×6 🍀', '6.99')">
-<span>10 Spins + suerte ×6🍀</span>
-<span>↓</span>
-<span>$6.99</span>
+<div class="buyBox" onclick="buy('10 Spins + suerte ×6 🍀', '6.99')"><span>10 Spins + suerte ×6🍀</span><span>↓</span><span>$6.99</span></div>
+<div class="buyBox" onclick="buy('5 Spins + suerte ×4 🍀','2.99')"><span>5 Spins + suerte ×4🍀</span><span>↓</span><span>$2.99</span></div>
+<div class="buyBox" onclick="buy('Suerte ×12 🍀','7.99')"><span>Suerte ×12🍀</span><span>↓</span><span>$7.99</span></div>
+<div class="buyBox" onclick="buy('Premio asegurado ⭐','5.99')"><span>Premio asegurado ⭐</span><span>↓</span><span>$5.99</span></div>
+<div class="buyBox" onclick="buy('Suerte ×7 🍀','4.99')"><span>Suerte ×7🍀</span><span>↓</span><span>$4.99</span></div>
+<div class="buyBox" onclick="buy('Suerte ×2 🍀','0.49')"><span>Suerte ×2🍀</span><span>↓</span><span>$0.49</span></div>
+<div class="buyBox" onclick="buy('Suerte ×1.5 🍀','0.25')"><span>Suerte ×1.5🍀</span><span>↓</span><span>$0.25</span></div>
+</div>
+</div>
 </div>
 
-<div class="buyBox" onclick="buy('5 Spins + suerte ×4 🍀','2.99')">
-<span>5 Spins + suerte ×4🍀</span>
-<span>↓</span>
-<span>$2.99</span>
+<!-- VIP -->
+<div class="vip-container">
+<small class="vip-new">¡¡NEW!!</small>
+<div class="vip-circle" onclick="openVIP()"><span class="vip-text">VIP</span></div>
 </div>
 
-<div class="buyBox" onclick="buy('Suerte ×12 🍀','7.99')">
-<span>Suerte ×12🍀</span>
-<span>↓</span>
-<span>$7.99</span>
-</div>
-
-<div class="buyBox" onclick="buy('Premio asegurado ⭐','5.99')">
-<span>Premio asegurado ⭐</span>
-<span>↓</span>
-<span>$5.99</span>
-</div>
-
-<div class="buyBox" onclick="buy('Suerte ×7 🍀','4.99')">
-<span>Suerte ×7🍀</span>
-<span>↓</span>
-<span>$4.99</span>
-</div>
-
-<div class="buyBox" onclick="buy('Suerte ×2 🍀','0.49')">
-<span>Suerte ×2🍀</span>
-<span>↓</span>
-<span>$0.49</span>
-</div>
-
-<div class="buyBox" onclick="buy('Suerte ×1.5 🍀','0.25')">
-<span>Suerte ×1.5🍀</span>
-<span>↓</span>
-<span>$0.25</span>
-</div>
-
-</div>
-
+<div id="vipModal" class="vip-modal">
+<div class="vip-content">
+<h2>ÚNETE a VIP</h2>
+<p><strong>LAS características VIP son las siguientes:</strong></p>
+<ul>
+<li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
+<li><b>10 giros</b> para la ruleta de la suerte 🍀.</li>
+<li><b>120 robux</b> semanales</li>
+<li>Acceso completo a nuestro código page de Github.</li>
+<li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
+</ul>
+<button class="vip-subscribe" onclick="subscribeVIP()">SUSCRÍBETE<br>$7.99 × semana</button>
+<button class="vip-close" onclick="closeVIP()">Cerrar</button>
 </div>
 </div>
 
 <script>
-
-/* ABRIR */
-document.getElementById("floatingBubble").onclick = () => {
-document.getElementById("wheelContainer").style.display = "flex";
-};
-
-/* SALIR */
-document.getElementById("closeWheel").onclick = () => {
-document.getElementById("wheelContainer").style.display = "none";
-};
+/* ABRIR / CERRAR RULETA */
+document.getElementById("floatingBubble").onclick = () => { document.getElementById("wheelContainer").style.display = "flex"; };
+document.getElementById("closeWheel").onclick = () => { document.getElementById("wheelContainer").style.display = "none"; };
 
 /* RULETA */
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
-
-const sections = [
-"350 ROBUX GRATIS",
-"PERDISTE",
-"BONO +25%",
-"TE FALTA MUCHO COMPRA EL VIP"
-];
-
+const sections = ["350 ROBUX GRATIS","PERDISTE","BONO +25%","TE FALTA MUCHO COMPRA EL VIP"];
 const colors = ["#fff4c2","#fff","#f7e35b","#f1d67a"];
-
-/* DIBUJAR RULETA */
-function drawWheel() {
-let start = 0;
-let arc = Math.PI * 2 / sections.length;
-
-for (let i = 0; i < sections.length; i++) {
+function drawWheel(){
+let start=0; let arc=Math.PI*2/sections.length;
+for(let i=0;i<sections.length;i++){
 ctx.beginPath();
-ctx.fillStyle = colors[i];
+ctx.fillStyle=colors[i];
 ctx.moveTo(150,150);
 ctx.arc(150,150,150,start,start+arc);
 ctx.fill();
-
 ctx.save();
 ctx.translate(150,150);
-ctx.rotate(start + arc/2);
-ctx.fillStyle = "black";
-ctx.font = "bold 17px Arial";
-ctx.fillText(sections[i], 20, 5);
+ctx.rotate(start+arc/2);
+ctx.fillStyle="black";
+ctx.font="bold 17px Arial";
+ctx.fillText(sections[i],20,5);
 ctx.restore();
-
-start += arc;
-}
-}
-
+start+=arc;
+}}
 drawWheel();
 
 /* SPIN */
-let spinning = false;
-
+let spinning=false;
 document.getElementById("spinBtn").onclick = spin;
-
-function spin() {
-if (spinning) return;
-if (!canSpin()) return;
-
-spinning = true;
-
-/* ANGULO PERO IMPOSIBLE QUE CAIGA EN 300 ROBUX */
-let safeAngles = [1, 2, 3]; // evita el primer sector
-let pick = safeAngles[Math.floor(Math.random()*safeAngles.length)];
-
-let angle = pick * 90 + 720;
-
-canvas.style.transition = "transform 4s ease-out";
-canvas.style.transform = `rotate(${angle}deg)`;
-
+const CD = 2*60*60*1000;
+function canSpin(){ let last=localStorage.getItem("lastSpin"); if(!last) return true; return Date.now()-last>=CD; }
+function saveSpin(){ localStorage.setItem("lastSpin",Date.now()); }
+function spin(){
+if(spinning||!canSpin()) return;
+spinning=true;
+let safeAngles=[1,2,3];
+let pick=safeAngles[Math.floor(Math.random()*safeAngles.length)];
+let angle = pick*90 + 720;
+canvas.style.transition="transform 4s ease-out";
+canvas.style.transform=`rotate(${angle}deg)`;
 setTimeout(()=>{
-spinning = false;
-
-let index = pick % 4;
-let prize = sections[index];
-
+spinning=false;
+let index=pick%4;
+let prize=sections[index];
 handlePrize(prize);
 saveSpin();
-
 },4000);
 }
-
-/* TIEMPO 2 HORAS */
-const CD = 2 * 60 * 60 * 1000;
-
-function saveSpin(){
-localStorage.setItem("lastSpin", Date.now());
-}
-
-function canSpin(){
-let last = localStorage.getItem("lastSpin");
-if (!last) return true;
-return Date.now() - last >= CD;
-}
-
 setInterval(()=>{
-let btn = document.getElementById("spinBtn");
-let cd = document.getElementById("cooldown");
-
-if (canSpin()) {
-btn.disabled = false;
-cd.innerText = "";
-} else {
-btn.disabled = true;
-let diff = CD - (Date.now() - localStorage.getItem("lastSpin"));
-let h = Math.floor(diff/3600000);
-let m = Math.floor((diff%3600000)/60000);
-let s = Math.floor((diff%60000)/1000);
-cd.innerText = `${h}h ${m}m ${s}s`;
+let btn=document.getElementById("spinBtn");
+let cd=document.getElementById("cooldown");
+if(canSpin()){ btn.disabled=false; cd.innerText=""; } else {
+btn.disabled=true;
+let diff=CD-(Date.now()-localStorage.getItem("lastSpin"));
+let h=Math.floor(diff/3600000);
+let m=Math.floor((diff%3600000)/60000);
+let s=Math.floor((diff%60000)/1000);
+cd.innerText=`${h}h ${m}m ${s}s`;
 }
-
 },1000);
-
-/* RESULTADOS */
 function handlePrize(prize){
-let r = document.getElementById("result");
-
-if (prize.includes("300")) {
-r.innerText = "Casi!";
-return;
+let r=document.getElementById("result");
+if(prize.includes("300")){ r.innerText="Casi!"; return; }
+if(prize==="PERDISTE"){ r.innerText="PERDISTE 🙃"; return; }
+if(prize==="BONO +25%"){ r.innerText="BONO +25% GANADO"; window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%","_blank"); return; }
+if(prize==="BONO +30%"){ r.innerText="HAS PERDIDO CASI, CONPRA EL VIP"; window.open("https://wa.me/50373826693?text=PERDI%20Quiero%20comprar%20VIP%2030%","_blank"); return; }
 }
+function buy(name,price){ window.open(`https://wa.me/50373826693?text=Quiero%20comprar%20${name}%20por%20$${price}`,"_blank"); }
 
-if (prize === "PERDISTE"){
-r.innerText = "PERDISTE 🙃";
-return;
-}
-
-if (prize === "BONO +25%"){
-r.innerText = "BONO +25% GANADO";
-window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%", "_blank");
-return;
-}
-
-if (prize === "BONO +30%"){
-r.innerText = "HAS PERDIDO CASI, CONPRA EL VIP";
-window.open("https://wa.me/50373826693?text=PERDI%20Quiero%20comprar%20VIP%2030%", "_blank");
-return;
-}
-
-}
-
-/* CASILLAS → WhatsApp */
-function buy(name, price){
-window.open(
-`https://wa.me/50373826693?text=Quiero%20comprar%20${name}%20por%20$${price}`,
-"_blank"
-);
-}
-
-</script>
- 
-<!-- ====== CÍRCULO VIP PEQUEÑO ESQUINA ====== -->
-<div class="vip-container">
-    <small class="vip-new">¡¡NEW!!</small>
-    <div class="vip-circle" onclick="openVIP()">
-        <span class="vip-text">VIP</span>
-    </div>
-</div>
-
-<!-- ====== MODAL VIP ====== -->
-<div id="vipModal" class="vip-modal">
-    <div class="vip-content animate-modal">
-        <h2>ÚNETE a VIP</h2>
-        <p><strong>LAS características VIP son las siguientes:</strong></p>
-        <ul>
-            <li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
-            <li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
-
-            <li><b>10 giros</b> para la ruleta de la suerte 🍀.</li>
- <li><b>120 robux</b> semanales</li>
-            <li>Acceso completo a nuestro código page de Github.</li>
-            <li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
-        </ul>
-
-        <!-- BOTÓN SUSCRIBIR -->
-        <button class="vip-subscribe" onclick="subscribeVIP()">
-            SUSCRÍBETE<br>$7.99 × semana
-        </button>
-
-        <!-- BOTÓN CERRAR -->
-        <button class="vip-close" onclick="closeVIP()">Cerrar</button>
-    </div>
-</div>
-
-<style>
-/* ======= POSICIÓN ESQUINA BAJADO 70px ======= */
-.vip-container {
-    position: absolute;
-    top: 70px; /* ← bajado */
-    right: 10px;
-    text-align: center;
-    z-index: 999;
-}
-
-/* ======= VIP NEW ======= */
-.vip-new {
-    font-size: 10px;
-    color: #007bff;
-    font-weight: bold;
-}
-
-/* ======= CÍRCULO VIP CHIQUITO ======= */
-.vip-circle {
-    width: 55px;
-    height: 55px;
-    background: gold;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    animation: vipPulse 1.6s infinite ease-in-out;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-}
-
-.vip-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    transform: skewX(-10deg);
-}
-
-/* Animación latido + zoom suave */
-@keyframes vipPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.13); }
-    100% { transform: scale(1); }
-}
-
-/* ======= MODAL FULL SCREEN ======= */
-.vip-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 9999;
-}
-
-/* ======= CONTENIDO MODAL ======= */
-.vip-content {
-    background: #0e355e; /* azulito oscuro pálido */
-    padding: 20px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 320px;
-    text-align: center;
-    animation: slideFade 0.55s ease;
-    color: #9aff9a; /* texto verde claro */
-}
-
-.vip-content h2,
-.vip-content p,
-.vip-content li {
-    color: #9aff9a;
-}
-
-.vip-content ul {
-    text-align: left;
-}
-
-/* Animación de entrada bonita */
-@keyframes slideFade {
-    0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* ======= BOTÓN SUSCRIBIR ======= */
-.vip-subscribe {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-size: 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    width: 100%;
-    font-weight: bold;
-}
-
-/* ======= BOTÓN CERRAR ======= */
-.vip-close {
-    margin-top: 15px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-}
-</style>
-
-<script>
-function openVIP() {
-    document.getElementById("vipModal").style.display = "flex";
-}
-
-function closeVIP() {
-    document.getElementById("vipModal").style.display = "none";
-}
-
-function subscribeVIP() {
-    const mensaje = encodeURIComponent("Hola, quiero comprar el VIP semanal de $7.99.");
-    window.location.href = "https://wa.me/50373826693?text=" + mensaje;
-}
+/* VIP */
+function openVIP(){ document.getElementById("vipModal").style.display="flex"; }
+function closeVIP(){ document.getElementById("vipModal").style.display="none"; }
+function subscribeVIP(){ const msg=encodeURIComponent("Hola, quiero comprar el VIP semanal de $7.99."); window.location.href="https://wa.me/50373826693?text="+msg; }
 </script>
 
-
-  <!-- NUEVA SECCIÓN: Usuario -->
-  <section id="usuario-burbuja">
-   
-</body>
-
-  
-<title> Robux × Steal a brainrot</title>
 <style>
   /* Reset & base */
   *{box-sizing:border-box;margin:0;padding:0}
