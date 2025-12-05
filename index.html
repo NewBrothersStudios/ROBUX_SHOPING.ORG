@@ -563,13 +563,12 @@ function subscribeVIP() {
   <section id="usuario-burbuja">
     <section id="usuario-burbuja">
   <style>
-    /* Fuente solo para este apartado */
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');#usuario-burbuja {
   position: fixed;
   bottom: 20px;
   left: 20px;
   z-index: 9999;
-  font-family: 'Press Start 2P', cursive; /* fuente exclusiva */
+  font-family: 'Press Start 2P', cursive;
   pointer-events: none; /* evita bloquear scroll */
 }
 
@@ -588,7 +587,7 @@ function subscribeVIP() {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  pointer-events: auto; /* permite click en círculo */
+  pointer-events: auto; /* permite click solo en círculo */
 }
 
 .user-circle:hover {
@@ -613,6 +612,7 @@ function subscribeVIP() {
   border: 2px solid #fff;
   cursor: pointer;
   transition: transform 0.3s;
+  pointer-events: auto; /* permite click solo en + */
 }
 
 .add-photo:hover { transform: scale(1.3); }
@@ -630,7 +630,7 @@ function subscribeVIP() {
   display: none;
   animation: slideIn 0.5s ease forwards;
   font-weight: bold;
-  pointer-events: auto; /* permite interacción */
+  pointer-events: auto; /* solo panel interactúa */
 }
 
 @keyframes slideIn {
@@ -682,7 +682,10 @@ function subscribeVIP() {
       userInfo.style.display = userInfo.style.display === 'block' ? 'none' : 'block';
     });
 
-    addPhotoBtn.addEventListener('click', () => fileInput.click());
+    addPhotoBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // evita cerrar el panel al hacer click
+      fileInput.click();
+    });
 
     fileInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
