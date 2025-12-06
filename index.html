@@ -323,7 +323,8 @@ saveSpin();
 },4000);
 }
 
-const CD = 5 * 1000; // 5 segundos
+/* TIEMPO 5 horas */
+const CD = 5 * 60 * 60 * 1000;
 
 function saveSpin(){
 localStorage.setItem("lastSpin", Date.now());
