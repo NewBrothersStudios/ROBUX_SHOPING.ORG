@@ -185,7 +185,7 @@ color: black;
 
 <canvas id="wheel" width="300" height="300"></canvas>
 
-<button id="spinBtn">GIRAR ×1 luck 🍀</button>
+<button id="spinBtn">GIRAR ×1 suerte 🍀</button>
 
 <div id="cooldown"></div>
 <div id="result"></div>
@@ -193,47 +193,219 @@ color: black;
 <!-- CASILLAS CON SCROLL -->
 <div id="scrollArea">
 
-<div class="buyBox" onclick="buy('10 Spins + ×6 luck 🍀', '6.99')">
-<span>Bundle: 10 Giros + ×6 luck 🍀</span>
-<span>↓</span>
-<span>$6.99</span>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bundles</title>
+
+<style>
+body {
+  background: #0a0a0a;
+  color: white;
+  font-family: Arial;
+  padding: 20px;
+}
+
+/* Cards */
+.bundle {
+  background: #111;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px 0;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 10px #00ff8855;
+}
+
+.bundle h2 {
+  margin: 0 0 10px;
+  color: #00ff88;
+}
+
+.bundle button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  background: #00ff88;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.bundle button:hover {
+  background: #00cc66;
+}
+
+/* MODAL Gamer */
+#paymentModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000cc;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 15px;
+  width: 85%;
+  max-width: 350px;
+  text-align: center;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 20px #00ff8866;
+  animation: pop .3s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pay-btn {
+  background: #0088ff;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pay-btn:hover { background: #0066cc; }
+
+.ws-btn {
+  background: #25D366;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ws-btn:hover { background: #1ea955; }
+
+.close-btn {
+  margin-top: 15px;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Bundles</h1>
+
+<!-- BUNDLE LIST -->
+<div class="bundle">
+  <h2>10 Spins + Luck ×6 🍀</h2>
+  <button onclick="openPayment(1)">Comprar $6.99</button>
 </div>
 
-<div class="buyBox" onclick="buy('premio asegurado + Giros ♾️ ','49.99')">
-<span> Bundle: PREMIO ASEGURADO + Giros ♾️</span>
-<span>↓</span>
-<span>$49.99</span>
+<div class="bundle">
+  <h2>Premio asegurado + Giros ♾️</h2>
+  <button onclick="openPayment(2)">Comprar $49.99</button>
 </div>
 
-<div class="buyBox" onclick="buy('5 Giros + ×4 luck 🍀','2.99')">
-<span>Bundle 5 Giros + ×4 luck 🍀</span>
-<span>↓</span>
-<span>$2.99</span>
+<div class="bundle">
+  <h2>5 Spins + Luck ×4 🍀</h2>
+  <button onclick="openPayment(3)">Comprar $2.99</button>
 </div>
 
-<div class="buyBox" onclick="buy('22 Giros + Luck ×12 🍀','7.99')">
-<span>Bundle: 22 Giros + luck ×12🍀</span>
-<span>↓</span>
-<span>$7.99</span>
+<div class="bundle">
+  <h2>22 Spins + Luck ×12 🍀</h2>
+  <button onclick="openPayment(4)">Comprar $7.99</button>
 </div>
 
-<div class="buyBox" onclick="buy('3 Giros + Luck ×3 🍀','1.50')">
-<span> Bundle: Luck ×3 🍀 + 3 Giros </span>
-<span>↓</span>
-<span>$1.50</span>
+<div class="bundle">
+  <h2>3 Spins + Luck ×3 🍀</h2>
+  <button onclick="openPayment(5)">Comprar $1.49</button>
 </div>
 
-<div class="buyBox" onclick="buy('4 Giros + Luck ×2 🍀 ','$0.99')">
-<span>Bundle: 4 Giros + Luck ×2 🍀</span>
-<span>↓</span>
-<span>$0.99</span>
+<div class="bundle">
+  <h2>4 Spins + Luck ×2 🍀</h2>
+  <button onclick="openPayment(6)">Comprar $0.99</button>
 </div>
 
-<div class="buyBox" onclick="buy('2 Giros + luck ×1.5 🍀','0.49')">
-<span>Bundle: 2 Giros + Luck ×1.5 🍀</span>
-<span>↓</span>
-<span>$0.49</span>
+<div class="bundle">
+  <h2>Membresía V.I.P</h2>
+  <button onclick="openPayment(7)">Comprar $8.99</button>
 </div>
+
+
+<!-- MODAL -->
+<div id="paymentModal">
+  <div class="modal-box">
+    <h2>🔥 ELIGE TU MÉTODO 🔥</h2>
+
+    <button id="payPalBtn" class="pay-btn">💳 PayPal</button>
+    <button id="wsBtn" class="ws-btn">🟢 WhatsApp</button>
+
+    <div class="close-btn" onclick="closePayment()">Cerrar</div>
+  </div>
+</div>
+
+<script>
+// TU NUMERO
+const NUM = "50373826693";
+
+// LINKS PAYPAL (TÚ LOS PEGAS)
+const paypalLinks = {
+  1: "https://www.paypal.com/ncp/payment/AQHFXUT46Z37L",
+  2: "https://www.paypal.com/ncp/payment/9H95XSQK5N5BA",
+  3: "https://www.paypal.com/ncp/payment/DAE5MQEAFM45G",
+  4: "https://www.paypal.com/ncp/payment/PWV7Z7NQ2EDBW",
+  5: "https://www.paypal.com/ncp/payment/3CJXRAWN2X7B6",
+  6: "https://www.paypal.com/ncp/payment/SJKT7M9YS2HAY",
+  7: "https://www.paypal.com/ncp/payment/UUZ7FHSUMTDGJ"
+};
+
+let currentBundle = 0;
+
+function openPayment(id) {
+  currentBundle = id;
+  document.getElementById("paymentModal").style.display = "flex";
+}
+
+function closePayment() {
+  document.getElementById("paymentModal").style.display = "none";
+}
+
+// BOTON PAYPAL
+document.getElementById("payPalBtn").onclick = () => {
+  const link = paypalLinks[currentBundle];
+  if (link.includes("AQUI_PEGAS")) {
+    alert("⚠️ Aún no has puesto el link PayPal de este bundle.");
+  } else {
+    window.open(link, "_blank");
+  }
+};
+
+// BOTON WHATSAPP
+document.getElementById("wsBtn").onclick = () => {
+  const mensaje = encodeURIComponent("Hola, quiero comprar el Bundle #" + currentBundle);
+  window.open(`https://wa.me/50373826693text=${mensaje}`, "_blank");
+};
+</script>
+
+
 
 </div>
 
@@ -323,8 +495,8 @@ saveSpin();
 },4000);
 }
 
-/* TIEMPO 5 horas */
-const CD = 5 * 60 * 60 * 1000;
+/* TIEMPO 3 HORAS */
+const CD = 3 * 60 * 60 * 1000;
 
 function saveSpin(){
 localStorage.setItem("lastSpin", Date.now());
@@ -370,13 +542,13 @@ return;
 
 if (prize === "BONO +25%"){
 r.innerText = "BONO +25% GANADO";
-window.open("https://wa.me/50373826693?text=GK2A-MAK1-RoblX%20BONO%2025%", "_blank");
+window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%", "_blank");
 return;
 }
 
 if (prize === "Descuento V.I.P"){
 r.innerText = "RECIBISTE DESCUENTO V.I.P";
-window.open("https://wa.me/50373826693?text=Gané Descuento BKL1-OAJQ-AMI70 Por $7.99", "_blank");
+window.open("https://wa.me/50373826693?text=Gané Descuento V.I.P Por $7.99", "_blank");
 return;
 }
 
@@ -391,530 +563,292 @@ window.open(
 }
 
 </script>
- 
-<!-- ====== CÍRCULO VIP PEQUEÑO ESQUINA ====== -->
-<div class="vip-container">
-    <small class="vip-new">NEW!</small>
-    <div class="vip-circle" onclick="openVIP()">
-        <span class="vip-text">V.I.P</span>
+ <!-- ================== BOTÓN VIP ESQUINA ================== -->
+<div class="vip-badge" onclick="openVIP()">
+    <span class="vip-badge-text">V.I.P</span>
+    <span class="vip-badge-new">NEW</span>
+</div>
+
+<!-- ================== MODAL VIP ================== -->
+<div id="vipModal" class="vip-modal">
+    <div class="vip-card">
+        <h1 class="vip-title">✨ MEMBRESÍA V.I.P ✨</h1>
+        <p class="vip-sub">Beneficios exclusivos cada semana:</p>
+        <ul class="vip-list">
+            <li>🔻 Precios reducidos <b>EXAGERADAMENTE</b></li>
+            <li>🍀 <b>10 giros</b> gratis cada semana</li>
+            <li>💻 Acceso total al código en GitHub</li>
+            <li>🍀 <b>Suerte ×3</b> en la ruleta</li>
+            <li>⏣ <b>120 Robux</b> semanales</li>
+            <li>🟥 Alfombra exclusiva Steal a Brainrot</li>
+        </ul>
+        <button class="vip-main-btn" onclick="openVIPPayment()">
+            SUSCRIBIRSE — <b>$8.99 / semana</b>
+        </button>
+        <button class="vip-close-btn" onclick="closeVIP()">Cerrar</button>
     </div>
 </div>
 
-<!-- ====== MODAL VIP ====== -->
-<div id="vipModal" class="vip-modal">
-    <div class="vip-content animate-modal">
-        <h2>V.I.P</h2>
-        <p><strong>LAS características VIP son las siguientes:</strong></p>
-        <ul>
-            <li>Los precios de los paquetes bajan <b>EXAGERADAMENTE</b>.</li>
-            <li><b>10 giros</b> para la ruleta de la suerte 🍀.</li>
-            <li>Acceso completo a nuestro código page de Github.</li>
-            <li><b>Suerte ×3</b> en la ruleta de la suerte 🍀.</li>
-          <li><b>120 robux ⏣ </b>semanales.</li>
-<li><b>Alfombra</b> × Steal a Brainrot.</li>
- </ul>
-
-        <!-- BOTÓN SUSCRIBIR -->
-        <button class="vip-subscribe" onclick="subscribeVIP()">
-            SUSCRIBIRSE.<br>$8.99 × semana
-        </button>
-
-        <!-- BOTÓN CERRAR -->
-        <button class="vip-close" onclick="closeVIP()">Cerrar</button>
+<!-- ================== MODAL MÉTODOS DE PAGO ================== -->
+<div id="vipPayModal" class="vip-modal">
+    <div class="vip-pay-card">
+        <h2 class="vip-pay-title">🔥 Elige tu método de pago 🔥</h2>
+        <button class="vip-pay-btn paypal" onclick="payVIPPaypal()">💳 PayPal</button>
+        <button class="vip-pay-btn whatsapp" onclick="payVIPWhats()">🟢 WhatsApp</button>
+        <button class="vip-close-btn" onclick="closeVIPPay()">Cerrar</button>
     </div>
 </div>
 
 <style>
-/* ======= POSICIÓN ESQUINA BAJADO 70px ======= */
-.vip-container {
+/* ========================= BOTÓN VIP ========================= */
+.vip-badge {
     position: absolute;
-    top: 70px; /* ← bajado */
-    right: 10px;
-    text-align: center;
-    z-index: 999;
-}
-
-/* ======= VIP NEW ======= */
-.vip-new {
-    font-size: 10px;
-    color: #007bff;
-    font-weight: bold;
-}
-
-/* ======= CÍRCULO VIP CHIQUITO ======= */
-.vip-circle {
-    width: 55px;
-    height: 55px;
-    background: gold;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 65px;
+    right: 15px;
+    background: linear-gradient(135deg, #ffd700, #ffb300);
+    padding: 12px 17px;
+    border-radius: 15px;
     cursor: pointer;
-    animation: vipPulse 1.6s infinite ease-in-out;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    box-shadow: 0 0 12px #ffd700aa;
+    animation: vipFloat 2.2s infinite ease-in-out;
+    text-align: center;
 }
+.vip-badge-text { font-size: 17px; font-weight: 900; color: #000; display: block; margin-bottom: 3px; }
+.vip-badge-new { font-size: 9px; font-weight: bold; color: #004cff; }
 
-.vip-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    transform: skewX(-10deg);
-}
+@keyframes vipFloat { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
 
-/* Animación latido + zoom suave */
-@keyframes vipPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.13); }
-    100% { transform: scale(1); }
-}
-
-/* ======= MODAL FULL SCREEN ======= */
+/* ========================= MODAL ========================= */
 .vip-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000000aa;
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    z-index: 9999;
+    padding: 25px; z-index: 9999;
 }
 
-/* ======= CONTENIDO MODAL ======= */
-.vip-content {
-    background: #0e355e; /* azulito oscuro pálido */
-    padding: 20px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 320px;
+/* ========================= TARJETA VIP ========================= */
+.vip-card {
+    width: 90%; max-width: 360px;
+    background: rgba(14, 53, 94, 0.75);
+    backdrop-filter: blur(6px);
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px #00ff8866;
+    border-radius: 15px;
+    padding: 25px;
     text-align: center;
-    animation: slideFade 0.55s ease;
-    color: #9aff9a; /* texto verde claro */
-}
-
-.vip-content h2,
-.vip-content p,
-.vip-content li {
     color: #9aff9a;
+    animation: popIn .45s ease;
+}
+.vip-title { font-size: 26px; color: #aaffff; margin-bottom: 10px; }
+.vip-sub { margin-bottom: 10px; color: #caffca; }
+.vip-list { text-align: left; margin-bottom: 15px; font-size: 15px; }
+
+@keyframes popIn { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+.vip-main-btn {
+    width: 100%; padding: 12px; background: #28a745; color: white;
+    border: none; border-radius: 10px; font-size: 17px; font-weight: bold;
+    cursor: pointer; margin-top: 10px; box-shadow: 0 0 10px #28a745aa;
+}
+.vip-main-btn:hover { background: #1f9839; }
+
+.vip-close-btn {
+    width: 100%; padding: 10px; margin-top: 12px;
+    background: #007bff; color: white; border: none; border-radius: 10px;
+    font-size: 16px; cursor: pointer;
 }
 
-.vip-content ul {
-    text-align: left;
+/* ========================= TARJETA PAGO ========================= */
+.vip-pay-card {
+    width: 85%; max-width: 320px;
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(6px);
+    border: 2px solid #00ff99;
+    border-radius: 15px;
+    padding: 22px;
+    text-align: center;
+    animation: popIn .45s ease;
 }
-
-/* Animación de entrada bonita */
-@keyframes slideFade {
-    0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+.vip-pay-title { color: #aaffff; margin-bottom: 15px; font-size: 22px; }
+.vip-pay-btn {
+    width: 100%; padding: 12px; border-radius: 10px; border: none;
+    font-size: 18px; margin-bottom: 12px; font-weight: bold; cursor: pointer;
 }
-
-/* ======= BOTÓN SUSCRIBIR ======= */
-.vip-subscribe {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-size: 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    width: 100%;
-    font-weight: bold;
-}
-
-/* ======= BOTÓN CERRAR ======= */
-.vip-close {
-    margin-top: 15px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-}
+.paypal { background: #0070ba; color: white; box-shadow: 0 0 10px #0070ba99; }
+.whatsapp { background: #25D366; color: white; box-shadow: 0 0 10px #25D36699; }
 </style>
 
 <script>
-function openVIP() {
-    document.getElementById("vipModal").style.display = "flex";
+/* ========================= ABRIR / CERRAR VIP ========================= */
+function openVIP() { document.getElementById("vipModal").style.display = "flex"; }
+function closeVIP() { document.getElementById("vipModal").style.display = "none"; }
+
+/* ========================= ABRIR / CERRAR MÉTODOS ========================= */
+function openVIPPayment() {
+    closeVIP();
+    document.getElementById("vipPayModal").style.display = "flex";
+}
+function closeVIPPay() { document.getElementById("vipPayModal").style.display = "none"; }
+
+/* ========================= PAGOS ========================= */
+const vipPaypal = "https://www.paypal.com/ncp/payment/UUZ7FHSUMTDGJ";
+
+function payVIPPaypal() {
+    window.open(vipPaypal, "_blank");
 }
 
-function closeVIP() {
-    document.getElementById("vipModal").style.display = "none";
-}
-
-function subscribeVIP() {
-    const mensaje = encodeURIComponent("Hola, quiero comprar el VIP semanal de $8.99.");
-    window.location.href = "https://wa.me/50373826693?text=" + mensaje;
+function payVIPWhats() {
+    const mensaje = encodeURIComponent("Hola, quiero comprar la Membresía VIP semanal.");
+    window.open("https://wa.me/50373826693?text=" + mensaje, "_blank");
 }
 </script>
 
-
-<title> ROBUX </title>
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROBUX GAMER</title>
 <style>
-  /* Reset & base */
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background:linear-gradient(180deg,#2a1400 0%, #100700 100%);
-    color:#BBDEFB;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding-top:88px;
-    overflow-x:hidden;
-    text-align:center;
-  }
+/* ====== Base y Reset ====== */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#0c0c0c 0%, #1a1a1a 100%); color:#fff; overflow-x:hidden; text-align:center; padding-top:88px;}
+a{text-decoration:none}/* Top bar */
+.top-bar{position:fixed;top:0;left:0;width:100%;background:linear-gradient(90deg,#ff6f00,#ffb300);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;color:#fff;z-index:140;border-bottom:3px solid rgba(255,140,0,0.14);box-shadow:0 6px 24px rgba(0,0,0,0.45);}
+.top-bar div{font-weight:700}
 
-  /* Top bar */
-  .top-bar{
-    position:fixed;top:0;left:0;width:100%;
-    background:linear-gradient(90deg, rgba(255,160,0,0.98), rgba(255,110,0,0.95));
-    padding:16px 18px;display:flex;justify-content:space-between;align-items:center;
-    color:#C8E6C9;z-index:140;border-bottom:3px solid rgba(255,140,0,0.14);
-    box-shadow:0 6px 24px rgba(0,0,0,0.45);
-    transform:translateY(-8px);
-    animation:barDrop .6s cubic-bezier(.2,.9,.3,1) forwards;
-  }
-  @keyframes barDrop{to{transform:translateY(0)}}
+/* Header */
+header{margin-top:6px;padding:8px 12px}
+h1{font-size:2rem;color:#ff5722;letter-spacing:0.6px;text-shadow:0 6px 18px rgba(255,87,34,0.2),0 0 22px rgba(255,152,0,0.1);}
+h2{color:#ffca28;font-weight:500;margin-top:6px;font-size:1rem;}
+.small{font-size:.95rem;color:#ffeb3b;margin-top:8px}
 
-  /* Header text */
-  header{margin-top:6px;padding:8px 12px}
-  h1{
-    font-size:2.0rem;
-    color:#ff44336;
-    letter-spacing:0.6px;
-    text-shadow:0 6px 18px rgba(255,150,0,0.12),0 0 22px rgba(255,200,50,0.06);
-    animation:glowText 2.4s ease-in-out infinite alternate;
-  }
-  @keyframes glowText{
-    from{text-shadow:0 6px 18px rgba(255,140,0,0.12),0 0 14px rgba(255,180,50,0.04)}
-    to{text-shadow:0 12px 30px rgba(255,180,0,0.18),0 0 36px rgba(255,220,90,0.08)}
-  }
-  h2{color:#ffe9b3;font-weight:500;margin-top:6px;font-size:1rem}
+/* Container */
+.container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
 
-  /* Layout container */
-  .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
+/* Card estilo gamer */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));width:94%;max-width:420px;border-radius:18px;padding:18px;display:flex;flex-direction:column;align-items:center;box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(255,140,0,0.03);transition:transform .28s,box-shadow .28s;position:relative;overflow:hidden;border:1px solid rgba(255,170,0,0.08);}
+.card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 22px 50px rgba(255,150,0,0.16);}
+.robux-title{font-size:1.35rem;color:#e1bbee;margin-bottom:8px;font-weight:700;text-shadow:0 4px 18px rgba(255,170,0,0.06);}
+.price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
+.price{font-weight:800;color:#4caf50;font-size:1.15rem}
+.price-bar{width:92%;height:12px;border-radius:10px;background:linear-gradient(90deg,#ffd54f,#ff8a00);margin-top:10px;box-shadow:0 6px 30px rgba(255,140,0,0.12) inset;position:relative;overflow:hidden;}
+.price-bar::after{content:"";position:absolute;left:-30%;top:0;width:50%;height:100%;background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0));transform:skewX(-18deg);animation:barShine 2.2s linear infinite;}
+@keyframes barShine{to{left:120%}}
+.btn{margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#ffcf5e,#ff7d00);color:#2b1100;font-weight:800;box-shadow:0 10px 30px rgba(255,140,0,0.22), 0 2px 6px rgba(0,0,0,0.18);}
+.btn:active{transform:translateY(2px) scale(.995)}
+.btn:hover{filter:brightness(1.05)}
+.memberships{max-width:1000px;margin:18px auto;padding:14px;}
 
-  /* CARD */
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    width:94%;
-    max-width:420px;
-    border-radius:18px;
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(255,140,0,0.03);
-    transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
-    will-change:transform;
-    overflow:hidden;
-    position:relative;
-    border:1px solid rgba(255,170,0,0.08);
-    transform:translateY(10px);
-    animation:cardIn .6s ease forwards;
-  }
-  @keyframes cardIn{to{transform:translateY(0)}}
-  .card::before{
-    content:"";position:absolute;left:-40%;top:-40%;width:120%;height:120%;
-    background:radial-gradient(circle at 10% 10%, rgba(255,215,120,0.08), transparent 10%),
-               radial-gradient(circle at 90% 90%, rgba(255,120,50,0.06), transparent 10%);
-    transform:scale(1.05);
-    pointer-events:none;
-  }
-  .card:hover{transform:translateY(-10px) scale(1.02); box-shadow:0 22px 50px rgba(255,150,0,0.16)}
+/* Modal PayPal / WhatsApp */
+#overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:260}
+.modal{background:linear-gradient(180deg,#3b1800,#2a1200);border-radius:16px;padding:18px;width:94%;max-width:560px;color:#fff8e5;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(255,170,0,0.18);}
+.modal h3{color:#ffd76a;margin-bottom:10px}
+.instruction{background:#2b0f00;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #ff8a00;color:#ffeccf}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.copyBtn{background:linear-gradient(90deg,#ffd54f,#ff8a00);color:#2b1100;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.copyBtn:active{transform:translateY(2px)}
+.ghost{background:transparent;border:2px solid #ffb86b;color:#ffecae;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700}
 
-  .robux-title{font-size:1.35rem;color:#E1BEE7; margin-bottom:8px; font-weight:700; text-shadow:0 4px 18px rgba(255,170,0,0.06)}
-  .price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
-  .price{font-weight:800;color:#388E3C;font-size:1.15rem}
-  .price-bar{
-    width:92%;height:12px;border-radius:10px;
-    background:linear-gradient(90deg,#ffd54f,#ff8a00);
-    margin-top:10px;
-    box-shadow:0 6px 30px rgba(255,140,0,0.12) inset;
-    position:relative;
-    overflow:hidden;
-  }
-  .price-bar::after{
-    content:"";position:absolute;left:-30%;top:0;width:50%;height:100%;
-    background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
-    transform:skewX(-18deg);
-    animation:barShine 2.2s linear infinite;
-  }
-  @keyframes barShine{to{left:120%}}
+/* Confetti */
+.confetti{position:fixed;z-index:9999;pointer-events:none}
 
-  .btn{
-    margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;
-    background:linear-gradient(90deg,#ffcf5e,#ff7d00);color:#E8F5E9;font-weight:800;
-    box-shadow:0 10px 30px rgba(255,140,0,0.22), 0 2px 6px rgba(0,0,0,0.18);
-    transition:transform .18s, box-shadow .18s;
-    letter-spacing:0.4px;
-  }
-  .btn:active{transform:translateY(2px) scale(.995)}
-  .btn.hoverPulse{animation:pulse 1.8s infinite}
-  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-
-  .small{font-size:.98rem;color:#ffe9b3;margin-top:10px}
-
-  /* MEMBERSHIPS */
-  .memberships{max-width:1000px;margin:18px auto;padding:14px}
-
-  /* KEY & Survey */
-  .key-survey{max-width:920px;margin:10px auto;padding:12px 16px;background:linear-gradient(180deg, rgba(255,140,0,0.02), rgba(0,0,0,0.02));border-radius:14px;border:1px solid rgba(255,140,0,0.06)}
-  .key-survey h4{color:#ffe7b0;margin-bottom:6px}
-  .key-survey input[type="text"]{padding:14px;border-radius:12px;border:none;width:100%;max-width:320px;font-size:1rem;margin-top:6px}
-  .ghost{background:transparent;border:2px solid rgba(255,190,90,0.14);color:#ffdca8;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:700}
-  .voteResult{margin-top:8px;color:#fff3d6;font-size:.98rem}
-
-  /* Overlays */
-  #overlayLoad,#overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.7));z-index:260}
-  .modal{background:linear-gradient(180deg,#3b1800,#2a1200);border-radius:16px;padding:18px; width:94%;max-width:560px;color:#fff8e5;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(255,170,0,0.18);transform:translateY(18px);animation:modalIn .48s cubic-bezier(.2,.9,.3,1) forwards}
-  @keyframes modalIn{to{transform:translateY(0)}}
-  .modal h3{color:#ffd76a;margin-bottom:10px}
-  .instruction{background:#2b0f00;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #ff8a00;color:#ffeccf}
-  .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-
-  .copyBtn{background:linear-gradient(90deg,#ffd54f,#ff8a00);color:#2b1100;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-  .copyBtn:active{transform:translateY(2px)}
-  .modal .ghost{background:transparent;border:2px solid #ffb86b;color:#ffecae;padding:10px 12px;border-radius:10px}
-
-  .spinner{width:76px;height:76px;border-radius:50%;border:10px solid rgba(255,210,120,0.12);border-top-color:#ffd54f;animation:spin 1s linear infinite;margin-bottom:10px}
-  @keyframes spin{to{transform:rotate(360deg)}}
-
-  .confetti{position:fixed;z-index:9999;pointer-events:none}
-
-  footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
-
-  @media(min-width:800px){
-    .container{padding:28px}
-    .card{width:260px}
-    .card:nth-child(odd){animation-duration:.64s}
-    .card:nth-child(even){animation-duration:.7s}
-  }
+/* Footer */
+footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
 </style>
+
 </head>
 <body>
 <div class="top-bar" role="banner">
-    <div>🔥<strong>Robux × Steal a Brainrot</strong></div>
-    <div id="serverCount" aria-live="polite">Estamos trabajando en nuestras traducciones a ingles</div>
-  </div>
-<body style="background-color: #F0F9E8; color: #81C784;"
-  <header>
-    <h1>TIENDA DE ROBUX ⏣</h1>
-    <h2>Versión 10.0.10</h2>
-    <p class="small">SIN V.I.P</p>
-  </header>
-
-  <!-- Paquetes -->
-  <main class="container" id="paquetes">
-    <div class="card">
+  <div>🔥 <strong>Robux × Gamer Shop</strong></div>
+  <div id="serverCount" aria-live="polite">Todos los paquetes disponibles</div>
+</div><header>
+<h1>TIENDA DE ROBUX ⏣</h1>
+<h2>Versión 10.0.10</h2>
+<p class="small">SIN V.I.P</p>
+</header><main class="container" id="paquetes">
+<!-- Paquetes Robux -->
+<div class="card">
   <div class="robux-title">⏣ 40 robux</div>
-  <div class="price-row">
-    <div class="price">$0.75</div>
-    <div class="price-bar" aria-hidden="true"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2040%20robux%20por%20$0.75','_blank')">Comprar</button>
-  <div class="small">-9% descuento</div>
-</div>
-
-    <div class="card">
-  <div class="robux-title">⏣ 80 robux</div>
-  <div class="price-row">
-    <div class="price">$1.75</div>
-    <div class="price-bar"></div>
-  </div>
-
-  <button class="btn" onclick="comprarPaquete('80 robux - $1.75')">Comprar</button>
-
+  <div class="price-row"><div class="price">$0.49</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$0.49','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/FQSA5FJ7PQD96','_blank')">Comprar PayPal $1.49</button>
   <div class="small">-3% descuento</div>
 </div>
 
-<script>
-  function comprarPaquete(nombrePaquete) {
-    const numero = "50373826693"; // tu número de WhatsApp
-    const mensaje = encodeURIComponent("Hola, quiero comprar el paquete: " + nombrePaquete);
-    const url = "https://wa.me/" + numero + "?text=" + mensaje;
-    window.location.href = url;
-  }
-</script>
 
-    <div class="card">
+<div class="card">
+  <div class="robux-title">⏣ 80 robux</div>
+  <div class="price-row"><div class="price">$1.75</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$1.75','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/HSXVW9AB5D92J','_blank')">Comprar PayPal $1.49</button>
+  <div class="small">-3% descuento</div>
+</div>
+
+<div class="card">
   <div class="robux-title">⏣ 400 robux</div>
-  <div class="price-row">
-    <div class="price">$6.25</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn hoverPulse" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar</button>
+  <div class="price-row"><div class="price">$6.25</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/WDVMGGR57EWTQ','_blank')">Comprar PayPal $5.99</button>
   <div class="small">-5% descuento</div>
 </div>
 
-    <div class="card">
+<div class="card">
   <div class="robux-title">⏣ 800 robux</div>
-  <div class="price-row">
-    <div class="price">$12.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20800%20robux%20por%20$12.99','_blank')">Comprar</button>
+  <div class="price-row"><div class="price">$12.99</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20800%20robux%20por%20$12.99','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/VDHDJLRPUULLS','_blank')">Comprar PayPal $12.99</button>
   <div class="small">-5% descuento</div>
 </div>
 
-    <div class="card">
+<div class="card">
   <div class="robux-title">⏣ 1000 robux</div>
-  <div class="price-row">
-    <div class="price">$14.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%201000%20robux%20por%20$14.99','_blank')">Comprar</button>
+  <div class="price-row"><div class="price">$14.99</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%201000%20robux%20por%20$14.99','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/QYWRFNA48LCFU','_blank')">Comprar PayPal $14.99</button>
   <div class="small">Paquete PREMIUM</div>
 </div>
 
-   <div class="card">
-  <div class="robux-title">⏣ 2,000 robux</div>
-  <div class="price-row">
-    <div class="price">$24.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%202000%20robux%20por%20$24.99','_blank')">Comprar</button>
+<div class="card">
+  <div class="robux-title">⏣ 2000 robux</div>
+  <div class="price-row"><div class="price">$24.99</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%202000%20robux%20por%20$24.99','_blank')">Comprar WhatsApp</button>
+  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/TLNU37GRGHVG4','_blank')">Comprar PayPal $24.99</button>
   <div class="small">DISPONIBLE CON V.I.P!</div>
 </div>
-  </main>
-
-  <!-- Membresías -->
-  <section class="memberships" aria-labelledby="membersTitle">
-    <h3 id="membersTitle" style="color:#ffdca8;margin-bottom:10px">MEBRESIAS ESPECIALES</h3>
-    <div class="container" style="gap:12px;">
-
-      <div class="card">
-  <div class="robux-title">Membresía 4 días — +25% robux</div>
-  <div class="price-row">
-    <div class="price">$1.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%204%20días%20+25%25','_blank')">Suscribirse</button>
-  <div class="small">extra robux en paquetes</div>
-</div>
-
-      <div class="card">
-  <div class="robux-title">Membresía 8 días — +25% robux</div>
-  <div class="price-row">
-    <div class="price">$2.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%208%20días%20+25%25','_blank')">Suscribirse</button>
-  <div class="small">extra robux en paquetes</div>
-</div>
-
-      <div class="card">
-  <div class="robux-title">Membresía 15 días — +25% robux</div>
-  <div class="price-row">
-    <div class="price">$4.99</div>
-    <div class="price-bar"></div>
-  </div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%2015%20días%20+25%25','_blank')">Suscribirse</button>
-  <div class="small">Extra robux en paquetes!</div>
-      </div>
+<!-- Membresías -->
+<section class="memberships" aria-labelledby="membersTitle">
+  <h3 id="membersTitle" style="color:#ffdca8;margin-bottom:10px">MEMBRESÍAS ESPECIALES</h3>
+  <div class="container" style="gap:12px;">
+  
+    <div class="card">
+      <div class="robux-title">Membresía 4 días — +25% robux</div>
+      <div class="price-row"><div class="price">$1.99</div><div class="price-bar"></div></div>
+      <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%204%20días%20+25%25','_blank')">WhatsApp</button>
+      <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/MF96TPN6YAADY','_blank')">PayPal $1.99</button>
+      <div class="small">Extra robux en paquetes</div>
     </div>
-  </section>
-
-  <!-- Key / Encuesta -->
-  <section style="max-width:940px;margin:12px auto;padding:12px">
-    <div class="key-survey" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <div style="text-align:left;min-width:260px">
-        <h4>🔐 IXXXX</h4>
-        <input id="keyInput" type="text" placeholder="Opcion disponible" aria-label="Key secreta">
-        <div style="margin-top:10px">
-          <button class="btn" onclick="checkKey()">Verificar 🔐</button>
-        </div>
-      </div>
-      <div style="min-width:260px;text-align:left">
-        <h4>🗳️ Encuesta</h4>
-        <p class="small">¿Quieres que traigamos más paquetes?</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="ghost" onclick="vote('100 robux')">100 robux</button>
-          <button class="ghost" onclick="vote('250 robux')">250 robux</button>
-          <button class="ghost" onclick="vote('600 robux')">600 robux</button>
-        </div>
-        <p id="voteResult" class="voteResult"></p>
-      </div>
+    
+    <div class="card">
+      <div class="robux-title">Membresía 8 días — +25% robux</div>
+      <div class="price-row"><div class="price">$2.99</div><div class="price-bar"></div></div>
+      <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%208%20días%20+25%25','_blank')">WhatsApp</button>
+      <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/6GPE2QLFQ7WYS','_blank')">PayPal $2.99</button>
+      <div class="small">Extra robux en paquetes</div>
     </div>
-  </section>
-
-  <!-- Overlay carga -->
-  <div id="overlayLoad" aria-hidden="true">
-    <div style="display:flex;flex-direction:column;align-items:center">
-      <div class="spinner" role="status" aria-label="Cargando"></div>
-      <div style="color:#ffeccf;margin-top:10px;font-weight:700">Cargando…</div>
+    
+    <div class="card">
+      <div class="robux-title">Membresía 15 días — +25% robux</div>
+      <div class="price-row"><div class="price">$4.99</div><div class="price-bar"></div></div>
+      <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Hola,%20quiero%20comprar%20Membresía%2015%20días%20+25%25','_blank')">WhatsApp</button>
+      <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/2RXSZ55D3FUVN','_blank')">PayPal $4.99</button>
+      <div class="small">Extra robux en paquetes!</div>
     </div>
-   </div>
+    
   </div>
-
-  <footer>© 2025 New Brothers Studios LLC — NOHEMXS</footer>
-
-<script>
-   
-  /* Key simple (mantén las keys que ya tenías) */
-  const validKeys = ["ANDZXKEY","NEWKEY","BROTHERKEY","ROBUXKEY","MEMKEY","NOHEMZXKEY"];
-  function checkKey(){
-    const k = (document.getElementById('keyInput')||{}).value || '';
-    if(validKeys.includes(String(k).trim().toUpperCase())){
-      alert('✅ Key aceptada — paquetes secretos desbloqueados.');
-      // show secret section if it exists (kept for compatibility)
-      const secret = document.getElementById('secret');
-      if(secret) secret.style.display = 'block';
-      spawnConfetti();
-    } else {
-      alert('❌ Key incorrecta');
-      // pequeño shake
-      const input = document.getElementById('keyInput');
-      input.style.transition='transform .08s'; input.style.transform='translateX(-6px)';
-      setTimeout(()=>{ input.style.transform='translateX(6px)'; },80);
-      setTimeout(()=>{ input.style.transform='translateX(0)'; },160);
-    }
-  }
-
-  /* Confetti (simple) */
-  function spawnConfetti(){
-    const count = 36;
-    for(let i=0;i<count;i++){
-      const d = document.createElement('div');
-      d.className = 'confetti';
-      const size = Math.floor(Math.random()*10)+8;
-      d.style.left = (20 + Math.random()*60) + '%';
-      d.style.top = '-10px';
-      d.style.width = size + 'px';
-      d.style.height = Math.floor(size*0.6) + 'px';
-      d.style.background = `hsl(${Math.random()*40 + 20},90%,55%)`;
-      d.style.opacity = Math.random()*0.9 + 0.2;
-      d.style.borderRadius = '2px';
-      d.style.transform = `rotate(${Math.random()*360}deg)`;
-      d.style.zIndex = 9999;
-      d.style.transition = `transform 2.6s linear, top 2.6s linear, left 2.6s linear, opacity .5s linear`;
-      document.body.appendChild(d);
-      setTimeout(()=>{ d.style.top = (window.innerHeight + 40) + 'px'; d.style.left = (Math.random()*100) + '%'; d.style.transform = `rotate(${Math.random()*720}deg)` },20);
-      setTimeout(()=>{ d.remove(); },3000);
-    }
-  }
-
-  /* Encuesta */
-  function vote(choice){
-    document.getElementById('voteResult').innerText = "✅ Gracias por votar por " + choice + "!";
-    // pulse effect
-    const el = document.getElementById('voteResult');
-    el.style.transform='scale(1.02)'; setTimeout(()=>el.style.transform='scale(1)',220);
-  }
-
-</script>
+</section>
+</section><footer>© 2025 New Brothers Studios LLC — Paypal Company ®</footer>
 </body>
 </html>
