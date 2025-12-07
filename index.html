@@ -495,8 +495,7 @@ saveSpin();
 },4000);
 }
 
-/* TIEMPO 3 HORAS */
-const CD = 3 * 60 * 60 * 1000;
+const CD = 5 * 1000; // 5 segundos
 
 function saveSpin(){
 localStorage.setItem("lastSpin", Date.now());
@@ -540,9 +539,9 @@ r.innerText = "PERDISTE 🙃";
 return;
 }
 
-if (prize === "BONO +25%"){
-r.innerText = "BONO +25% GANADO";
-window.open("https://wa.me/50373826693?text=Gané%20BONO%2025%", "_blank");
+if (prize === "BONO de 80 robux"){
+r.innerText = "BONO 80 robux GANADO";
+window.open("https://wa.me/50373826693?text=Gané Bono de 80 robux por una recarga de 400 robux", "_blank");
 return;
 }
 
