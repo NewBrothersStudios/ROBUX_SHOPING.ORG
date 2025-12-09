@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruleta Admin</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #e0f7fa; }
+  button { margin: 5px; padding: 10px 20px; font-size: 16px; }
+  #resultado { margin-top: 20px; font-weight: bold; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<h2>Botones de Ruleta</h2>
+<button id="spinBtn">+1 Spin</button>
+<button id="suerteBtn">Suerte ×2</button>
+<button id="girarBtn">Girar Ruleta</button>
+
+<p id="resultado"></p>
+
+<script>
+  let spinCount = 1;
+  let suerteMultiplier = 1;
+
+  const spinBtn = document.getElementById("spinBtn");
+  const suerteBtn = document.getElementById("suerteBtn");
+  const girarBtn = document.getElementById("girarBtn");
+  const resultadoP = document.getElementById("resultado");
+
+  spinBtn.addEventListener("click", () => {
+    spinCount += 1;
+    alert("+1 Spin agregado. Total: " + spinCount);
+  });
+
+  suerteBtn.addEventListener("click", () => {
+    suerteMultiplier = 2;
+    alert("Suerte ×2 activada!");
+  });
+
+  girarBtn.addEventListener("click", () => {
+    const rand = Math.random() * 100;
+    let resultado;
+
+    if (rand < 70) {
+      resultado = "Perdiste";
+    } else if (rand < 70 + 20 * suerteMultiplier) {
+      resultado = "Bono";
+    } else {
+      resultado = "V.I.P Descuento";
+    }
+
+    // 500 Robux nunca sale
+    resultadoP.textContent = "Resultado: " + resultado;
+  });
+</script>
+
+</body>
+</html>
