@@ -22,3 +22,29 @@ let ruletaSuerteSpins = 0;
 let ruletaSuerteLuck = 1;
 let luckyRoyaleSpins = 0;
 let luckyRoyaleLuck = 1;
+
+
+function applyKey() {
+  const input = document.getElementById("keyInput").value.trim().toUpperCase();
+  const msg = document.getElementById("keyMsg");
+
+  if(keys[input]){
+    const k = keys[input];
+
+    if(k.roulette === "ruletaSuerte"){
+      ruletaSuerteSpins += k.spins;
+      ruletaSuerteLuck *= k.luck;
+      msg.innerText = `✅ Ruleta de la Suerte: +${k.spins} giros, suerte ×${k.luck}`;
+      // Bloquear 500 robux si aplica
+      ruletaSuerteBlock500 = k.block500 || false;
+    } else if(k.roulette === "luckyRoyale"){
+      luckyRoyaleSpins += k.spins;
+      luckyRoyaleLuck *= k.luck;
+      msg.innerText = `✅ Lucky Royale: +${k.spins} giros, suerte ×${k.luck}`;
+    }
+
+    document.getElementById("keyInput").value = "";
+  } else {
+    msg.innerText = "❌ Key inválida";
+  }
+}
