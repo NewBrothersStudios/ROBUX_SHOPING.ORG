@@ -1,0 +1,24 @@
+// Keys definidas
+const keys = {
+  "123KEY": { roulette: "ruletaSuerte", spins: 2, luck: 1 },
+  "432KEY": { roulette: "ruletaSuerte", spins: 0, luck: 1.5, block500: true },
+  "788KEY": { roulette: "ruletaSuerte", spins: 2, luck: 1 },
+  "122KEY": { roulette: "ruletaSuerte", spins: 1, luck: 1 },
+  "878KEY": { roulette: "ruletaSuerte", spins: 1, luck: 1 },
+  "871KEY": { roulette: "ruletaSuerte", spins: 0, luck: 0.6 },
+  "342KEY": { roulette: "ruletaSuerte", spins: 0, luck: 0.2 },
+  "781KEY": { roulette: "ruletaSuerte", spins: 2, luck: 1 },
+  "091KEY": { roulette: "luckyRoyale", spins: 2, luck: 1 },
+  "166KEY": { roulette: "luckyRoyale", spins: 1, luck: 1 },
+  "1002KEY": { roulette: "luckyRoyale", spins: 3, luck: 1 },
+  "1081KEY": { roulette: "luckyRoyale", spins: 0, luck: 0.4 },
+  "971KEY": { roulette: "luckyRoyale", spins: 2, luck: 1 },
+  "APIKEY": { roulette: "ruletaSuerte", spins: 1, luck: 1 },
+  "DBS12KEY": { roulette: "ruletaSuerte", spins: 1, luck: 1 }
+};
+
+// Variables globales de giros y suerte
+let ruletaSuerteSpins = 0;
+let ruletaSuerteLuck = 1;
+let luckyRoyaleSpins = 0;
+let luckyRoyaleLuck = 1;
