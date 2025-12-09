@@ -1,25 +1,22 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLZd_PIRJ-ikZCOcJ-wCXJucLYzmDy9xg",
+    authDomain: "admin-abuse-3b63d.firebaseapp.com",
+    databaseURL: "https://admin-abuse-3b63d-default-rtdb.firebaseio.com",
+    projectId: "admin-abuse-3b63d",
+    storageBucket: "admin-abuse-3b63d.firebasestorage.app",
+    messagingSenderId: "684723344818",
+    appId: "1:684723344818:web:89e8be3464628806efc0ab",
+    measurementId: "G-ZZ3HVEK0Q5"
+  };
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCLZd_PIRJ-ikZCOcJ-wCXJucLYzmDy9xg",
-  authDomain: "admin-abuse-3b63d.firebaseapp.com",
-  databaseURL: "https://admin-abuse-3b63d-default-rtdb.firebaseio.com",
-  projectId: "admin-abuse-3b63d",
-  storageBucket: "admin-abuse-3b63d.firebasestorage.app",
-  messagingSenderId: "684723344818",
-  appId: "1:684723344818:web:89e8be3464628806efc0ab",
-  measurementId: "G-ZZ3HVEK0Q5"
-};
+  // Inicializar Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+  // Ejemplo: agregar un valor
+  db.ref("adminAbuses").push({ action: "Test", fecha: Date.now() });
+</script>
