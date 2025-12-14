@@ -716,52 +716,55 @@ function payVIPWhats() {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROBUX GAMER</title>
+
 <style>
 /* ====== Base y Reset ====== */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#0c0c0c 0%, #1a1a1a 100%); color:#fff; overflow-x:hidden; text-align:center; padding-top:88px;}
+html,body{height:100%; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background: linear-gradient(180deg, #001a0d 0%, #002b1a 100%); color:#fff; overflow-x:hidden; text-align:center; padding-top:88px;}
 a{text-decoration:none}/* Top bar */
-.top-bar{position:fixed;top:0;left:0;width:100%;background:linear-gradient(90deg,#ff6f00,#ffb300);padding:16px 18px;display:flex;justify-content:space-between;align-items:center;color:#fff;z-index:140;border-bottom:3px solid rgba(255,140,0,0.14);box-shadow:0 6px 24px rgba(0,0,0,0.45);}
+.top-bar{position:fixed;top:0;left:0;width:100%;background: linear-gradient(90deg, #00ffaa, #00cccc); /* Verde neon a celeste */
+border-bottom: 3px solid rgba(0, 255, 204, 0.3);
+box-shadow: 0 6px 24px rgba(0, 255, 204, 0.3);}
 .top-bar div{font-weight:700}
 
 /* Header */
 header{margin-top:6px;padding:8px 12px}
-h1{font-size:2rem;color:#ff5722;letter-spacing:0.6px;text-shadow:0 6px 18px rgba(255,87,34,0.2),0 0 22px rgba(255,152,0,0.1);}
-h2{color:#ffca28;font-weight:500;margin-top:6px;font-size:1rem;}
-.small{font-size:.95rem;color:#ffeb3b;margin-top:8px}
+h1{font-size:2rem;color:#00ffff;letter-spacing:0.6px;text-shadow:0 0 20px rgba(0, 255, 255, 0.6),0 0 30px rgba(0, 255, 204, 0.4);}
+h2{color:#00ffaa;font-weight:500;margin-top:6px;font-size:1rem;}
+.small{font-size:.95rem;color:#00ffdd;margin-top:8px}
 
 /* Container */
 .container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
 
 /* Card estilo gamer */
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));width:94%;max-width:420px;border-radius:18px;padding:18px;display:flex;flex-direction:column;align-items:center;box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(255,140,0,0.03);transition:transform .28s,box-shadow .28s;position:relative;overflow:hidden;border:1px solid rgba(255,170,0,0.08);}
-.card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 22px 50px rgba(255,150,0,0.16);}
-.robux-title{font-size:1.35rem;color:#e1bbee;margin-bottom:8px;font-weight:700;text-shadow:0 4px 18px rgba(255,170,0,0.06);}
+.card{background:linear-gradient(180deg, rgba(0,255,204,0.08), rgba(0,255,170,0.04));width:94%;max-width:420px;border-radius:18px;padding:18px;display:flex;flex-direction:column;align-items:center;box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(0,255,204,0.1);transition:transform .28s,box-shadow .28s;position:relative;overflow:hidden;border:1px solid rgba(0, 255, 204, 0.3);}
+.card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 22px 50px rgba(0, 255, 204, 0.3);}
+.robux-title{font-size:1.35rem;color:#00ffdd;margin-bottom:8px;font-weight:700;text-shadow:0 0 15px rgba(0, 255, 204, 0.5);}
 .price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
-.price{font-weight:800;color:#4caf50;font-size:1.15rem}
-.price-bar{width:92%;height:12px;border-radius:10px;background:linear-gradient(90deg,#ffd54f,#ff8a00);margin-top:10px;box-shadow:0 6px 30px rgba(255,140,0,0.12) inset;position:relative;overflow:hidden;}
+.price{font-weight:800;color:#00ffaa;font-size:1.15rem}
+.price-bar{width:92%;height:12px;border-radius:10px;background:linear-gradient(90deg,#00ffaa,#00cccc);margin-top:10px;box-shadow:0 6px 30px rgba(0, 255, 204, 0.3) inset;position:relative;overflow:hidden;}
 .price-bar::after{content:"";position:absolute;left:-30%;top:0;width:50%;height:100%;background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0));transform:skewX(-18deg);animation:barShine 2.2s linear infinite;}
 @keyframes barShine{to{left:120%}}
-.btn{margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#ffcf5e,#ff7d00);color:#2b1100;font-weight:800;box-shadow:0 10px 30px rgba(255,140,0,0.22), 0 2px 6px rgba(0,0,0,0.18);}
+.btn{margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#00ffaa,#00cccc);color:#000;font-weight:800;box-shadow:0 10px 30px rgba(0, 255, 204, 0.4), 0 2px 6px rgba(0,0,0,0.18);}
 .btn:active{transform:translateY(2px) scale(.995)}
-.btn:hover{filter:brightness(1.05)}
+.btn:hover{filter:brightness(1.15)}
 .memberships{max-width:1000px;margin:18px auto;padding:14px;}
 
 /* Modal PayPal / WhatsApp */
 #overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:260}
-.modal{background:linear-gradient(180deg,#3b1800,#2a1200);border-radius:16px;padding:18px;width:94%;max-width:560px;color:#fff8e5;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(255,170,0,0.18);}
-.modal h3{color:#ffd76a;margin-bottom:10px}
-.instruction{background:#2b0f00;padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #ff8a00;color:#ffeccf}
+.modal{background:linear-gradient(180deg,rgba(0,50,40,0.9),rgba(0,30,30,0.9));border-radius:16px;padding:18px;width:94%;max-width:560px;color:#e0fffe;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(0, 255, 204, 0.4);}
+.modal h3{color:#00ffdd;margin-bottom:10px}
+.instruction{background:rgba(0,40,30,0.8);padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #00ffaa;color:#e0fffe}
 .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-.copyBtn{background:linear-gradient(90deg,#ffd54f,#ff8a00);color:#2b1100;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.copyBtn{background:linear-gradient(90deg,#00ffaa,#00cccc);color:#000;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
 .copyBtn:active{transform:translateY(2px)}
-.ghost{background:transparent;border:2px solid #ffb86b;color:#ffecae;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+.ghost{background:transparent;border:2px solid #00ffdd;color:#00ffdd;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700}
 
 /* Confetti */
 .confetti{position:fixed;z-index:9999;pointer-events:none}
 
 /* Footer */
-footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
+footer{margin:28px 0 80px;color:#00ffdd;font-size:.95rem;text-shadow:0 0 10px rgba(0, 255, 204, 0.6)}
 </style>
 
 <style>
