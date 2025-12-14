@@ -765,115 +765,117 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
 </style>
 
 <style>
-/* CONTENEDOR GENERAL */
-#videoIntroContainer {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    z-index: 999998;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+/* SOLO ACTIVAR EN CELULAR (media query) */
+@media (max-width: 768px) {
+    /* CONTENEDOR GENERAL (solo móvil) */
+    #videoIntroContainer {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        z-index: 999998;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 
-/* VIDEO OPTIMIZADO PARA CELULAR */
-#videoIntro {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
-    z-index: 999999;
-    background: black;
-}
+    /* VIDEO OPTIMIZADO PARA CELULAR */
+    #videoIntro {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        z-index: 999999;
+        background: black;
+    }
 
-/* LOADER: ⏣ ROBUX GIRANDO EN GRIS */
-#robuxLoader {
-    width: 200px;
-    height: 200px;
-    background: url('https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/0/4/a047bb6e4236686095168948698596f6ceb059e8.gif') center/contain no-repeat;
-    animation: pulseGlow 1.8s infinite;
-    filter: brightness(1.2) contrast(1.1); /* Hace que el gris brille un poco más */
-}
+    /* LOADER: ⏣ GRIS GIRANDO (estilo Roblox oficial) */
+    #robuxLoader {
+        width: 180px;
+        height: 180px;
+        background: url('https://i.imgur.com/2Z0J3tP.gif') center/contain no-repeat; /* GIF gris ⏣ girando con glow */
+        animation: pulseGlow 1.8s infinite;
+    }
 
-.loader-text {
-    margin-top: 50px;
-    color: #aaaaaa;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-shadow: 0 0 15px rgba(150, 150, 150, 0.8);
-    animation: pulse 1.5s infinite;
-}
+    .loader-text {
+        margin-top: 50px;
+        color: #bbbbbb;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 0 0 15px rgba(180, 180, 180, 0.8);
+        animation: pulse 1.5s infinite;
+    }
 
-@keyframes pulseGlow {
-    0% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
-    50% { box-shadow: 0 0 40px rgba(200, 200, 200, 0.8); }
-    100% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
-}
+    @keyframes pulseGlow {
+        0% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
+        50% { box-shadow: 0 0 45px rgba(200, 200, 200, 0.9); }
+        100% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
+    }
 
-@keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
+    @keyframes pulse {
+        0% { opacity: 0.7; }
+        50% { opacity: 1; }
+        100% { opacity: 0.7; }
+    }
 }
 </style>
 
-<!-- CONTENEDOR CON LOADER ⏣ GRIS + VIDEO -->
-<div id="videoIntroContainer">
-    <!-- Loader Robux gris girando -->
+<!-- INTRO SOLO PARA CELULAR -->
+<div id="videoIntroContainer" style="display:none;">
+    <!-- Loader ⏣ gris girando -->
     <div id="robuxLoader"></div>
     <div class="loader-text">CARGANDO...</div>
     
-    <!-- Video principal -->
+    <!-- Video nuevo -->
     <video id="videoIntro" autoplay muted playsinline>
-        <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213204452.mp4">
+        <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213204452.mp4" type="video/mp4">
         Tu cel no soporta video 😭
     </video>
 </div>
 
 <script>
-// Cuando el video carga y empieza, quitar el loader
-const video = document.getElementById('videoIntro');
-const robuxLoader = document.getElementById('robuxLoader');
-const loaderText = document.querySelector('.loader-text');
-const container = document.getElementById('videoIntroContainer');
+// Detectar si es CELULAR (ancho <= 768px)
+if (window.innerWidth <= 768) {
+    const container = document.getElementById('videoIntroContainer');
+    container.style.display = 'flex'; // Mostrar solo en móvil
 
-video.addEventListener('canplay', hideLoader);
-video.addEventListener('playing', hideLoader);
+    const video = document.getElementById('videoIntro');
+    const robuxLoader = document.getElementById('robuxLoader');
+    const loaderText = document.querySelector('.loader-text');
 
-function hideLoader() {
-    robuxLoader.style.opacity = '0';
-    loaderText.style.opacity = '0';
-    setTimeout(() => {
-        robuxLoader.remove();
-        loaderText.remove();
-    }, 600);
+    // Quitar loader cuando video carga
+    video.addEventListener('canplay', hideLoader);
+    video.addEventListener('playing', hideLoader);
+
+    function hideLoader() {
+        robuxLoader.style.opacity = '0';
+        loaderText.style.opacity = '0';
+        setTimeout(() => {
+            robuxLoader.remove();
+            loaderText.remove();
+        }, 600);
+    }
+
+    // Quitar todo cuando termine el video
+    video.addEventListener('ended', () => {
+        container.style.opacity = '0';
+        container.style.transition = 'opacity 1s ease';
+        setTimeout(() => {
+            container.remove();
+        }, 1000);
+    });
+
+    // Seguridad: quitar loader a los 8 seg, todo a los 20 seg
+    setTimeout(hideLoader, 8000);
+    setTimeout(() => { if (container) container.remove(); }, 20000);
 }
-
-// Cuando termine el video → quitar todo
-video.addEventListener('ended', () => {
-    container.style.opacity = '0';
-    container.style.transition = 'opacity 1s ease';
-    setTimeout(() => {
-        container.remove();
-    }, 1000);
-});
-
-// Seguridad: quitar loader a los 8 seg si tarda mucho
-setTimeout(hideLoader, 8000);
-
-// Si falla todo, quitar a los 20 seg
-setTimeout(() => {
-    if (container) container.remove();
-}, 20000);
 </script>
-
 </head>
 <body>
 <div class="top-bar" role="banner">
