@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -713,6 +712,93 @@ function payVIPWhats() {
 }
 </script>
 
+<style>
+/* ========= OVERRIDE ROBUX GREEN + CYAN ========= */
+:root{
+  --robux-green:#00ff9c;
+  --robux-cyan:#00d9ff;
+}
+
+/* BURBUJA */
+#floatingBubble{
+  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  box-shadow:0 0 22px rgba(0,217,255,.9) !important;
+}
+
+/* OVERLAY RULETA */
+#wheelContainer{
+  background:radial-gradient(circle at top,#043a36,#050606) !important;
+}
+
+/* CAJA RULETA */
+#wheelBox{
+  background:linear-gradient(160deg,#0f0f10,#090b0c) !important;
+  box-shadow:0 0 35px rgba(0,255,156,.35) !important;
+}
+
+/* RULETA */
+#wheel{
+  border-color:var(--robux-cyan) !important;
+  box-shadow:
+    0 0 22px rgba(0,217,255,.8),
+    inset 0 0 25px rgba(0,255,156,.6) !important;
+}
+
+/* FLECHA */
+#pointer{
+  color:var(--robux-green) !important;
+  text-shadow:0 0 10px rgba(0,255,156,.8) !important;
+}
+
+/* BOTÓN GIRAR */
+#spinBtn{
+  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  color:#000 !important;
+  box-shadow:0 0 18px rgba(0,217,255,.7) !important;
+}
+
+/* RESULTADO */
+#result{
+  color:var(--robux-green) !important;
+}
+
+/* CASILLAS */
+.buyBox{
+  background:linear-gradient(145deg,#042f33,#041f22) !important;
+  border-color:var(--robux-cyan) !important;
+  color:var(--robux-green) !important;
+}
+
+/* BUNDLES */
+.bundle{
+  border-color:var(--robux-green) !important;
+  box-shadow:0 0 18px rgba(0,255,156,.35) !important;
+}
+.bundle h2{ color:var(--robux-cyan) !important; }
+.bundle button{
+  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  color:#000 !important;
+}
+
+/* MODALES */
+.modal-box,
+.vip-card,
+.vip-pay-card{
+  border-color:var(--robux-cyan) !important;
+  box-shadow:0 0 25px rgba(0,217,255,.45) !important;
+}
+
+/* VIP */
+.vip-badge{
+  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  box-shadow:0 0 18px rgba(0,217,255,.8) !important;
+}
+.vip-main-btn{
+  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  color:#000 !important;
+}
+</style>
+
 <!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8" />
@@ -810,7 +896,7 @@ footer{margin:28px 0 80px;color:#00ffdd;font-size:.95rem;text-shadow:0 0 10px rg
 <!-- FAKE LOADER SOLO PARA CELULAR -->
 <div id="fakeLoader" style="display:none;">
     <div class="robux-symbol">⏣</div>
-    <div class="loading-text" id="dots">Cargando</div>
+    <div class="loading-text" id="dots">Cargando recursos</div>
 </div>
 
 <script>
@@ -819,15 +905,15 @@ if (window.innerWidth <= 768) {
     const loader = document.getElementById('fakeLoader');
     loader.style.display = 'flex';
 
-    // Animación de puntos: Cargando. → Cargando.. → Cargando... → repite
+    // Animación de puntos: Cargando recursos. → Cargando recursos.. → Cargando recursos... → repite
     const dotsText = document.getElementById('dots');
     let dotCount = 0;
     const dotCycle = setInterval(() => {
         dotCount = (dotCount + 1) % 4;
-        dotsText.textContent = 'Cargando' + '.'.repeat(dotCount);
+        dotsText.textContent = 'Cargando recursos' + '.'.repeat(dotCount);
     }, 500);
 
-    // Después de 8 segundos exactos: quitar todo con fade out
+    // Después de 6 segundos exactos: quitar todo con fade out
     setTimeout(() => {
         clearInterval(dotCycle); // parar los puntos
         loader.style.opacity = '0';
@@ -835,16 +921,195 @@ if (window.innerWidth <= 768) {
         setTimeout(() => {
             loader.remove();
         }, 1000);
-    }, 8000);
+    }, 6000);
 }
 </script>
 </head>
 <body>
+
+<style>
+:root{
+  --green:#00ff9c;
+  --cyan:#00d9ff;
+  --bg:#050606;
+}
+
+/* ================= BASE ================= */
+body{
+  margin:0;
+  background:var(--bg);
+  color:white;
+  font-family:Arial, sans-serif;
+}
+
+/* ================= TOP POINTS ================= */
+#topPoints{
+  position:fixed;
+  top:12px;
+  right:12px;
+  background:linear-gradient(135deg,var(--green),var(--cyan));
+  color:#000;
+  padding:10px 16px;
+  border-radius:14px;
+  font-weight:900;
+  box-shadow:0 0 18px rgba(0,255,204,.6);
+  z-index:1000;
+}
+
+/* ================= LOGIN ================= */
+#loginScreen{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, #08211a, #050606);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.login-card{
+  width:90%;
+  max-width:380px;
+  background:#0f0f10;
+  border-radius:18px;
+  padding:30px 25px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(0,255,156,.3);
+}
+
+.login-card h1{
+  margin-bottom:20px;
+}
+
+#loginForm{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .6s ease;
+}
+#loginForm.show{ max-height:260px }
+
+.login-card input{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  background:#0b0e10;
+  border:1px solid #1f2a2a;
+  border-radius:10px;
+  color:#fff;
+}
+
+.btn-main{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  background:linear-gradient(135deg,var(--green),var(--cyan));
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#error{ color:#ff5f5f; margin-top:10px }
+
+/* ================= SHOP ================= */
+#shop{
+  display:none;
+  padding:80px 20px;
+}
+
+.card{
+  background:#0f0f10;
+  border:2px solid var(--green);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== POINTS HUD ===== -->
+<div id="topPoints">Robux Points: <span id="robuxValue">0</span></div>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>Inicia sesión</h1>
+
+    <button class="btn-main" onclick="showLogin()">Iniciar sesión</button>
+
+    <div id="loginForm">
+      <input type="text" id="username" placeholder="Usuario">
+      <input type="password" id="password" placeholder="Contraseña 🔐">
+      <button class="btn-main" onclick="login()">Entrar</button>
+      <p id="error"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= USUARIOS ================= */
+const users = [
+  {user:"Levittochimi56", pass:"levitiñochimino561", points:0},
+  {user:"Jonathan9091", pass:"Jonansa812", points:0},
+  {user:"Brianzmx17", pass:"Brianazx87", points:0},
+  {user:"NicolAZX881", pass:"NICOA192", points:0},
+  {user:"STEV172991", pass:"Stevnc8114", points:0},
+  {user:"Andersxn2012", pass:"ANDERSXN9182", points:99}
+];
+
+let currentUser = null;
+let robuxPoints = 0;
+const MAX_POINTS = 100000;
+
+/* ================= LOGIN ================= */
+function showLogin(){
+  loginForm.classList.add("show");
+}
+
+function login(){
+  const u = username.value.trim();
+  const p = password.value.trim();
+
+  const found = users.find(x => x.user === u && x.pass === p);
+  if(!found){
+    error.textContent = "Usuario o contraseña incorrectos";
+    return;
+  }
+
+  currentUser = found.user;
+  robuxPoints = found.points;
+  updatePoints(robuxPoints);
+
+  loginScreen.style.display = "none";
+  shop.style.display = "block";
+}
+
+/* ================= POINTS ================= */
+function updatePoints(val){
+  val = parseInt(val);
+  if(val > MAX_POINTS) val = MAX_POINTS;
+  if(val < 0) val = 0;
+
+  robuxPoints = val;
+  robuxValue.innerText = robuxPoints;
+}
+
+/* ================= ADMIN ================= */
+/* USO:
+   setRobuxPoints(99999)
+*/
+function setRobuxPoints(amount){
+  updatePoints(amount);
+}
+</script>
+
 <div class="top-bar" role="banner">
-  <div>🔥 <strong>Robux × Steal a Brainrot</strong></div>
-  <div id="serverCount" aria-live="polite">Todos los paquetes disponibles</div>
+  <div>🔥 <strong>Robux × Steal</strong></div>
+  <div id="serverCount" aria-live="polite">New Brothers Studios LLC</div>
 </div><header>
-<h1>Shopping robux ⏣</h1>
+<h1>SHOPPING  robux ⏣</h1>
 <h2>Versión 44.9.0</h2>
 <p class="small">⏣</p>
 </header><main class="container" id="paquetes">
@@ -857,7 +1122,9 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 40 robux</div>
   <div class="price-row"><div class="price">$0.49</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$0.49','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/FQSA5FJ7PQD96','_blank')">Comprar PayPal $1.49</button>
+
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$6,000%20points','_blank')">Comprar por 6K points</button>
+  
   <div class="small">-3% descuento</div>
 </div>
 
@@ -866,7 +1133,8 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 80 robux</div>
   <div class="price-row"><div class="price">$1.75</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$1.75','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/HSXVW9AB5D92J','_blank')">Comprar PayPal $1.49</button>
+
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$12,000%20points','_blank')">comprar por 12K points</button>
   <div class="small">-3% descuento</div>
 </div>
 
@@ -874,7 +1142,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 400 robux</div>
   <div class="price-row"><div class="price">$6.25</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/WDVMGGR57EWTQ','_blank')">Comprar PayPal $5.99</button>
+   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$19,000%20points','_blank')">Comprar por 19K points</button>
   <div class="small">-5% descuento</div>
 </div>
 
@@ -882,7 +1150,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 800 robux</div>
   <div class="price-row"><div class="price">$12.99</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20800%20robux%20por%20$12.99','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/VDHDJLRPUULLS','_blank')">Comprar PayPal $12.99</button>
+   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$27,000%20points','_blank')">Comprar por 27K points </button>
   <div class="small">-5% descuento</div>
 </div>
 
@@ -890,7 +1158,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 1000 robux</div>
   <div class="price-row"><div class="price">$14.99</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%201000%20robux%20por%20$14.99','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/QYWRFNA48LCFU','_blank')">Comprar PayPal $14.99</button>
+   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$44,000%20points','_blank')">Comprar por 44K points</button>
   <div class="small">Paquete PREMIUM</div>
 </div>
 
@@ -898,7 +1166,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 2000 robux</div>
   <div class="price-row"><div class="price">$24.99</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%202000%20robux%20por%20$24.99','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/TLNU37GRGHVG4','_blank')">Comprar PayPal $24.99</button>
+ <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$78,000%20points','_blank')">Comprar por 78K points</button>
   <div class="small">DISPONIBLE CON V.I.P!</div>
 </div>
 
@@ -913,7 +1181,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 400 robux + Alfombra × Steal a Brainrot</div>
   <div class="price-row"><div class="price">$12.49</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text= Quiero comprar bundle especial: 400 robux + Alfombra × STB por $12.49','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/RHSFJ598GWPXJ','_blank')">Comprar PayPal $11.99</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text','_blank')">Paquetes Especiales solo por WhatsApp</button>
   <div class="small">-5% descuento</div>
 </div>
 
@@ -921,7 +1189,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 800 robux + alfombra × Steal a Brainrot</div>
   <div class="price-row"><div class="price">$18.99</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text= Quiero comprar el bundle especial: 800 Robux + Alfombra × STB por $18.99','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/SSHCQ67XSKDSW','_blank')">Comprar PayPal $18.99</button>
+ <button class="btn" onclick="window.open('https://wa.me/50373826693?text','_blank')">Paquetes Especiales solo por WhatsApp</button>
   <div class="small">-5% descuento</div>
 </div>
 
@@ -929,7 +1197,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 1000 robux + comandos de administrador × Steal a Brainrot</div>
   <div class="price-row"><div class="price">$69.99</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text= Quiero comprar bundle especial: 1,000 robux + comandos de administrador × Steal a Brainrot por $69.99','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/WYJA6XEHP36MN','_blank')">Comprar PayPal $69.99</button>
+<button class="btn" onclick="window.open('https://wa.me/50373826693?text','_blank')">Paquetes Especiales solo por WhatsApp</button>
   <div class="small">Paquete PREMIUM</div>
 </div>
 
@@ -937,7 +1205,7 @@ if (window.innerWidth <= 768) {
   <div class="robux-title">⏣ 2000 robux + Láser Gun × Steal a Brainrot</div>
   <div class="price-row"><div class="price">$36.49</div><div class="price-bar"></div></div>
   <button class="btn" onclick="window.open('https://wa.me/50373826693?text= Quiero Comprar Bundle especial: 2,000 robux + Láser Gun','_blank')">Comprar WhatsApp</button>
-  <button class="btn" onclick="window.open('https://www.paypal.com/ncp/payment/TB82XRU4R6KE2','_blank')">Comprar PayPal $34.99</button>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text','_blank')">Paquetes Especiales solo por WhatsApp</button>
   <div class="small">DISPONIBLE CON V.I.P!</div>
 </div>
 
