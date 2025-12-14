@@ -765,115 +765,72 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
 </style>
 
 <style>
-/* SOLO ACTIVAR EN CELULAR (media query) */
+/* SOLO EN CELULAR */
 @media (max-width: 768px) {
-    /* CONTENEDOR GENERAL (solo móvil) */
-    #videoIntroContainer {
+    #fakeLoader {
         position: fixed;
         top: 0; left: 0;
         width: 100vw;
         height: 100vh;
         background: black;
-        z-index: 999998;
+        z-index: 999999;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        color: #bbbbbb;
+        font-family: Arial, sans-serif;
     }
 
-    /* VIDEO OPTIMIZADO PARA CELULAR */
-    #videoIntro {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        transform: translate(-50%, -50%);
-        z-index: 999999;
-        background: black;
-    }
-
-    /* LOADER: ⏣ GRIS GIRANDO (estilo Roblox oficial) */
-    #robuxLoader {
-        width: 180px;
-        height: 180px;
-        background: url('https://i.imgur.com/2Z0J3tP.gif') center/contain no-repeat; /* GIF gris ⏣ girando con glow */
+    .robux-symbol {
+        font-size: 120px;
+        margin-bottom: 40px;
         animation: pulseGlow 1.8s infinite;
     }
 
-    .loader-text {
-        margin-top: 50px;
-        color: #bbbbbb;
-        font-size: 1.8rem;
+    .loading-text {
+        font-size: 2rem;
         font-weight: bold;
-        text-shadow: 0 0 15px rgba(180, 180, 180, 0.8);
-        animation: pulse 1.5s infinite;
+        letter-spacing: 4px;
     }
 
     @keyframes pulseGlow {
-        0% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
-        50% { box-shadow: 0 0 45px rgba(200, 200, 200, 0.9); }
-        100% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
-    }
-
-    @keyframes pulse {
-        0% { opacity: 0.7; }
-        50% { opacity: 1; }
-        100% { opacity: 0.7; }
+        0% { text-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
+        50% { text-shadow: 0 0 50px rgba(200, 200, 200, 0.9); }
+        100% { text-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
     }
 }
 </style>
 
-<!-- INTRO SOLO PARA CELULAR -->
-<div id="videoIntroContainer" style="display:none;">
-    <!-- Loader ⏣ gris girando -->
-    <div id="robuxLoader"></div>
-    <div class="loader-text">CARGANDO...</div>
-    
-    <!-- Video nuevo -->
-    <video id="videoIntro" autoplay muted playsinline>
-        <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213204452.mp4" type="video/mp4">
-        Tu cel no soporta video 😭
-    </video>
+<!-- FAKE LOADER SOLO PARA CELULAR -->
+<div id="fakeLoader" style="display:none;">
+    <div class="robux-symbol">⏣</div>
+    <div class="loading-text" id="dots">Cargando</div>
 </div>
 
 <script>
-// Detectar si es CELULAR (ancho <= 768px)
+// Solo activar en celular
 if (window.innerWidth <= 768) {
-    const container = document.getElementById('videoIntroContainer');
-    container.style.display = 'flex'; // Mostrar solo en móvil
+    const loader = document.getElementById('fakeLoader');
+    loader.style.display = 'flex';
 
-    const video = document.getElementById('videoIntro');
-    const robuxLoader = document.getElementById('robuxLoader');
-    const loaderText = document.querySelector('.loader-text');
+    // Animación de puntos: Cargando. → Cargando.. → Cargando... → repite
+    const dotsText = document.getElementById('dots');
+    let dotCount = 0;
+    const dotCycle = setInterval(() => {
+        dotCount = (dotCount + 1) % 4;
+        dotsText.textContent = 'Cargando' + '.'.repeat(dotCount);
+    }, 500);
 
-    // Quitar loader cuando video carga
-    video.addEventListener('canplay', hideLoader);
-    video.addEventListener('playing', hideLoader);
-
-    function hideLoader() {
-        robuxLoader.style.opacity = '0';
-        loaderText.style.opacity = '0';
+    // Después de 8 segundos exactos: quitar todo con fade out
+    setTimeout(() => {
+        clearInterval(dotCycle); // parar los puntos
+        loader.style.opacity = '0';
+        loader.style.transition = 'opacity 1s ease';
         setTimeout(() => {
-            robuxLoader.remove();
-            loaderText.remove();
-        }, 600);
-    }
-
-    // Quitar todo cuando termine el video
-    video.addEventListener('ended', () => {
-        container.style.opacity = '0';
-        container.style.transition = 'opacity 1s ease';
-        setTimeout(() => {
-            container.remove();
+            loader.remove();
         }, 1000);
-    });
-
-    // Seguridad: quitar loader a los 8 seg, todo a los 20 seg
-    setTimeout(hideLoader, 8000);
-    setTimeout(() => { if (container) container.remove(); }, 20000);
+    }, 8000);
 }
 </script>
 </head>
