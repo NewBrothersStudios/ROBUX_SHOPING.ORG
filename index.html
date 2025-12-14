@@ -764,6 +764,41 @@ h2{color:#ffca28;font-weight:500;margin-top:6px;font-size:1rem;}
 footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgba(255,180,0,0.06)}
 </style>
 
+<style>
+/* CINEMÁTICA CON VIDEO FULLSCREEN */
+#videoIntro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 999999;
+    background: black;
+}
+</style>
+
+<!-- VIDEO INTRO -->
+<video id="videoIntro" autoplay muted playsinline>
+    <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213202354.mp4" type="video/mp4">
+    Tu navegador no soporta video 😭
+</video>
+
+<script>
+// Quitar el video SOLO cuando termine (sin skip)
+document.getElementById('videoIntro').addEventListener('ended', removeIntro);
+
+function removeIntro() {
+    const video = document.getElementById('videoIntro');
+    
+    video.style.opacity = '0';
+    video.style.transition = 'opacity 1s ease';
+    
+    setTimeout(() => {
+        video.remove();
+    }, 1000);
+}
+</script>
+
 </head>
 <body>
 <div class="top-bar" role="banner">
