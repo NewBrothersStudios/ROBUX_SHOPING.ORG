@@ -765,38 +765,113 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
 </style>
 
 <style>
-/* CINEMÁTICA CON VIDEO FULLSCREEN */
-#videoIntro {
+/* CONTENEDOR GENERAL */
+#videoIntroContainer {
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    background: black;
+    z-index: 999998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* VIDEO OPTIMIZADO PARA CELULAR */
+#videoIntro {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
     z-index: 999999;
     background: black;
 }
+
+/* LOADER: ROBUX GIRANDO ⏣ */
+#robuxLoader {
+    width: 120px;
+    height: 120px;
+    background: url('https://media.tenor.com/q0g-tERBbt4AAAAM/robux-now.gif') center/contain no-repeat;
+    animation: spinSlow 2s linear infinite;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    border-radius: 50%;
+}
+
+.loader-text {
+    margin-top: 40px;
+    color: gold;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes spinSlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
 </style>
 
-<!-- VIDEO INTRO -->
-<video id="videoIntro" autoplay muted playsinline>
-    <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213202354.mp4" type="video/mp4">
-    Tu navegador no soporta video 😭
-</video>
+<!-- CONTENEDOR CON LOADER ROBUX + VIDEO -->
+<div id="videoIntroContainer">
+    <!-- Loader Robux girando -->
+    <div id="robuxLoader"></div>
+    <div class="loader-text">CARGANDO ROBUX...</div>
+    
+    <!-- Video principal -->
+    <video id="videoIntro" autoplay muted playsinline>
+        <source src="https://github.com/NewBrothersStudios/ROBUX_SHOPING.ORG/raw/refs/heads/main/videos/lv_0_20251213202354.mp4" type="video/mp4">
+        Tu cel no soporta video 😭
+    </video>
+</div>
 
 <script>
-// Quitar el video SOLO cuando termine (sin skip)
-document.getElementById('videoIntro').addEventListener('ended', removeIntro);
+// Cuando el video carga y empieza, quitar el loader Robux
+const video = document.getElementById('videoIntro');
+const robuxLoader = document.getElementById('robuxLoader');
+const loaderText = document.querySelector('.loader-text');
+const container = document.getElementById('videoIntroContainer');
 
-function removeIntro() {
-    const video = document.getElementById('videoIntro');
-    
-    video.style.opacity = '0';
-    video.style.transition = 'opacity 1s ease';
-    
+video.addEventListener('canplay', hideLoader);
+video.addEventListener('playing', hideLoader);
+
+function hideLoader() {
+    robuxLoader.style.opacity = '0';
+    loaderText.style.opacity = '0';
     setTimeout(() => {
-        video.remove();
-    }, 1000);
+        robuxLoader.remove();
+        loaderText.remove();
+    }, 600);
 }
+
+// Cuando termine el video → quitar todo
+video.addEventListener('ended', () => {
+    container.style.opacity = '0';
+    container.style.transition = 'opacity 1s ease';
+    setTimeout(() => {
+        container.remove();
+    }, 1000);
+});
+
+// Seguridad: quitar loader a los 8 seg por si tarda
+setTimeout(hideLoader, 8000);
+
+// Si falla todo, quitar a los 20 seg
+setTimeout(() => {
+    if (container) container.remove();
+}, 20000);
 </script>
 
 </head>
