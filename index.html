@@ -793,28 +793,28 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
     background: black;
 }
 
-/* LOADER: ROBUX GIRANDO ⏣ */
+/* LOADER: ⏣ ROBUX GIRANDO EN GRIS */
 #robuxLoader {
-    width: 120px;
-    height: 120px;
-    background: url('https://media.tenor.com/q0g-tERBbt4AAAAM/robux-now.gif') center/contain no-repeat;
-    animation: spinSlow 2s linear infinite;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background: url('https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/a/0/4/a047bb6e4236686095168948698596f6ceb059e8.gif') center/contain no-repeat;
+    animation: pulseGlow 1.8s infinite;
+    filter: brightness(1.2) contrast(1.1); /* Hace que el gris brille un poco más */
 }
 
 .loader-text {
-    margin-top: 40px;
-    color: gold;
-    font-size: 1.6rem;
+    margin-top: 50px;
+    color: #aaaaaa;
+    font-size: 1.8rem;
     font-weight: bold;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    text-shadow: 0 0 15px rgba(150, 150, 150, 0.8);
     animation: pulse 1.5s infinite;
 }
 
-@keyframes spinSlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
+    50% { box-shadow: 0 0 40px rgba(200, 200, 200, 0.8); }
+    100% { box-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
 }
 
 @keyframes pulse {
@@ -824,11 +824,11 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
 }
 </style>
 
-<!-- CONTENEDOR CON LOADER ROBUX + VIDEO -->
+<!-- CONTENEDOR CON LOADER ⏣ GRIS + VIDEO -->
 <div id="videoIntroContainer">
-    <!-- Loader Robux girando -->
+    <!-- Loader Robux gris girando -->
     <div id="robuxLoader"></div>
-    <div class="loader-text">CARGANDO ROBUX...</div>
+    <div class="loader-text">CARGANDO...</div>
     
     <!-- Video principal -->
     <video id="videoIntro" autoplay muted playsinline>
@@ -838,7 +838,7 @@ footer{margin:28px 0 80px;color:#CE93D8;font-size:.95rem;text-shadow:0 0 6px rgb
 </div>
 
 <script>
-// Cuando el video carga y empieza, quitar el loader Robux
+// Cuando el video carga y empieza, quitar el loader
 const video = document.getElementById('videoIntro');
 const robuxLoader = document.getElementById('robuxLoader');
 const loaderText = document.querySelector('.loader-text');
@@ -865,7 +865,7 @@ video.addEventListener('ended', () => {
     }, 1000);
 });
 
-// Seguridad: quitar loader a los 8 seg por si tarda
+// Seguridad: quitar loader a los 8 seg si tarda mucho
 setTimeout(hideLoader, 8000);
 
 // Si falla todo, quitar a los 20 seg
