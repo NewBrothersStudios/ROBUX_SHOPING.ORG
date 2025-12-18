@@ -1105,6 +1105,165 @@ function setRobuxPoints(amount){
 }
 </script>
 
+<!-- ====== CUADRO INSTALAR ====== -->
+<div class="install-box">
+  <div class="zombie">
+    🧟
+    <span>Zombie Master<br>Shot</span>
+  </div>
+  <button onclick="openBuy()">Instalar<br><b>$2.99</b></button>
+</div>
+
+<!-- ====== OVERLAY COMPRA ====== -->
+<div class="overlay" id="buyBox">
+  <div class="buy-card">
+    <div class="big-icon">🧟</div>
+    <h2>Zombie Master Shot</h2>
+
+    <p class="desc">
+      Juego desarrollado por:<br>
+      <b>New Brothers Studios LLC × Unreal Engine × Studios LLC × ANDZXX × Unity studio</b><br><br>
+
+      La calidad del juego está en desarrollo en estilos <b>3D a 4K HD</b>.<br>
+      Con una personalización de <b>HUDs y armas FPS</b> realizado por Unreal Engine × Unity Studio.<br><br>
+
+      Todavía en desarrollo pero ya estando disponible ✅<br>
+      Cada actualización costará <b>$0.50</b> por paquete.
+    </p>
+
+    <button class="buy-btn" onclick="goWhatsApp()">Comprar $2.99</button>
+    <button class="close-btn" onclick="closeBuy()">Cerrar</button>
+  </div>
+</div>
+
+<style>
+/* ====== CUADRO INFERIOR ====== */
+.install-box{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(120px);
+  background:#0b0b0b;
+  border:2px solid #00ff88;
+  border-radius:14px;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  animation:slideUp .8s ease forwards;
+  box-shadow:0 0 25px #00ff8860;
+  z-index:999;
+}
+
+@keyframes slideUp{
+  to{ transform:translateX(-50%) translateY(0); }
+}
+
+.zombie{
+  font-size:26px;
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+.zombie span{
+  font-size:12px;
+  color:#9affd2;
+}
+
+.install-box button{
+  background:#00ff88;
+  color:#000;
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ====== OVERLAY ====== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.buy-card{
+  background:#0f0f10;
+  border:2px solid #00ff88;
+  border-radius:18px;
+  padding:22px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  animation:pop .4s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.8); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+.big-icon{
+  font-size:80px;
+  margin-bottom:10px;
+}
+
+.buy-card h2{
+  color:#00ff88;
+  margin-bottom:10px;
+}
+
+.desc{
+  font-size:13px;
+  color:#d6ffe9;
+  line-height:1.4;
+  margin-bottom:16px;
+}
+
+.buy-btn{
+  background:#00ff88;
+  color:#000;
+  border:none;
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  margin-bottom:8px;
+}
+
+.close-btn{
+  background:none;
+  color:#aaa;
+  border:none;
+  cursor:pointer;
+}
+</style>
+
+<script>
+function openBuy(){
+  document.getElementById("buyBox").style.display="flex";
+}
+
+function closeBuy(){
+  document.getElementById("buyBox").style.display="none";
+}
+
+function goWhatsApp(){
+  const msg = encodeURIComponent(
+    "Hola quiero comprar El nuevo Juego disponible por APK de $2.99"
+  );
+  window.open("https://wa.me/50373826693?text=" + msg, "_blank");
+}
+</script>
+
+
 <div class="top-bar" role="banner">
   <div>🔥 <strong>Robux × Steal</strong></div>
   <div id="serverCount" aria-live="polite">New Brothers Studios LLC</div>
