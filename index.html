@@ -895,8 +895,8 @@ footer{margin:28px 0 80px;color:#00ffdd;font-size:.95rem;text-shadow:0 0 10px rg
 
 <!-- FAKE LOADER SOLO PARA CELULAR -->
 <div id="fakeLoader" style="display:none;">
-    <div class="robux-symbol">⏣</div>
-    <div class="loading-text" id="dots">Cargando recursos</div>
+    <div class="robux-symbol">descargando paquete: 420MB</div>
+    <div class="loading-text" id="dots">Descargando</div>
 </div>
 
 <script>
@@ -905,15 +905,15 @@ if (window.innerWidth <= 768) {
     const loader = document.getElementById('fakeLoader');
     loader.style.display = 'flex';
 
-    // Animación de puntos: Cargando recursos. → Cargando recursos.. → Casi listos!! → repite
+    // Animación de puntos: DESCARGANDO. → DESCARGANDO.. → DESCARGANDO...→ repite
     const dotsText = document.getElementById('dots');
     let dotCount = 0;
     const dotCycle = setInterval(() => {
         dotCount = (dotCount + 1) % 4;
-        dotsText.textContent = 'Cargando recursos' + '.'.repeat(dotCount);
+        dotsText.textContent = 'Descargando:420MB' + '.'.repeat(dotCount);
     }, 500);
 
-    // Después de 4 segundos exactos: quitar todo con fade out
+    // Después de 40 segundos exactos: quitar todo con fade out
     setTimeout(() => {
         clearInterval(dotCycle); // parar los puntos
         loader.style.opacity = '0';
