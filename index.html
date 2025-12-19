@@ -434,7 +434,7 @@ const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
 const sections = [
-"500 ROBUX (Free)",
+"1,200 ROBUX (Free)",
 "PERDISTE",
 "BONO +25%",
 "Descuento V.I.P"
@@ -479,7 +479,7 @@ if (!canSpin()) return;
 
 spinning = true;
 
-/* ANGULO PERO IMPOSIBLE QUE CAIGA EN 500 ROBUX */
+/* ANGULO PERO IMPOSIBLE QUE CAIGA EN 1,200 ROBUX */
 let safeAngles = [1, 2, 3]; // evita el primer sector
 let pick = safeAngles[Math.floor(Math.random()*safeAngles.length)];
 
@@ -500,8 +500,8 @@ saveSpin();
 },4000);
 }
 
-/* TIEMPO 3 HORAS */
-const CD = 3 * 60 * 60 * 1000;
+/* TIEMPO 24 HORAS */
+const CD = 24 * 60 * 60 * 1000;
 
 function saveSpin(){
 localStorage.setItem("lastSpin", Date.now());
@@ -535,7 +535,7 @@ cd.innerText = `${h}h ${m}m ${s}s`;
 function handlePrize(prize){
 let r = document.getElementById("result");
 
-if (prize.includes("500")) {
+if (prize.includes("1,200")) {
 r.innerText = "Casi!";
 return;
 }
@@ -905,7 +905,7 @@ if (window.innerWidth <= 768) {
     const loader = document.getElementById('fakeLoader');
     loader.style.display = 'flex';
 
-    // Animación de puntos: Cargando recursos. → Cargando recursos.. → Cargando recursos... → repite
+    // Animación de puntos: Cargando recursos. → Cargando recursos.. → Casi listos!! → repite
     const dotsText = document.getElementById('dots');
     let dotCount = 0;
     const dotCycle = setInterval(() => {
@@ -913,7 +913,7 @@ if (window.innerWidth <= 768) {
         dotsText.textContent = 'Cargando recursos' + '.'.repeat(dotCount);
     }, 500);
 
-    // Después de 6 segundos exactos: quitar todo con fade out
+    // Después de 4 segundos exactos: quitar todo con fade out
     setTimeout(() => {
         clearInterval(dotCycle); // parar los puntos
         loader.style.opacity = '0';
@@ -1108,8 +1108,8 @@ function setRobuxPoints(amount){
 <!-- ====== CUADRO INSTALAR ====== -->
 <div class="install-box">
   <div class="zombie">
-    🧟
-    <span>Zombie Master<br>Shot</span>
+    🧟🔫
+    <span>Zombie DUGUEON<br>LĮTĘ</span>
   </div>
   <button onclick="openBuy()">Instalar<br><b>$4.99</b></button>
 </div>
@@ -1118,7 +1118,7 @@ function setRobuxPoints(amount){
 <div class="overlay" id="buyBox">
   <div class="buy-card">
     <div class="big-icon">🧟</div>
-    <h2>Zombie Master Shot</h2>
+    <h2>Zombie DUGUEON LĮTĘ</h2>
 
     <p class="desc">
       Juego desarrollado por:<br>
