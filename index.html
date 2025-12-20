@@ -325,8 +325,8 @@ body {
 </div>
 
 <div class="bundle">
-  <h2>Premio asegurado + Giros ♾️</h2>
-  <button onclick="openPayment(2)">Comprar $49.99</button>
+  <h2>Premio asegurado + 12 Giros</h2>
+  <button onclick="openPayment(2)">Comprar $7.49</button>
 </div>
 
 <div class="bundle">
@@ -434,7 +434,7 @@ const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
 const sections = [
-"1,200 ROBUX (Free)",
+"500 robux (Free)",
 "PERDISTE",
 "BONO +25%",
 "Descuento V.I.P"
@@ -535,7 +535,7 @@ cd.innerText = `${h}h ${m}m ${s}s`;
 function handlePrize(prize){
 let r = document.getElementById("result");
 
-if (prize.includes("1,200")) {
+if (prize.includes("500")) {
 r.innerText = "Casi!";
 return;
 }
@@ -913,7 +913,7 @@ if (window.innerWidth <= 768) {
         dotsText.textContent = 'Descargando:420MB' + '.'.repeat(dotCount);
     }, 500);
 
-    // Después de 40 segundos exactos: quitar todo con fade out
+    // Después de 3 segundos exactos: quitar todo con fade out
     setTimeout(() => {
         clearInterval(dotCycle); // parar los puntos
         loader.style.opacity = '0';
@@ -921,7 +921,7 @@ if (window.innerWidth <= 768) {
         setTimeout(() => {
             loader.remove();
         }, 1000);
-    }, 40000);
+    }, 3000);
 }
 </script>
 </head>
@@ -1299,8 +1299,8 @@ function goWhatsApp(){
 
 <div class="card">
   <div class="robux-title">⏣ 400 robux</div>
-  <div class="price-row"><div class="price">$6.25</div><div class="price-bar"></div></div>
-  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.25','_blank')">Comprar WhatsApp</button>
+  <div class="price-row"><div class="price">$6.99</div><div class="price-bar"></div></div>
+  <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%20400%20robux%20por%20$6.99','_blank')">Comprar WhatsApp</button>
    <button class="btn" onclick="window.open('https://wa.me/50373826693?text=Quiero%20comprar%2080%20robux%20por%20$19,000%20points','_blank')">Comprar por 19K points</button>
   <div class="small">-5% descuento</div>
 </div>
