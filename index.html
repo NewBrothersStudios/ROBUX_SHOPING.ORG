@@ -1186,7 +1186,6 @@ body{
 </head>
 
 <body>
-
 <!-- ===== POINTS HUD ===== -->
 <div id="topPoints">Robux Points: <span id="robuxValue">0</span></div>
 
@@ -1301,15 +1300,15 @@ function setRobuxPoints(amount){
   bottom:20px;
   left:50%;
   transform:translateX(-50%) translateY(120px);
-  background:#0f0f10;
-  border:2px solid #bfc3c7;
+  background:#0b0b0b;
+  border:2px solid #00ff88;
   border-radius:14px;
   padding:12px 18px;
   display:flex;
   align-items:center;
   gap:14px;
   animation:slideUp .8s ease forwards;
-  box-shadow:0 0 25px rgba(255,255,255,.25);
+  box-shadow:0 0 25px #00ff8860;
   z-index:999;
 }
 
@@ -1322,23 +1321,21 @@ function setRobuxPoints(amount){
   display:flex;
   flex-direction:column;
   line-height:1.1;
-  color:#ffffff;
 }
 
 .zombie span{
   font-size:12px;
-  color:#bfc3c7;
+  color:#9affd2;
 }
 
 .install-box button{
-  background:linear-gradient(135deg,#ffffff,#bfc3c7);
+  background:#00ff88;
   color:#000;
   border:none;
   padding:8px 14px;
   border-radius:10px;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 0 12px rgba(255,255,255,.35);
 }
 
 /* ====== OVERLAY ====== */
@@ -1354,14 +1351,13 @@ function setRobuxPoints(amount){
 
 .buy-card{
   background:#0f0f10;
-  border:2px solid #bfc3c7;
+  border:2px solid #00ff88;
   border-radius:18px;
   padding:22px;
   width:90%;
   max-width:420px;
   text-align:center;
   animation:pop .4s ease;
-  box-shadow:0 0 35px rgba(255,255,255,.25);
 }
 
 @keyframes pop{
@@ -1375,20 +1371,19 @@ function setRobuxPoints(amount){
 }
 
 .buy-card h2{
-  color:#ffffff;
+  color:#00ff88;
   margin-bottom:10px;
-  text-shadow:0 0 10px rgba(255,255,255,.4);
 }
 
 .desc{
   font-size:13px;
-  color:#d6d9dd;
+  color:#d6ffe9;
   line-height:1.4;
   margin-bottom:16px;
 }
 
 .buy-btn{
-  background:linear-gradient(135deg,#ffffff,#bfc3c7);
+  background:#00ff88;
   color:#000;
   border:none;
   width:100%;
@@ -1398,7 +1393,6 @@ function setRobuxPoints(amount){
   font-size:16px;
   cursor:pointer;
   margin-bottom:8px;
-  box-shadow:0 0 18px rgba(255,255,255,.35);
 }
 
 .close-btn{
@@ -1407,7 +1401,7 @@ function setRobuxPoints(amount){
   border:none;
   cursor:pointer;
 }
-<style>
+</style>
 <script>
 function openBuy(){
   document.getElementById("buyBox").style.display="flex";
