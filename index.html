@@ -713,70 +713,71 @@ function payVIPWhats() {
 </script>
 
 <style>
-/* ========= OVERRIDE ROBUX GREEN + CYAN ========= */
+/* ========= OVERRIDE BLANCO + GRIS ========= */
 :root{
-  --robux-green:#00ff9c;
-  --robux-cyan:#00d9ff;
+  --main-white:#ffffff;
+  --soft-gray:#bfc3c7;
+  --dark-gray:#1a1c1e;
 }
 
 /* BURBUJA */
 #floatingBubble{
-  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
-  box-shadow:0 0 22px rgba(0,217,255,.9) !important;
+  background:linear-gradient(135deg,var(--main-white),var(--soft-gray)) !important;
+  box-shadow:0 0 22px rgba(255,255,255,.6) !important;
 }
 
 /* OVERLAY RULETA */
 #wheelContainer{
-  background:radial-gradient(circle at top,#043a36,#050606) !important;
+  background:radial-gradient(circle at top,#2a2d30,#050606) !important;
 }
 
 /* CAJA RULETA */
 #wheelBox{
-  background:linear-gradient(160deg,#0f0f10,#090b0c) !important;
-  box-shadow:0 0 35px rgba(0,255,156,.35) !important;
+  background:linear-gradient(160deg,#1b1d1f,#0b0c0d) !important;
+  box-shadow:0 0 35px rgba(255,255,255,.25) !important;
 }
 
 /* RULETA */
 #wheel{
-  border-color:var(--robux-cyan) !important;
+  border-color:var(--soft-gray) !important;
   box-shadow:
-    0 0 22px rgba(0,217,255,.8),
-    inset 0 0 25px rgba(0,255,156,.6) !important;
+    0 0 22px rgba(255,255,255,.55),
+    inset 0 0 25px rgba(255,255,255,.25) !important;
 }
 
 /* FLECHA */
 #pointer{
-  color:var(--robux-green) !important;
-  text-shadow:0 0 10px rgba(0,255,156,.8) !important;
+  color:var(--main-white) !important;
+  text-shadow:0 0 10px rgba(255,255,255,.7) !important;
 }
 
 /* BOTÓN GIRAR */
 #spinBtn{
-  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  background:linear-gradient(135deg,var(--main-white),var(--soft-gray)) !important;
   color:#000 !important;
-  box-shadow:0 0 18px rgba(0,217,255,.7) !important;
+  box-shadow:0 0 18px rgba(255,255,255,.55) !important;
 }
 
 /* RESULTADO */
 #result{
-  color:var(--robux-green) !important;
+  color:var(--main-white) !important;
 }
 
 /* CASILLAS */
 .buyBox{
-  background:linear-gradient(145deg,#042f33,#041f22) !important;
-  border-color:var(--robux-cyan) !important;
-  color:var(--robux-green) !important;
+  background:linear-gradient(145deg,#1c1f22,#141618) !important;
+  border-color:var(--soft-gray) !important;
+  color:var(--main-white) !important;
 }
 
 /* BUNDLES */
 .bundle{
-  border-color:var(--robux-green) !important;
-  box-shadow:0 0 18px rgba(0,255,156,.35) !important;
+  border-color:var(--main-white) !important;
+  box-shadow:0 0 18px rgba(255,255,255,.25) !important;
 }
-.bundle h2{ color:var(--robux-cyan) !important; }
+.bundle h2{ color:var(--soft-gray) !important; }
 .bundle button{
-  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  background:linear-gradient(135deg,var(--main-white),var(--soft-gray)) !important;
   color:#000 !important;
 }
 
@@ -784,20 +785,21 @@ function payVIPWhats() {
 .modal-box,
 .vip-card,
 .vip-pay-card{
-  border-color:var(--robux-cyan) !important;
-  box-shadow:0 0 25px rgba(0,217,255,.45) !important;
+  border-color:var(--soft-gray) !important;
+  box-shadow:0 0 25px rgba(255,255,255,.35) !important;
 }
 
 /* VIP */
 .vip-badge{
-  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
-  box-shadow:0 0 18px rgba(0,217,255,.8) !important;
+  background:linear-gradient(135deg,var(--main-white),var(--soft-gray)) !important;
+  box-shadow:0 0 18px rgba(255,255,255,.65) !important;
 }
 .vip-main-btn{
-  background:linear-gradient(135deg,var(--robux-green),var(--robux-cyan)) !important;
+  background:linear-gradient(135deg,var(--main-white),var(--soft-gray)) !important;
   color:#000 !important;
 }
 </style>
+
 
 <!DOCTYPE html><html lang="es">
 <head>
