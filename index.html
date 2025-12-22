@@ -801,77 +801,231 @@ function payVIPWhats() {
 </style>
 
 
-<!DOCTYPE html><html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROBUX GAMER</title>
-
 <style>
 /* ====== Base y Reset ====== */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background: linear-gradient(180deg, #001a0d 0%, #002b1a 100%); color:#fff; overflow-x:hidden; text-align:center; padding-top:88px;}
-a{text-decoration:none}/* Top bar */
-.top-bar{position:fixed;top:0;left:0;width:100%;background: linear-gradient(90deg, #00ffaa, #00cccc); /* Verde neon a celeste */
-border-bottom: 3px solid rgba(0, 255, 204, 0.3);
-box-shadow: 0 6px 24px rgba(0, 255, 204, 0.3);}
-.top-bar div{font-weight:700}
+html,body{
+  height:100%;
+  font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:linear-gradient(180deg,#0e0f11 0%,#050606 100%);
+  color:#ffffff;
+  overflow-x:hidden;
+  text-align:center;
+  padding-top:88px;
+}
+a{text-decoration:none}
 
-/* Header */
+/* ====== TOP BAR ====== */
+.top-bar{
+  position:fixed;
+  top:0;left:0;width:100%;
+  background:linear-gradient(90deg,#ffffff,#bfc3c7);
+  border-bottom:3px solid rgba(255,255,255,.25);
+  box-shadow:0 6px 24px rgba(255,255,255,.25);
+}
+.top-bar div{font-weight:700;color:#000}
+
+/* ====== HEADER ====== */
 header{margin-top:6px;padding:8px 12px}
-h1{font-size:2rem;color:#00ffff;letter-spacing:0.6px;text-shadow:0 0 20px rgba(0, 255, 255, 0.6),0 0 30px rgba(0, 255, 204, 0.4);}
-h2{color:#00ffaa;font-weight:500;margin-top:6px;font-size:1rem;}
-.small{font-size:.95rem;color:#00ffdd;margin-top:8px}
+h1{
+  font-size:2rem;
+  color:#ffffff;
+  letter-spacing:.6px;
+  text-shadow:0 0 18px rgba(255,255,255,.6);
+}
+h2{
+  color:#cfd2d6;
+  font-weight:500;
+  margin-top:6px;
+  font-size:1rem;
+}
+.small{
+  font-size:.95rem;
+  color:#bfc3c7;
+  margin-top:8px;
+}
 
-/* Container */
-.container{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:20px;max-width:1100px;margin:8px auto}
+/* ====== CONTAINER ====== */
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  justify-content:center;
+  padding:20px;
+  max-width:1100px;
+  margin:8px auto;
+}
 
-/* Card estilo gamer */
-.card{background:linear-gradient(180deg, rgba(0,255,204,0.08), rgba(0,255,170,0.04));width:94%;max-width:420px;border-radius:18px;padding:18px;display:flex;flex-direction:column;align-items:center;box-shadow:0 10px 34px rgba(0,0,0,0.6), inset 0 -4px 18px rgba(0,255,204,0.1);transition:transform .28s,box-shadow .28s;position:relative;overflow:hidden;border:1px solid rgba(0, 255, 204, 0.3);}
-.card:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 22px 50px rgba(0, 255, 204, 0.3);}
-.robux-title{font-size:1.35rem;color:#00ffdd;margin-bottom:8px;font-weight:700;text-shadow:0 0 15px rgba(0, 255, 204, 0.5);}
-.price-row{width:100%;display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
-.price{font-weight:800;color:#00ffaa;font-size:1.15rem}
-.price-bar{width:92%;height:12px;border-radius:10px;background:linear-gradient(90deg,#00ffaa,#00cccc);margin-top:10px;box-shadow:0 6px 30px rgba(0, 255, 204, 0.3) inset;position:relative;overflow:hidden;}
-.price-bar::after{content:"";position:absolute;left:-30%;top:0;width:50%;height:100%;background:linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0));transform:skewX(-18deg);animation:barShine 2.2s linear infinite;}
+/* ====== CARD ====== */
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  width:94%;
+  max-width:420px;
+  border-radius:18px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-shadow:0 10px 34px rgba(0,0,0,.7), inset 0 -4px 18px rgba(255,255,255,.08);
+  transition:transform .28s,box-shadow .28s;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.25);
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 22px 50px rgba(255,255,255,.25);
+}
+
+.robux-title{
+  font-size:1.35rem;
+  color:#ffffff;
+  margin-bottom:8px;
+  font-weight:700;
+  text-shadow:0 0 14px rgba(255,255,255,.5);
+}
+
+/* ====== PRICE ====== */
+.price-row{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:10px;
+}
+.price{
+  font-weight:800;
+  color:#e5e7ea;
+  font-size:1.15rem;
+}
+.price-bar{
+  width:92%;
+  height:12px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#ffffff,#bfc3c7);
+  margin-top:10px;
+  box-shadow:0 6px 30px rgba(255,255,255,.25) inset;
+  position:relative;
+  overflow:hidden;
+}
+.price-bar::after{
+  content:"";
+  position:absolute;
+  left:-30%;
+  top:0;
+  width:50%;
+  height:100%;
+  background:linear-gradient(90deg,rgba(255,255,255,.45),rgba(255,255,255,0));
+  transform:skewX(-18deg);
+  animation:barShine 2.2s linear infinite;
+}
 @keyframes barShine{to{left:120%}}
-.btn{margin-top:14px;padding:16px 26px;font-size:1.05rem;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(90deg,#00ffaa,#00cccc);color:#000;font-weight:800;box-shadow:0 10px 30px rgba(0, 255, 204, 0.4), 0 2px 6px rgba(0,0,0,0.18);}
-.btn:active{transform:translateY(2px) scale(.995)}
-.btn:hover{filter:brightness(1.15)}
-.memberships{max-width:1000px;margin:18px auto;padding:14px;}
 
-/* Modal PayPal / WhatsApp */
-#overlayPay{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:260}
-.modal{background:linear-gradient(180deg,rgba(0,50,40,0.9),rgba(0,30,30,0.9));border-radius:16px;padding:18px;width:94%;max-width:560px;color:#e0fffe;box-shadow:0 20px 60px rgba(0,0,0,0.7);border:2px solid rgba(0, 255, 204, 0.4);}
-.modal h3{color:#00ffdd;margin-bottom:10px}
-.instruction{background:rgba(0,40,30,0.8);padding:12px;border-radius:10px;margin:10px 0;border-left:6px solid #00ffaa;color:#e0fffe}
-.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-.copyBtn{background:linear-gradient(90deg,#00ffaa,#00cccc);color:#000;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+/* ====== BUTTON ====== */
+.btn{
+  margin-top:14px;
+  padding:16px 26px;
+  font-size:1.05rem;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(90deg,#ffffff,#bfc3c7);
+  color:#000;
+  font-weight:800;
+  box-shadow:0 10px 30px rgba(255,255,255,.35),0 2px 6px rgba(0,0,0,.25);
+}
+.btn:hover{filter:brightness(1.1)}
+.btn:active{transform:translateY(2px) scale(.99)}
+
+.memberships{max-width:1000px;margin:18px auto;padding:14px}
+
+/* ====== MODAL ====== */
+#overlayPay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.75);
+  z-index:260;
+}
+.modal{
+  background:linear-gradient(180deg,#1a1c1f,#0c0d0f);
+  border-radius:16px;
+  padding:18px;
+  width:94%;
+  max-width:560px;
+  color:#ffffff;
+  box-shadow:0 20px 60px rgba(0,0,0,.8);
+  border:2px solid rgba(255,255,255,.3);
+}
+.modal h3{color:#ffffff;margin-bottom:10px}
+
+.instruction{
+  background:rgba(255,255,255,.05);
+  padding:12px;
+  border-radius:10px;
+  margin:10px 0;
+  border-left:6px solid #ffffff;
+  color:#e5e7ea;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:12px;
+}
+
+.copyBtn{
+  background:linear-gradient(90deg,#ffffff,#bfc3c7);
+  color:#000;
+  padding:10px 12px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
 .copyBtn:active{transform:translateY(2px)}
-.ghost{background:transparent;border:2px solid #00ffdd;color:#00ffdd;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700}
 
-/* Confetti */
+.ghost{
+  background:transparent;
+  border:2px solid #bfc3c7;
+  color:#bfc3c7;
+  padding:10px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* ====== CONFETTI ====== */
 .confetti{position:fixed;z-index:9999;pointer-events:none}
 
-/* Footer */
-footer{margin:28px 0 80px;color:#00ffdd;font-size:.95rem;text-shadow:0 0 10px rgba(0, 255, 204, 0.6)}
+/* ====== FOOTER ====== */
+footer{
+  margin:28px 0 80px;
+  color:#bfc3c7;
+  font-size:.95rem;
+  text-shadow:0 0 10px rgba(255,255,255,.35);
+}
 </style>
 
 <style>
-/* SOLO EN CELULAR */
+/* ========= SOLO EN CELULAR ========= */
 @media (max-width: 768px) {
     #fakeLoader {
         position: fixed;
         top: 0; left: 0;
         width: 100vw;
         height: 100vh;
-        background: black;
+        background: #050606;
         z-index: 999999;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #bbbbbb;
+        color: #e5e7ea;
         font-family: Arial, sans-serif;
     }
 
@@ -879,60 +1033,55 @@ footer{margin:28px 0 80px;color:#00ffdd;font-size:.95rem;text-shadow:0 0 10px rg
         font-size: 120px;
         margin-bottom: 40px;
         animation: pulseGlow 1.8s infinite;
+        color: #ffffff;
     }
 
     .loading-text {
         font-size: 2rem;
         font-weight: bold;
         letter-spacing: 4px;
+        color: #bfc3c7;
     }
 
     @keyframes pulseGlow {
-        0% { text-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
-        50% { text-shadow: 0 0 50px rgba(200, 200, 200, 0.9); }
-        100% { text-shadow: 0 0 20px rgba(200, 200, 200, 0.4); }
+        0%   { text-shadow: 0 0 20px rgba(255,255,255,.4); }
+        50%  { text-shadow: 0 0 50px rgba(255,255,255,.9); }
+        100% { text-shadow: 0 0 20px rgba(255,255,255,.4); }
     }
 }
 </style>
 
 <!-- FAKE LOADER SOLO PARA CELULAR -->
 <div id="fakeLoader" style="display:none;">
-    <div class="robux-symbol"> ⏣</div>
+    <div class="robux-symbol">⏣</div>
     <div class="loading-text" id="dots">Descargando</div>
 </div>
 
 <script>
-// Solo activar en celular
 if (window.innerWidth <= 768) {
     const loader = document.getElementById('fakeLoader');
     loader.style.display = 'flex';
 
-    // Animación de puntos: DESCARGANDO. → DESCARGANDO.. → DESCARGANDO...→ repite
     const dotsText = document.getElementById('dots');
     let dotCount = 0;
     const dotCycle = setInterval(() => {
         dotCount = (dotCount + 1) % 4;
-        dotsText.textContent = 'Descargando:420MB' + '.'.repeat(dotCount);
+        dotsText.textContent = 'Descargando 420MB' + '.'.repeat(dotCount);
     }, 500);
 
-    // Después de 3 segundos exactos: quitar todo con fade out
     setTimeout(() => {
-        clearInterval(dotCycle); // parar los puntos
+        clearInterval(dotCycle);
         loader.style.opacity = '0';
         loader.style.transition = 'opacity 1s ease';
-        setTimeout(() => {
-            loader.remove();
-        }, 1000);
+        setTimeout(() => loader.remove(), 1000);
     }, 3000);
 }
 </script>
-</head>
-<body>
 
 <style>
 :root{
-  --green:#00ff9c;
-  --cyan:#00d9ff;
+  --white:#ffffff;
+  --gray:#bfc3c7;
   --bg:#050606;
 }
 
@@ -940,7 +1089,7 @@ if (window.innerWidth <= 768) {
 body{
   margin:0;
   background:var(--bg);
-  color:white;
+  color:var(--white);
   font-family:Arial, sans-serif;
 }
 
@@ -949,12 +1098,12 @@ body{
   position:fixed;
   top:12px;
   right:12px;
-  background:linear-gradient(135deg,var(--green),var(--cyan));
+  background:linear-gradient(135deg,var(--white),var(--gray));
   color:#000;
   padding:10px 16px;
   border-radius:14px;
   font-weight:900;
-  box-shadow:0 0 18px rgba(0,255,204,.6);
+  box-shadow:0 0 18px rgba(255,255,255,.6);
   z-index:1000;
 }
 
@@ -962,7 +1111,7 @@ body{
 #loginScreen{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at top, #08211a, #050606);
+  background:radial-gradient(circle at top,#1a1c1f,#050606);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -976,11 +1125,13 @@ body{
   border-radius:18px;
   padding:30px 25px;
   text-align:center;
-  box-shadow:0 0 40px rgba(0,255,156,.3);
+  box-shadow:0 0 40px rgba(255,255,255,.25);
+  border:1px solid rgba(255,255,255,.25);
 }
 
 .login-card h1{
   margin-bottom:20px;
+  color:var(--white);
 }
 
 #loginForm{
@@ -995,23 +1146,26 @@ body{
   padding:14px;
   margin:10px 0;
   background:#0b0e10;
-  border:1px solid #1f2a2a;
+  border:1px solid #2a2d30;
   border-radius:10px;
   color:#fff;
 }
 
+/* BOTÓN PRINCIPAL */
 .btn-main{
   width:100%;
   padding:14px;
   margin-top:12px;
-  background:linear-gradient(135deg,var(--green),var(--cyan));
+  background:linear-gradient(135deg,var(--white),var(--gray));
   border:none;
   border-radius:12px;
   font-weight:bold;
   cursor:pointer;
+  color:#000;
+  box-shadow:0 0 18px rgba(255,255,255,.35);
 }
 
-#error{ color:#ff5f5f; margin-top:10px }
+#error{ color:#ff6b6b; margin-top:10px }
 
 /* ================= SHOP ================= */
 #shop{
@@ -1021,12 +1175,14 @@ body{
 
 .card{
   background:#0f0f10;
-  border:2px solid var(--green);
+  border:2px solid var(--gray);
   border-radius:16px;
   padding:20px;
   text-align:center;
+  box-shadow:0 0 22px rgba(255,255,255,.2);
 }
 </style>
+
 </head>
 
 <body>
@@ -1145,15 +1301,15 @@ function setRobuxPoints(amount){
   bottom:20px;
   left:50%;
   transform:translateX(-50%) translateY(120px);
-  background:#0b0b0b;
-  border:2px solid #00ff88;
+  background:#0f0f10;
+  border:2px solid #bfc3c7;
   border-radius:14px;
   padding:12px 18px;
   display:flex;
   align-items:center;
   gap:14px;
   animation:slideUp .8s ease forwards;
-  box-shadow:0 0 25px #00ff8860;
+  box-shadow:0 0 25px rgba(255,255,255,.25);
   z-index:999;
 }
 
@@ -1166,21 +1322,23 @@ function setRobuxPoints(amount){
   display:flex;
   flex-direction:column;
   line-height:1.1;
+  color:#ffffff;
 }
 
 .zombie span{
   font-size:12px;
-  color:#9affd2;
+  color:#bfc3c7;
 }
 
 .install-box button{
-  background:#00ff88;
+  background:linear-gradient(135deg,#ffffff,#bfc3c7);
   color:#000;
   border:none;
   padding:8px 14px;
   border-radius:10px;
   font-weight:bold;
   cursor:pointer;
+  box-shadow:0 0 12px rgba(255,255,255,.35);
 }
 
 /* ====== OVERLAY ====== */
@@ -1196,13 +1354,14 @@ function setRobuxPoints(amount){
 
 .buy-card{
   background:#0f0f10;
-  border:2px solid #00ff88;
+  border:2px solid #bfc3c7;
   border-radius:18px;
   padding:22px;
   width:90%;
   max-width:420px;
   text-align:center;
   animation:pop .4s ease;
+  box-shadow:0 0 35px rgba(255,255,255,.25);
 }
 
 @keyframes pop{
@@ -1216,19 +1375,20 @@ function setRobuxPoints(amount){
 }
 
 .buy-card h2{
-  color:#00ff88;
+  color:#ffffff;
   margin-bottom:10px;
+  text-shadow:0 0 10px rgba(255,255,255,.4);
 }
 
 .desc{
   font-size:13px;
-  color:#d6ffe9;
+  color:#d6d9dd;
   line-height:1.4;
   margin-bottom:16px;
 }
 
 .buy-btn{
-  background:#00ff88;
+  background:linear-gradient(135deg,#ffffff,#bfc3c7);
   color:#000;
   border:none;
   width:100%;
@@ -1238,6 +1398,7 @@ function setRobuxPoints(amount){
   font-size:16px;
   cursor:pointer;
   margin-bottom:8px;
+  box-shadow:0 0 18px rgba(255,255,255,.35);
 }
 
 .close-btn{
@@ -1246,8 +1407,7 @@ function setRobuxPoints(amount){
   border:none;
   cursor:pointer;
 }
-</style>
-
+<style>
 <script>
 function openBuy(){
   document.getElementById("buyBox").style.display="flex";
