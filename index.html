@@ -1267,6 +1267,182 @@ text-align:center;
 @keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 
+<!-- ========= BURBUJA COMPRA DERECHOS (GRIS + VERDE) ========= -->
+
+<style>
+.buy-bubble{
+position:fixed;
+bottom:120px; /* ⬆️ más arriba, no tapa nada */
+right:16px;
+background:linear-gradient(135deg,#2f2f2f,#3a3a3a);
+padding:16px 18px;
+border-radius:30px;
+max-width:260px;
+box-shadow:0 0 25px rgba(0,255,120,.5);
+animation:bounce 2s infinite alternate;
+cursor:pointer;
+z-index:9999;
+font-family:Poppins,sans-serif;
+}
+
+.buy-bubble h4{
+margin:0;
+color:#00ff88;
+font-size:1rem;
+}
+
+.buy-bubble p{
+margin:0;
+font-size:.85rem;
+color:#dcdcdc;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:10000;
+}
+
+.modal-content{
+background:#1f1f1f;
+padding:25px;
+border-radius:22px;
+max-width:90%;
+position:relative;
+animation:zoomIn .5s ease;
+color:#eaeaea;
+box-shadow:0 0 30px rgba(0,255,120,.4);
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:14px;
+font-size:1.4rem;
+cursor:pointer;
+color:#ff5c5c;
+}
+
+.buy-btn{
+background:linear-gradient(135deg,#00ff88,#00cc6a);
+color:#003320;
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:16px;
+font-weight:800;
+font-size:1.1rem;
+cursor:pointer;
+}
+
+.loading{
+margin-top:12px;
+font-weight:800;
+color:#00ff88;
+display:none;
+text-align:center;
+}
+
+@keyframes bounce{to{transform:translateY(-10px)}}
+@keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+
+<!-- ========= BURBUJA COMPRA DERECHOS (GRIS + VERDE) ========= -->
+
+<style>
+.buy-bubble{
+position:fixed;
+bottom:120px; /* ⬆️ más arriba, no tapa nada */
+right:16px;
+background:linear-gradient(135deg,#2f2f2f,#3a3a3a);
+padding:16px 18px;
+border-radius:30px;
+max-width:260px;
+box-shadow:0 0 25px rgba(0,255,120,.5);
+animation:bounce 2s infinite alternate;
+cursor:pointer;
+z-index:9999;
+font-family:Poppins,sans-serif;
+}
+
+.buy-bubble h4{
+margin:0;
+color:#00ff88;
+font-size:1rem;
+}
+
+.buy-bubble p{
+margin:0;
+font-size:.85rem;
+color:#dcdcdc;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:10000;
+}
+
+.modal-content{
+background:#1f1f1f;
+padding:25px;
+border-radius:22px;
+max-width:90%;
+position:relative;
+animation:zoomIn .5s ease;
+color:#eaeaea;
+box-shadow:0 0 30px rgba(0,255,120,.4);
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:14px;
+font-size:1.4rem;
+cursor:pointer;
+color:#ff5c5c;
+}
+
+.buy-btn{
+background:linear-gradient(135deg,#00ff88,#00cc6a);
+color:#003320;
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:16px;
+font-weight:800;
+font-size:1.1rem;
+cursor:pointer;
+}
+
+.loading{
+margin-top:12px;
+font-weight:800;
+color:#00ff88;
+display:none;
+text-align:center;
+}
+
+@keyframes bounce{to{transform:translateY(-10px)}}
+@keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+
 <!-- BURBUJA -->
 <div class="buy-bubble" onclick="openBuyModal()">
 <h4>🗨️ Comprar derechos ©️</h4>
@@ -1278,9 +1454,9 @@ text-align:center;
 <div class="modal-content">
 <div class="close-btn" onclick="closeBuyModal()">✕</div>
 
-<h3>Comprar derechos ©️</h3>
+<h3 style="color:#00ff88">Comprar derechos ©️</h3>
 <p>
-Al comprar obtendrás <b>TODOS los derechos ©️</b> de la página,
+Obtendrás <b>TODOS los derechos ©️</b> de la página,
 incluyendo ganancias y propiedad total.
 </p>
 <p><b>Precio: $4,500 DLS</b></p>
@@ -1327,7 +1503,7 @@ window.open(
 }
 </script>
 
-<!-- ================= FIN BURBUJA ================= -->
+<!-- ========= FIN BURBUJA ========= -->
 
 </head>
 
