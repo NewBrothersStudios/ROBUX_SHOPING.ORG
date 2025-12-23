@@ -1015,72 +1015,109 @@ footer{
 }
 </style>
 
+<!-- ========= LOADER SECUENCIAL SOLO CELULAR ========= -->
 <style>
-/* ========= SOLO EN CELULAR ========= */
-@media (max-width: 768px) {
-    #fakeLoader {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #050606;
-        z-index: 999999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #e5e7ea;
-        font-family: Arial, sans-serif;
-    }
+#mobileLoader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0e0e0e;
+display:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:999999;
+}
 
-    .robux-symbol {
-        font-size: 120px;
-        margin-bottom: 40px;
-        animation: pulseGlow 1.8s infinite;
-        color: #ffffff;
-    }
+/* SPINNER */
+.spinner{
+width:70px;
+height:70px;
+border:6px solid rgba(255,255,255,0.1);
+border-top:6px solid #00ff88;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
 
-    .loading-text {
-        font-size: 2rem;
-        font-weight: bold;
-        letter-spacing: 4px;
-        color: #bfc3c7;
-    }
+/* TEXTO */
+.loader-text{
+font-size:1.1rem;
+font-weight:700;
+color:#eaeaea;
+text-align:center;
+max-width:80%;
+opacity:0;
+animation:fadeIn .6s ease forwards;
+}
 
-    @keyframes pulseGlow {
-        0%   { text-shadow: 0 0 20px rgba(255,255,255,.4); }
-        50%  { text-shadow: 0 0 50px rgba(255,255,255,.9); }
-        100% { text-shadow: 0 0 20px rgba(255,255,255,.4); }
-    }
+/* ANIMACIONES */
+.fade-out{
+animation:fadeOut .6s ease forwards;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes fadeOut{
+from{opacity:1;transform:translateY(0)}
+to{opacity:0;transform:translateY(-10px)}
 }
 </style>
 
-<!-- FAKE LOADER SOLO PARA CELULAR -->
-<div id="fakeLoader" style="display:none;">
-    <div class="robux-symbol">⏣</div>
-    <div class="loading-text" id="dots">Descargando</div>
+<div id="mobileLoader">
+    <div class="spinner"></div>
+    <div class="loader-text" id="loaderText">Cargando...</div>
 </div>
 
 <script>
 if (window.innerWidth <= 768) {
-    const loader = document.getElementById('fakeLoader');
-    loader.style.display = 'flex';
 
-    const dotsText = document.getElementById('dots');
-    let dotCount = 0;
-    const dotCycle = setInterval(() => {
-        dotCount = (dotCount + 1) % 4;
-        dotsText.textContent = 'Descargando 420MB' + '.'.repeat(dotCount);
-    }, 500);
+const loader = document.getElementById("mobileLoader");
+const text = document.getElementById("loaderText");
 
-    setTimeout(() => {
-        clearInterval(dotCycle);
-        loader.style.opacity = '0';
-        loader.style.transition = 'opacity 1s ease';
-        setTimeout(() => loader.remove(), 1000);
-    }, 3000);
+loader.style.display = "flex";
+
+const steps = [
+  { msg: "Cargando...", time: 4000 },
+  { msg: "Actualizando app.", time: 4000 },
+  { msg: "¿Sabías que nuestra App está en venta?", time: 5000 },
+  { msg: "Cómprala por solo $29.99", time: 3000 },
+  { msg: "También hay descuento por código.", time: 3000 }
+];
+
+let index = 0;
+
+function nextStep(){
+  if(index >= steps.length){
+    loader.classList.add("fade-out");
+    setTimeout(() => loader.remove(), 700);
+    return;
+  }
+
+  text.classList.remove("fade-out");
+  text.textContent = steps[index].msg;
+  text.style.animation = "fadeIn .6s ease forwards";
+
+  setTimeout(() => {
+    text.classList.add("fade-out");
+    index++;
+    setTimeout(nextStep, 600);
+  }, steps[index].time);
+}
+
+nextStep();
 }
 </script>
+<!-- ========= FIN LOADER ========= -->
 
 <style>
 :root{
