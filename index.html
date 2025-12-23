@@ -1187,6 +1187,148 @@ body{
 }
 </style>
 
+<!-- ================= BURBUJA COMPRA DERECHOS ================= -->
+
+<style>
+.buy-bubble{
+position:fixed;
+bottom:20px;
+right:20px;
+background:linear-gradient(135deg,#00c6ff,#0072ff);
+padding:18px;
+border-radius:30px;
+max-width:260px;
+box-shadow:0 0 25px rgba(0,200,255,.7);
+animation:bounce 2s infinite alternate;
+cursor:pointer;
+z-index:9999;
+font-family:Poppins,sans-serif;
+}
+
+.buy-bubble h4,.buy-bubble p{
+margin:0;
+color:#fff;
+}
+
+.modal{
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:10000;
+}
+
+.modal-content{
+background:#111;
+padding:25px;
+border-radius:22px;
+max-width:90%;
+position:relative;
+animation:zoomIn .5s ease;
+color:#fff;
+box-shadow:0 0 30px rgba(0,255,255,.4);
+}
+
+.close-btn{
+position:absolute;
+top:10px;
+right:14px;
+font-size:1.4rem;
+cursor:pointer;
+color:#ff6f61;
+}
+
+.buy-btn{
+background:gold;
+color:#000;
+margin-top:15px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:16px;
+font-weight:800;
+font-size:1.1rem;
+cursor:pointer;
+}
+
+.loading{
+margin-top:12px;
+font-weight:800;
+color:#00ffe5;
+display:none;
+text-align:center;
+}
+
+@keyframes bounce{to{transform:translateY(-12px)}}
+@keyframes zoomIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+
+<!-- BURBUJA -->
+<div class="buy-bubble" onclick="openBuyModal()">
+<h4>🗨️ Comprar derechos ©️</h4>
+<p>Propiedad total + ganancias</p>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="buyModal">
+<div class="modal-content">
+<div class="close-btn" onclick="closeBuyModal()">✕</div>
+
+<h3>Comprar derechos ©️</h3>
+<p>
+Al comprar obtendrás <b>TODOS los derechos ©️</b> de la página,
+incluyendo ganancias y propiedad total.
+</p>
+<p><b>Precio: $4,500 DLS</b></p>
+
+<button class="buy-btn" onclick="buyRights()">> Comprar <</button>
+<div class="loading" id="buyLoading">Cargando.</div>
+</div>
+</div>
+
+<!-- SONIDOS -->
+<audio id="soundOpen" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3"></audio>
+<audio id="soundClick" src="https://assets.mixkit.co/sfx/preview/mixkit-confirmation-tone-2867.mp3"></audio>
+<audio id="soundClose" src="https://assets.mixkit.co/sfx/preview/mixkit-click-error-1110.mp3"></audio>
+
+<script>
+function openBuyModal(){
+document.getElementById("soundOpen").play();
+document.getElementById("buyModal").style.display="flex";
+}
+
+function closeBuyModal(){
+document.getElementById("soundClose").play();
+document.getElementById("buyModal").style.display="none";
+}
+
+function buyRights(){
+document.getElementById("soundClick").play();
+const loading=document.getElementById("buyLoading");
+loading.style.display="block";
+
+let dots=1;
+const anim=setInterval(()=>{
+loading.innerText="Cargando"+".".repeat(dots);
+dots=dots<3?dots+1:1;
+},700);
+
+setTimeout(()=>{
+clearInterval(anim);
+window.open(
+"https://wa.me/50379197720?text=Quiero%20comprar%20Todos%20los%20derechos%20de%20la%20página%20por%20$4,500",
+"_blank"
+);
+},5000);
+}
+</script>
+
+<!-- ================= FIN BURBUJA ================= -->
+
 </head>
 
 <body>
