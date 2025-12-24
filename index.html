@@ -1042,21 +1042,30 @@ animation:spin 1s linear infinite;
 margin-bottom:20px;
 }
 
-/* CHECK */
+/* CHECK DIBUJADO */
 .check{
 display:none;
-width:70px;
-height:70px;
+width:60px;
+height:60px;
 border-radius:50%;
-background:#00ff88;
-color:#004422;
-font-size:2.5rem;
-font-weight:900;
-display:flex;
-align-items:center;
-justify-content:center;
-animation:pop .6s ease forwards;
+border:3px solid #00ff88;
 margin-bottom:20px;
+position:relative;
+}
+
+.check::after{
+content:'';
+position:absolute;
+width:18px;
+height:35px;
+border-right:4px solid #00ff88;
+border-bottom:4px solid #00ff88;
+transform:rotate(45deg);
+top:8px;
+left:20px;
+stroke-dasharray:60;
+stroke-dashoffset:60;
+animation:drawCheck .8s ease forwards;
 }
 
 /* TEXTO */
@@ -1092,15 +1101,21 @@ from{opacity:1;transform:translateY(0)}
 to{opacity:0;transform:translateY(-10px)}
 }
 
-@keyframes pop{
-from{transform:scale(.4);opacity:0}
-to{transform:scale(1);opacity:1}
+@keyframes drawCheck{
+from{
+opacity:0;
+transform:rotate(45deg) scale(.5);
+}
+to{
+opacity:1;
+transform:rotate(45deg) scale(1);
+}
 }
 </style>
 
 <div id="mobileLoader">
     <div class="spinner" id="spinner"></div>
-    <div class="check" id="check">✓</div>
+    <div class="check" id="check"></div>
     <div class="loader-text" id="loaderText">Cargando...</div>
 </div>
 
@@ -1140,7 +1155,7 @@ function nextStep(){
   if(step.done){
     text.classList.add("completed");
     spinner.style.display = "none";
-    check.style.display = "flex";
+    check.style.display = "block";
   }
 
   setTimeout(() => {
