@@ -1594,7 +1594,7 @@ window.open(
 
 <!-- ========= FIN BURBUJA ========= -->
 
-<!-- ========= LOADER SIMPLE GARANTIZADO ========= -->
+<!-- ========= LOADER GLOBAL + WHATSAPP ========= -->
 <style>
 #actionLoader{
 position:fixed;
@@ -1602,7 +1602,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(14,14,14,.96);
+background:rgba(12,12,12,.96);
 display:none;
 flex-direction:column;
 align-items:center;
@@ -1610,84 +1610,96 @@ justify-content:center;
 z-index:9999999;
 }
 
+/* CÍRCULO GIRANDO */
+.circle{
+width:80px;
+height:80px;
+border-radius:50%;
+border:5px solid rgba(0,255,136,.2);
+border-top:5px solid #00ff88;
+animation:spin 1s linear infinite;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* CHECK */
+.check{
+display:none;
+width:34px;
+height:20px;
+border-right:5px solid #00ff88;
+border-bottom:5px solid #00ff88;
+transform:rotate(45deg) scale(.2);
+animation:drawCheck .8s ease forwards;
+}
+
+/* TEXTO */
 #actionText{
+margin-top:18px;
 font-size:1.2rem;
 font-weight:700;
 color:#eaeaea;
-margin-top:18px;
 }
 
-.check{
-display:none;
-width:62px;
-height:62px;
-border-radius:50%;
-border:3px solid #00ff88;
-position:relative;
-}
+.completed{ color:#00ff88; }
 
-.check::after{
-content:'';
-position:absolute;
-width:18px;
-height:35px;
-border-right:4px solid #00ff88;
-border-bottom:4px solid #00ff88;
-transform:rotate(45deg);
-top:8px;
-left:20px;
-animation:drawCheck .9s ease forwards;
-}
-
-.completed{
-color:#00ff88;
-}
-
-@keyframes drawCheck{
-from{opacity:0;transform:rotate(45deg) scale(.4)}
-to{opacity:1;transform:rotate(45deg) scale(1)}
-}
+@keyframes spin{ to{transform:rotate(360deg)} }
+@keyframes drawCheck{ to{transform:rotate(45deg) scale(1)} }
 </style>
 
 <div id="actionLoader">
-  <div class="check" id="checkAnim"></div>
+  <div class="circle" id="circle">
+    <div class="check" id="checkAnim"></div>
+  </div>
   <div id="actionText">Iniciando...</div>
 </div>
 
 <script>
 (function(){
 
-if(window.innerWidth > 768) return; // solo móvil
+if(window.innerWidth > 768) return; // solo celular
 
 const loader = document.getElementById("actionLoader");
 const text = document.getElementById("actionText");
 const check = document.getElementById("checkAnim");
+const circle = document.getElementById("circle");
 
-function startLoader(){
-  loader.style.display = "flex";
-  text.textContent = "Iniciando...";
-  text.classList.remove("completed");
-  check.style.display = "none";
+let targetMessage = "";
 
-  // Iniciando (5s)
-  setTimeout(() => {
-    text.textContent = "Completado!";
-    text.classList.add("completed");
-    check.style.display = "block";
-  }, 5000);
+function startLoader(message){
 
-  // Cerrar (2s)
-  setTimeout(() => {
-    loader.style.display = "none";
-  }, 7000);
+targetMessage = message;
+
+loader.style.display = "flex";
+text.textContent = "Iniciando...";
+text.classList.remove("completed");
+check.style.display = "none";
+circle.style.animation = "spin 1s linear infinite";
+
+/* Iniciando (5s) */
+setTimeout(() => {
+  text.textContent = "Completado!";
+  text.classList.add("completed");
+  circle.style.animation = "none";
+  check.style.display = "block";
+}, 5000);
+
+/* Redirigir (2s después) */
+setTimeout(() => {
+  const url = "https://wa.me/50379197720?text=" + 
+              encodeURIComponent(targetMessage);
+  window.location.href = url;
+}, 7000);
 }
 
-/* 🔥 DETECTA TODOS LOS BOTONES AUTOMÁTICAMENTE */
+/* 🔥 DETECTA TODOS LOS BOTONES CON data-whatsapp */
 document.addEventListener("click", function(e){
-  const btn = e.target.closest("button");
+  const btn = e.target.closest("[data-whatsapp]");
   if(!btn) return;
 
-  startLoader();
+  e.preventDefault(); // evita acción inmediata
+  startLoader(btn.getAttribute("data-whatsapp"));
 });
 
 })();
