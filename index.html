@@ -1594,118 +1594,6 @@ window.open(
 
 <!-- ========= FIN BURBUJA ========= -->
 
-<!-- ========= LOADER GLOBAL + WHATSAPP ========= -->
-<style>
-#actionLoader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(12,12,12,.96);
-display:none;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:9999999;
-}
-
-/* CÍRCULO GIRANDO */
-.circle{
-width:80px;
-height:80px;
-border-radius:50%;
-border:5px solid rgba(0,255,136,.2);
-border-top:5px solid #00ff88;
-animation:spin 1s linear infinite;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-/* CHECK */
-.check{
-display:none;
-width:34px;
-height:20px;
-border-right:5px solid #00ff88;
-border-bottom:5px solid #00ff88;
-transform:rotate(45deg) scale(.2);
-animation:drawCheck .8s ease forwards;
-}
-
-/* TEXTO */
-#actionText{
-margin-top:18px;
-font-size:1.2rem;
-font-weight:700;
-color:#eaeaea;
-}
-
-.completed{ color:#00ff88; }
-
-@keyframes spin{ to{transform:rotate(360deg)} }
-@keyframes drawCheck{ to{transform:rotate(45deg) scale(1)} }
-</style>
-
-<div id="actionLoader">
-  <div class="circle" id="circle">
-    <div class="check" id="checkAnim"></div>
-  </div>
-  <div id="actionText">Iniciando...</div>
-</div>
-
-<script>
-(function(){
-
-if(window.innerWidth > 768) return; // solo celular
-
-const loader = document.getElementById("actionLoader");
-const text = document.getElementById("actionText");
-const check = document.getElementById("checkAnim");
-const circle = document.getElementById("circle");
-
-let targetMessage = "";
-
-function startLoader(message){
-
-targetMessage = message;
-
-loader.style.display = "flex";
-text.textContent = "Iniciando...";
-text.classList.remove("completed");
-check.style.display = "none";
-circle.style.animation = "spin 1s linear infinite";
-
-/* Iniciando (5s) */
-setTimeout(() => {
-  text.textContent = "Completado!";
-  text.classList.add("completed");
-  circle.style.animation = "none";
-  check.style.display = "block";
-}, 5000);
-
-/* Redirigir (2s después) */
-setTimeout(() => {
-  const url = "https://wa.me/50379197720?text=" + 
-              encodeURIComponent(targetMessage);
-  window.location.href = url;
-}, 7000);
-}
-
-/* 🔥 DETECTA TODOS LOS BOTONES CON data-whatsapp */
-document.addEventListener("click", function(e){
-  const btn = e.target.closest("[data-whatsapp]");
-  if(!btn) return;
-
-  e.preventDefault(); // evita acción inmediata
-  startLoader(btn.getAttribute("data-whatsapp"));
-});
-
-})();
-</script>
-<!-- ========= FIN ========= -->
-
 </head>
 <body>
 <!-- ===== POINTS HUD ===== -->
@@ -1948,8 +1836,8 @@ function goWhatsApp(){
   <div>🔥 <strong>Robux × Steal</strong></div>
   <div id="serverCount" aria-live="polite">New Brothers Studios LLC</div>
 </div><header>
-<h1> robux ⏣</h1>
-<h2>Versión 44.9.0</h2>
+<h1>ROBUX.COM</h1>
+<h2>Versión 11.9.21</h2>
 <p class="small">⏣</p>
 </header><main class="container" id="paquetes">
 <h5>Paquetes normales</h5>
@@ -2011,7 +1899,7 @@ function goWhatsApp(){
 
 <h1>Paquetes Especiales ⭐✨</h1>
 
-<h8>Tiempo restante: 7 Días</h8>
+<h8>Tiempo restante: 5 Días</h8>
 <h9>paquetes limitados!</h9>
 
 <!-- Paquetes Robux -->
