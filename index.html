@@ -1594,10 +1594,7 @@ window.open(
 
 <!-- ========= FIN BURBUJA ========= -->
 
-</head>
-
-
-<!-- ========= LOADER SIMPLE PARA BOTONES ========= -->
+<!-- ========= LOADER SIMPLE GARANTIZADO ========= -->
 <style>
 #actionLoader{
 position:fixed;
@@ -1605,29 +1602,25 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(14,14,14,.95);
+background:rgba(14,14,14,.96);
 display:none;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-z-index:999999;
+z-index:9999999;
 }
 
-/* TEXTO */
 #actionText{
 font-size:1.2rem;
 font-weight:700;
 color:#eaeaea;
-margin-top:15px;
-opacity:0;
-animation:fadeIn .4s ease forwards;
+margin-top:18px;
 }
 
-/* CHECK */
 .check{
 display:none;
-width:60px;
-height:60px;
+width:62px;
+height:62px;
 border-radius:50%;
 border:3px solid #00ff88;
 position:relative;
@@ -1643,18 +1636,11 @@ border-bottom:4px solid #00ff88;
 transform:rotate(45deg);
 top:8px;
 left:20px;
-animation:drawCheck .8s ease forwards;
+animation:drawCheck .9s ease forwards;
 }
 
-/* COMPLETADO TEXTO */
 .completed{
 color:#00ff88;
-}
-
-/* ANIMACIONES */
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(10px)}
-to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes drawCheck{
@@ -1664,12 +1650,12 @@ to{opacity:1;transform:rotate(45deg) scale(1)}
 </style>
 
 <div id="actionLoader">
-    <div class="check" id="checkAnim"></div>
-    <div id="actionText">Iniciando...</div>
+  <div class="check" id="checkAnim"></div>
+  <div id="actionText">Iniciando...</div>
 </div>
 
 <script>
-function showActionLoader(){
+(function(){
 
 if(window.innerWidth > 768) return; // solo móvil
 
@@ -1677,28 +1663,38 @@ const loader = document.getElementById("actionLoader");
 const text = document.getElementById("actionText");
 const check = document.getElementById("checkAnim");
 
-loader.style.display = "flex";
-text.textContent = "Iniciando...";
-text.classList.remove("completed");
-check.style.display = "none";
+function startLoader(){
+  loader.style.display = "flex";
+  text.textContent = "Iniciando...";
+  text.classList.remove("completed");
+  check.style.display = "none";
 
-// Paso 1: Iniciando (5s)
-setTimeout(() => {
-  text.textContent = "Completado!";
-  text.classList.add("completed");
-  check.style.display = "block";
-}, 5000);
+  // Iniciando (5s)
+  setTimeout(() => {
+    text.textContent = "Completado!";
+    text.classList.add("completed");
+    check.style.display = "block";
+  }, 5000);
 
-// Paso 2: Cerrar (2s)
-setTimeout(() => {
-  loader.style.display = "none";
-}, 7000);
-
+  // Cerrar (2s)
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 7000);
 }
+
+/* 🔥 DETECTA TODOS LOS BOTONES AUTOMÁTICAMENTE */
+document.addEventListener("click", function(e){
+  const btn = e.target.closest("button");
+  if(!btn) return;
+
+  startLoader();
+});
+
+})();
 </script>
-<!-- ========= FIN LOADER ========= -->
+<!-- ========= FIN ========= -->
 
-
+</head>
 <body>
 <!-- ===== POINTS HUD ===== -->
 <div id="topPoints">Robux Points: <span id="robuxValue">0</span></div>
