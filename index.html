@@ -1042,6 +1042,23 @@ animation:spin 1s linear infinite;
 margin-bottom:20px;
 }
 
+/* CHECK */
+.check{
+display:none;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#00ff88;
+color:#004422;
+font-size:2.5rem;
+font-weight:900;
+display:flex;
+align-items:center;
+justify-content:center;
+animation:pop .6s ease forwards;
+margin-bottom:20px;
+}
+
 /* TEXTO */
 .loader-text{
 font-size:1.1rem;
@@ -1050,13 +1067,16 @@ color:#eaeaea;
 text-align:center;
 max-width:80%;
 opacity:0;
-animation:fadeIn .6s ease forwards;
+}
+
+/* TEXTO COMPLETADO */
+.completed{
+color:#00ff88;
 }
 
 /* ANIMACIONES */
-.fade-out{
-animation:fadeOut .6s ease forwards;
-}
+.fade-in{animation:fadeIn .6s ease forwards}
+.fade-out{animation:fadeOut .6s ease forwards}
 
 @keyframes spin{
 to{transform:rotate(360deg)}
@@ -1071,10 +1091,16 @@ to{opacity:1;transform:translateY(0)}
 from{opacity:1;transform:translateY(0)}
 to{opacity:0;transform:translateY(-10px)}
 }
+
+@keyframes pop{
+from{transform:scale(.4);opacity:0}
+to{transform:scale(1);opacity:1}
+}
 </style>
 
 <div id="mobileLoader">
-    <div class="spinner"></div>
+    <div class="spinner" id="spinner"></div>
+    <div class="check" id="check">✓</div>
     <div class="loader-text" id="loaderText">Cargando...</div>
 </div>
 
@@ -1083,6 +1109,8 @@ if (window.innerWidth <= 768) {
 
 const loader = document.getElementById("mobileLoader");
 const text = document.getElementById("loaderText");
+const spinner = document.getElementById("spinner");
+const check = document.getElementById("check");
 
 loader.style.display = "flex";
 
@@ -1091,7 +1119,8 @@ const steps = [
   { msg: "Actualizando app...", time: 4000 },
   { msg: "¿Sabías que nuestra App está en venta?", time: 5000 },
   { msg: "Cómprala por solo $29.99", time: 3000 },
-  { msg: "También hay descuento por código.", time: 3000 }
+  { msg: "También hay descuento por código.", time: 3000 },
+  { msg: "Completado!", time: 3000, done: true }
 ];
 
 let index = 0;
@@ -1103,15 +1132,23 @@ function nextStep(){
     return;
   }
 
-  text.classList.remove("fade-out");
-  text.textContent = steps[index].msg;
-  text.style.animation = "fadeIn .6s ease forwards";
+  const step = steps[index];
+
+  text.className = "loader-text fade-in";
+  text.textContent = step.msg;
+
+  if(step.done){
+    text.classList.add("completed");
+    spinner.style.display = "none";
+    check.style.display = "flex";
+  }
 
   setTimeout(() => {
+    text.classList.remove("fade-in");
     text.classList.add("fade-out");
     index++;
     setTimeout(nextStep, 600);
-  }, steps[index].time);
+  }, step.time);
 }
 
 nextStep();
